@@ -11,15 +11,16 @@ export default function AppAdapter({
   children: React.ReactNode;
 }) {
   const [isMainnet, setIsMainnet] = useState(() => {
-    if (typeof window !== "undefined") {
-      const result = localStorage.getItem("isMainnet");
-      if (!result) {
-        localStorage.setItem("isMainnet", "true");
-        return true;
-      } else {
-        return JSON.parse(result);
-      }
-    }
+    return true;
+    // if (typeof window !== "undefined") {
+    //   const result = localStorage.getItem("isMainnet");
+    //   if (!result) {
+    //     localStorage.setItem("isMainnet", "true");
+    //     return true;
+    //   } else {
+    //     return JSON.parse(result);
+    //   }
+    // }
   });
   const [balance, setBalance] = useState(0);
   const { publicKey } = useWallet();

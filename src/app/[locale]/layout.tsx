@@ -18,10 +18,12 @@ export default function RootLayout({
   params: { locale: string };
 }>) {
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <body>
         <ProviderWrapper>
-          <DefaultLayout>{children}</DefaultLayout>
+          <DefaultLayout>
+          {children}
+          </DefaultLayout>
         </ProviderWrapper>
       </body>
     </html>

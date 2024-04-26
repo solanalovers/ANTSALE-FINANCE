@@ -2,15 +2,15 @@
 import { localeList } from "@/constant/localeItemConstant";
 import { TriangleDownIcon } from "@chakra-ui/icons";
 import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownSection,
+  DropdownItem,
   Button,
-  Flex,
   Image,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Text,
-} from "@chakra-ui/react";
+} from "@nextui-org/react";
+
 import React from "react";
 import { useLocale } from "next-intl";
 import { useRouter as useLocaleRouter } from "@/navigation";
@@ -25,66 +25,46 @@ export default function LocaleSelect() {
     })[0].label;
   };
   return (
-    <Menu>
-      <MenuButton
-        as={Button}
-        rightIcon={
-          <TriangleDownIcon
-            width={"16px"}
-            height={"16px"}
-          />
-        }
-        backgroundColor={"transparent"}
-      >
-        <Flex
-          alignItems={"center"}
-          columnGap={"8px"}
+    <Dropdown>
+      <DropdownTrigger>
+        <Button
+          variant={undefined}
+          className="bg-['none']"
         >
-          <Image
-            src={`/image/locale/${locale}.png`}
-            width={"20px"}
-            height={"14px"}
-          />
-          <Text
-            fontFamily={"cp"}
-            fontWeight={400}
-          >
+          <div className="flex items-center gap-x-2">
+            <Image
+              src={`/image/locale/${locale}.png`}
+              className="w-5 h-[14px] rounded-none"
+            />
             {getCurrentLocale()}
-          </Text>
-        </Flex>
-      </MenuButton>
-      <MenuList>
+            <TriangleDownIcon />
+          </div>
+        </Button>
+      </DropdownTrigger>
+      <DropdownMenu>
         {localeList.map(
           (
             item: { label: string; value: string; icon: string },
             idx: number
           ) => (
-            <MenuItem
+            <DropdownItem
               key={idx}
               onClick={() =>
                 localeRouter.replace("/pathnames", { locale: item.value })
               }
             >
-              <Flex
-                alignItems={"center"}
-                columnGap={"8px"}
-              >
+              <div className="flex items-center gap-x-2">
                 <Image
                   src={item.icon}
                   width={"20px"}
                   height={"14px"}
                 />
-                <Text
-                  fontFamily={"cp"}
-                  fontWeight={400}
-                >
-                  {item.label}
-                </Text>
-              </Flex>
-            </MenuItem>
+                <p>{item.label}</p>
+              </div>
+            </DropdownItem>
           )
         )}
-      </MenuList>
-    </Menu>
+      </DropdownMenu>
+    </Dropdown>
   );
 }

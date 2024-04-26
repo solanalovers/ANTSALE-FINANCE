@@ -1,19 +1,22 @@
 "use client";
-
-import { ChakraProvider } from "@chakra-ui/react";
 import WalletAdapter from "./WalletAdapter";
-import theme from "@/config/Theme";
-import { createContext, useState } from "react";
 import AppAdapter from "./AppAdapter";
+import { NextUIProvider } from "@nextui-org/react";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 export function ProviderWrapper({ children }: { children: React.ReactNode }) {
   return (
     <WalletAdapter>
-      <ChakraProvider theme={theme}>
-        <AppAdapter>
-          {children}
-        </AppAdapter>
-      </ChakraProvider>
+      <AppAdapter>
+        <NextUIProvider>
+          <NextThemesProvider
+            attribute="class"
+            defaultTheme="light"
+          >
+            {children}
+          </NextThemesProvider>
+        </NextUIProvider>
+      </AppAdapter>
     </WalletAdapter>
   );
 }

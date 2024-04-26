@@ -4,7 +4,7 @@ import HomeFooter from "@/components/home/HomeFooter";
 import HomeHeading from "@/components/home/HomeHeading";
 import HomeTableList from "@/components/home/HomeTableList";
 import { findOneTokenData, getTokensData } from "@/supabase/getTokensData";
-import { Box, Container, useColorModeValue } from "@chakra-ui/react";
+// import { Box, Container, useColorModeValue } from "@chakra-ui/react";
 // import HomeHeading from '../components/home/HomeHeading'
 // import HomeFilter from '../components/home/HomeFilter'
 // import HomeTableList from '../components/home/HomeTableList'
@@ -12,7 +12,7 @@ import { Box, Container, useColorModeValue } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const border = useColorModeValue("light.border", "dark.border");
+  // const border = useColorModeValue("light.border", "dark.border");
   const [tokenList, setTokenList] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
@@ -50,42 +50,43 @@ export default function Home() {
   };
 
   return (
-    <Box>
-      <Container
-        maxW={"1328px"}
-        paddingY={"24px"}
-      >
-        <HomeHeading />
-        <HomeFilter
-          filter={filter}
-          handleChangeFilter={(value: string, type: "top" | "time") => {
-            if (value === filter[type]) {
-              setFilter((prev: any) => ({ ...prev, [type]: "" }));
-            } else {
-              setFilter((prev: any) => ({ ...prev, [type]: value }));
-            }
-          }}
-          handleSearch={handleSearch}
-          getTokenList={getTokenList}
-        />
-        <HomeTableList
-          tokenList={tokenList}
-          loading={loading}
-        />
-      </Container>
-      <Box
-        borderTop={`1px solid`}
-        borderColor={border}
-      >
-        <Container maxW={"1328px"}>
-          <HomeFooter
-            total={total}
-            totalPage={totalPage}
-            setPage={setPage}
-            page={page}
-          />
-        </Container>
-      </Box>
-    </Box>
+    <div></div>
+    // <Box>
+    //   <Container
+    //     maxW={"1328px"}
+    //     paddingY={"24px"}
+    //   >
+    //     <HomeHeading />
+    //     <HomeFilter
+    //       filter={filter}
+    //       handleChangeFilter={(value: string, type: "top" | "time") => {
+    //         if (value === filter[type]) {
+    //           setFilter((prev: any) => ({ ...prev, [type]: "" }));
+    //         } else {
+    //           setFilter((prev: any) => ({ ...prev, [type]: value }));
+    //         }
+    //       }}
+    //       handleSearch={handleSearch}
+    //       getTokenList={getTokenList}
+    //     />
+    //     <HomeTableList
+    //       tokenList={tokenList}
+    //       loading={loading}
+    //     />
+    //   </Container>
+    //   <Box
+    //     borderTop={`1px solid`}
+    //     borderColor={border}
+    //   >
+    //     <Container maxW={"1328px"}>
+    //       <HomeFooter
+    //         total={total}
+    //         totalPage={totalPage}
+    //         setPage={setPage}
+    //         page={page}
+    //       />
+    //     </Container>
+    //   </Box>
+    // </Box>
   );
 }
