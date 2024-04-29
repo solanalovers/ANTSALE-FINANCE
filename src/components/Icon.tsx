@@ -13,5 +13,54 @@ const CheckIcon = ({ size = "20", fill = "#F5A524" }) => (
   </svg>
 );
 
+const FireIcon = ({ size = "18" }: { size?: string }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 18 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect
+      width={size}
+      height={size}
+      fill="url(#pattern0_4455_6078)"
+    />
+    <defs>
+      <pattern
+        id="pattern0_4455_6078"
+        patternContentUnits="objectBoundingBox"
+        width="1"
+        height="1"
+      >
+        <use transform="scale(0.0138889)" />
+      </pattern>
+      <image
+        id="image0_4455_6078"
+        width="72"
+        height="72"
+      />
+    </defs>
+  </svg>
+);
 
-export {CheckIcon}
+const ArrowDownIcon = ({ size = "20", color = "#006FEE" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 20 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M16.5999 7.45898L11.1666 12.8923C10.5249 13.534 9.4749 13.534 8.83324 12.8923L3.3999 7.45898"
+      stroke={color}
+      stroke-width="1.5"
+      stroke-miterlimit="10"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);
+
+export { CheckIcon, FireIcon, ArrowDownIcon };
