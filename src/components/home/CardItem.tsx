@@ -11,10 +11,12 @@ import React from "react";
 import CustomAvatar from "../CustomAvatar";
 import Chips from "../Chips";
 import { FireIcon } from "../Icon";
+import { useRouter } from "next/navigation";
 
 interface CardItemProps {}
 
 export default function CardItem({}: CardItemProps) {
+  const router = useRouter();
   return (
     <Card className="p-4">
       <CardHeader className="flex items-center justify-between p-0">
@@ -88,7 +90,7 @@ export default function CardItem({}: CardItemProps) {
               <p>Sale Ends In:</p>
               <p>00:11:01:23</p>
             </div>
-            <Button color="primary">View</Button>
+            <Button color="primary" onClick={()=>router.replace('/1')}>View</Button>
           </div>
         </div>
       </CardBody>
