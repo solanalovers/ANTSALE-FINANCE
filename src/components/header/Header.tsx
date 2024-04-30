@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLocale } from "next-intl";
 import LocaleSelect from "./localeComponent/LocaleSelect";
-import ClusterSelect from "./solanaCluster/ClusterSelect";
+// import ClusterSelect from "./solanaCluster/ClusterSelect";
 import ConnectedWallet from "./ConnectedWallet";
 import { Image, Input, commonColors } from "@nextui-org/react";
 import { SearchIcon } from "@chakra-ui/icons";

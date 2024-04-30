@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import BorderContent from "../Detail/BorderContent";
+import BorderContent from "../detail/BorderContent";
 import {
   Button,
   Checkbox,
