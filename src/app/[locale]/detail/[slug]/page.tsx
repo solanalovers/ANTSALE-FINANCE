@@ -1,6 +1,6 @@
 import Banner from "@/components/Banner";
-import LeftContent from "@/components/Detail/LeftContent";
-import RightContent from "@/components/Detail/RightContent";
+import LeftContent from "@/components/detail/LeftContent";
+import RightContent from "@/components/detail/RightContent";
 import React from "react";
 
 export default function Detail({ params }: { params: { slug: string } }) {

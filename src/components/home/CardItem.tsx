@@ -90,7 +90,12 @@ export default function CardItem({}: CardItemProps) {
               <p>Sale Ends In:</p>
               <p>00:11:01:23</p>
             </div>
-            <Button color="primary" onClick={()=>router.replace('/1')}>View</Button>
+            <Button
+              color="primary"
+              onClick={() => router.replace("/detail/1")}
+            >
+              View
+            </Button>
           </div>
         </div>
       </CardBody>
