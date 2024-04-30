@@ -103,17 +103,17 @@ export default function CreateForm() {
                 Are you going to Create a Liquidity Pool?
               </p>
               <p className="text-xs leading-[140%] text-[#718096]">
-                If you want to create a liquidity pool you will need to "Revoke
+                {`If you want to create a liquidity pool you will need to "Revoke
                 Freeze Authority" of the Token, you can do that here. The cost
-                is FREE.
+                is FREE.`}
               </p>
             </Checkbox>
             <Checkbox className="items-start gap-2">
               <p className="text-base leading-[140%]">Revoke Mint Authority</p>
               <p className="text-xs leading-[140%] text-[#718096]">
-                Revoking mint authority ensures that there can be no more tokens
+                {`Revoking mint authority ensures that there can be no more tokens
                 minted than the total supply. This provides security and peace
-                of mind to buyers. The cost is FREE.
+                of mind to buyers. The cost is FREE.`}
               </p>
             </Checkbox>
             <div className="-mx-6 border-t border-default-300 border-dashed" />
