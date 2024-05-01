@@ -5,7 +5,7 @@ import { getBalance } from "@/function/wallet";
 
 export const AppContext = createContext<any>({});
 
-export default function AppAdapter({
+export default function AppProvider({
   children,
 }: {
   children: React.ReactNode;

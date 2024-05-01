@@ -116,9 +116,9 @@ export default function CreateForm() {
                 of mind to buyers. The cost is FREE.`}
               </p>
             </Checkbox>
-            <div className="-mx-6 border-t border-default-300 border-dashed" />
           </>
         )}
+        <div className="-mx-6 border-t border-default-300 border-dashed" />
         <Button
           color="primary"
           className="w-fit mx-auto px-44 py-3 font-medium text-base leading-6"

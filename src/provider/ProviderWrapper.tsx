@@ -1,13 +1,13 @@
 "use client";
 import WalletAdapter from "./WalletAdapter";
-import AppAdapter from "./AppAdapter";
 import { NextUIProvider } from "@nextui-org/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
+import AppProvider from "./AppProvider";
 
 export function ProviderWrapper({ children }: { children: React.ReactNode }) {
   return (
     <WalletAdapter>
-      <AppAdapter>
+      <AppProvider>
         <NextUIProvider>
           <NextThemesProvider
             attribute="class"
@@ -16,7 +16,7 @@ export function ProviderWrapper({ children }: { children: React.ReactNode }) {
             {children}
           </NextThemesProvider>
         </NextUIProvider>
-      </AppAdapter>
+      </AppProvider>
     </WalletAdapter>
   );
 }

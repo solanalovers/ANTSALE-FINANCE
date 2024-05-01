@@ -1,5 +1,5 @@
 "use client";
-import { AppContext } from "@/provider/AppAdapter";
+import { AppContext } from "@/provider/AppProvider";
 import React, { useContext, useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { Image } from "@nextui-org/react";
