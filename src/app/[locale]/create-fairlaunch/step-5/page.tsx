@@ -6,7 +6,7 @@ import { CreatePresaleContext } from "@/provider/CreatePresaleProvider";
 import { Input, Link, Select, SelectItem, Textarea } from "@nextui-org/react";
 import React, { useContext } from "react";
 
-export default function CreatePresaleStep5() {
+export default function CreateFairLaunchStep5() {
   return (
     <div>
       <CustomDivider />
