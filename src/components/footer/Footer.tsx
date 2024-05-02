@@ -30,7 +30,7 @@ export default function Footer() {
               isExternal
             >
               <Image
-                src="/image/social/twitter.png"
+                src="/image/footer/twitter.png"
                 width={"40px"}
                 height={"40xp"}
               />
@@ -40,7 +40,7 @@ export default function Footer() {
               isExternal
             >
               <Image
-                src="/image/social/telegram.png"
+                src="/image/footer/telegram.png"
                 width={"40px"}
                 height={"40xp"}
               />
@@ -50,7 +50,7 @@ export default function Footer() {
               isExternal
             >
               <Image
-                src="/image/social/discord.png"
+                src="/image/footer/discord.png"
                 width={"40px"}
                 height={"40xp"}
               />
@@ -60,7 +60,7 @@ export default function Footer() {
               isExternal
             >
               <Image
-                src="/image/social/facebook.png"
+                src="/image/footer/facebook.png"
                 width={"40px"}
                 height={"40xp"}
               />
