@@ -101,20 +101,24 @@ export default function CreateMultiChainStep1() {
               </p>
             </div>
           </div>
-          <Select
-            classNames={{ value: "placeholder:text-[#8E8E93]" }}
-            variant="bordered"
-            label="Currency"
-            placeholder="SOL"
-            value={"sol"}
-          >
-            <SelectItem
-              key={1}
-              value={"sol"}
-            >
-              SOL
-            </SelectItem>
-          </Select>
+          <div>
+            <Input
+              classNames={{ input: "placeholder:text-[#8E8E93]" }}
+              variant="bordered"
+              label="Solsale.fi's storyteller (5% SOL raised only)"
+              placeholder="9RFFhhe4XPV8UcBFJkgrDwGGtN3jmktBtw4RBia1bBVn"
+            />
+            <p className="mt-1 text-sm">
+              How to become a Solsale.fi's storyteller?{" "}
+              <Link
+                href=""
+                isExternal
+                className="text-sm underline"
+              >
+                Register here!
+              </Link>
+            </p>
+          </div>
           <Input
             classNames={{ input: "placeholder:text-[#8E8E93]" }}
             variant="bordered"
