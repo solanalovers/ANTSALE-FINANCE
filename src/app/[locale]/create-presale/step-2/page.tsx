@@ -1,12 +1,9 @@
 "use client";
 import CustomDivider from "@/components/CustomDivider";
-import { CreatePresaleContext } from "@/provider/CreatePresaleProvider";
 import { DatePicker, Input, Link, Select, SelectItem } from "@nextui-org/react";
-import React, { useContext } from "react";
+import React from "react";
 import {
   now,
-  getLocalTimeZone,
-  parseZonedDateTime,
 } from "@internationalized/date";
 
 export default function CreatePresaleStep2() {
@@ -149,4 +146,3 @@ export default function CreatePresaleStep2() {
     </div>
   );
 }
-//

@@ -1,8 +1,9 @@
 "use client";
 import CustomDivider from "@/components/CustomDivider";
 import { CreatePresaleContext } from "@/provider/CreatePresaleProvider";
-import { Input, Link, Select, SelectItem } from "@nextui-org/react";
+import { DatePicker, Input, Link, Select, SelectItem } from "@nextui-org/react";
 import React, { useContext } from "react";
+import { now } from "@internationalized/date";
 
 export default function CreateFairLaunchStep2() {
   return (
@@ -17,6 +18,14 @@ export default function CreateFairLaunchStep2() {
             label="Softcap"
             placeholder="0"
             endContent={<p className="text-sm text-default-500">SOL</p>}
+            onBlur={(e: any) => {
+              const value = parseFloat(e.target.value);
+              const roundedValue = Math.round(value);
+              e.target.value = roundedValue.toString();
+              if (Number(e.target.value) < 0) {
+                e.target.value = 0;
+              }
+            }}
           />
           <Input
             classNames={{ input: "placeholder:text-[#8E8E93]" }}
@@ -25,6 +34,14 @@ export default function CreateFairLaunchStep2() {
             label="Hardcap"
             placeholder="0"
             endContent={<p className="text-sm text-default-500">SOL</p>}
+            onBlur={(e: any) => {
+              const value = parseFloat(e.target.value);
+              const roundedValue = Math.round(value);
+              e.target.value = roundedValue.toString();
+              if (Number(e.target.value) < 0) {
+                e.target.value = 0;
+              }
+            }}
           />
           <Input
             classNames={{ input: "placeholder:text-[#8E8E93]" }}
@@ -33,6 +50,14 @@ export default function CreateFairLaunchStep2() {
             label="Minimum buy"
             placeholder="0"
             endContent={<p className="text-sm text-default-500">SOL</p>}
+            onBlur={(e: any) => {
+              const value = parseFloat(e.target.value);
+              const roundedValue = Math.round(value);
+              e.target.value = roundedValue.toString();
+              if (Number(e.target.value) < 0) {
+                e.target.value = 0;
+              }
+            }}
           />
           <Input
             classNames={{ input: "placeholder:text-[#8E8E93]" }}
@@ -41,32 +66,40 @@ export default function CreateFairLaunchStep2() {
             label="Maximum buy"
             placeholder="0"
             endContent={<p className="text-sm text-default-500">SOL</p>}
+            onBlur={(e: any) => {
+              const value = parseFloat(e.target.value);
+              const roundedValue = Math.round(value);
+              e.target.value = roundedValue.toString();
+              if (Number(e.target.value) < 0) {
+                e.target.value = 0;
+              }
+            }}
           />
-          <Input
+          <DatePicker
             classNames={{ input: "placeholder:text-[#8E8E93]" }}
-            variant="bordered"
-            type="date"
             label="Startdate"
-            placeholder="0"
-          />
-          <Input
-            classNames={{ input: "placeholder:text-[#8E8E93]" }}
             variant="bordered"
-            type="date"
+            showMonthAndYearPickers
+            defaultValue={now("Etc/Universal")}
+          />
+          <DatePicker
+            classNames={{ input: "placeholder:text-[#8E8E93]" }}
             label="Enddate"
-            placeholder="0"
+            variant="bordered"
+            showMonthAndYearPickers
+            defaultValue={now("Etc/Universal")}
           />
           <Select
             classNames={{ value: "placeholder:text-[#8E8E93]" }}
             variant="bordered"
             label="Listing Options"
-            placeholder="Manual Listing"
+            placeholder="Auto Listing"
           >
             <SelectItem
               key={1}
-              value={1}
+              value={"auto"}
             >
-              1
+              Auto Listing
             </SelectItem>
           </Select>
           <Select
@@ -77,22 +110,22 @@ export default function CreateFairLaunchStep2() {
           >
             <SelectItem
               key={1}
-              value={1}
+              value={"raydium"}
             >
-              1
+              RaydiumAmmV4
             </SelectItem>
           </Select>
           <Select
             classNames={{ value: "placeholder:text-[#8E8E93]" }}
             variant="bordered"
             label="Liquidity Type"
-            placeholder="Manual Burning"
+            placeholder="Auto Burning"
           >
             <SelectItem
               key={1}
-              value={1}
+              value={"auto"}
             >
-              1
+              Auto Burning
             </SelectItem>
           </Select>
         </div>
