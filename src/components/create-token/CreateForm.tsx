@@ -10,6 +10,7 @@ import {
 } from "@nextui-org/react";
 import TagSelect from "./TagSelect";
 import { useWallet } from "@solana/wallet-adapter-react";
+import CustomEditor from "../CustomEditor";
 
 export default function CreateForm() {
   const [currentEdit, setCurrentEdit] = useState("token");
@@ -59,12 +60,7 @@ export default function CreateForm() {
           </div>
           <div className="border-[2px] border-default-200 rounded-lg"></div>
         </div>
-        <Textarea
-          label="Description"
-          placeholder="Enter your description"
-          variant="bordered"
-          isRequired
-        />
+        <CustomEditor/>
         {currentEdit === "token-2022" && (
           <>
             <div className="grid grid-cols-2 gap-x-6">

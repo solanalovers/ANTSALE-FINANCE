@@ -1,5 +1,6 @@
 "use client";
 import CustomDivider from "@/components/CustomDivider";
+import CustomEditor from "@/components/CustomEditor";
 import { CreatePresaleContext } from "@/provider/CreatePresaleProvider";
 import { Input, Link, Select, SelectItem, Textarea } from "@nextui-org/react";
 import React, { useContext } from "react";
@@ -15,12 +16,7 @@ export default function CreateFairLaunchStep4() {
         placeholder="http://example.com"
       />
       <div className="my-6">
-        <Textarea
-          variant="bordered"
-          label="Description"
-          classNames={{ input: "placeholder:text-[#8E8E93]" }}
-          placeholder="Description"
-        />
+        <CustomEditor />
       </div>
       <div className="grid grid-cols-2 gap-6">
         <Input
