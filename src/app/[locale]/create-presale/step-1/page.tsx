@@ -1,7 +1,7 @@
 "use client";
 import CustomDivider from "@/components/CustomDivider";
 import { CreatePresaleContext } from "@/provider/CreatePresaleProvider";
-import { Input, Link } from "@nextui-org/react";
+import { Input, Link, Select, SelectItem } from "@nextui-org/react";
 import React, { useContext } from "react";
 
 export default function CreatePresaleStep1() {
@@ -28,12 +28,20 @@ export default function CreatePresaleStep1() {
               </p>
             </div>
           </div>
-          <Input
-            classNames={{ input: "placeholder:text-[#8E8E93]" }}
+          <Select
+            classNames={{ value: "placeholder:text-[#8E8E93]" }}
             variant="bordered"
             label="Currency"
             placeholder="SOL"
-          />
+            value={'sol'}
+          >
+            <SelectItem
+              key={1}
+              value={'sol'}
+            >
+              SOL
+            </SelectItem>
+          </Select>
           <Input
             classNames={{ input: "placeholder:text-[#8E8E93]" }}
             variant="bordered"
