@@ -62,7 +62,7 @@ export default function CreatePresaleStep1() {
               placeholder="9RFFhhe4XPV8UcBFJkgrDwGGtN3jmktBtw4RBia1bBVn"
             />
             <p className="mt-1 text-sm">
-              How to become a Solsale.fi's storyteller?{" "}
+            {`How to become a Solsale.fi's storyteller? `}
               <Link
                 href=""
                 isExternal

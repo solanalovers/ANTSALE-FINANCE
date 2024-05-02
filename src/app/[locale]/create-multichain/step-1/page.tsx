@@ -109,7 +109,7 @@ export default function CreateMultiChainStep1() {
               placeholder="9RFFhhe4XPV8UcBFJkgrDwGGtN3jmktBtw4RBia1bBVn"
             />
             <p className="mt-1 text-sm">
-              How to become a Solsale.fi's storyteller?{" "}
+            {`How to become a Solsale.fi's storyteller? `}
               <Link
                 href=""
                 isExternal
@@ -136,6 +136,7 @@ export default function CreateMultiChainStep1() {
             <div className="flex flex-col gap-2">
               {currencyList.map((item: any, idx: number) => (
                 <CurrencySelect
+                  key={idx}
                   image={item.image}
                   name={item.name}
                 />
