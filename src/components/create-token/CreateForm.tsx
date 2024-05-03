@@ -165,7 +165,15 @@ export default function CreateForm() {
                 />
               </div>
             </div>
-            <TagSelect />
+            <TagSelect
+              tagList={form.tags}
+              handleAddTag={(e: any) =>
+                setForm((prev: any) => ({
+                  ...prev,
+                  tags: [...e],
+                }))
+              }
+            />
             <Checkbox className="items-start gap-2">
               <p className="text-base leading-[140%]">
                 Are you going to Create a Liquidity Pool?
