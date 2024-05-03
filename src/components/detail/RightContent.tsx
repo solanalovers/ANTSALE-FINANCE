@@ -1,7 +1,6 @@
 import React from "react";
 import BorderContent from "./BorderContent";
 import { Chip, Link } from "@nextui-org/react";
-import { Copy, Warning2 } from "iconsax-react";
 import TokenInfo from "./TokenInfo";
 import PoolInfo from "./PoolInfo";
 

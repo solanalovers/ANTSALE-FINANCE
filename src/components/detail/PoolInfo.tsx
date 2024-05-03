@@ -18,8 +18,14 @@ export default function PoolInfo() {
               9RFFhhe4XPV8UcBFJkgrDwGGtN3jmktBtw4RBia1bBVn
             </Link>
             <Copy
+              className="hover:opacity-80 cursor-pointer"
               variant="Bold"
               size={20}
+              onClick={() =>
+                navigator.clipboard.writeText(
+                  "9RFFhhe4XPV8UcBFJkgrDwGGtN3jmktBtw4RBia1bBVn"
+                )
+              }
             />
           </div>
           <div className="flex justify-end items-center gap-x-2">

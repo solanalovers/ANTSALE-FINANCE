@@ -18,8 +18,10 @@ export default function TokenInfo() {
               9RFFhhe4XPV8UcBFJkgrDwGGtN3jmktBtw4RBia1bBVn
             </Link>
             <Copy
+              className="hover:opacity-80 cursor-pointer"
               variant="Bold"
               size={20}
+              onClick={()=>navigator.clipboard.writeText('9RFFhhe4XPV8UcBFJkgrDwGGtN3jmktBtw4RBia1bBVn')}
             />
           </div>
           <div className="flex justify-end items-center gap-x-2">
@@ -52,7 +54,9 @@ export default function TokenInfo() {
       <div className="my-[14px] w-full border-t border-dashed border-divider" />
       <div className="flex justify-between">
         <p className="font-medium text-base">Total Supply</p>
-        <p className="text-base leading-6 text-[#1C1C1E]">{(420000000).toLocaleString()}</p>
+        <p className="text-base leading-6 text-[#1C1C1E]">
+          {(420000000).toLocaleString()}
+        </p>
       </div>
     </div>
   );

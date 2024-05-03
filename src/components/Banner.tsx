@@ -14,7 +14,7 @@ export default function Banner() {
             width={"486px"}
             height={"578px"}
           />
-          <div className="flex-1 py-6">
+          <div className="flex-1 py-6 z-10">
             <p
               className={`text-[50px] leading-[60px] text-default-700 font-medium ${archivo.className}`}
             >

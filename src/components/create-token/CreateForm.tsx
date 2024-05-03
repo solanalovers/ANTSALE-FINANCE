@@ -13,6 +13,31 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import CustomEditor from "../CustomEditor";
 import UploadImage from "./UploadImage";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import Stepper from "../Stepper";
+import CustomDivider from "../CustomDivider";
+
+const listStep = [
+  {
+    title: "Verify Token",
+    desc: "Enter the token address and verify",
+  },
+  {
+    title: "Defi Launchpad Info",
+    desc: "Submit all the necessary presale information",
+  },
+  {
+    title: "Tokenomic Info",
+    desc: "Submit all the necessary presale information",
+  },
+  {
+    title: "Add Additional Info",
+    desc: "Let people know who you are",
+  },
+  {
+    title: "Finalize",
+    desc: "Review your information",
+  },
+];
 
 export default function CreateForm() {
   const [currentEdit, setCurrentEdit] = useState("token");
@@ -20,6 +45,12 @@ export default function CreateForm() {
   const { publicKey } = useWallet();
   return (
     <BorderContent>
+      <Stepper
+        listStep={listStep}
+        step={1}
+        active
+      />
+      <CustomDivider />
       <RadioGroup
         value={currentEdit}
         onChange={(e) => setCurrentEdit(e.target.value)}
@@ -135,9 +166,7 @@ export default function CreateForm() {
               </div>
             </div>
             <TagSelect />
-            <Checkbox
-              className="items-start gap-2"
-            >
+            <Checkbox className="items-start gap-2">
               <p className="text-base leading-[140%]">
                 Are you going to Create a Liquidity Pool?
               </p>

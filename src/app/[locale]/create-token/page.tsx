@@ -1,5 +1,6 @@
 "use client";
 import Banner from "@/components/Banner";
+import Stepper from "@/components/Stepper";
 import CreateForm from "@/components/create-token/CreateForm";
 import { Accordion, AccordionItem } from "@nextui-org/react";
 import React from "react";
@@ -9,11 +10,9 @@ export default function CreateToken() {
     <div>
       <Banner />
       <div className="container mx-auto">
-        <img
-          src="/image/stepper.png"
-          className="w-full h-[88px] mt-10 mb-6"
-        />
-        <CreateForm />
+        <div className="mt-10">
+          <CreateForm />
+        </div>
         <div className="grid grid-cols-2 gap-6 mt-20">
           <Accordion
             selectionMode="multiple"

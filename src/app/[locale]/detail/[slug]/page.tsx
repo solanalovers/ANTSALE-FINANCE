@@ -1,3 +1,4 @@
+"use client";
 import Banner from "@/components/Banner";
 import LeftContent from "@/components/detail/LeftContent";
 import RightContent from "@/components/detail/RightContent";
