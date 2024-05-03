@@ -7,22 +7,33 @@ import {
   Divider,
   Progress,
 } from "@nextui-org/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CustomAvatar from "../CustomAvatar";
 import Chips from "../Chips";
 import { FireIcon } from "../Icon";
 import { useRouter } from "next/navigation";
+import { countdownToSaleEnd } from "@/function/timer";
 
-interface CardItemProps {}
+interface CardItemProps {
+  data: any;
+}
 
-export default function CardItem({}: CardItemProps) {
+export default function CardItem({ data }: CardItemProps) {
   const router = useRouter();
+  const [timer, setTimer] = useState("00:00:00:00");
+  useEffect(() => {
+    const countdown = setInterval(() => {
+      const timeleft = countdownToSaleEnd(data.saleEndsIn);
+      setTimer(timeleft);
+    }, 1000);
+    return () => clearInterval(countdown);
+  }, []);
   return (
     <Card className="p-4">
       <CardHeader className="flex items-center justify-between p-0">
-        <CustomAvatar tokenAvatar="/image/token-image.png" />
+        <CustomAvatar tokenAvatar={data.tokenAvatar} />
         <div className="flex items-end flex-col">
-          <Chips status="upcoming" />
+          <Chips status={data.status} />
           <div className="flex items-center gap-x-1 mt-2">
             <Chip
               color="secondary"
@@ -50,7 +61,7 @@ export default function CardItem({}: CardItemProps) {
           <div>
             <p className="font-semibold text-[26px] leading-[34px]">SMB GEN2</p>
             <p className="text-[14px] leading-[22px] text-[#8E8E93]">
-              Fair Launch
+              {data.launchType}
             </p>
           </div>
           <div>
@@ -61,21 +72,24 @@ export default function CardItem({}: CardItemProps) {
           </div>
           <div>
             <p className="text-[14px] leading-[22px]">
-              Progress<span className="ml-2 text-[#8E8E93]">(484.13%)</span>
+              Progress
+              <span className="ml-2 text-[#8E8E93]">
+                ({data.progress.percentage})
+              </span>
             </p>
             <Progress
-              value={50}
+              value={data.progress.value}
               color="success"
               className="my-1"
             />
             <p className="text-[12px] leading-[20px] text-[#8E8E93]">
-              242.0635 SOL Raised
+              {data.progress.raised.toLocaleString()} SOL Raised
             </p>
           </div>
           <div>
             <div className="flex items-center justify-between">
               <p className="text-[14px] leading-[22px]">Liquidity</p>
-              <p className="text-[14px] leading-[22px]">60%</p>
+              <p className="text-[14px] leading-[22px]">{data.liquidity}</p>
             </div>
             <div className="flex items-center justify-between mt-2">
               <p className="text-[14px] leading-[22px]">Lockup Time</p>
@@ -88,11 +102,11 @@ export default function CardItem({}: CardItemProps) {
           <div className="flex items-center justify-between">
             <div>
               <p>Sale Ends In:</p>
-              <p>00:11:01:23</p>
+              <p>{timer}</p>
             </div>
             <Button
               color="primary"
-              onClick={() => router.replace("/detail/1")}
+              onClick={() => router.replace(`/detail/${data.id}`)}
             >
               View
             </Button>

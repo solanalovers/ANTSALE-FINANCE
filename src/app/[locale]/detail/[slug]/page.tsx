@@ -2,9 +2,24 @@
 import Banner from "@/components/Banner";
 import LeftContent from "@/components/detail/LeftContent";
 import RightContent from "@/components/detail/RightContent";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Detail({ params }: { params: { slug: string } }) {
+  const [type] = useState(() => {
+    switch (params.slug) {
+      case "4":
+        return "multi-price";
+        break;
+      case "5":
+        return "purchase-currency";
+        break;
+      case "6":
+        return "fixed-price";
+        break;
+      default:
+        return "normal";
+    }
+  });
   return (
     <div>
       <Banner />

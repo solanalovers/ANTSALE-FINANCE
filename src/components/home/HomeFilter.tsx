@@ -1,22 +1,29 @@
 import { SearchIcon } from "@chakra-ui/icons";
 import { Tabs, Tab, Input } from "@nextui-org/react";
-import React from "react";
+import React, { Key } from "react";
 import HomeDropdown from "./HomeDropdown";
 
-export default function HomeFilter() {
+interface HomeFilterProps {
+  currentList: string;
+  setCurrentList: (key: Key) => void
+}
+
+export default function HomeFilter({currentList, setCurrentList}: HomeFilterProps) {
   return (
     <div className="flex items-center gap-x-6">
       <Tabs
         size={"md"}
         color="primary"
         className="font-semibold"
+        selectedKey={currentList}
+        onSelectionChange={setCurrentList}
       >
         <Tab
-          key="FAIRLAUNCH list"
+          key="fairlaunch"
           title="FAIRLAUNCH list"
         />
         <Tab
-          key="MULTICHAIN-LAUNCH list"
+          key="multichain"
           title="MULTICHAIN-LAUNCH list"
         />
       </Tabs>
