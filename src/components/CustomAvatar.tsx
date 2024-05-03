@@ -1,4 +1,4 @@
-import { networkImage } from "@/constant/network-image";
+import { networkImage } from "@/constant/network";
 import { Avatar } from "@nextui-org/react";
 import React from "react";
 

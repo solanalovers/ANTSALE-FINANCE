@@ -1,5 +1,6 @@
 "use client";
 import CustomDivider from "@/components/CustomDivider";
+import { currencyList } from "@/constant/network";
 import { CreatePresaleContext } from "@/provider/CreatePresaleProvider";
 import {
   Checkbox,
@@ -10,45 +11,6 @@ import {
   SelectItem,
 } from "@nextui-org/react";
 import React, { useContext, useState } from "react";
-
-const currencyList = [
-  {
-    image: "eth",
-    name: "Ethereum (ETH)",
-  },
-  {
-    image: "bnb",
-    name: "BNB Chain (BNB)",
-  },
-  {
-    image: "sol",
-    name: "Solona (SOL)",
-  },
-  {
-    image: "base",
-    name: "Base (BASE)",
-  },
-  {
-    image: "polygon",
-    name: "Polygon (MATIC)",
-  },
-  {
-    image: "avax",
-    name: "Avalanche (AVAX)",
-  },
-  {
-    image: "ton",
-    name: "Toncoin (TON)",
-  },
-  {
-    image: "arb",
-    name: "Arbitrum (ARB)",
-  },
-  {
-    image: "trx",
-    name: "TRON (TRX)",
-  },
-];
 
 const CurrencySelect = ({ image, name, value, setValue }: any) => {
   const [isActive, setIsActive] = useState(false);
