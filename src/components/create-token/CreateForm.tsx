@@ -11,9 +11,12 @@ import {
 import TagSelect from "./TagSelect";
 import { useWallet } from "@solana/wallet-adapter-react";
 import CustomEditor from "../CustomEditor";
+import UploadImage from "./UploadImage";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 export default function CreateForm() {
   const [currentEdit, setCurrentEdit] = useState("token");
+  const [form, setForm] = useState<any>({});
   const { publicKey } = useWallet();
   return (
     <BorderContent>
@@ -35,6 +38,9 @@ export default function CreateForm() {
               placeholder="Enter your name"
               variant="bordered"
               isRequired
+              onChange={(e: any) =>
+                setForm((prev: any) => ({ ...prev, name: e.target.value }))
+              }
             />
             <Input
               type="text"
@@ -42,6 +48,9 @@ export default function CreateForm() {
               placeholder="Enter your symbol"
               variant="bordered"
               isRequired
+              onChange={(e: any) =>
+                setForm((prev: any) => ({ ...prev, symbol: e.target.value }))
+              }
             />
             <Input
               type="number"
@@ -49,6 +58,9 @@ export default function CreateForm() {
               placeholder="Enter your decimals"
               variant="bordered"
               isRequired
+              onChange={(e: any) =>
+                setForm((prev: any) => ({ ...prev, decimals: e.target.value }))
+              }
             />
             <Input
               type="number"
@@ -56,11 +68,19 @@ export default function CreateForm() {
               placeholder="Enter your supply"
               variant="bordered"
               isRequired
+              onChange={(e: any) =>
+                setForm((prev: any) => ({ ...prev, supply: e.target.value }))
+              }
             />
           </div>
-          <div className="border-[2px] border-default-200 rounded-lg"></div>
+          <UploadImage
+            value={form?.image}
+            onChange={(e: any) =>
+              setForm((prev: any) => ({ ...prev, image: e.target.files[0] }))
+            }
+          />
         </div>
-        <CustomEditor/>
+        <CustomEditor />
         {currentEdit === "token-2022" && (
           <>
             <div className="grid grid-cols-2 gap-x-6">
@@ -70,12 +90,21 @@ export default function CreateForm() {
                   label="Website URL"
                   placeholder="http://reddit.com/abc"
                   variant="bordered"
+                  onChange={(e: any) =>
+                    setForm((prev: any) => ({ ...prev, url: e.target.value }))
+                  }
                 />
                 <Input
                   type="text"
                   label="Telegram Group URL"
                   placeholder="http://reddit.com/abc"
                   variant="bordered"
+                  onChange={(e: any) =>
+                    setForm((prev: any) => ({
+                      ...prev,
+                      telegram: e.target.value,
+                    }))
+                  }
                 />
               </div>
               <div className="flex flex-col gap-y-6">
@@ -84,17 +113,31 @@ export default function CreateForm() {
                   label="Twitter URL"
                   placeholder="http://youtube.com/abc"
                   variant="bordered"
+                  onChange={(e: any) =>
+                    setForm((prev: any) => ({
+                      ...prev,
+                      twitter: e.target.value,
+                    }))
+                  }
                 />
                 <Input
                   type="text"
                   label="Discord URL"
                   placeholder="http://youtube.com/abc"
                   variant="bordered"
+                  onChange={(e: any) =>
+                    setForm((prev: any) => ({
+                      ...prev,
+                      discord: e.target.value,
+                    }))
+                  }
                 />
               </div>
             </div>
             <TagSelect />
-            <Checkbox className="items-start gap-2">
+            <Checkbox
+              className="items-start gap-2"
+            >
               <p className="text-base leading-[140%]">
                 Are you going to Create a Liquidity Pool?
               </p>
@@ -119,7 +162,14 @@ export default function CreateForm() {
           color="primary"
           className="w-fit mx-auto px-44 py-3 font-medium text-base leading-6"
         >
-          {!publicKey ? "Connect your wallet" : "Create Token"}
+          {!publicKey ? (
+            <>
+              <WalletMultiButton />
+              Connect your wallet
+            </>
+          ) : (
+            "Create Token"
+          )}
         </Button>
       </div>
     </BorderContent>

@@ -4,6 +4,7 @@ import { useTheme } from "next-themes";
 
 export default function Footer() {
   const { theme, setTheme } = useTheme();
+  console.log(theme)
   return (
     <div className="mt-[72px]">
       <div className="h-2 bg-gradient-to-t from-[rgba(000,000,000,0.03)] to-transparent"></div>
@@ -72,6 +73,7 @@ export default function Footer() {
               className="flex items-center gap-x-2"
               onClick={() => setTheme("light")}
             >
+              {theme === "light" && <p style={{display: 'none'}}>aaa</p>}
               <SunIcon
                 color={theme === "light" ? "#006FEE" : "#8E8E93"}
                 width={"24px"}

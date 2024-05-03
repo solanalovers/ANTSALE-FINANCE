@@ -16,7 +16,7 @@ export default function CustomEditor() {
       [{ align: [] }],
       [{ color: [] }],
       ["code-block"],
-      ["clean"],
+      // ["clean"],
     ],
   };
 
@@ -36,6 +36,8 @@ export default function CustomEditor() {
     "code-block",
   ];
 
+
+
   const handleEditorChange = (newContent: any) => {
     setContent(newContent);
   };
@@ -46,7 +48,7 @@ export default function CustomEditor() {
       onChange={handleEditorChange}
       modules={quillModules}
       formats={quillFormats}
-      className="w-full mt-10 bg-white"
+      className="w-full bg-white"
     />
   );
 }
