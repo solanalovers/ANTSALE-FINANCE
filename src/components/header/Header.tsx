@@ -54,7 +54,9 @@ export default function Header() {
           </div>
         </div>
       </div>
+      <div className={`border-b border-default-300`}>
       <Navbar />
+      </div>
     </div>
   );
 }

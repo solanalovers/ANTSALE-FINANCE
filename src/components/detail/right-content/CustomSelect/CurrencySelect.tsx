@@ -1,5 +1,5 @@
 import { ArrowDownIcon } from "@/components/Icon";
-import { currencyList } from "@/constant/network";
+import { currencyList, currencyShortName } from "@/constant/network";
 import {
   Dropdown,
   DropdownTrigger,
@@ -29,7 +29,7 @@ export default function CurrencySelect({ currency, setCurrency }: any) {
             src={`/image/multi-chain/${currency}.png`}
             className="w-6 h-6 object-cover object-center"
           />
-          <div className="flex">{currency.toUpperCase()}</div>
+          <div className="flex">{currencyShortName[currency]}</div>
         </Button>
       </DropdownTrigger>
       <DropdownMenu>

@@ -11,7 +11,7 @@ export default function BaseRightContent() {
           <p className="leading-5 text-base font-medium">
             MULTICHAIN-LAUNCH Ends In
           </p>
-          <Countdown />
+          <Countdown/>
         </div>
         <div className="my-6">
           <Progress

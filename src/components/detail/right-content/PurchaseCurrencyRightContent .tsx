@@ -14,7 +14,7 @@ import Countdown from "../Countdown";
 import { currencyList } from "@/constant/network";
 import { ArrowDownIcon } from "@/components/Icon";
 import { set } from "@coral-xyz/anchor/dist/cjs/utils/features";
-import CurrencySelect from "./CurrencySelect";
+import CurrencySelect from "./CustomSelect/CurrencySelect";
 
 export default function PurchaseCurrencyRightContent() {
   const [currency, setCurrency] = useState("eth");
@@ -25,7 +25,7 @@ export default function PurchaseCurrencyRightContent() {
           <p className="leading-5 text-base font-medium">
             MULTICHAIN-LAUNCH Ends In
           </p>
-          <Countdown />
+          <Countdown multichain/>
         </div>
         <div className="mt-6">
           <p className="font-semibold text-base leading-5 text-center mb-2">
