@@ -18,24 +18,24 @@ import CustomDivider from "../CustomDivider";
 
 const listStep = [
   {
-    title: "Verify Token",
-    desc: "Enter the token address and verify",
+    title: "Step 1",
+    desc: "Connect your Solana wallet",
   },
   {
-    title: "Defi Launchpad Info",
-    desc: "Submit all the necessary presale information",
+    title: "Step 2",
+    desc: "Specify the token name, token symbol, token image",
   },
   {
-    title: "Tokenomic Info",
-    desc: "Submit all the necessary presale information",
+    title: "Step 3",
+    desc: "Determine the Supply and Decimals of your Token.",
   },
   {
-    title: "Add Additional Info",
-    desc: "Let people know who you are",
+    title: "Step 4",
+    desc: "Add more information about token: website, twitter (X), telegram, discord ... (optional)",
   },
   {
-    title: "Finalize",
-    desc: "Review your information",
+    title: "Step 5",
+    desc: "Click on create, accept the transaction on your wallet and wait until your tokens ready.",
   },
 ];
 
