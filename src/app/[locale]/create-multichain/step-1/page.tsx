@@ -1,6 +1,7 @@
 "use client";
 import CustomDivider from "@/components/CustomDivider";
 import { currencyList } from "@/constant/network";
+import { CreateMultiChainContext } from "@/provider/CreateMultiChainProvider";
 import { CreatePresaleContext } from "@/provider/CreatePresaleProvider";
 import {
   Checkbox,
@@ -34,12 +35,22 @@ const CurrencySelect = ({ image, name, value, setValue }: any) => {
         variant="bordered"
         placeholder="Your address to receive fund"
         isDisabled={!isActive}
+        value={value}
+        onChange={(e: any) =>
+          setValue((prev: any) => ({
+            ...prev,
+            multiWallet: { [image]: e.target.value },
+          }))
+        }
       />
     </div>
   );
 };
 
 export default function CreateMultiChainStep1() {
+  const { createMultiChainForm, setCreateMultiChainForm } = useContext(
+    CreateMultiChainContext
+  );
   return (
     <div>
       <CustomDivider />
@@ -71,7 +82,7 @@ export default function CreateMultiChainStep1() {
               placeholder="9RFFhhe4XPV8UcBFJkgrDwGGtN3jmktBtw4RBia1bBVn"
             />
             <p className="mt-1 text-sm">
-            {`How to become a Solsale.fi's storyteller? `}
+              {`How to become a Solsale.fi's storyteller? `}
               <Link
                 href=""
                 isExternal
@@ -101,6 +112,8 @@ export default function CreateMultiChainStep1() {
                   key={idx}
                   image={item.image}
                   name={item.name}
+                  value={setCreateMultiChainForm?.multiWallet?.[item.image]}
+                  setValue={setCreateMultiChainForm}
                 />
               ))}
             </div>

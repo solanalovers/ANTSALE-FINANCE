@@ -1,14 +1,13 @@
 "use client";
 import Banner from "@/components/Banner";
-import CustomDivider from "@/components/CustomDivider";
 import Stepper from "@/components/Stepper";
 import CreateSaleFooter from "@/components/create-sale/CreateSaleFooter";
 import BorderContent from "@/components/detail/BorderContent";
-import CreatePresaleProvider, {
-  CreatePresaleContext,
-} from "@/provider/CreatePresaleProvider";
+import CreateMultiChainProvider, {
+  CreateMultiChainContext,
+} from "@/provider/CreateMultiChainProvider";
 import { usePathname } from "next/navigation";
-import React, { ReactNode, useContext, useEffect } from "react";
+import React, { ReactNode, useContext, useEffect, useState } from "react";
 
 const listStep = [
   {
@@ -34,7 +33,6 @@ const listStep = [
 ];
 
 export default function Layout({ children }: { children: ReactNode }) {
-  const { createPresaleForm } = useContext(CreatePresaleContext);
   const pathname = usePathname();
   const step = Number(pathname.slice(-1));
   const currentRoute = pathname.split(`/step-${step}`)[0];
@@ -43,7 +41,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <CreatePresaleProvider>
+    <CreateMultiChainProvider>
       <Banner />
       <div className="container mx-auto mt-10">
         <BorderContent>
@@ -56,11 +54,11 @@ export default function Layout({ children }: { children: ReactNode }) {
             isFirst={step === 1}
             isLast={step === listStep.length}
             step={step}
-            finalText="CREATE PRESALE"
+            finalText="CREATE MULTICHAIN-LAUNCH"
             currentRoute={currentRoute}
           />
         </BorderContent>
       </div>
-    </CreatePresaleProvider>
+    </CreateMultiChainProvider>
   );
 }
