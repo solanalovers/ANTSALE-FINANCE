@@ -19,6 +19,7 @@ import PoolSelect from "./CustomSelect/PoolSelect";
 
 export default function FixedRightContent({ type }: any) {
   const [currency, setCurrency] = useState("usdt");
+  const [payment, setPayment] = useState("eth");
   const [upperPool, setUpperPool] = useState(2);
   const [lowerPool, setLowerPool] = useState(2);
 
@@ -118,51 +119,10 @@ export default function FixedRightContent({ type }: any) {
           />
         </div>
         <div className="grid grid-cols-2 gap-x-3 items-center mt-4">
-          <Dropdown>
-            <DropdownTrigger>
-              <Button
-                size="lg"
-                variant="bordered"
-                className="w-full"
-                endContent={
-                  <ArrowDownIcon
-                    color="#000000"
-                    size="24"
-                  />
-                }
-              >
-                <Image
-                  src={`/image/multi-chain/${currency}.png`}
-                  className="w-6 h-6 object-cover object-center"
-                />
-                <div className="flex">{currencyShortName[currency]}</div>
-              </Button>
-            </DropdownTrigger>
-            <DropdownMenu>
-              <DropdownItem
-                onClick={() => setCurrency('eth')}
-              >
-                <div className="flex gap-2 items-center w-[250px]">
-                  <Image
-                    src={`/image/multi-chain/eth.png`}
-                    className="w-6 h-6 object-cover object-center"
-                  />
-                  <p>ETH</p>
-                </div>
-              </DropdownItem>
-              <DropdownItem
-                onClick={() => setCurrency('usdt')}
-              >
-                <div className="flex gap-2 items-center w-[250px]">
-                  <Image
-                    src={`/image/multi-chain/usdt.png`}
-                    className="w-6 h-6 object-cover object-center"
-                  />
-                  <p>USDT</p>
-                </div>
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
+          <CurrencySelect
+            currency={payment}
+            setCurrency={setPayment}
+          />
           <Button
             color="primary"
             className="w-full"
