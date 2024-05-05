@@ -11,7 +11,7 @@ import {
 import React, { useState } from "react";
 import BorderContent from "../BorderContent";
 import Countdown from "../Countdown";
-import { currencyList } from "@/constant/network";
+import { currencyList, currencyShortName } from "@/constant/network";
 import { ArrowDownIcon } from "@/components/Icon";
 import { set } from "@coral-xyz/anchor/dist/cjs/utils/features";
 import CurrencySelect from "./CustomSelect/CurrencySelect";
@@ -78,7 +78,7 @@ export default function FixedRightContent({ type }: any) {
             onClick={() => setCurrency("usdt")}
           >
             <Image
-              src="/image/token/usdt.png"
+              src="/image/multi-chain/usdt.png"
               className="w-6 h-6"
             />
             USDT
@@ -96,7 +96,7 @@ export default function FixedRightContent({ type }: any) {
                 src={`${
                   currency === "eth"
                     ? "/image/multi-chain/eth.png"
-                    : "/image/token/usdt.png"
+                    : "/image/multi-chain/usdt.png"
                 }`}
                 className="w-4 h-4"
               />
@@ -117,19 +117,60 @@ export default function FixedRightContent({ type }: any) {
             }
           />
         </div>
-        {/* <div className="grid grid-cols-2 gap-x-3 items-center mt-4"> */}
-        {/* <CurrencySelect
-            currency={currency}
-            setCurrency={setCurrency}
-          /> */}
-        <Button
-          color="primary"
-          className="w-full mt-4"
-          size="lg"
-        >
-          BUY NOW
-        </Button>
-        {/* </div> */}
+        <div className="grid grid-cols-2 gap-x-3 items-center mt-4">
+          <Dropdown>
+            <DropdownTrigger>
+              <Button
+                size="lg"
+                variant="bordered"
+                className="w-full"
+                endContent={
+                  <ArrowDownIcon
+                    color="#000000"
+                    size="24"
+                  />
+                }
+              >
+                <Image
+                  src={`/image/multi-chain/${currency}.png`}
+                  className="w-6 h-6 object-cover object-center"
+                />
+                <div className="flex">{currencyShortName[currency]}</div>
+              </Button>
+            </DropdownTrigger>
+            <DropdownMenu>
+              <DropdownItem
+                onClick={() => setCurrency('eth')}
+              >
+                <div className="flex gap-2 items-center w-[250px]">
+                  <Image
+                    src={`/image/multi-chain/eth.png`}
+                    className="w-6 h-6 object-cover object-center"
+                  />
+                  <p>ETH</p>
+                </div>
+              </DropdownItem>
+              <DropdownItem
+                onClick={() => setCurrency('usdt')}
+              >
+                <div className="flex gap-2 items-center w-[250px]">
+                  <Image
+                    src={`/image/multi-chain/usdt.png`}
+                    className="w-6 h-6 object-cover object-center"
+                  />
+                  <p>USDT</p>
+                </div>
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+          <Button
+            color="primary"
+            className="w-full"
+            size="lg"
+          >
+            BUY NOW
+          </Button>
+        </div>
       </BorderContent>
       <BorderContent>
         <div className="mb-6">

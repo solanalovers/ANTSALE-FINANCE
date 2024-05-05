@@ -51,5 +51,6 @@ const currencyShortName: any = {
   ton: "Toncoin",
   arb: "Arbitrum",
   trx: "TRON",
+  usdt: "USDT"
 }
 export { networkImage, currencyList, currencyShortName }
