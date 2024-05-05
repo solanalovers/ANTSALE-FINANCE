@@ -27,7 +27,7 @@ export default function CurrencySelect({ currency, setCurrency }: any) {
         >
           <Image
             src={`/image/multi-chain/${currency}.png`}
-            className="w-6 h-6 object-cover object-center"
+            className="w-6 rounded-full object-cover object-center"
           />
           <div className="flex">{currencyShortName[currency]}</div>
         </Button>
