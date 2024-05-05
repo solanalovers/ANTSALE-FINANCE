@@ -19,7 +19,6 @@ import PoolSelect from "./CustomSelect/PoolSelect";
 
 export default function FixedRightContent({ type }: any) {
   const [currency, setCurrency] = useState("usdt");
-  const [payment, setPayment] = useState("eth");
   const [upperPool, setUpperPool] = useState(2);
   const [lowerPool, setLowerPool] = useState(2);
 
@@ -58,16 +57,24 @@ export default function FixedRightContent({ type }: any) {
             variant="bordered"
             size="lg"
             className={`${
-              currency === "eth" &&
+              currency !== "usdt" &&
               "border-primary bg-primary-50 font-bold text-primary"
             } text-lg leading-[28px]`}
-            onClick={() => setCurrency("eth")}
+            onClick={() =>
+              setCurrency(
+                currency !== "usdt" ? currencyShortName.currency : "eth"
+              )
+            }
           >
             <Image
-              src="/image/multi-chain/eth.png"
+              src={
+                currency !== "usdt"
+                  ? `/image/multi-chain/${currency}.png`
+                  : "/image/multi-chain/eth.png"
+              }
               className="w-6 h-6"
             />
-            Ethereum
+            {currency !== "usdt" ? currencyShortName[currency] : "Ethereum"}
           </Button>
           <Button
             variant="bordered"
@@ -120,8 +127,8 @@ export default function FixedRightContent({ type }: any) {
         </div>
         <div className="grid grid-cols-2 gap-x-3 items-center mt-4">
           <CurrencySelect
-            currency={payment}
-            setCurrency={setPayment}
+            currency={currency}
+            setCurrency={setCurrency}
           />
           <Button
             color="primary"
