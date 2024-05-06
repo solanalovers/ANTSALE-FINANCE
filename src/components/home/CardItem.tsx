@@ -106,7 +106,7 @@ export default function CardItem({ data }: CardItemProps) {
             </div>
             <Button
               color="primary"
-              onClick={() => router.replace(`/detail/${data.id}`)}
+              onClick={() => router.push(`/detail/${data.id}`)}
             >
               View
             </Button>

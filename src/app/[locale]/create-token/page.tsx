@@ -8,7 +8,7 @@ import React from "react";
 export default function CreateToken() {
   return (
     <div>
-      <Banner />
+      {/* <Banner /> */}
       <div className="container mx-auto">
         <div className="mt-10">
           <CreateForm />

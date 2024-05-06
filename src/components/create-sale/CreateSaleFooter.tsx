@@ -27,7 +27,7 @@ export default function CreateSaleFooter({
           isDisabled={isFirst}
           size="lg"
           onClick={() => {
-            router.replace(`${currentRoute}/step-${step - 1}`);
+            router.push(`${currentRoute}/step-${step - 1}`);
           }}
         >
           <div className="flex items-center gap-x-3">
@@ -42,7 +42,7 @@ export default function CreateSaleFooter({
           color="primary"
           size="lg"
           onClick={() => {
-            router.replace(`${currentRoute}/step-${step + 1}`);
+            router.push(`${currentRoute}/step-${step + 1}`);
           }}
         >
           <div className="flex items-center gap-x-3">

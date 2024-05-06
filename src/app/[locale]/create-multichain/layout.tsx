@@ -42,7 +42,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   }, []);
   return (
     <CreateMultiChainProvider>
-      <Banner />
+      {/* <Banner /> */}
       <div className="container mx-auto mt-10">
         <BorderContent>
           <Stepper

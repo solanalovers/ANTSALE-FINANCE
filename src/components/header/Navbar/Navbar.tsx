@@ -1,6 +1,7 @@
+import { Link } from "@nextui-org/react";
 import { useLocale } from "next-intl";
 import { useTheme } from "next-themes";
-import Link from "next/link";
+// import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 
@@ -42,7 +43,7 @@ export default function Navbar() {
           <Link
             key={idx}
             href={link.isHaveStepper ? link.value + "/step-1" : link.value}
-            className={`mx-3 text-sm leading-5 relative ${
+            className={`mx-3 text-sm leading-5 relative text-black ${
               theme === "dark" ? "header-link" : "header-link light"
             } ${
               (pathname === link.value ||
