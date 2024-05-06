@@ -1,10 +1,25 @@
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { Image, Link } from "@nextui-org/react";
+"use client";
 import { useTheme } from "next-themes";
+import { MoonIcon, SunIcon } from "../Icon";
+import { useEffect, useState } from "react";
+import { Image, Link } from "@nextui-org/react";
 
 export default function Footer() {
   const { theme, setTheme } = useTheme();
-  console.log(theme)
+  const [sunbg, setSunbg] = useState("#8E8E93");
+  const [moonbg, setMoonbg] = useState("#8E8E93");
+
+  useEffect(() => {
+    console.log(theme);
+    if (theme === "dark") {
+      setMoonbg("#006FEE");
+      setSunbg("#8E8E93");
+    } else {
+      setSunbg("#006FEE");
+      setMoonbg("#8E8E93");
+    }
+  }, [theme]);
+
   return (
     <div className="mt-[72px]">
       <div className="h-2 bg-gradient-to-t from-[rgba(000,000,000,0.03)] to-transparent"></div>
@@ -18,7 +33,6 @@ export default function Footer() {
           <Link
             className="font-medium text-primary underline"
             href={""}
-            isExternal
           >
             Binance Academy.
           </Link>
@@ -32,8 +46,9 @@ export default function Footer() {
             >
               <Image
                 src="/image/footer/twitter.png"
-                width={"40px"}
-                height={"40xp"}
+                alt=""
+                width={40}
+                height={40}
               />
             </Link>
             <Link
@@ -42,8 +57,9 @@ export default function Footer() {
             >
               <Image
                 src="/image/footer/telegram.png"
-                width={"40px"}
-                height={"40xp"}
+                alt=""
+                width={40}
+                height={40}
               />
             </Link>
             <Link
@@ -52,8 +68,9 @@ export default function Footer() {
             >
               <Image
                 src="/image/footer/discord.png"
-                width={"40px"}
-                height={"40xp"}
+                alt=""
+                width={40}
+                height={40}
               />
             </Link>
             <Link
@@ -62,8 +79,9 @@ export default function Footer() {
             >
               <Image
                 src="/image/footer/facebook.png"
-                width={"40px"}
-                height={"40xp"}
+                alt=""
+                width={40}
+                height={40}
               />
             </Link>
           </div>
@@ -73,36 +91,15 @@ export default function Footer() {
               className="flex items-center gap-x-2"
               onClick={() => setTheme("light")}
             >
-              {theme === "light" && <p style={{display: 'none'}}>aaa</p>}
-              <SunIcon
-                color={theme === "light" ? "#006FEE" : "#8E8E93"}
-                width={"24px"}
-                height={"24px"}
-              />
-              <p
-                className={`font-medium ${
-                  theme === "light" ? "text-primary" : "text-[#8E8E93]"
-                }`}
-              >
-                Light Mode
-              </p>
+              <SunIcon color={sunbg} />
+              <p className={`font-medium text-[${sunbg}]`}>Light Mode</p>
             </div>
             <div
               className="flex items-center gap-x-2"
               onClick={() => setTheme("dark")}
             >
-              <MoonIcon
-                color={theme === "dark" ? "#006FEE" : "#8E8E93"}
-                width={"24px"}
-                height={"24px"}
-              />
-              <p
-                className={`font-medium ${
-                  theme === "dark" ? "text-primary" : "text-[#8E8E93]"
-                }`}
-              >
-                Dark Mode
-              </p>
+              <MoonIcon color={moonbg} />
+              <p className={`font-medium text-[${moonbg}]`}>Dark Mode</p>
             </div>
           </div>
         </div>

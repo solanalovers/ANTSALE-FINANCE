@@ -81,6 +81,7 @@ export default function CardItem({ data }: CardItemProps) {
               value={data.progress.value}
               color="success"
               className="my-1"
+              aria-label="card-progress"
             />
             <p className="text-[12px] leading-[20px] text-[#8E8E93]">
               {data.progress.raised.toLocaleString()} SOL Raised

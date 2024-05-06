@@ -2,13 +2,12 @@
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import "./header.css";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLocale } from "next-intl";
 import LocaleSelect from "./localeComponent/LocaleSelect";
 // import ClusterSelect from "./solanaCluster/ClusterSelect";
 import ConnectedWallet from "./ConnectedWallet";
-import { Image, Input, commonColors } from "@nextui-org/react";
+import { Image, Input, Link, commonColors } from "@nextui-org/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import Navbar from "./Navbar/Navbar";
 import { useTheme } from "next-themes";

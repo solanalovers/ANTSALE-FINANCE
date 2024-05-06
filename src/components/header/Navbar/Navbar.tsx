@@ -58,7 +58,7 @@ export default function Navbar() {
       <div className="flex items-center">
         <Link
           href={"/faq"}
-          className={`mx-3 text-sm leading-5 ${
+          className={`mx-3 text-sm leading-5 text-black ${
             theme === "dark" ? "header-link" : "header-link light"
           } ${pathname === "FAQ" && "text-primary font-bold"}`}
         >
@@ -66,7 +66,7 @@ export default function Navbar() {
         </Link>
         <Link
           href={"/blog"}
-          className={`mx-3 text-sm leading-5 ${
+          className={`mx-3 text-sm leading-5 text-black ${
             theme === "dark" ? "header-link" : "header-link light"
           } ${pathname === "BLOG" && "text-primary font-bold"}`}
         >
