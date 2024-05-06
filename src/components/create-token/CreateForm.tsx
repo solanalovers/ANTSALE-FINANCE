@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import BorderContent from "../detail/BorderContent";
 import {
@@ -195,9 +196,9 @@ export default function CreateForm() {
           </>
         )}
         <div className="-mx-6 border-t border-default-300 border-dashed" />
-        <Button
+        <div
           color="primary"
-          className="w-fit mx-auto px-44 py-3 font-medium text-base leading-6"
+          className="w-fit mx-auto px-44 py-3 font-medium text-base leading-6 h-10 bg-primary relative hover:opacity-50 rounded-lg flex items-center justify-center text-white"
         >
           {!publicKey ? (
             <>
@@ -207,7 +208,7 @@ export default function CreateForm() {
           ) : (
             "Create Token"
           )}
-        </Button>
+        </div>
       </div>
     </BorderContent>
   );
