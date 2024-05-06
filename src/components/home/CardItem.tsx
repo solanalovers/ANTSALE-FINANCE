@@ -37,19 +37,19 @@ export default function CardItem({ data }: CardItemProps) {
           <div className="flex items-center gap-x-1 mt-2">
             <Chip
               color="secondary"
-              className="rounded-lg"
+              className="rounded-lg text-sm leading-5"
             >
               Safu
             </Chip>
             <Chip
               color="primary"
-              className="rounded-lg"
+              className="rounded-lg text-sm leading-5"
             >
               Audit
             </Chip>
             <Chip
               color="success"
-              className={"text-white rounded-lg"}
+              className={"text-white rounded-lg text-sm leading-5"}
             >
               KYC
             </Chip>

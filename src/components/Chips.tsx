@@ -41,7 +41,7 @@ export default function Chips({ status }: ChipProps) {
   };
   return (
     <Chip
-      className={`bg-${chipValueList[status].bg} text-${chipValueList[status].cl}`}
+      className={`bg-${chipValueList[status].bg} text-${chipValueList[status].cl} text-sm leading-5`}
       startContent={chipValueList[status].icon}
     >
       {chipValueList[status].value}

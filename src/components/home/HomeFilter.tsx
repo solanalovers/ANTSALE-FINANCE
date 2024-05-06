@@ -14,7 +14,7 @@ export default function HomeFilter({currentList, setCurrentList}: HomeFilterProp
       <Tabs
         size={"md"}
         color="primary"
-        className="font-semibold"
+        className="font-semibold text-sm leading-5"
         selectedKey={currentList}
         onSelectionChange={setCurrentList}
       >
