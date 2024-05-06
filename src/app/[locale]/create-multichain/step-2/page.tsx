@@ -1,15 +1,34 @@
 "use client";
 import CustomDivider from "@/components/CustomDivider";
-import { DatePicker, Input, Link, Select, SelectItem } from "@nextui-org/react";
-import React, { useContext, useState } from "react";
+import {
+  Button,
+  DatePicker,
+  Input,
+  Link,
+  Select,
+  SelectItem,
+} from "@nextui-org/react";
+import React, { useContext, useEffect, useState } from "react";
 import { now } from "@internationalized/date";
 import { CreateMultiChainContext } from "@/provider/CreateMultiChainProvider";
 import { currencyShortName } from "@/constant/network";
+import { MinusIcon, PlusIcon } from "@/components/Icon";
+import { poolList } from "@/constant/pool";
 
 export default function CreateMultiChainStep2() {
   const { createMultiChainForm, setCreateMultiChainForm } = useContext(
     CreateMultiChainContext
   );
+
+  useEffect(() => {
+    // CHECK PRICEMODEL TO REMOVE UN NEEED VALUE
+    if (
+      createMultiChainForm?.priceModel !== "multi-price" &&
+      createMultiChainForm?.pool
+    ) {
+      delete createMultiChainForm.pool;
+    }
+  }, [createMultiChainForm?.priceModel]);
   return (
     <div>
       <CustomDivider />
@@ -94,6 +113,9 @@ export default function CreateMultiChainStep2() {
               }))
             }
             value={createMultiChainForm?.priceModel}
+            disabledKeys={
+              createMultiChainForm?.multiWallet ? [] : ["purchase-currency"]
+            }
           >
             <SelectItem
               key={"fixed-price"}
@@ -148,6 +170,72 @@ export default function CreateMultiChainStep2() {
                     />
                   )
                 )}
+            </div>
+          )}
+          {createMultiChainForm?.priceModel === "multi-price" && (
+            <div>
+              <div className="grid grid-cols-2 gap-6 min-h-10 max-h-[400px] overflow-y-scroll">
+                {createMultiChainForm?.poolList?.map(
+                  (value: string, idx: number) => (
+                    <Input
+                      classNames={{ input: "placeholder:text-[#8E8E93]" }}
+                      variant="bordered"
+                      type="number"
+                      label={`Pool ${idx + 1} - Price per Token`}
+                      placeholder="0"
+                      key={idx}
+                      value={createMultiChainForm?.poolList[idx]}
+                      onChange={(e: any) => {
+                        const newPoolList = createMultiChainForm?.poolList;
+                        newPoolList[idx] = e.target.value;
+                        setCreateMultiChainForm((prev: any) => ({
+                          ...prev,
+                          poolList: newPoolList,
+                        }));
+                      }}
+                    />
+                  )
+                )}
+              </div>
+              <div className="flex items-center justify-between mt-3">
+                <Button
+                  variant={undefined}
+                  className="flex items-center gap-3 bg-transparent"
+                  isDisabled={createMultiChainForm?.poolList?.length === 20}
+                  onClick={() => {
+                    if (!createMultiChainForm?.poolList?.length) {
+                      setCreateMultiChainForm((prev: any) => ({
+                        ...prev,
+                        poolList: [""],
+                      }));
+                    } else {
+                      setCreateMultiChainForm((prev: any) => ({
+                        ...prev,
+                        poolList: [...prev.poolList, ""],
+                      }));
+                    }
+                  }}
+                >
+                  <PlusIcon />
+                  <p className="text-[#006FEE]">Pool List (max is 20 pools)</p>
+                </Button>
+                <Button
+                  variant={undefined}
+                  className="flex items-center gap-3 bg-transparent"
+                  isDisabled={createMultiChainForm?.poolList?.length === 0}
+                  onClick={() => {
+                    const newPoolList = [...createMultiChainForm.poolList];
+                    newPoolList.pop();
+                    setCreateMultiChainForm((prev: any) => ({
+                      ...prev,
+                      poolList: [...newPoolList],
+                    }));
+                  }}
+                >
+                  <MinusIcon />
+                  <p className="text-[#F31260]">Delete</p>
+                </Button>
+              </div>
             </div>
           )}
         </div>
