@@ -11,7 +11,7 @@ import {
   Select,
   SelectItem,
 } from "@nextui-org/react";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 const CurrencySelect = ({ image, name, value, setValue }: any) => {
   const [isActive, setIsActive] = useState(false);
@@ -39,7 +39,7 @@ const CurrencySelect = ({ image, name, value, setValue }: any) => {
         onChange={(e: any) =>
           setValue((prev: any) => ({
             ...prev,
-            multiWallet: { [image]: e.target.value },
+            multiWallet: { ...prev?.multiWallet, [image]: e.target.value },
           }))
         }
       />
@@ -48,7 +48,7 @@ const CurrencySelect = ({ image, name, value, setValue }: any) => {
 };
 
 export default function CreateMultiChainStep1() {
-  const { createMultiChainForm, setCreateMultiChainForm } = useContext(
+  const { setCreateMultiChainForm } = useContext(
     CreateMultiChainContext
   );
   return (

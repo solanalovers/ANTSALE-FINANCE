@@ -44,7 +44,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <CreateFairLaunchProvider>
       {/* <Banner /> */}
-      <div className="container mx-auto mt-40">
+      <div className="container mx-auto mt-10">
         <BorderContent>
           <Stepper
             step={step}
