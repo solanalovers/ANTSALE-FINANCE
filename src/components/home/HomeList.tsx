@@ -11,16 +11,7 @@ export default function HomeList({ currentList }: HomeListProps) {
   return (
     <div>
       <div className="grid grid-cols-3 gap-x-6 my-10">
-        {currentList === "fairlaunch" ? (
-          <>
-            {fairlaunchCardData.map((item: any, idx: number) => (
-              <CardItem
-                data={item}
-                key={idx}
-              />
-            ))}
-          </>
-        ) : (
+        {currentList === "multichain" ? (
           <>
             {multiChainCardData.map((item: any, idx: number) => (
               <CardItem
@@ -29,16 +20,25 @@ export default function HomeList({ currentList }: HomeListProps) {
               />
             ))}
           </>
+        ) : (
+          <>
+            {fairlaunchCardData.map((item: any, idx: number) => (
+              <CardItem
+                data={item}
+                key={idx}
+              />
+            ))}
+          </>
         )}
       </div>
-      <div className="flex justify-end">
+      {/* <div className="flex justify-end">
         <Pagination
           showControls
           total={10}
           initialPage={1}
           variant="light"
         />
-      </div>
+      </div> */}
     </div>
   );
 }

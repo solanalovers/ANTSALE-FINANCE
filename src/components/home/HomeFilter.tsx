@@ -5,10 +5,13 @@ import HomeDropdown from "./HomeDropdown";
 
 interface HomeFilterProps {
   currentList: string;
-  setCurrentList: (key: Key) => void
+  setCurrentList: (key: Key) => void;
 }
 
-export default function HomeFilter({currentList, setCurrentList}: HomeFilterProps) {
+export default function HomeFilter({
+  currentList,
+  setCurrentList,
+}: HomeFilterProps) {
   return (
     <div className="flex items-center gap-x-6">
       <Tabs
@@ -20,11 +23,15 @@ export default function HomeFilter({currentList, setCurrentList}: HomeFilterProp
       >
         <Tab
           key="fairlaunch"
-          title="FAIRLAUNCH list"
+          title="FAIRLAUNCH"
         />
         <Tab
           key="multichain"
-          title="MULTICHAIN-LAUNCH list"
+          title="MULTICHAIN-LAUNCH"
+        />
+        <Tab
+          key="presale"
+          title="PRE SALE"
         />
       </Tabs>
       <Input

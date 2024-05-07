@@ -11,16 +11,8 @@ import React, { ReactNode, useContext, useEffect } from "react";
 
 const listStep = [
   {
-    title: "Verify Token",
-    desc: "Enter the token address and verify",
-  },
-  {
-    title: "Defi Launchpad Info",
-    desc: "Submit all the necessary presale information",
-  },
-  {
-    title: "Tokenomic Info",
-    desc: "Submit all the necessary presale information",
+    title: "Verify Token & Config Launchpad",
+    desc: "Enter the token address and launchpad info",
   },
   {
     title: "Add Additional Info",
@@ -29,7 +21,7 @@ const listStep = [
   {
     title: "Finalize",
     desc: "Review your information",
-  },
+  }
 ];
 
 export default function Layout({ children }: { children: ReactNode }) {

@@ -8,7 +8,9 @@ export default function CreatePresaleProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [createPresaleForm, setCreatePresaleForm] = useState({});
+  const [createPresaleForm, setCreatePresaleForm] = useState({
+    listingOption: "auto",
+  });
 
   return (
     <CreatePresaleContext.Provider

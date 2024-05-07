@@ -22,7 +22,7 @@ export default function Detail({ params }: { params: { slug: string } }) {
   });
   return (
     <div>
-      {/* <Banner /> */}
+      <Banner />
       <div className="container mx-auto flex gap-x-6 mt-10">
         <div className="flex-1">
           <LeftContent />

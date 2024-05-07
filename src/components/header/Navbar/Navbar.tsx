@@ -34,6 +34,10 @@ export default function Navbar() {
       value: `/${locale}/create-multichain`,
       isHaveStepper: true,
     },
+    {
+      label: "DAO FUND",
+      value: `/${locale}/dao`,
+    },
   ];
 
   return (
@@ -43,7 +47,7 @@ export default function Navbar() {
           <Link
             key={idx}
             href={link.isHaveStepper ? link.value + "/step-1" : link.value}
-            className={`mx-3 text-sm leading-5 relative text-black ${
+            className={`mx-3 text-sm leading-5 relative text-default-500 font-semibold ${
               theme === "dark" ? "header-link" : "header-link light"
             } ${
               (pathname === link.value ||
@@ -58,7 +62,7 @@ export default function Navbar() {
       <div className="flex items-center">
         <Link
           href={"/faq"}
-          className={`mx-3 text-sm leading-5 text-black ${
+          className={`mx-3 text-sm leading-5 text-default-500 font-semibold ${
             theme === "dark" ? "header-link" : "header-link light"
           } ${pathname === "FAQ" && "text-primary font-bold"}`}
         >
@@ -66,7 +70,7 @@ export default function Navbar() {
         </Link>
         <Link
           href={"/blog"}
-          className={`mx-3 text-sm leading-5 text-black ${
+          className={`mx-3 text-sm leading-5 text-default-500 font-semibold ${
             theme === "dark" ? "header-link" : "header-link light"
           } ${pathname === "BLOG" && "text-primary font-bold"}`}
         >

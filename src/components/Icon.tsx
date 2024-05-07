@@ -212,6 +212,36 @@ const MoonIcon = ({ size = "24", color = "#8E8E93" }) => (
   </svg>
 );
 
+const CautionIcon = ({ size = "20", color = "#DD6B20" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox={`0 0 ${size} ${size}`}
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M10 20C4.477 20 0 15.523 0 10C0 4.477 4.477 0 10 0C15.523 0 20 4.477 20 10C20 15.523 15.523 20 10 20ZM9 13V15H11V13H9ZM9 5V11H11V5H9Z"
+      fill={color}
+    />
+  </svg>
+);
+
+const InfoIcon = ({ size = "20", color = "#3182CE" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox={`0 0 ${size} ${size}`}
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M10 20C4.477 20 0 15.523 0 10C0 4.477 4.477 0 10 0C15.523 0 20 4.477 20 10C20 15.523 15.523 20 10 20ZM9 9V15H11V9H9ZM9 5V7H11V5H9Z"
+      fill={color}
+    />
+  </svg>
+);
+
 export {
   CheckIcon,
   FireIcon,
@@ -223,4 +253,6 @@ export {
   MinusIcon,
   SunIcon,
   MoonIcon,
+  CautionIcon,
+  InfoIcon,
 };

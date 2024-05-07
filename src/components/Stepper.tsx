@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { ArrowRightIcon } from "./Icon";
 
 interface StepperProps {
@@ -11,14 +11,14 @@ export default function Stepper({ step, listStep, active }: StepperProps) {
   const checkLastStep = (idx: number) => idx + 1 !== listStep.length;
   const checkCurrentStep = (idx: number) => idx + 1 === step;
   return (
-    <div className="flex py-2 gap-x-4 justify-center items-center">
+    // <div className="flex py-2 gap-x-4 justify-between items-center">
+    <div className="flex py-2 justify-between items-center">
       {listStep.map(
         ({ title, desc }: { title: string; desc: string }, idx: number) => (
-          <div
-            className="flex items-center gap-x-4"
+          <Fragment
             key={idx}
           >
-            <div className="flex items-center gap-x-[10px] max-w-56">
+            <div className={`flex items-center gap-x-3 ${active && 'max-w-56'}`}>
               <p
                 className={`px-[15.5px] py-1.5 ${
                   checkCurrentStep(idx) || active
@@ -42,9 +42,10 @@ export default function Stepper({ step, listStep, active }: StepperProps) {
               </div>
             </div>
             {checkLastStep(idx) && <ArrowRightIcon />}
-          </div>
+          </Fragment>
         )
       )}
     </div>
+    // </div>
   );
 }
