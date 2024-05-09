@@ -59,11 +59,11 @@ export default function PoolInfo() {
         <p className="font-medium text-base">Soft Cap</p>
         <p className="text-base leading-6 text-[#1C1C1E]">5 SOL</p>
       </div>
-      <div className="my-[14px] w-full border-t border-dashed border-divider" />
+      {/* <div className="my-[14px] w-full border-t border-dashed border-divider" />
       <div className="flex justify-between">
         <p className="font-medium text-base">Hard Cap</p>
         <p className="text-base leading-6 text-[#1C1C1E]">-</p>
-      </div>
+      </div> */}
       <div className="my-[14px] w-full border-t border-dashed border-divider" />
       <div className="flex justify-between">
         <p className="font-medium text-base">Start Time</p>

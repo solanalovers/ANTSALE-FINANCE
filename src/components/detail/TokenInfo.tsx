@@ -4,7 +4,7 @@ import React from "react";
 
 export default function TokenInfo() {
   return (
-    <div className="mt-6">
+    <div className="">
       <p className="mb-5 font-medium text-lg">Token</p>
       <div className="flex justify-between">
         <p className="font-medium text-base">Address</p>
