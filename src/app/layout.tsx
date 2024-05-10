@@ -1,10 +1,10 @@
-
 import type { Metadata } from "next";
 import "./globals.css";
 import "@solana/wallet-adapter-react-ui/styles.css";
 import { ProviderWrapper } from "@/provider/ProviderWrapper";
 import DefaultLayout from "@/components/layout/DefaultLayout";
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
+import NProgress from 'nprogress'
 
 export const metadata: Metadata = {
   title: "Antsale",
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   icons: "/image/header-logo.png",
 };
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -28,9 +28,7 @@ export default function RootLayout({
       className={`${inter.className}`}
     >
       <body>
-        <ProviderWrapper>
-          {children}
-        </ProviderWrapper>
+        <ProviderWrapper>{children}</ProviderWrapper>
       </body>
     </html>
   );
