@@ -1,7 +1,6 @@
 "use client";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
-import "./header.css";
 import { usePathname } from "next/navigation";
 import { useLocale } from "next-intl";
 import LocaleSelect from "./localeComponent/LocaleSelect";
@@ -22,7 +21,7 @@ export default function Header() {
           <div className="flex py-4 items-center gap-x-8 justify-between">
             <Link href={"/"}>
               <Image
-                src={"/image/header-logo.png"}
+                src={"/image/logo-ant.png"}
                 width={"68px"}
                 height={"68px"}
                 className="object-cover object-center"

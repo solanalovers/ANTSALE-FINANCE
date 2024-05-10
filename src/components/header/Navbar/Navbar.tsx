@@ -4,6 +4,7 @@ import { useTheme } from "next-themes";
 // import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+import DropdownNavbar from "./DropdownNavbar";
 
 export default function Navbar() {
   const locale = useLocale();
@@ -35,13 +36,13 @@ export default function Navbar() {
       isHaveStepper: true,
     },
     {
-      label: "DAO FUND",
-      value: `/${locale}/dao`,
+      label: "PUMP ME",
+      value: `/${locale}/pumb`,
     },
   ];
 
   return (
-    <div className="flex container mx-auto py-4 justify-between">
+    <div className="flex container mx-auto pt-4 pb-[10px] justify-between">
       <div className="flex items-center">
         {navlink.map((link: any, idx: number) => (
           <Link
@@ -52,7 +53,7 @@ export default function Navbar() {
             } ${
               (pathname === link.value ||
                 pathname.startsWith(`${link.value}/step-`)) &&
-              "text-primary font-bold mt-[-4px] after:absolute after:h-[2px] after:bg-primary after:w-full after:left-0 after:bottom-[-4px]"
+              "text-primary font-bold after:absolute after:h-[2px] after:bg-primary after:w-full after:left-0 after:bottom-[-10px]"
             }`}
           >
             {link.label}
@@ -68,14 +69,15 @@ export default function Navbar() {
         >
           FAQ
         </Link>
-        <Link
+        {/* <Link
           href={"/services"}
           className={`mx-3 text-sm leading-5 text-default-500 font-semibold ${
             theme === "dark" ? "header-link" : "header-link light"
           } ${pathname === "services" && "text-primary font-bold"}`}
         >
           MY SERVICES
-        </Link>
+        </Link> */}
+        <DropdownNavbar />
       </div>
     </div>
   );

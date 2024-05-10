@@ -9,7 +9,7 @@ import NProgress from 'nprogress'
 export const metadata: Metadata = {
   title: "Antsale",
   description: "Antsale",
-  icons: "/image/header-logo.png",
+  icons: "/image/logo-ant-base.png",
 };
 
 const inter = Inter({ subsets: ["latin"] });
