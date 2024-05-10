@@ -24,7 +24,7 @@ export default function Footer() {
     <div className="mt-[72px]">
       <div className="h-2 bg-gradient-to-t from-[rgba(000,000,000,0.03)] to-transparent"></div>
       <div className="container mx-auto">
-        <p className="text-center py-10 border-b border-b-divider border-dashed">
+        <p className="text-center py-10 border-b border-b-divider border-dashed text-sm">
           Disclaimer: Solsale.fi will never endorse or encourage that you invest
           in any of the projects listed and therefore, accept no liability for
           any loss occasioned. It is the user(s) responsibility to do their own
@@ -32,7 +32,8 @@ export default function Footer() {
           information about (DYOR) can be found via{" "}
           <Link
             className="font-medium text-primary underline"
-            href={""}
+            href={"https://academy.binance.com/en/glossary/do-your-own-research"}
+            isExternal
           >
             Binance Academy.
           </Link>
