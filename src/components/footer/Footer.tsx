@@ -96,11 +96,14 @@ export default function Footer() {
               <p className={`font-medium text-[${sunbg}]`}>Light Mode</p>
             </div>
             <div
-              className="flex items-center gap-x-2"
+              className="flex items-center gap-x-2 pointer-events-none"
               onClick={() => setTheme("dark")}
             >
-              <MoonIcon color={moonbg} />
-              <p className={`font-medium text-[${moonbg}]`}>Dark Mode</p>
+              <MoonIcon
+              // color={moonbg}
+              color={'#ccc'}
+               />
+              <p className={`font-medium text-[#ccc]`}>Dark Mode</p>
             </div>
           </div>
         </div>
