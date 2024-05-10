@@ -24,7 +24,7 @@ export default function Header() {
               <Image
                 src={"/image/logo-ant.png"}
                 radius="none"
-                width={118.11}
+                width={96}
                 height={90}
                 className="object-contain object-center"
               />

@@ -32,7 +32,7 @@ export default function TagSelect({ tagList, handleAddTag }: any) {
         </div>
         <input
           value={tagValue}
-          className="mt-2 outline-none"
+          className="mt-2 outline-none w-full"
           onChange={(e) => setTagValue(e?.target?.value)}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
