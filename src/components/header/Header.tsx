@@ -33,7 +33,7 @@ export default function Header() {
               startContent={<SearchIcon color={"#71717A"} />}
             />
             <div className="flex gap-x-4 items-center">
-              <ClusterSelect />
+              {/* <ClusterSelect /> */}
               <LocaleSelect />
               {!publicKey ? (
                 <div className="h-10 py-2 px-[26px] bg-primary relative hover:opacity-50 rounded-lg">
