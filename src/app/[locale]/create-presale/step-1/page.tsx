@@ -251,46 +251,46 @@ export default function CreatePresaleStep1() {
             showMonthAndYearPickers
             defaultValue={now("Etc/Universal")}
           />
-          <Select
-            classNames={{ value: "placeholder:text-[#8E8E93]" }}
-            variant="bordered"
-            label="Liquidity Type"
-            placeholder="Auto Locking"
-          >
-            <SelectItem
-              key={1}
-              value={"auto"}
+          {createPresaleForm?.listingOption === "auto" && (
+            <Select
+              classNames={{ value: "placeholder:text-[#8E8E93]" }}
+              variant="bordered"
+              label="Liquidity Type"
+              placeholder="Auto Locking"
             >
-              Manual Locking
-            </SelectItem>
-            <SelectItem
-              key={"manual"}
-              value={"manual"}
-            >
-              Manual Listing
-            </SelectItem>
-          </Select>
+              <SelectItem
+                key={1}
+                value={"auto"}
+              >
+                Manual Locking
+              </SelectItem>
+              <SelectItem
+                key={"manual"}
+                value={"manual"}
+              >
+                Manual Listing
+              </SelectItem>
+            </Select>
+          )}
           <div>
+            <Select
+              classNames={{ value: "placeholder:text-[#8E8E93]" }}
+              variant="bordered"
+              label="Unsold Tokens Refund Type"
+              placeholder="Refund"
+            >
+              <SelectItem
+                key={1}
+                value={"refund"}
+              >
+                Refund
+              </SelectItem>
+            </Select>
             {createPresaleForm?.listingOption === "auto" && (
-              <>
-                <Select
-                  classNames={{ value: "placeholder:text-[#8E8E93]" }}
-                  variant="bordered"
-                  label="Unsold Tokens Refund Type"
-                  placeholder="Refund"
-                >
-                  <SelectItem
-                    key={1}
-                    value={"refund"}
-                  >
-                    Refund
-                  </SelectItem>
-                </Select>
-                <p className="text-[#1C1C1E] text-xs mt-1">
-                  Auto Burning can only see selected if the Listing Options is
-                  Auto Listing
-                </p>
-              </>
+              <p className="text-[#1C1C1E] text-xs mt-1">
+                Auto Burning can only see selected if the Listing Options is
+                Auto Listing
+              </p>
             )}
           </div>
         </div>
