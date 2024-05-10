@@ -366,6 +366,33 @@ const ContributeIcon = () => (
   </svg>
 );
 
+const SearchIcon = ({ size = "21", color="#71717A" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox={`0 0 ${size} ${size}`}
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle
+      cx="10.3279"
+      cy="10.5901"
+      r="7.49047"
+      stroke={color}
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M15.5376 16.1895L18.4743 19.1185"
+      stroke={color}
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);
+
 export {
   CheckIcon,
   FireIcon,
@@ -383,4 +410,5 @@ export {
   GroupAddIcon,
   ProjectsIcon,
   ContributeIcon,
+  SearchIcon
 };

@@ -1,6 +1,5 @@
 "use client";
 import { localeList } from "@/constant/localeItemConstant";
-import { TriangleDownIcon } from "@chakra-ui/icons";
 import {
   Dropdown,
   DropdownTrigger,
@@ -16,23 +15,30 @@ import { useLocale } from "next-intl";
 import { useRouter as useLocaleRouter } from "@/navigation";
 import { AppContext } from "@/provider/AppProvider";
 import { clusterList } from "@/constant/network";
+import { ArrowDownIcon } from "../Icon";
 
 export default function ClusterSelect() {
   const { cluster, setCluster } = useContext(AppContext);
+
   return (
     <Dropdown>
       <DropdownTrigger>
         <Button
           variant={undefined}
-          className="bg-['none']"
+          className="bg-['none'] min-w-[213px]"
         >
           <div className="flex items-center gap-x-2">
             <Image
               src={clusterList[cluster].logo}
-              className="w-5 h-[14px] rounded-none"
+              className="w-6 h-6 rounded-none"
             />
-            {clusterList[cluster].label}
-            <TriangleDownIcon />
+            <p className="text-[#11181C] text-base leading-6">
+              {clusterList[cluster].label}
+            </p>
+            <ArrowDownIcon
+              color="#292D32"
+              size="16"
+            />
           </div>
         </Button>
       </DropdownTrigger>
@@ -49,10 +55,11 @@ export default function ClusterSelect() {
               <div className="flex items-center gap-x-2">
                 <Image
                   src={item.logo}
-                  width={"20px"}
-                  height={"14px"}
+                  className="w-6 h-6 object-cover object-center"
                 />
-                <p>{item.label}</p>
+                <p className="text-[#11181C] text-base leading-6">
+                  {item.label}
+                </p>
               </div>
             </DropdownItem>
           )

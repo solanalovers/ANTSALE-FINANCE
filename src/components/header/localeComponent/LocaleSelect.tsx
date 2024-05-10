@@ -1,6 +1,5 @@
 "use client";
 import { localeList } from "@/constant/localeItemConstant";
-import { TriangleDownIcon } from "@chakra-ui/icons";
 import {
   Dropdown,
   DropdownTrigger,
@@ -14,6 +13,7 @@ import {
 import React from "react";
 import { useLocale } from "next-intl";
 import { useRouter as useLocaleRouter } from "@/navigation";
+import { ArrowDownIcon } from "@/components/Icon";
 
 export default function LocaleSelect() {
   const locale = useLocale();
@@ -37,7 +37,10 @@ export default function LocaleSelect() {
               className="w-5 h-[14px] rounded-none"
             />
             {getCurrentLocale()}
-            <TriangleDownIcon />
+            <ArrowDownIcon
+              color="#292D32"
+              size="16"
+            />
           </div>
         </Button>
       </DropdownTrigger>

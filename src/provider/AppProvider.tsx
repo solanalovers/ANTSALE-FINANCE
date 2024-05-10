@@ -37,7 +37,9 @@ export default function AppProvider({
     (async () => {
       await getWalletBalance();
     })();
+    localStorage.setItem("cluster", JSON.stringify(cluster));
   }, [publicKey, cluster]);
+
   return (
     <AppContext.Provider
       value={{ cluster, setCluster, balance, getWalletBalance }}

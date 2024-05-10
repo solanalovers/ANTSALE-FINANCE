@@ -1,7 +1,7 @@
-import { SearchIcon } from "@chakra-ui/icons";
 import { Tabs, Tab, Input } from "@nextui-org/react";
 import React, { Key } from "react";
 import HomeDropdown from "./HomeDropdown";
+import { SearchIcon } from "../Icon";
 
 interface HomeFilterProps {
   currentList: string;

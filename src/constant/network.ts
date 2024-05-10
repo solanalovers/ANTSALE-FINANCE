@@ -57,22 +57,22 @@ const currencyShortName: any = {
 const clusterList = [
   {
     name: 'sol-devnet',
-    logo: '/image/network/solana.png',
+    logo: '/image/multi-chain/sol.png',
     label: 'SOLANA Devnet'
   },
   {
     name: 'sol-mainnet',
-    logo: '/image/network/solana.png',
+    logo: '/image/multi-chain/sol.png',
     label: 'SOLANA Mainnet'
   },
   {
     name: 'ton-devnet',
-    logo: '/image/network/ton.png',
+    logo: '/image/multi-chain/ton.png',
     label: 'TON Devnet'
   },
   {
     name: 'ton-mainnet',
-    logo: '/image/network/ton.png',
+    logo: '/image/multi-chain/ton.png',
     label: 'TON Mainnet'
   }
 ]
