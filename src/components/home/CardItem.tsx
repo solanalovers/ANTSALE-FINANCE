@@ -102,7 +102,7 @@ export default function CardItem({ data }: CardItemProps) {
           <Divider />
           <div className="flex items-center justify-between">
             <div>
-              <p>Sale Ends In:</p>
+              <p>Sale Ends In</p>
               <p>{timer}</p>
             </div>
             <Button
