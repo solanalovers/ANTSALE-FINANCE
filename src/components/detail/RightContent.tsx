@@ -9,7 +9,7 @@ import FixedRightContent from "./right-content/FixedRightContent";
 
 export default function RightContent({ type }: { type: string }) {
   return (
-    <div className="flex flex-col gap-y-6">
+    <div className="flex flex-col gap-y-10">
       <div className="bg-warning-50 border border-warning py-[10px]">
         <p className="text-sm leading-5 text-center">
           Make sure the website is{" "}
