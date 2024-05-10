@@ -8,7 +8,7 @@ export default function Home() {
   const [currentList, setCurrentlist] = useState<any>('fairlaunch')
   return (
     <div>
-      <Banner />
+      {/* <Banner /> */}
       <div className="container mx-auto mt-10">
         <HomeFilter currentList={currentList} setCurrentList={setCurrentlist}/>
         <HomeList currentList={currentList}/>

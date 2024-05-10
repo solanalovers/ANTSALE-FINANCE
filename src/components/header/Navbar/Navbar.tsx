@@ -12,7 +12,7 @@ export default function Navbar() {
 
   const navlink = [
     {
-      label: "FAIRLAUNCH LIST",
+      label: "PROJECT LIST",
       value: `/${locale}`,
     },
     {
@@ -52,7 +52,7 @@ export default function Navbar() {
             } ${
               (pathname === link.value ||
                 pathname.startsWith(`${link.value}/step-`)) &&
-              "text-primary font-bold after:absolute after:h-[2px] after:bg-primary after:w-full after:left-0 after:bottom-[-4px]"
+              "text-primary font-bold mt-[-4px] after:absolute after:h-[2px] after:bg-primary after:w-full after:left-0 after:bottom-[-4px]"
             }`}
           >
             {link.label}
@@ -69,12 +69,12 @@ export default function Navbar() {
           FAQ
         </Link>
         <Link
-          href={"/blog"}
+          href={"/services"}
           className={`mx-3 text-sm leading-5 text-default-500 font-semibold ${
             theme === "dark" ? "header-link" : "header-link light"
-          } ${pathname === "BLOG" && "text-primary font-bold"}`}
+          } ${pathname === "services" && "text-primary font-bold"}`}
         >
-          BLOG
+          MY SERVICES
         </Link>
       </div>
     </div>
