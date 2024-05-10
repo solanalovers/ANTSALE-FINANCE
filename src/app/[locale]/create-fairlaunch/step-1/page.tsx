@@ -235,10 +235,12 @@ export default function CreateFairLaunchStep1() {
             </p>
           </div>
         </div>
-        <ToastItem
-          status="info"
-          content={`Need <span class='font-bold'>321,600 COIN4</span> to create launchpad`}
-        />
+        <div className="rounded-lg overflow-hidden mt-6">
+          <ToastItem
+            status="info"
+            content={`Need <span class='font-bold'>321,600 COIN4</span> to create launchpad`}
+          />
+        </div>
       </div>
     </div>
   );
