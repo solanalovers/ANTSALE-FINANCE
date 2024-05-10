@@ -5,7 +5,7 @@ import HomeList from "@/components/home/HomeList";
 import React, { useState } from "react";
 
 export default function Home() {
-  const [currentList, setCurrentlist] = useState<any>('fairlaunch')
+  const [currentList, setCurrentlist] = useState<any>('presale')
   return (
     <div>
       {/* <Banner /> */}

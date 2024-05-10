@@ -1,18 +1,14 @@
 "use client";
-import { localeList } from "@/constant/localeItemConstant";
 import {
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
-  DropdownSection,
   DropdownItem,
   Button,
   Image,
 } from "@nextui-org/react";
 
 import React, { useContext } from "react";
-import { useLocale } from "next-intl";
-import { useRouter as useLocaleRouter } from "@/navigation";
 import { AppContext } from "@/provider/AppProvider";
 import { clusterList } from "@/constant/network";
 import { ArrowDownIcon } from "../Icon";

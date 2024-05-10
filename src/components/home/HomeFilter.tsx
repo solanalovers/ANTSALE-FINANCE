@@ -22,16 +22,16 @@ export default function HomeFilter({
         onSelectionChange={setCurrentList}
       >
         <Tab
+          key="presale"
+          title="PRE SALE"
+        />
+        <Tab
           key="fairlaunch"
           title="FAIRLAUNCH"
         />
         <Tab
           key="multichain"
           title="MULTICHAIN-LAUNCH"
-        />
-        <Tab
-          key="presale"
-          title="PRE SALE"
         />
       </Tabs>
       <Input
