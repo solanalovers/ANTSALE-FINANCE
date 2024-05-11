@@ -24,7 +24,7 @@ export default function CreateMultiChainStep2() {
     if (e.target.value === "multi-price") {
       setCreateMultiChainForm((prev: any) => ({
         ...prev,
-        poolList: [{ amount: 0, price: 0 }],
+        poolList: [{ amount: null, price: null }],
       }));
     }
     setCreateMultiChainForm((prev: any) => ({
@@ -193,7 +193,7 @@ export default function CreateMultiChainStep2() {
                         label={`Pool ${idx + 1} - Price per Token`}
                         placeholder="0"
                         key={idx}
-                        value={item.price.toString()}
+                        value={item.price?.toString()}
                         onChange={(e: any) => {
                           const newPoolList = createMultiChainForm?.poolList;
                           newPoolList[idx].price = e.target.value;
@@ -207,10 +207,10 @@ export default function CreateMultiChainStep2() {
                         classNames={{ input: "placeholder:text-[#8E8E93]" }}
                         variant="bordered"
                         type="number"
-                        label={`Pool ${idx + 1} - Price per Token`}
+                        label={`Pool ${idx + 1} - Total amount for presale`}
                         placeholder="0"
                         key={idx}
-                        value={item.amount.toString()}
+                        value={item.amount?.toString()}
                         onChange={(e: any) => {
                           const newPoolList = createMultiChainForm?.poolList;
                           newPoolList[idx].amount = e.target.value;
