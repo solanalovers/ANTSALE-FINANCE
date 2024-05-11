@@ -8,7 +8,7 @@ import {
   Select,
   SelectItem,
 } from "@nextui-org/react";
-import React, { useContext, useEffect, useState } from "react";
+import React, { ChangeEventHandler, useContext, useEffect, useState } from "react";
 import { now } from "@internationalized/date";
 import { CreateMultiChainContext } from "@/provider/CreateMultiChainProvider";
 import { currencyShortName } from "@/constant/network";
@@ -19,6 +19,19 @@ export default function CreateMultiChainStep2() {
   const { createMultiChainForm, setCreateMultiChainForm } = useContext(
     CreateMultiChainContext
   );
+
+  const handleChangePriceModel = (e: any) => {
+    if (e.target.value === "multi-price") {
+      setCreateMultiChainForm((prev: any) => ({
+        ...prev,
+        poolList: [{ amount: 0, price: 0 }],
+      }));
+    }
+    setCreateMultiChainForm((prev: any) => ({
+      ...prev,
+      priceModel: e.target.value,
+    }));
+  };
 
   useEffect(() => {
     // CHECK PRICEMODEL TO REMOVE UN NEEED VALUE
@@ -106,12 +119,7 @@ export default function CreateMultiChainStep2() {
             variant="bordered"
             label="Price Model"
             placeholder="Fixed a price in USDT"
-            onChange={(e) =>
-              setCreateMultiChainForm((prev: any) => ({
-                ...prev,
-                priceModel: e.target.value,
-              }))
-            }
+            onChange={handleChangePriceModel}
             value={createMultiChainForm?.priceModel}
             disabledKeys={
               createMultiChainForm?.multiWallet ? [] : ["purchase-currency"]
@@ -176,24 +184,43 @@ export default function CreateMultiChainStep2() {
             <div>
               <div className="grid grid-cols-2 gap-6 min-h-10 max-h-[400px] overflow-y-scroll">
                 {createMultiChainForm?.poolList?.map(
-                  (value: string, idx: number) => (
-                    <Input
-                      classNames={{ input: "placeholder:text-[#8E8E93]" }}
-                      variant="bordered"
-                      type="number"
-                      label={`Pool ${idx + 1} - Price per Token`}
-                      placeholder="0"
-                      key={idx}
-                      value={createMultiChainForm?.poolList[idx]}
-                      onChange={(e: any) => {
-                        const newPoolList = createMultiChainForm?.poolList;
-                        newPoolList[idx] = e.target.value;
-                        setCreateMultiChainForm((prev: any) => ({
-                          ...prev,
-                          poolList: newPoolList,
-                        }));
-                      }}
-                    />
+                  (item: { price: number; amount: number }, idx: number) => (
+                    <>
+                      <Input
+                        classNames={{ input: "placeholder:text-[#8E8E93]" }}
+                        variant="bordered"
+                        type="number"
+                        label={`Pool ${idx + 1} - Price per Token`}
+                        placeholder="0"
+                        key={idx}
+                        value={item.price.toString()}
+                        onChange={(e: any) => {
+                          const newPoolList = createMultiChainForm?.poolList;
+                          newPoolList[idx].price = e.target.value;
+                          setCreateMultiChainForm((prev: any) => ({
+                            ...prev,
+                            poolList: newPoolList,
+                          }));
+                        }}
+                      />
+                      <Input
+                        classNames={{ input: "placeholder:text-[#8E8E93]" }}
+                        variant="bordered"
+                        type="number"
+                        label={`Pool ${idx + 1} - Price per Token`}
+                        placeholder="0"
+                        key={idx}
+                        value={item.amount.toString()}
+                        onChange={(e: any) => {
+                          const newPoolList = createMultiChainForm?.poolList;
+                          newPoolList[idx].amount = e.target.value;
+                          setCreateMultiChainForm((prev: any) => ({
+                            ...prev,
+                            poolList: newPoolList,
+                          }));
+                        }}
+                      />
+                    </>
                   )
                 )}
               </div>
@@ -206,12 +233,12 @@ export default function CreateMultiChainStep2() {
                     if (!createMultiChainForm?.poolList?.length) {
                       setCreateMultiChainForm((prev: any) => ({
                         ...prev,
-                        poolList: [""],
+                        poolList: [{ amount: 0, price: 0 }],
                       }));
                     } else {
                       setCreateMultiChainForm((prev: any) => ({
                         ...prev,
-                        poolList: [...prev.poolList, ""],
+                        poolList: [...prev.poolList, { amount: 0, price: 0 }],
                       }));
                     }
                   }}
