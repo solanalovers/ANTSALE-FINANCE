@@ -21,12 +21,12 @@ export default function ClusterSelect() {
       <DropdownTrigger>
         <Button
           variant={undefined}
-          className="bg-['none'] min-w-[213px]"
+          className="bg-['none'] p-0"
         >
           <div className="flex items-center gap-x-2">
             <Image
               src={clusterList[cluster].logo}
-              className="w-6 h-6 rounded-none"
+              className="w-6 h-6 rounded-none object-center object-cover"
             />
             <p className="text-[#11181C] text-base leading-6">
               {clusterList[cluster].label}

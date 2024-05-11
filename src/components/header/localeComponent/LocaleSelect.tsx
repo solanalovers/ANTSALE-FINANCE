@@ -25,11 +25,11 @@ export default function LocaleSelect() {
     })[0].label;
   };
   return (
-    <Dropdown>
+    <Dropdown className="p-0">
       <DropdownTrigger>
         <Button
           variant={undefined}
-          className="bg-['none']"
+          className="bg-['none'] p-0"
         >
           <div className="flex items-center gap-x-2">
             <Image
