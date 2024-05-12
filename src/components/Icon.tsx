@@ -366,7 +366,7 @@ const ContributeIcon = () => (
   </svg>
 );
 
-const SearchIcon = ({ size = "21", color="#71717A" }) => (
+const SearchIcon = ({ size = "21", color = "#71717A" }) => (
   <svg
     width={size}
     height={size}
@@ -393,6 +393,34 @@ const SearchIcon = ({ size = "21", color="#71717A" }) => (
   </svg>
 );
 
+const EditIcon = ({ size = "20", color = "black" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox={`0 0 ${size} ${size}`}
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g clip-path="url(#clip0_4755_21552)">
+      <path
+        d="M13.395 1.39453L17.75 5.74954L6.10501 17.3945L1.75409 17.3904L1.75 13.0395L13.395 1.39453Z"
+        stroke={color}
+        stroke-width="1.5"
+        stroke-linecap="square"
+      />
+    </g>
+    <defs>
+      <clipPath id="clip0_4755_21552">
+        <rect
+          width="20"
+          height="20"
+          fill="white"
+        />
+      </clipPath>
+    </defs>
+  </svg>
+);
+
 export {
   CheckIcon,
   FireIcon,
@@ -410,5 +438,6 @@ export {
   GroupAddIcon,
   ProjectsIcon,
   ContributeIcon,
-  SearchIcon
+  SearchIcon,
+  EditIcon,
 };

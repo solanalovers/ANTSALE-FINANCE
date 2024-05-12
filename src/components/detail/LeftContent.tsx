@@ -14,7 +14,8 @@ export default function LeftContent() {
           <Image
             src="/image/img-detail.png"
             radius="none"
-            className="object-cover object-center"
+            className="object-cover object-center h-[200px]"
+            width={"100%"}
           />
           <div className="flex justify-between">
             <div className="mt-[-60px] z-20 ml-10">
