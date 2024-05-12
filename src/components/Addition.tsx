@@ -1,29 +1,31 @@
-"use client";
-import CustomDivider from "@/components/CustomDivider";
-import CustomEditor from "@/components/CustomEditor";
-import { CreatePresaleContext } from "@/provider/CreatePresaleProvider";
-import { Input, Link, Select, SelectItem, Textarea } from "@nextui-org/react";
-import React, { useContext } from "react";
+import { Image, Input } from "@nextui-org/react";
+import React from "react";
+import CustomAvatar from "./CustomAvatar";
+import CustomEditor from "./CustomEditor";
+import CustomDivider from "./CustomDivider";
 
-export default function CreatePresaleStep4() {
+export default function Addition() {
   return (
-    <div>
-      <CustomDivider />
+    <div className="flex flex-col gap-y-6">
+      <div>
+        <Image
+          src="/image/img-detail.png"
+          radius="none"
+          className="object-cover object-center h-[200px]"
+          width={"100%"}
+        />
+        <Image
+          className="mt-[-60px] z-20 ml-10 w-[120px] h-[120px]"
+          src="/image/token-image-1.png"
+        />
+      </div>
       <Input
         variant="bordered"
         label="Website"
         classNames={{ input: "placeholder:text-[#8E8E93]" }}
         placeholder="http://example.com"
       />
-      <div className="my-6">
-        {/* <Textarea
-          variant="bordered"
-          label="Description"
-          classNames={{ input: "placeholder:text-[#8E8E93]" }}
-          placeholder="Description"
-        /> */}
-        <CustomEditor />
-      </div>
+      <CustomEditor />
       <div className="grid grid-cols-2 gap-6">
         <Input
           variant="bordered"
@@ -74,6 +76,7 @@ export default function CreatePresaleStep4() {
           placeholder="http://facebook.com/abc"
         />
       </div>
+      <CustomDivider/>
     </div>
   );
 }
