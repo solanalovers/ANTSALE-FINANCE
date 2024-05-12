@@ -1,123 +1,418 @@
 "use client";
 import CustomDivider from "@/components/CustomDivider";
-import { currencyList } from "@/constant/network";
-import { CreateMultiChainContext } from "@/provider/CreateMultiChainProvider";
+import ToastItem from "@/components/toast/ToastItem";
+import { getTokenData } from "@/function/token";
 import { CreatePresaleContext } from "@/provider/CreatePresaleProvider";
 import {
+  Button,
   Checkbox,
+  DatePicker,
   Image,
   Input,
-  Link,
+  Radio,
+  RadioGroup,
   Select,
   SelectItem,
 } from "@nextui-org/react";
+import { debounce } from "lodash";
 import React, { useContext, useEffect, useState } from "react";
+import { now } from "@internationalized/date";
+import { CreateMultiChainContext } from "@/provider/CreateMultiChainProvider";
+import { currencyList, currencyShortName } from "@/constant/network";
+import { MinusIcon, PlusIcon } from "@/components/Icon";
 
-const CurrencySelect = ({ image, name, value, setValue }: any) => {
+const CurrencySelect = ({ image, name, symbol, value, setValue }: any) => {
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <div className="flex gap-4 items-center">
+    <div className="flex gap-2 items-center">
       <Checkbox
         onChange={(e) => setIsActive(e.target.checked)}
         checked={isActive}
         className="w-full"
       />
-      <div className="flex gap-2 items-center w-[250px]">
-        <Image
-          src={`/image/multi-chain/${image}.png`}
-          className="w-6 h-6 object-cover object-center"
+      <div className="flex items-center gap-2  flex-1">
+        <div className="flex gap-2 items-center w-[160px]">
+          <Image
+            src={`/image/multi-chain/${image}.png`}
+            className="w-6 h-6 object-cover object-center"
+          />
+          <div>
+            <p className="text-sm leading-5">{name}</p>
+            <p className="text-sm leading-5 text-primary">{symbol}</p>
+          </div>
+        </div>
+        <Input
+          classNames={{
+            input: "placeholder:text-[#8E8E93]",
+            inputWrapper: `${!isActive && "bg-[#F4F4F5]"}`,
+          }}
+          variant="bordered"
+          label="Your address to receive fund"
+          placeholder="Address"
+          isDisabled={!isActive}
+          value={value}
+          onChange={(e: any) =>
+            setValue((prev: any) => ({
+              ...prev,
+              multiWallet: { ...prev?.multiWallet, [image]: e.target.value },
+            }))
+          }
         />
-        <p className="">{name}</p>
       </div>
-      <Input
-        classNames={{ input: "placeholder:text-[#8E8E93]" }}
-        variant="bordered"
-        placeholder="Your address to receive fund"
-        isDisabled={!isActive}
-        value={value}
-        onChange={(e: any) =>
-          setValue((prev: any) => ({
-            ...prev,
-            multiWallet: { ...prev?.multiWallet, [image]: e.target.value },
-          }))
-        }
-      />
     </div>
   );
 };
 
 export default function CreateMultiChainStep1() {
-  const { setCreateMultiChainForm } = useContext(
+  const { createMultiChainForm, setCreateMultiChainForm } = useContext(
     CreateMultiChainContext
   );
+  const [tokenAddr, setTokenAddr] = useState("");
+  const [tokenInfo, setTokenInfo] = useState<any>(null);
+  const handleChangePriceModel = (e: any) => {
+    if (e.target.value === "multi-price") {
+      setCreateMultiChainForm((prev: any) => ({
+        ...prev,
+        poolList: [{ amount: null, price: null }],
+      }));
+    }
+    setCreateMultiChainForm((prev: any) => ({
+      ...prev,
+      priceModel: e.target.value,
+    }));
+  };
+
+  useEffect(() => {
+    // CHECK PRICEMODEL TO REMOVE UN NEEED VALUE
+    if (
+      createMultiChainForm?.priceModel !== "multi-price" &&
+      createMultiChainForm?.pool
+    ) {
+      delete createMultiChainForm.pool;
+    }
+  }, [createMultiChainForm?.priceModel]);
+
+  const fetchData = async () => {
+    return await new Promise((resolve) => {
+      const debouncedFetch = debounce(() => {
+        resolve(getTokenData(tokenAddr));
+      }, 1000);
+
+      debouncedFetch();
+    });
+  };
+  useEffect(() => {
+    const fetchDataAndLog = async () => {
+      const tokenInfo = await fetchData();
+      setTokenInfo(tokenInfo);
+    };
+    if (tokenAddr) {
+      fetchDataAndLog();
+    }
+  }, [tokenAddr]);
   return (
     <div>
       <CustomDivider />
       <div>
-        <div className="grid grid-cols-2 gap-6">
-          <div>
-            <Input
-              classNames={{ input: "placeholder:text-[#8E8E93]" }}
-              variant="bordered"
-              label="Token Address"
-              placeholder="0x912CE59144191C1204E64559 E8253a0e49E6548"
-            />
-            <div className="mt-3 flex flex-col gap-y-1">
-              <p className="text-xs ledaing-5 text-[#8E8E93]">
-                Name: We are going to $0
-              </p>
-              <p className="text-xs ledaing-5 text-[#8E8E93]">Symbol: 0</p>
-              <p className="text-xs ledaing-5 text-[#8E8E93]">Decimals: 5</p>
-              <p className="text-xs ledaing-5 text-[#8E8E93]">
-                Supply: 223398198040.53727
-              </p>
-            </div>
-          </div>
-          <div>
-            <Input
-              classNames={{ input: "placeholder:text-[#8E8E93]" }}
-              variant="bordered"
-              label="Solsale.fi's storyteller (5% SOL raised only)"
-              placeholder="9RFFhhe4XPV8UcBFJkgrDwGGtN3jmktBtw4RBia1bBVn"
-            />
-            <p className="mt-1 text-sm">
-              {`How to become a Solsale.fi's storyteller? `}
-              <Link
-                href=""
-                isExternal
-                className="text-sm underline"
-              >
-                Register here!
-              </Link>
+        <div>
+          <Input
+            classNames={{ input: "placeholder:text-[#8E8E93]" }}
+            variant="bordered"
+            label="Token Address"
+            placeholder="0x912CE59144191C1204E64559 E8253a0e49E6548"
+            onChange={(e) => setTokenAddr(e.target.value)}
+          />
+          <div className="mt-2 flex flex-col gap-y-1">
+            <p className="text-xs leading-5 font-semibold text-[#8E8E93]">
+              Creation fee: FREE
             </p>
+            {tokenInfo && (
+              <>
+                <p className="text-xs leading-5 text-[#8E8E93]">
+                  Name: {tokenInfo.name}
+                </p>
+                <p className="text-xs leading-5 text-[#8E8E93]">
+                  Symbol: {tokenInfo.symbol}
+                </p>
+                <p className="text-xs leading-5 text-[#8E8E93]">
+                  Total Supply: 223398198040.53727
+                </p>
+                <p className="text-xs leading-5 text-[#8E8E93]">
+                  Decimals: {tokenInfo.decimals}
+                </p>
+                <p className="text-xs leading-5 text-[#8E8E93]">
+                  Your balance: 223398198040.53727
+                </p>
+              </>
+            )}
           </div>
-          <Input
-            classNames={{ input: "placeholder:text-[#8E8E93]" }}
-            variant="bordered"
-            label="Creation Fee"
-            placeholder="FREE"
-          />
-          <Input
-            classNames={{ input: "placeholder:text-[#8E8E93]" }}
-            variant="bordered"
-            label="Fee Options"
-            placeholder="5% SOL raised only"
-          />
-          <div>
-            <p>Currency</p>
+        </div>
+        <div className="my-6 flex flex-col gap-y-6">
+          <p className="text-base leading-6 text-foreground-500">Currency</p>
+          <div className="grid grid-cols-2">
             <div className="flex flex-col gap-2">
               {currencyList.map((item: any, idx: number) => (
                 <CurrencySelect
                   key={idx}
                   image={item.image}
-                  name={item.name}
+                  name={item.shortName}
+                  symbol={item.symbol}
                   value={setCreateMultiChainForm?.multiWallet?.[item.image]}
                   setValue={setCreateMultiChainForm}
                 />
               ))}
             </div>
+            <div />
           </div>
+          <RadioGroup
+            label="Fee options"
+            defaultValue="5%"
+            className={"text-sm leading-5"}
+          >
+            <Radio value="5%">
+              <p className={"text-sm leading-5"}>
+                5% SOL raised only (no hidden fees)
+              </p>
+            </Radio>
+          </RadioGroup>
+          <RadioGroup
+            label="Listing Options"
+            defaultValue="manual"
+            className={"text-sm leading-5"}
+            onChange={(e) =>
+              setCreateMultiChainForm((prev: any) => ({
+                ...prev,
+                listingOption: e.target.value,
+              }))
+            }
+            value={createMultiChainForm?.listingOption}
+          >
+            <Radio value="manual">
+              <p className={"text-sm leading-5"}>Manual Listing</p>
+            </Radio>
+          </RadioGroup>
+        </div>
+        <div className="rounded-lg overflow-hidden">
+          <ToastItem
+            content={
+              createMultiChainForm?.listingOption === "auto"
+                ? "For auto listing, after you finalize the pool your token will be auto listed on DEX"
+                : "For manual listing, AntSale won’t charge tokens for liquidity. You may withdraw all your funds after the pool ends then do DEX listing yourself."
+            }
+            status="caution"
+          />
+        </div>
+        <CustomDivider />
+        <div className="grid grid-cols-2 gap-6">
+          <Select
+            classNames={{ value: "placeholder:text-[#8E8E93]" }}
+            variant="bordered"
+            label="Sale Type"
+            placeholder="Public"
+          >
+            <SelectItem
+              key={"public"}
+              value={"public"}
+            >
+              Public
+            </SelectItem>
+          </Select>
+          <div />
+          <Select
+            classNames={{
+              value: `${
+                createMultiChainForm?.priceModel
+                  ? "text-black"
+                  : "text-[#8E8E93]"
+              }`,
+            }}
+            variant="bordered"
+            label="Price Model"
+            placeholder="Fixed a price in USDT"
+            onChange={handleChangePriceModel}
+            value={createMultiChainForm?.priceModel}
+            disabledKeys={
+              createMultiChainForm?.multiWallet ? [] : ["purchase-currency"]
+            }
+          >
+            <SelectItem
+              key={"fixed-price"}
+              value={"fixed-price"}
+            >
+              Fixed a price in USDT
+            </SelectItem>
+            <SelectItem
+              key={"multi-price"}
+              value={"multi-price"}
+            >
+              Fixed multi prices in USDT
+            </SelectItem>
+            <SelectItem
+              key={"purchase-currency"}
+              value={"purchase-currency"}
+            >
+              Distribute based on purchase currency
+            </SelectItem>
+          </Select>
+          <div>
+            {createMultiChainForm?.priceModel === "fixed-price" && (
+              <div className="grid grid-cols-2 gap-6">
+                <Input
+                  classNames={{ input: "placeholder:text-[#8E8E93]" }}
+                  variant="bordered"
+                  type="number"
+                  label="Price per token (USDT)"
+                  placeholder="0"
+                />
+                <Input
+                  classNames={{ input: "placeholder:text-[#8E8E93]" }}
+                  variant="bordered"
+                  type="number"
+                  label="Token amount for presale"
+                  placeholder="0"
+                  isDisabled
+                />
+              </div>
+            )}
+            {createMultiChainForm?.priceModel === "purchase-currency" && (
+              <div className="flex flex-col gap-y-3">
+                {createMultiChainForm?.multiWallet &&
+                  Object.entries(createMultiChainForm?.multiWallet).map(
+                    ([key]: any, idx: number) => (
+                      <Input
+                        classNames={{ input: "placeholder:text-[#8E8E93]" }}
+                        variant="bordered"
+                        type="number"
+                        label={`${currencyShortName[key]} pool - Amount of Token`}
+                        placeholder="0"
+                        key={idx}
+                      />
+                    )
+                  )}
+              </div>
+            )}
+            {createMultiChainForm?.priceModel === "multi-price" && (
+              <div>
+                <div className="grid grid-cols-2 gap-6 min-h-10 max-h-[400px] overflow-y-scroll">
+                  {createMultiChainForm?.poolList?.map(
+                    (item: { price: number; amount: number }, idx: number) => (
+                      <>
+                        <Input
+                          classNames={{ input: "placeholder:text-[#8E8E93]" }}
+                          variant="bordered"
+                          type="number"
+                          label={`Pool ${idx + 1} - Price per Token`}
+                          placeholder="0"
+                          key={idx}
+                          value={item.price?.toString()}
+                          onChange={(e: any) => {
+                            const newPoolList = createMultiChainForm?.poolList;
+                            newPoolList[idx].price = e.target.value;
+                            setCreateMultiChainForm((prev: any) => ({
+                              ...prev,
+                              poolList: newPoolList,
+                            }));
+                          }}
+                        />
+                        <Input
+                          classNames={{ input: "placeholder:text-[#8E8E93]" }}
+                          variant="bordered"
+                          type="number"
+                          label={`Pool ${idx + 1} - Total amount for presale`}
+                          placeholder="0"
+                          key={idx}
+                          value={item.amount?.toString()}
+                          onChange={(e: any) => {
+                            const newPoolList = createMultiChainForm?.poolList;
+                            newPoolList[idx].amount = e.target.value;
+                            setCreateMultiChainForm((prev: any) => ({
+                              ...prev,
+                              poolList: newPoolList,
+                            }));
+                          }}
+                        />
+                      </>
+                    )
+                  )}
+                </div>
+                <div className="flex items-center justify-between mt-3">
+                  <Button
+                    variant={undefined}
+                    className="flex items-center gap-3 bg-transparent"
+                    isDisabled={createMultiChainForm?.poolList?.length === 20}
+                    onClick={() => {
+                      if (!createMultiChainForm?.poolList?.length) {
+                        setCreateMultiChainForm((prev: any) => ({
+                          ...prev,
+                          poolList: [{ amount: 0, price: 0 }],
+                        }));
+                      } else {
+                        setCreateMultiChainForm((prev: any) => ({
+                          ...prev,
+                          poolList: [...prev.poolList, { amount: 0, price: 0 }],
+                        }));
+                      }
+                    }}
+                  >
+                    <PlusIcon />
+                    <p className="text-[#006FEE]">
+                      Pool List (max is 20 pools)
+                    </p>
+                  </Button>
+                  <Button
+                    variant={undefined}
+                    className="flex items-center gap-3 bg-transparent"
+                    isDisabled={createMultiChainForm?.poolList?.length === 0}
+                    onClick={() => {
+                      const newPoolList = [...createMultiChainForm.poolList];
+                      newPoolList.pop();
+                      setCreateMultiChainForm((prev: any) => ({
+                        ...prev,
+                        poolList: [...newPoolList],
+                      }));
+                    }}
+                  >
+                    <MinusIcon />
+                    <p className="text-[#F31260]">Delete</p>
+                  </Button>
+                </div>
+              </div>
+            )}
+          </div>
+          <DatePicker
+            classNames={{ input: "placeholder:text-[#8E8E93]" }}
+            label="Start Time (UTC)"
+            variant="bordered"
+            showMonthAndYearPickers
+            defaultValue={now("Etc/Universal")}
+          />
+          <DatePicker
+            classNames={{ input: "placeholder:text-[#8E8E93]" }}
+            label="End Time (UTC)"
+            variant="bordered"
+            showMonthAndYearPickers
+            defaultValue={now("Etc/Universal")}
+          />
+           <Select
+              classNames={{ value: "placeholder:text-[#8E8E93]" }}
+              variant="bordered"
+              label="Unsold Tokens Refund Type"
+              placeholder="Refund"
+            >
+              <SelectItem
+                key={1}
+                value={"refund"}
+              >
+                Refund
+              </SelectItem>
+            </Select>
+        </div>
+        <div className="rounded-lg overflow-hidden mt-6">
+          <ToastItem
+            status="info"
+            content={`Need <span class='font-bold'>321,600 COIN4</span> to create launchpad`}
+          />
         </div>
       </div>
     </div>

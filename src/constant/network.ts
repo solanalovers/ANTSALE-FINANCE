@@ -6,38 +6,56 @@ const currencyList = [
   {
     image: "eth",
     name: "Ethereum (ETH)",
+    shortName: "Ethereum",
+    symbol: "ETH"
   },
   {
     image: "bnb",
     name: "BNB Chain (BNB)",
+    shortName: "BNB Chain",
+    symbol: "BNB"
   },
   {
     image: "sol",
     name: "Solona (SOL)",
+    shortName: "Solona",
+    symbol: "SOL"
   },
   {
     image: "base",
     name: "Base (BASE)",
+    shortName: "Base",
+    symbol: "BASE"
   },
   {
     image: "polygon",
     name: "Polygon (MATIC)",
+    shortName: "Polygon",
+    symbol: "MATIC"
   },
   {
     image: "avax",
     name: "Avalanche (AVAX)",
+    shortName: "Avalanche",
+    symbol: "AVAX"
   },
   {
     image: "ton",
     name: "Toncoin (TON)",
+    shortName: "Toncoin",
+    symbol: "TON"
   },
   {
     image: "arb",
     name: "Arbitrum (ARB)",
+    shortName: "Arbitrum",
+    symbol: "ARB"
   },
   {
     image: "trx",
     name: "TRON (TRX)",
+    shortName: "TRON",
+    symbol: "TRX"
   },
 ];
 
