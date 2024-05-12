@@ -29,7 +29,7 @@ export default function ClusterSelect() {
               className="w-6 h-6 rounded-none object-center object-cover"
             />
             <p className="text-[#11181C] text-base leading-6">
-              {clusterList[cluster].label}
+              {clusterList[cluster]?.label}
             </p>
             <ArrowDownIcon
               color="#292D32"
@@ -50,11 +50,11 @@ export default function ClusterSelect() {
             >
               <div className="flex items-center gap-x-2">
                 <Image
-                  src={item.logo}
+                  src={item?.logo}
                   className="w-6 h-6 object-cover object-center"
                 />
                 <p className="text-[#11181C] text-base leading-6">
-                  {item.label}
+                  {item?.label}
                 </p>
               </div>
             </DropdownItem>
