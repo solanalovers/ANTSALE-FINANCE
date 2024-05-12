@@ -379,16 +379,16 @@ const SearchIcon = ({ size = "21", color = "#71717A" }) => (
       cy="10.5901"
       r="7.49047"
       stroke={color}
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M15.5376 16.1895L18.4743 19.1185"
       stroke={color}
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -405,8 +405,8 @@ const EditIcon = ({ size = "20", color = "black" }) => (
       <path
         d="M13.395 1.39453L17.75 5.74954L6.10501 17.3945L1.75409 17.3904L1.75 13.0395L13.395 1.39453Z"
         stroke={color}
-        stroke-width="1.5"
-        stroke-linecap="square"
+        strokeWidth="1.5"
+        strokeLinecap="square"
       />
     </g>
     <defs>

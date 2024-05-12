@@ -16,8 +16,12 @@ import React, { useContext, useEffect, useState } from "react";
 import debounce from "lodash.debounce";
 import { getTokenData } from "@/function/token";
 import { now } from "@internationalized/date";
+import { CreateFairLaunchContext } from "@/provider/CreateFairLaunchProvider";
 
 export default function CreateFairLaunchStep1() {
+  const { createFairLaunchForm, setCreateFairLaunchForm } = useContext(
+    CreateFairLaunchContext
+  );
   const [tokenAddr, setTokenAddr] = useState("");
   const [tokenInfo, setTokenInfo] = useState<any>(null);
   const fetchData = async () => {
@@ -38,6 +42,10 @@ export default function CreateFairLaunchStep1() {
       fetchDataAndLog();
     }
   }, [tokenAddr]);
+
+  const handleChangeForm = (formValue: any) => {
+    setCreateFairLaunchForm((prev: any) => ({ ...prev, ...formValue }));
+  };
   return (
     <div>
       <CustomDivider />
@@ -134,7 +142,7 @@ export default function CreateFairLaunchStep1() {
             classNames={{ input: "placeholder:text-[#8E8E93]" }}
             variant="bordered"
             label="Total Selling Amount"
-            placeholder="FREE"
+            placeholder="0"
           />
           <div>
             <Input
@@ -153,6 +161,10 @@ export default function CreateFairLaunchStep1() {
           className="text-sm leading-5 mb-3"
           radius="none"
           size="sm"
+          value={createFairLaunchForm?.isMaxBuy}
+          onChange={(e) => {
+            handleChangeForm({ isMaxBuy: e.target.checked });
+          }}
         >
           CONFIG Max Buy (The maximum amount that per wallet can buy)
         </Checkbox>
@@ -162,6 +174,7 @@ export default function CreateFairLaunchStep1() {
           label="Max Buy"
           placeholder="0"
           endContent={<p className="text-sm text-default-500">SOL</p>}
+          isDisabled={!createFairLaunchForm?.isMaxBuy}
         />
         <div className="grid grid-cols-2 gap-6 mt-6">
           <Select
@@ -204,22 +217,26 @@ export default function CreateFairLaunchStep1() {
             defaultValue={now("Etc/Universal")}
           />
           <Select
-            classNames={{ value: "placeholder:text-[#8E8E93]" }}
+            classNames={{ value: "placeholder:text-[#8E8E93] text-black" }}
             variant="bordered"
             label="Liquidity Type"
             placeholder="Auto Locking"
+            selectedKeys={[createFairLaunchForm?.liquidityType]}
+            onChange={(e) =>
+              handleChangeForm({ liquidityType: e.target.value })
+            }
           >
             <SelectItem
-              key={1}
-              value={"auto"}
+              key={"lock"}
+              value={"lock"}
             >
-              Manual Locking
+              Auto Locking
             </SelectItem>
             <SelectItem
-              key={"manual"}
-              value={"manual"}
+              key={"burn"}
+              value={"burn"}
             >
-              Manual Locking
+              Auto Burning
             </SelectItem>
           </Select>
           <div>

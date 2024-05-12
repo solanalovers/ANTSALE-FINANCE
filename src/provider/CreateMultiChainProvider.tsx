@@ -8,7 +8,7 @@ export default function CreateMultiChainProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [createMultiChainForm, setCreateMultiChainForm] = useState({});
+  const [createMultiChainForm, setCreateMultiChainForm] = useState({priceModel: 'fixed-price'});
 
   return (
     <CreateMultiChainContext.Provider

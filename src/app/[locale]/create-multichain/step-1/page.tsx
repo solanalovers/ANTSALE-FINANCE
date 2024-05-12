@@ -271,7 +271,6 @@ export default function CreateMultiChainStep1() {
                   type="number"
                   label="Token amount for presale"
                   placeholder="0"
-                  isDisabled
                 />
               </div>
             )}
@@ -394,19 +393,32 @@ export default function CreateMultiChainStep1() {
             showMonthAndYearPickers
             defaultValue={now("Etc/Universal")}
           />
-           <Select
-              classNames={{ value: "placeholder:text-[#8E8E93]" }}
-              variant="bordered"
-              label="Unsold Tokens Refund Type"
-              placeholder="Refund"
+          <Select
+            classNames={{ value: "placeholder:text-[#8E8E93]" }}
+            variant="bordered"
+            label="Unsold Tokens Refund Type"
+            placeholder="Refund"
+            onChange={(e) =>
+              setCreateMultiChainForm((prev: any) => ({
+                ...prev,
+                refundType: e.target.value,
+              }))
+            }
+            value={createMultiChainForm?.refundType}
+          >
+            <SelectItem
+              key={1}
+              value={"refund"}
             >
-              <SelectItem
-                key={1}
-                value={"refund"}
-              >
-                Refund
-              </SelectItem>
-            </Select>
+              Refund
+            </SelectItem>
+            <SelectItem
+              key={1}
+              value={"burn"}
+            >
+              Burn
+            </SelectItem>
+          </Select>
         </div>
         <div className="rounded-lg overflow-hidden mt-6">
           <ToastItem

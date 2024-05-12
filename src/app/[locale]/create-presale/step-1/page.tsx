@@ -252,25 +252,41 @@ export default function CreatePresaleStep1() {
             defaultValue={now("Etc/Universal")}
           />
           {createPresaleForm?.listingOption === "auto" && (
-            <Select
-              classNames={{ value: "placeholder:text-[#8E8E93]" }}
-              variant="bordered"
-              label="Liquidity Type"
-              placeholder="Auto Locking"
-            >
-              <SelectItem
-                key={1}
-                value={"auto"}
+            <>
+              <Select
+                classNames={{ value: "placeholder:text-[#8E8E93]" }}
+                variant="bordered"
+                label="Liquidity Type"
+                placeholder="Auto Locking"
               >
-                Manual Locking
-              </SelectItem>
-              <SelectItem
-                key={"manual"}
-                value={"manual"}
-              >
-                Manual Listing
-              </SelectItem>
-            </Select>
+                <SelectItem
+                  key={1}
+                  value={"auto"}
+                >
+                  Manual Locking
+                </SelectItem>
+                <SelectItem
+                  key={"manual"}
+                  value={"manual"}
+                >
+                  Manual Listing
+                </SelectItem>
+              </Select>
+              <div>
+                <Input
+                  classNames={{ input: "placeholder:text-[#8E8E93]" }}
+                  variant="bordered"
+                  label="Liquidity Lockup Time"
+                  placeholder="0"
+                  endContent={
+                    <p className="text-sm text-default-500">Minutes</p>
+                  }
+                />
+                <p className="text-[#1C1C1E] text-xs mt-1">
+                  Liquidity lock up time must be greater than 30 days
+                </p>
+              </div>
+            </>
           )}
           <div>
             <Select
@@ -278,12 +294,25 @@ export default function CreatePresaleStep1() {
               variant="bordered"
               label="Unsold Tokens Refund Type"
               placeholder="Refund"
+              onChange={(e) =>
+                setCreatePresaleForm((prev: any) => ({
+                  ...prev,
+                  refundType: e.target.value,
+                }))
+              }
+              value={createPresaleForm?.refundType}
             >
               <SelectItem
                 key={1}
                 value={"refund"}
               >
                 Refund
+              </SelectItem>
+              <SelectItem
+                key={1}
+                value={"burn"}
+              >
+                Burn
               </SelectItem>
             </Select>
             {createPresaleForm?.listingOption === "auto" && (

@@ -23,6 +23,11 @@ export default function Addition() {
           >
             <EditIcon />
             <p className="text-sm leading-5 font-medium">Edit background</p>
+            <input
+              className="absolute left-0 right-0 top-0 bottom-0 opacity-0 z-10 cursor-pointer"
+              type="file"
+              accept="image/*"
+            />
           </Button>
         </div>
         <div className="relative mt-[-60px] z-20 ml-10 w-[120px] h-[120px]">
@@ -35,8 +40,13 @@ export default function Addition() {
             className="absolute right-0 bottom-1 z-50 p-1.5 min-w-0 w-fit flex items-center"
             size="sm"
             radius="full"
-            >
-            <EditIcon color="#006FEE"/>
+          >
+            <EditIcon color="#006FEE" />
+            <input
+              className="absolute left-0 right-0 top-0 bottom-0 opacity-0 z-10 cursor-pointer"
+              type="file"
+              accept="image/*"
+            />
           </Button>
         </div>
       </div>

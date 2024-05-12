@@ -8,7 +8,9 @@ export default function CreateFairLaunchProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [createFairLaunchForm, setCreateFairLaunchForm] = useState({});
+  const [createFairLaunchForm, setCreateFairLaunchForm] = useState({
+    liquidityType: "lock",
+  });
 
   return (
     <CreateFairLaunchContext.Provider
