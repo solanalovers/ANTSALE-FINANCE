@@ -13,7 +13,7 @@ export default function CreateToken() {
         <div className="mt-10">
           <CreateForm />
         </div>
-        <div className="grid grid-cols-2 gap-6 mt-20">
+        {/* <div className="grid grid-cols-2 gap-6 mt-20">
           <Accordion
             selectionMode="multiple"
             itemClasses={{
@@ -55,7 +55,7 @@ export default function CreateToken() {
             platform.`}
             </AccordionItem>
           </Accordion>
-        </div>
+        </div> */}
       </div>
     </div>
   );
