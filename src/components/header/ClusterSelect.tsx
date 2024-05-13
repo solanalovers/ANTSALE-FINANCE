@@ -25,11 +25,11 @@ export default function ClusterSelect() {
         >
           <div className="flex items-center gap-x-2">
             <Image
-              src={clusterList[cluster]?.logo}
+              src={clusterList[cluster].logo}
               className="w-6 h-6 rounded-none object-center object-cover"
             />
             <p className="text-[#11181C] text-base leading-6">
-              {clusterList[cluster]?.label}
+              {clusterList[cluster].label}
             </p>
             <ArrowDownIcon
               color="#292D32"
