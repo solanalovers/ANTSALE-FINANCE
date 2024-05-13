@@ -110,11 +110,11 @@ export default function CreatePresaleStep1() {
             }
             value={createPresaleForm?.listingOption}
           >
-            <Radio value="list">
+            <Radio value="auto">
               <p className={"text-sm leading-5"}>Auto Listing</p>
             </Radio>
-            <Radio value="burn">
-              <p className={"text-sm leading-5"}>Auto Burning</p>
+            <Radio value="manual">
+              <p className={"text-sm leading-5"}>Manual Listing</p>
             </Radio>
           </RadioGroup>
         </div>
@@ -260,16 +260,16 @@ export default function CreatePresaleStep1() {
                 placeholder="Auto Locking"
               >
                 <SelectItem
-                  key={1}
-                  value={"auto"}
+                  key={"lock"}
+                  value={"lock"}
                 >
-                  Manual Locking
+                  Auto Locking
                 </SelectItem>
                 <SelectItem
-                  key={"manual"}
-                  value={"manual"}
+                  key={"burn"}
+                  value={"burn"}
                 >
-                  Manual Listing
+                  Auto Burning
                 </SelectItem>
               </Select>
               <div>
