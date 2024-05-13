@@ -9,6 +9,9 @@ export default function CreateFairLaunchProvider({
   children: React.ReactNode;
 }) {
   const [createFairLaunchForm, setCreateFairLaunchForm] = useState({
+    currency: 'sol',
+    feeOption: '5%',
+    listingOption: "auto",
     liquidityType: "lock",
   });
 

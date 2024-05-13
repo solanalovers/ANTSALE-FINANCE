@@ -14,16 +14,16 @@ import {
 import { debounce } from "lodash";
 import React, { useContext, useEffect, useState } from "react";
 import { now } from "@internationalized/date";
+import { changeForm } from "@/function/form";
 
 export default function CreatePresaleStep1() {
   const { createPresaleForm, setCreatePresaleForm } =
     useContext(CreatePresaleContext);
-  const [tokenAddr, setTokenAddr] = useState("");
-  const [tokenInfo, setTokenInfo] = useState<any>(null);
+  const handleChangeForm = changeForm(setCreatePresaleForm);
   const fetchData = async () => {
     return await new Promise((resolve) => {
       const debouncedFetch = debounce(() => {
-        resolve(getTokenData(tokenAddr));
+        resolve(getTokenData(createPresaleForm?.tokenAddress));
       }, 1000);
 
       debouncedFetch();
@@ -32,12 +32,13 @@ export default function CreatePresaleStep1() {
   useEffect(() => {
     const fetchDataAndLog = async () => {
       const tokenInfo = await fetchData();
-      setTokenInfo(tokenInfo);
+      handleChangeForm({ tokenInfo });
     };
-    if (tokenAddr) {
+    if (createPresaleForm?.tokenAddress) {
       fetchDataAndLog();
     }
-  }, [tokenAddr]);
+  }, [createPresaleForm?.tokenAddress]);
+
   return (
     <div>
       <CustomDivider />
@@ -48,25 +49,25 @@ export default function CreatePresaleStep1() {
             variant="bordered"
             label="Token Address"
             placeholder="0x912CE59144191C1204E64559 E8253a0e49E6548"
-            onChange={(e) => setTokenAddr(e.target.value)}
+            onChange={(e) => handleChangeForm({ tokenAddress: e.target.value })}
           />
           <div className="mt-2 flex flex-col gap-y-1">
             <p className="text-xs leading-5 font-semibold text-[#8E8E93]">
               Creation fee: FREE
             </p>
-            {tokenInfo && (
+            {createPresaleForm?.tokenInfo && (
               <>
                 <p className="text-xs leading-5 text-[#8E8E93]">
-                  Name: {tokenInfo.name}
+                  Name: {createPresaleForm?.tokenInfoname}
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
-                  Symbol: {tokenInfo.symbol}
+                  Symbol: {createPresaleForm?.tokenInfosymbol}
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
                   Total Supply: 223398198040.53727
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
-                  Decimals: {tokenInfo.decimals}
+                  Decimals: {createPresaleForm?.tokenInfodecimals}
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
                   Your balance: 223398198040.53727
@@ -78,10 +79,13 @@ export default function CreatePresaleStep1() {
         <div className="my-6 flex flex-col gap-y-6">
           <RadioGroup
             label="Currency"
-            defaultValue="SOL"
             className={"text-sm leading-5"}
+            value={createPresaleForm?.currency}
+            onChange={(e) => {
+              handleChangeForm({ currency: e.target.value });
+            }}
           >
-            <Radio value="SOL">
+            <Radio value="sol">
               <p className={"text-sm leading-5"}>
                 SOL (User will pay with SOL for your token)
               </p>
@@ -89,8 +93,11 @@ export default function CreatePresaleStep1() {
           </RadioGroup>
           <RadioGroup
             label="Fee options"
-            defaultValue="5%"
             className={"text-sm leading-5"}
+            value={createPresaleForm?.feeOption}
+            onChange={(e) => {
+              handleChangeForm({ feeOption: e.target.value });
+            }}
           >
             <Radio value="5%">
               <p className={"text-sm leading-5"}>
@@ -103,10 +110,7 @@ export default function CreatePresaleStep1() {
             defaultValue="auto"
             className={"text-sm leading-5"}
             onChange={(e) =>
-              setCreatePresaleForm((prev: any) => ({
-                ...prev,
-                listingOption: e.target.value,
-              }))
+              handleChangeForm({ listingOption: e.target.value })
             }
             value={createPresaleForm?.listingOption}
           >
@@ -131,10 +135,16 @@ export default function CreatePresaleStep1() {
         <CustomDivider />
         <div className="grid grid-cols-2 gap-6">
           <Select
-            classNames={{ value: "placeholder:text-[#8E8E93]" }}
+            classNames={{ value: `placeholder:text-[#8E8E93] ${createPresaleForm?.saleType && 'text-black'}` }}
             variant="bordered"
             label="Sale Type"
             placeholder="Public"
+            onChange={(e) => {
+              if (e.target.value) {
+                handleChangeForm({ saleType: e.target.value });
+              }
+            }}
+            value={createPresaleForm?.saleType}
           >
             <SelectItem
               key={"public"}
@@ -150,6 +160,12 @@ export default function CreatePresaleStep1() {
               variant="bordered"
               label="PRESALE rate"
               placeholder="0"
+              onChange={(e) => {
+                if (e.target.value) {
+                  handleChangeForm({ presaleRate: e.target.value });
+                }
+              }}
+              value={createPresaleForm?.presaleRate}
             />
             <p className="text-[#1C1C1E] text-xs mt-1">
               1 SOL = 1000 COIN4 <br />
@@ -164,6 +180,12 @@ export default function CreatePresaleStep1() {
                   variant="bordered"
                   label="LISTING rate"
                   placeholder="0"
+                  onChange={(e) => {
+                    if (e.target.value) {
+                      handleChangeForm({ listingRate: e.target.value });
+                    }
+                  }}
+                  value={createPresaleForm?.listingRate}
                 />
                 <p className="text-[#1C1C1E] text-xs mt-1">
                   1 SOL = 800 COIN4
@@ -182,6 +204,12 @@ export default function CreatePresaleStep1() {
               variant="bordered"
               label="Softcap"
               placeholder="0"
+              onChange={(e) => {
+                if (e.target.value) {
+                  handleChangeForm({ softcap: e.target.value });
+                }
+              }}
+              value={createPresaleForm?.softcap}
             />
             <p className="text-[#1C1C1E] text-xs mt-1">
               Softcap must be greater than or equals 20% of Hardcap
@@ -193,6 +221,12 @@ export default function CreatePresaleStep1() {
             label="Hardcap"
             placeholder="0"
             endContent={<p className="text-sm text-default-500">SOL</p>}
+            onChange={(e) => {
+              if (e.target.value) {
+                handleChangeForm({ hardcap: e.target.value });
+              }
+            }}
+            value={createPresaleForm?.hardcap}
           />
           <Input
             classNames={{ input: "placeholder:text-[#8E8E93]" }}
@@ -200,6 +234,12 @@ export default function CreatePresaleStep1() {
             label="Minimum buy"
             placeholder="0"
             endContent={<p className="text-sm text-default-500">SOL</p>}
+            onChange={(e) => {
+              if (e.target.value) {
+                handleChangeForm({ minBuy: e.target.value });
+              }
+            }}
+            value={createPresaleForm?.minBuy}
           />
           <Input
             classNames={{ input: "placeholder:text-[#8E8E93]" }}
@@ -207,14 +247,26 @@ export default function CreatePresaleStep1() {
             label="Maximum buy"
             placeholder="0"
             endContent={<p className="text-sm text-default-500">SOL</p>}
+            onChange={(e) => {
+              if (e.target.value) {
+                handleChangeForm({ maxBuy: e.target.value });
+              }
+            }}
+            value={createPresaleForm?.maxBuy}
           />
           {createPresaleForm?.listingOption === "auto" && (
             <>
               <Select
-                classNames={{ value: "placeholder:text-[#8E8E93]" }}
+                classNames={{ value: `placeholder:text-[#8E8E93] ${createPresaleForm?.router && 'text-black'}` }}
                 variant="bordered"
                 label="Router"
                 placeholder="RaydiumAmmV4"
+                onChange={(e) => {
+                  if (e.target.value) {
+                    handleChangeForm({ router: e.target.value });
+                  }
+                }}
+                value={createPresaleForm?.router}
               >
                 <SelectItem
                   key={1}
@@ -229,6 +281,12 @@ export default function CreatePresaleStep1() {
                   variant="bordered"
                   label="Liquidity Percent (%)"
                   placeholder="51"
+                  onChange={(e) => {
+                    if (e.target.value) {
+                      handleChangeForm({ liquidityPercent: e.target.value });
+                    }
+                  }}
+                  value={createPresaleForm?.liquidityPercent}
                 />
                 <p className="text-[#1C1C1E] text-xs mt-1">
                   Enter the percentage of raised funds that should be allocated
@@ -243,6 +301,12 @@ export default function CreatePresaleStep1() {
             variant="bordered"
             showMonthAndYearPickers
             defaultValue={now("Etc/Universal")}
+            onChange={(e) => {
+              if (e) {
+                handleChangeForm({ startTime: e });
+              }
+            }}
+            value={createPresaleForm?.startTime}
           />
           <DatePicker
             classNames={{ input: "placeholder:text-[#8E8E93]" }}
@@ -250,14 +314,26 @@ export default function CreatePresaleStep1() {
             variant="bordered"
             showMonthAndYearPickers
             defaultValue={now("Etc/Universal")}
+            onChange={(e) => {
+              if (e) {
+                handleChangeForm({ endTime: e });
+              }
+            }}
+            value={createPresaleForm?.endTime}
           />
           {createPresaleForm?.listingOption === "auto" && (
             <>
               <Select
-                classNames={{ value: "placeholder:text-[#8E8E93]" }}
+                classNames={{ value: `placeholder:text-[#8E8E93] ${createPresaleForm?.liquidityType && 'text-black'}` }}
                 variant="bordered"
                 label="Liquidity Type"
                 placeholder="Auto Locking"
+                onChange={(e) => {
+                  if (e.target.value) {
+                    handleChangeForm({ liquidityType: e.target.value });
+                  }
+                }}
+                value={createPresaleForm?.liquidityType}
               >
                 <SelectItem
                   key={"lock"}
@@ -281,6 +357,12 @@ export default function CreatePresaleStep1() {
                   endContent={
                     <p className="text-sm text-default-500">Minutes</p>
                   }
+                  onChange={(e) => {
+                    if (e.target.value) {
+                      handleChangeForm({ liquidityLockupTime: e.target.value });
+                    }
+                  }}
+                  value={createPresaleForm?.liquidityLockupTime}
                 />
                 <p className="text-[#1C1C1E] text-xs mt-1">
                   Liquidity lock up time must be greater than 30 days
@@ -290,26 +372,34 @@ export default function CreatePresaleStep1() {
           )}
           <div>
             <Select
-              classNames={{ value: "placeholder:text-[#8E8E93]" }}
+              classNames={{
+                value: `placeholder:text-[#8E8E93] ${
+                  createPresaleForm?.refundType && "text-black"
+                }`,
+              }}
               variant="bordered"
               label="Unsold Tokens Refund Type"
               placeholder="Refund"
-              onChange={(e) =>
-                setCreatePresaleForm((prev: any) => ({
-                  ...prev,
-                  refundType: e.target.value,
-                }))
+              onChange={(e) => {
+                if (e.target.value) {
+                  handleChangeForm({ refundType: e.target.value });
+                }
+              }}
+              selectedKeys={
+                createPresaleForm?.refundType
+                  ? [createPresaleForm?.refundType]
+                  : undefined
               }
-              value={createPresaleForm?.refundType}
+              selectionMode="single"
             >
               <SelectItem
-                key={1}
+                key={"refund"}
                 value={"refund"}
               >
                 Refund
               </SelectItem>
               <SelectItem
-                key={1}
+                key={"burn"}
                 value={"burn"}
               >
                 Burn

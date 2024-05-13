@@ -20,6 +20,7 @@ import { now } from "@internationalized/date";
 import { CreateMultiChainContext } from "@/provider/CreateMultiChainProvider";
 import { currencyList, currencyShortName } from "@/constant/network";
 import { MinusIcon, PlusIcon } from "@/components/Icon";
+import { changeForm } from "@/function/form";
 
 const CurrencySelect = ({ image, name, symbol, value, setValue }: any) => {
   const [isActive, setIsActive] = useState(false);
@@ -68,8 +69,7 @@ export default function CreateMultiChainStep1() {
   const { createMultiChainForm, setCreateMultiChainForm } = useContext(
     CreateMultiChainContext
   );
-  const [tokenAddr, setTokenAddr] = useState("");
-  const [tokenInfo, setTokenInfo] = useState<any>(null);
+
   const handleChangePriceModel = (e: any) => {
     if (e.target.value === "multi-price") {
       setCreateMultiChainForm((prev: any) => ({
@@ -83,6 +83,26 @@ export default function CreateMultiChainStep1() {
     }));
   };
 
+  const handleChangeForm = changeForm(setCreateMultiChainForm);
+  const fetchData = async () => {
+    return await new Promise((resolve) => {
+      const debouncedFetch = debounce(() => {
+        resolve(getTokenData(createMultiChainForm?.tokenAddress));
+      }, 1000);
+
+      debouncedFetch();
+    });
+  };
+  useEffect(() => {
+    const fetchDataAndLog = async () => {
+      const tokenInfo = await fetchData();
+      handleChangeForm({ tokenInfo });
+    };
+    if (createMultiChainForm?.tokenAddress) {
+      fetchDataAndLog();
+    }
+  }, [createMultiChainForm?.tokenAddress]);
+
   useEffect(() => {
     // CHECK PRICEMODEL TO REMOVE UN NEEED VALUE
     if (
@@ -93,24 +113,6 @@ export default function CreateMultiChainStep1() {
     }
   }, [createMultiChainForm?.priceModel]);
 
-  const fetchData = async () => {
-    return await new Promise((resolve) => {
-      const debouncedFetch = debounce(() => {
-        resolve(getTokenData(tokenAddr));
-      }, 1000);
-
-      debouncedFetch();
-    });
-  };
-  useEffect(() => {
-    const fetchDataAndLog = async () => {
-      const tokenInfo = await fetchData();
-      setTokenInfo(tokenInfo);
-    };
-    if (tokenAddr) {
-      fetchDataAndLog();
-    }
-  }, [tokenAddr]);
   return (
     <div>
       <CustomDivider />
@@ -121,25 +123,25 @@ export default function CreateMultiChainStep1() {
             variant="bordered"
             label="Token Address"
             placeholder="0x912CE59144191C1204E64559 E8253a0e49E6548"
-            onChange={(e) => setTokenAddr(e.target.value)}
+            onChange={(e) => handleChangeForm({ tokenAddress: e.target.value })}
           />
           <div className="mt-2 flex flex-col gap-y-1">
             <p className="text-xs leading-5 font-semibold text-[#8E8E93]">
               Creation fee: FREE
             </p>
-            {tokenInfo && (
+            {createMultiChainForm?.tokenInfo && (
               <>
                 <p className="text-xs leading-5 text-[#8E8E93]">
-                  Name: {tokenInfo.name}
+                  Name: {createMultiChainForm?.tokenInfoname}
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
-                  Symbol: {tokenInfo.symbol}
+                  Symbol: {createMultiChainForm?.tokenInfosymbol}
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
                   Total Supply: 223398198040.53727
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
-                  Decimals: {tokenInfo.decimals}
+                  Decimals: {createMultiChainForm?.tokenInfodecimals}
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
                   Your balance: 223398198040.53727
@@ -181,10 +183,7 @@ export default function CreateMultiChainStep1() {
             defaultValue="manual"
             className={"text-sm leading-5"}
             onChange={(e) =>
-              setCreateMultiChainForm((prev: any) => ({
-                ...prev,
-                listingOption: e.target.value,
-              }))
+              handleChangeForm({ listingOption: e.target.value })
             }
             value={createMultiChainForm?.listingOption}
           >
@@ -206,10 +205,16 @@ export default function CreateMultiChainStep1() {
         <CustomDivider />
         <div className="grid grid-cols-2 gap-6">
           <Select
-            classNames={{ value: "placeholder:text-[#8E8E93]" }}
+            classNames={{
+              value: `placeholder:text-[#8E8E93] ${
+                createMultiChainForm?.saleType && "text-black"
+              }`,
+            }}
             variant="bordered"
             label="Sale Type"
             placeholder="Public"
+            onChange={(e) => handleChangeForm({ saleType: e.target.value })}
+            value={createMultiChainForm?.saleType}
           >
             <SelectItem
               key={"public"}
@@ -385,6 +390,8 @@ export default function CreateMultiChainStep1() {
             variant="bordered"
             showMonthAndYearPickers
             defaultValue={now("Etc/Universal")}
+            onChange={(e) => handleChangeForm({ startTime: e })}
+            value={createMultiChainForm?.startTime}
           />
           <DatePicker
             classNames={{ input: "placeholder:text-[#8E8E93]" }}
@@ -392,17 +399,16 @@ export default function CreateMultiChainStep1() {
             variant="bordered"
             showMonthAndYearPickers
             defaultValue={now("Etc/Universal")}
+            onChange={(e) => handleChangeForm({ endTime: e })}
+            value={createMultiChainForm?.endTime}
           />
           <Select
-            classNames={{ value: "placeholder:text-[#8E8E93]" }}
+            classNames={{ value: `placeholder:text-[#8E8E93] ${createMultiChainForm?.refundType && 'text-black'}` }}
             variant="bordered"
             label="Unsold Tokens Refund Type"
             placeholder="Refund"
             onChange={(e) =>
-              setCreateMultiChainForm((prev: any) => ({
-                ...prev,
-                refundType: e.target.value,
-              }))
+              handleChangeForm({ refundType: e.target.value })
             }
             value={createMultiChainForm?.refundType}
           >

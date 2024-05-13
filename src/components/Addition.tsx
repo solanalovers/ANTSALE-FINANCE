@@ -4,6 +4,7 @@ import CustomAvatar from "./CustomAvatar";
 import CustomEditor from "./CustomEditor";
 import CustomDivider from "./CustomDivider";
 import { EditIcon } from "./Icon";
+import ConfigTokenomic from "./Tokennomic/ConfigTokenomic";
 
 export default function Addition() {
   return (
@@ -107,7 +108,7 @@ export default function Addition() {
           placeholder="http://facebook.com/abc"
         />
       </div>
-      <CustomDivider />
+      <ConfigTokenomic />
     </div>
   );
 }

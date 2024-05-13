@@ -17,17 +17,17 @@ import debounce from "lodash.debounce";
 import { getTokenData } from "@/function/token";
 import { now } from "@internationalized/date";
 import { CreateFairLaunchContext } from "@/provider/CreateFairLaunchProvider";
+import { changeForm } from "@/function/form";
 
 export default function CreateFairLaunchStep1() {
   const { createFairLaunchForm, setCreateFairLaunchForm } = useContext(
     CreateFairLaunchContext
   );
-  const [tokenAddr, setTokenAddr] = useState("");
-  const [tokenInfo, setTokenInfo] = useState<any>(null);
+  const handleChangeForm = changeForm(setCreateFairLaunchForm);
   const fetchData = async () => {
     return await new Promise((resolve) => {
       const debouncedFetch = debounce(() => {
-        resolve(getTokenData(tokenAddr));
+        resolve(getTokenData(createFairLaunchForm?.tokenAddress));
       }, 1000);
 
       debouncedFetch();
@@ -36,16 +36,13 @@ export default function CreateFairLaunchStep1() {
   useEffect(() => {
     const fetchDataAndLog = async () => {
       const tokenInfo = await fetchData();
-      setTokenInfo(tokenInfo);
+      handleChangeForm({ tokenInfo });
     };
-    if (tokenAddr) {
+    if (createFairLaunchForm?.tokenAddress) {
       fetchDataAndLog();
     }
-  }, [tokenAddr]);
+  }, [createFairLaunchForm?.tokenAddress]);
 
-  const handleChangeForm = (formValue: any) => {
-    setCreateFairLaunchForm((prev: any) => ({ ...prev, ...formValue }));
-  };
   return (
     <div>
       <CustomDivider />
@@ -56,25 +53,25 @@ export default function CreateFairLaunchStep1() {
             variant="bordered"
             label="Token Address"
             placeholder="0x912CE59144191C1204E64559 E8253a0e49E6548"
-            onChange={(e) => setTokenAddr(e.target.value)}
+            onChange={(e) => handleChangeForm({ tokenAddress: e.target.value })}
           />
           <div className="mt-2 flex flex-col gap-y-1">
             <p className="text-xs leading-5 font-semibold text-[#8E8E93]">
               Creation fee: FREE
             </p>
-            {tokenInfo && (
+            {createFairLaunchForm?.tokenInfo && (
               <>
                 <p className="text-xs leading-5 text-[#8E8E93]">
-                  Name: {tokenInfo.name}
+                  Name: {createFairLaunchForm?.tokenInfoname}
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
-                  Symbol: {tokenInfo.symbol}
+                  Symbol: {createFairLaunchForm?.tokenInfosymbol}
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
                   Total Supply: 223398198040.53727
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
-                  Decimals: {tokenInfo.decimals}
+                  Decimals: {createFairLaunchForm?.tokenInfodecimals}
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
                   Your balance: 223398198040.53727
@@ -86,10 +83,13 @@ export default function CreateFairLaunchStep1() {
         <div className="my-6 flex flex-col gap-y-6">
           <RadioGroup
             label="Currency"
-            defaultValue="SOL"
             className={"text-sm leading-5"}
+            value={createFairLaunchForm?.currency}
+            onChange={(e) => {
+              handleChangeForm({ currency: e.target.value });
+            }}
           >
-            <Radio value="SOL">
+            <Radio value="sol">
               <p className={"text-sm leading-5"}>
                 SOL (User will pay with SOL for your token)
               </p>
@@ -97,8 +97,11 @@ export default function CreateFairLaunchStep1() {
           </RadioGroup>
           <RadioGroup
             label="Fee options"
-            defaultValue="5%"
             className={"text-sm leading-5"}
+            value={createFairLaunchForm?.feeOption}
+            onChange={(e) => {
+              handleChangeForm({ feeOption: e.target.value });
+            }}
           >
             <Radio value="5%">
               <p className={"text-sm leading-5"}>
@@ -108,8 +111,11 @@ export default function CreateFairLaunchStep1() {
           </RadioGroup>
           <RadioGroup
             label="Listing Options"
-            defaultValue="auto"
             className={"text-sm leading-5"}
+            onChange={(e) =>
+              handleChangeForm({ listingOption: e.target.value })
+            }
+            value={createFairLaunchForm?.listingOption}
           >
             <Radio value="auto">
               <p className={"text-sm leading-5"}>Auto Listing</p>
@@ -125,10 +131,20 @@ export default function CreateFairLaunchStep1() {
         <CustomDivider />
         <div className="grid grid-cols-2 gap-6">
           <Select
-            classNames={{ value: "placeholder:text-[#8E8E93]" }}
+            classNames={{
+              value: `placeholder:text-[#8E8E93] ${
+                createFairLaunchForm?.saleType && "text-black"
+              }`,
+            }}
             variant="bordered"
             label="Sale Type"
             placeholder="Public"
+            onChange={(e) => {
+              if (e.target.value) {
+                handleChangeForm({ saleType: e.target.value });
+              }
+            }}
+            value={createFairLaunchForm?.saleType}
           >
             <SelectItem
               key={"public"}
@@ -143,6 +159,8 @@ export default function CreateFairLaunchStep1() {
             variant="bordered"
             label="Total Selling Amount"
             placeholder="0"
+            onChange={(e) => handleChangeForm({ totalSale: e.target.value })}
+            value={createFairLaunchForm?.totalSale}
           />
           <div>
             <Input
@@ -151,6 +169,8 @@ export default function CreateFairLaunchStep1() {
               label="Softcap"
               placeholder="0"
               endContent={<p className="text-sm text-default-500">SOL</p>}
+              onChange={(e) => handleChangeForm({ softCap: e.target.value })}
+              value={createFairLaunchForm?.softCap}
             />
             <p className="text-[#1C1C1E] text-xs mt-1">
               Softcap minimum must be 1 SOL
@@ -175,13 +195,21 @@ export default function CreateFairLaunchStep1() {
           placeholder="0"
           endContent={<p className="text-sm text-default-500">SOL</p>}
           isDisabled={!createFairLaunchForm?.isMaxBuy}
+          onChange={(e) => handleChangeForm({ maxBuy: e.target.value })}
+          value={createFairLaunchForm?.maxBuy}
         />
         <div className="grid grid-cols-2 gap-6 mt-6">
           <Select
-            classNames={{ value: "placeholder:text-[#8E8E93]" }}
+            classNames={{
+              value: `placeholder:text-[#8E8E93] ${
+                createFairLaunchForm?.router && "text-black"
+              }`,
+            }}
             variant="bordered"
             label="Router"
             placeholder="RaydiumAmmV4"
+            onChange={(e) => handleChangeForm({ router: e.target.value })}
+            value={createFairLaunchForm?.router}
           >
             <SelectItem
               key={1}
@@ -196,6 +224,10 @@ export default function CreateFairLaunchStep1() {
               variant="bordered"
               label="Liquidity Percent (%)"
               placeholder="51"
+              onChange={(e) =>
+                handleChangeForm({ liquidityPercent: e.target.value })
+              }
+              value={createFairLaunchForm?.liquidityPercent}
             />
             <p className="text-[#1C1C1E] text-xs mt-1">
               Enter the percentage of raised funds that should be allocated to
@@ -208,6 +240,8 @@ export default function CreateFairLaunchStep1() {
             variant="bordered"
             showMonthAndYearPickers
             defaultValue={now("Etc/Universal")}
+            onChange={(e) => handleChangeForm({ startTime: e })}
+            value={createFairLaunchForm?.startTime}
           />
           <DatePicker
             classNames={{ input: "placeholder:text-[#8E8E93]" }}
@@ -215,9 +249,15 @@ export default function CreateFairLaunchStep1() {
             variant="bordered"
             showMonthAndYearPickers
             defaultValue={now("Etc/Universal")}
+            onChange={(e) => handleChangeForm({ endTime: e })}
+            value={createFairLaunchForm?.endTime}
           />
           <Select
-            classNames={{ value: "placeholder:text-[#8E8E93] text-black" }}
+            classNames={{
+              value: `placeholder:text-[#8E8E93] ${
+                createFairLaunchForm?.liquidityType && "text-black"
+              }`,
+            }}
             variant="bordered"
             label="Liquidity Type"
             placeholder="Auto Locking"
@@ -246,6 +286,10 @@ export default function CreateFairLaunchStep1() {
               label="Liquidity Lockup Time"
               placeholder="0"
               endContent={<p className="text-sm text-default-500">Minutes</p>}
+              onChange={(e) =>
+                handleChangeForm({ liquidityLockupTime: e.target.value })
+              }
+              value={createFairLaunchForm?.liquidityLockupTime}
             />
             <p className="text-[#1C1C1E] text-xs mt-1">
               Liquidity lock up time must be greater than 30 days

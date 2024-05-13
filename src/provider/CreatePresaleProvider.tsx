@@ -9,6 +9,8 @@ export default function CreatePresaleProvider({
   children: React.ReactNode;
 }) {
   const [createPresaleForm, setCreatePresaleForm] = useState({
+    currency: 'sol',
+    feeOption: '5%',
     listingOption: "auto",
   });
 
