@@ -1,10 +1,10 @@
-import { Link } from "@nextui-org/react";
 import { useLocale } from "next-intl";
 import { useTheme } from "next-themes";
 // import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import DropdownNavbar from "./DropdownNavbar";
+import Link from "next/link";
 
 export default function Navbar() {
   const locale = useLocale();
