@@ -36,7 +36,7 @@ export default function Navbar() {
       isHaveStepper: true,
     },
     {
-      label: "PUMP ME",
+      label: "PumpWithMe",
       value: `/${locale}/pumb`,
     },
   ];

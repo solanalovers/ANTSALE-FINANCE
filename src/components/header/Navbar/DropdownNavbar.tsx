@@ -71,7 +71,7 @@ export default function DropdownNavbar() {
             className={`text-base leading-6 text-[#11181C] flex items-center gap-x-3`}
           >
             <RocketIcon />
-            <p>My Pump Me</p>
+            <p>PumpWithMe</p>
           </Link>
         </DropdownItem>
       </DropdownMenu>
