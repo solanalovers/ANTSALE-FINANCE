@@ -14,7 +14,7 @@ import { clusterList } from "@/constant/network";
 import { ArrowDownIcon } from "../Icon";
 
 export default function ClusterSelect() {
-  const { cluster, setCluster } = useContext(AppContext);
+  const { cluster = "0", setCluster } = useContext(AppContext);
 
   return (
     <Dropdown>

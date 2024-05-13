@@ -1,5 +1,5 @@
 import { networkImage } from "@/constant/network";
-import { Avatar } from "@nextui-org/react";
+import { Avatar, Image } from "@nextui-org/react";
 import React from "react";
 
 interface AvatarProps {
@@ -26,15 +26,15 @@ export default function CustomAvatar({
         }}
       />
       <div className="absolute flex items-center justify-center bottom-[-1px] right-[0px]">
-        <img
+        <Image
           src={networkImage[network]}
-          className="object-cover object-center rounded-full z-[2]"
+          className="object-cover object-center rounded-full z-[2] border-[2px] border-white"
           style={{
-            width: networkSize,
-            height: networkSize,
+            width: networkSize -4,
+            height: networkSize -4,
           }}
         />
-        <div className="absolute left-0 right-0 top-0 bottom-0 rounded-full  bg-white z-[1]" />
+        {/* <div className="absolute left-0 right-0 top-0 bottom-0 rounded-full  bg-white z-[1]" /> */}
       </div>
     </div>
   );

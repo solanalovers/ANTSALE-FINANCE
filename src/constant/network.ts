@@ -1,5 +1,5 @@
 const networkImage = {
-  solana: '/image/network/solana.png'
+  solana: '/image/multi-chain/sol.png'
 }
 
 const currencyList = [

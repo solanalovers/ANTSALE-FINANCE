@@ -2,6 +2,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { getBalance } from "@/function/wallet";
+import { useCookies } from "next-client-cookies";
 
 export const AppContext = createContext<any>({});
 
@@ -10,16 +11,14 @@ export default function AppProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [cluster, setCluster] = useState(() => {
-    // return true;
-    if (typeof window !== "undefined") {
-      const result = localStorage.getItem("cluster");
-      if (!result) {
-        localStorage.setItem("cluster", "0");
-        return "sol-devnet";
-      } else {
-        return Number(result);
-      }
+  const cookieStore = useCookies();
+  const [cluster, setCluster] = useState<number>(() => {
+    if (!cookieStore.get("cluster")) {
+      cookieStore.set("cluster", '0');
+      return 0;
+    } else{
+      const result = cookieStore.get('cluster');
+      return Number(result);
     }
   });
   const [balance, setBalance] = useState(0);
@@ -37,8 +36,11 @@ export default function AppProvider({
     (async () => {
       await getWalletBalance();
     })();
-    localStorage.setItem("cluster", JSON.stringify(cluster));
-  }, [publicKey, cluster]);
+  }, [publicKey]);
+
+  useEffect(() => {
+    cookieStore.set("cluster", cluster.toString());
+  }, [cluster]);
 
   return (
     <AppContext.Provider

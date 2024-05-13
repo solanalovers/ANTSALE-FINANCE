@@ -8,14 +8,14 @@ export function ProviderWrapper({ children }: { children: React.ReactNode }) {
   return (
     <WalletAdapter>
       <AppProvider>
-        <NextUIProvider>
-          <NextThemesProvider
-            attribute="class"
-            defaultTheme="light"
-          >
-            {children}
-          </NextThemesProvider>
-        </NextUIProvider>
+          <NextUIProvider>
+            <NextThemesProvider
+              attribute="class"
+              defaultTheme="light"
+            >
+              {children}
+            </NextThemesProvider>
+          </NextUIProvider>
       </AppProvider>
     </WalletAdapter>
   );
