@@ -5,6 +5,7 @@ import { ArrowDownIcon, MinusIcon, PlusIcon } from "../Icon";
 import { ChartInterface } from "@/interface/chart.interface";
 import ColorPicker from "react-best-gradient-color-picker";
 import useClickOutside from "@/hook/useClickOutside";
+import TokenomicChart from "./TokenomicChart";
 
 const defaultChartItem: ChartInterface = {
   title: "",
@@ -19,11 +20,7 @@ const TokenomicItem = ({
   item: ChartInterface;
   handleChange: (chartData: ChartInterface) => void;
 }) => {
-  const [showChooseColor, setShowChooseColor] = useState(false);
-  const colorPickerRef = useRef<any>();
-  useClickOutside(colorPickerRef, () => {
-    setShowChooseColor(false);
-  });
+  const { isOpen, setIsOpen, containerRef } = useClickOutside(false);
 
   return (
     <div className="flex items-center gap-x-4 relative">
@@ -42,6 +39,7 @@ const TokenomicItem = ({
         label="DataSource"
         placeholder="Input in % or number"
         variant="bordered"
+        type="number"
         value={item.dataSource}
         onChange={(e) => {
           const newData = { ...item };
@@ -51,7 +49,7 @@ const TokenomicItem = ({
       />
       <div
         className="flex items-center gap-x-2 border-[2px] border-default-200 p-3 rounded-xl cursor-pointer hover:opacity-80"
-        onClick={() => setShowChooseColor(true)}
+        onClick={() => setIsOpen(true)}
       >
         <div
           className="border border-[2px] border-[rgba(51,51,51,0.3)] w-8 h-8 rounded-full flex-shrink-0"
@@ -62,10 +60,10 @@ const TokenomicItem = ({
           color="#292D32"
         />
       </div>
-      {showChooseColor && (
+      {isOpen && (
         <div
           className="absolute rounded-2xl p-4 bg-white left-full z-50"
-          ref={colorPickerRef}
+          ref={containerRef}
         >
           <ColorPicker
             hideAdvancedSliders
@@ -92,6 +90,20 @@ export default function ConfigTokenomic() {
     isShowTokenomic: false,
     chart: [{ ...defaultChartItem }],
   });
+  const [isShowChart, setIsShowChart] = useState(false);
+
+  const handleCheckShowChart = () => {
+    const isValid = form.chart.every((item) => item.title && item.dataSource);
+
+    if (isValid) {
+      setIsShowChart(true);
+    } else {
+      // Handle error or show a message indicating missing values
+      alert(
+        "Some chart items have missing values for title or dataSource."
+      );
+    }
+  };
   return (
     <div>
       <CustomDivider />
@@ -102,10 +114,7 @@ export default function ConfigTokenomic() {
         className="mt-4"
         checked={form.isShowTokenomic}
         onChange={(e) => {
-          setForm((prev: any) => ({
-            ...prev,
-            isShowTokenomic: e.target.checked,
-          }));
+          setForm((prev) => ({ ...prev, isShowTokenomic: e.target.checked }));
         }}
       >
         Show the tokenomics
@@ -123,7 +132,7 @@ export default function ConfigTokenomic() {
                 onClick={() => {
                   setForm((prev: any) => ({
                     ...prev,
-                    type: 'percent',
+                    type: "percent",
                   }));
                 }}
               >
@@ -135,7 +144,7 @@ export default function ConfigTokenomic() {
                 onClick={() => {
                   setForm((prev: any) => ({
                     ...prev,
-                    type: 'number',
+                    type: "number",
                   }));
                 }}
               >
@@ -193,6 +202,21 @@ export default function ConfigTokenomic() {
                   </p>
                 </div>
               </div>
+            </div>
+            <div>
+              <Button
+                color="primary"
+                onClick={handleCheckShowChart}
+              >
+                Preview
+              </Button>
+              {isShowChart && (
+                <div className="flex items-center justify-center">
+                  <div className="w-1/2">
+                    <TokenomicChart chartData={form.chart}/>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </>

@@ -1,18 +1,24 @@
-import { useEffect } from "react"
+import { useEffect, useRef, useState } from "react";
 
-export default function useClickOutside(elementRef: any, callback: any) {
-    useEffect(() => {
-        const handleClickOutside = (event: any) => {
-            event.preventDefault()
-            if (elementRef && elementRef.current && !elementRef.current.contains(event.target)) {
-                // Call Callback only if event happens outside element or descendent elements
-                callback()
-            }
-            return
-        }
-        document.addEventListener('click', handleClickOutside, true)
-        return () => {
-            document.removeEventListener('click', handleClickOutside, true)
-        }
-    }, [elementRef, callback])
-}
+const useClickOutside = (initialState = false) => {
+  const [isOpen, setIsOpen] = useState(initialState);
+  const containerRef = useRef<any>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event:any) => {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  return { isOpen, setIsOpen, containerRef };
+};
+
+export default useClickOutside;
