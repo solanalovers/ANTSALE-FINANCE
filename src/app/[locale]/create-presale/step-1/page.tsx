@@ -11,7 +11,7 @@ import {
   Select,
   SelectItem,
 } from "@nextui-org/react";
-import { debounce } from "lodash";
+import { debounce, isNumber } from "lodash";
 import React, { useContext, useEffect, useState } from "react";
 import { now } from "@internationalized/date";
 import { changeForm } from "@/function/form";
@@ -135,7 +135,11 @@ export default function CreatePresaleStep1() {
         <CustomDivider />
         <div className="grid grid-cols-2 gap-6">
           <Select
-            classNames={{ value: `placeholder:text-[#8E8E93] ${createPresaleForm?.saleType && 'text-black'}` }}
+            classNames={{
+              value: `placeholder:text-[#8E8E93] ${
+                createPresaleForm?.saleType && "text-black"
+              }`,
+            }}
             variant="bordered"
             label="Sale Type"
             placeholder="Public"
@@ -160,12 +164,34 @@ export default function CreatePresaleStep1() {
               variant="bordered"
               label="PRESALE rate"
               placeholder="0"
-              onChange={(e) => {
-                if (e.target.value) {
-                  handleChangeForm({ presaleRate: e.target.value });
+              value={createPresaleForm?.presaleRate}
+              onBlur={() => {
+                if (createPresaleForm?.presaleRate) {
+                  handleChangeForm({
+                    presaleRate: Number(
+                      createPresaleForm?.presaleRate
+                    )?.toLocaleString(),
+                  });
                 }
               }}
-              value={createPresaleForm?.presaleRate}
+              onFocus={() => {
+                if (createPresaleForm?.presaleRate) {
+                  handleChangeForm({
+                    presaleRate: parseFloat(
+                      createPresaleForm?.presaleRate.replace(/,/g, "")
+                    ),
+                  });
+                }
+              }}
+              onChange={(e) => {
+                if (!e.target.value || !Number.isNaN(Number(e.target.value))) {
+                  handleChangeForm({
+                    presaleRate: e.target.value,
+                  });
+                } else {
+                  e.target.value = "";
+                }
+              }}
             />
             <p className="text-[#1C1C1E] text-xs mt-1">
               1 SOL = 1000 COIN4 <br />
@@ -180,9 +206,31 @@ export default function CreatePresaleStep1() {
                   variant="bordered"
                   label="LISTING rate"
                   placeholder="0"
+                  onBlur={() => {
+                    if (createPresaleForm?.listingRate) {
+                      handleChangeForm({
+                        listingRate: Number(
+                          createPresaleForm?.listingRate
+                        )?.toLocaleString(),
+                      });
+                    }
+                  }}
+                  onFocus={() => {
+                    if (createPresaleForm?.listingRate) {
+                      handleChangeForm({
+                        listingRate: parseFloat(
+                          createPresaleForm?.listingRate.replace(/,/g, "")
+                        ),
+                      });
+                    }
+                  }}
                   onChange={(e) => {
-                    if (e.target.value) {
-                      handleChangeForm({ listingRate: e.target.value });
+                    if (!e.target.value || !Number.isNaN(Number(e.target.value))) {
+                      handleChangeForm({
+                        listingRate: e.target.value,
+                      });
+                    } else {
+                      e.target.value = "";
                     }
                   }}
                   value={createPresaleForm?.listingRate}
@@ -204,9 +252,31 @@ export default function CreatePresaleStep1() {
               variant="bordered"
               label="Softcap"
               placeholder="0"
+              onBlur={() => {
+                if (createPresaleForm?.softcap) {
+                  handleChangeForm({
+                    softcap: Number(
+                      createPresaleForm?.softcap
+                    )?.toLocaleString(),
+                  });
+                }
+              }}
+              onFocus={() => {
+                if (createPresaleForm?.softcap) {
+                  handleChangeForm({
+                    softcap: parseFloat(
+                      createPresaleForm?.softcap.replace(/,/g, "")
+                    ),
+                  });
+                }
+              }}
               onChange={(e) => {
-                if (e.target.value) {
-                  handleChangeForm({ softcap: e.target.value });
+                if (!e.target.value || !Number.isNaN(Number(e.target.value))) {
+                  handleChangeForm({
+                    softcap: e.target.value,
+                  });
+                } else {
+                  e.target.value = "";
                 }
               }}
               value={createPresaleForm?.softcap}
@@ -221,9 +291,31 @@ export default function CreatePresaleStep1() {
             label="Hardcap"
             placeholder="0"
             endContent={<p className="text-sm text-default-500">SOL</p>}
+            onBlur={() => {
+              if (createPresaleForm?.hardcap) {
+                handleChangeForm({
+                  hardcap: Number(
+                    createPresaleForm?.hardcap
+                  )?.toLocaleString(),
+                });
+              }
+            }}
+            onFocus={() => {
+              if (createPresaleForm?.hardcap) {
+                handleChangeForm({
+                  hardcap: parseFloat(
+                    createPresaleForm?.hardcap.replace(/,/g, "")
+                  ),
+                });
+              }
+            }}
             onChange={(e) => {
-              if (e.target.value) {
-                handleChangeForm({ hardcap: e.target.value });
+              if (!e.target.value || !Number.isNaN(Number(e.target.value))) {
+                handleChangeForm({
+                  hardcap: e.target.value,
+                });
+              } else {
+                e.target.value = "";
               }
             }}
             value={createPresaleForm?.hardcap}
@@ -234,9 +326,31 @@ export default function CreatePresaleStep1() {
             label="Minimum buy"
             placeholder="0"
             endContent={<p className="text-sm text-default-500">SOL</p>}
+            onBlur={() => {
+              if (createPresaleForm?.minBuy) {
+                handleChangeForm({
+                  minBuy: Number(
+                    createPresaleForm?.minBuy
+                  )?.toLocaleString(),
+                });
+              }
+            }}
+            onFocus={() => {
+              if (createPresaleForm?.minBuy) {
+                handleChangeForm({
+                  minBuy: parseFloat(
+                    createPresaleForm?.minBuy.replace(/,/g, "")
+                  ),
+                });
+              }
+            }}
             onChange={(e) => {
-              if (e.target.value) {
-                handleChangeForm({ minBuy: e.target.value });
+              if (!e.target.value || !Number.isNaN(Number(e.target.value))) {
+                handleChangeForm({
+                  minBuy: e.target.value,
+                });
+              } else {
+                e.target.value = "";
               }
             }}
             value={createPresaleForm?.minBuy}
@@ -247,9 +361,31 @@ export default function CreatePresaleStep1() {
             label="Maximum buy"
             placeholder="0"
             endContent={<p className="text-sm text-default-500">SOL</p>}
+            onBlur={() => {
+              if (createPresaleForm?.maxBuy) {
+                handleChangeForm({
+                  maxBuy: Number(
+                    createPresaleForm?.maxBuy
+                  )?.toLocaleString(),
+                });
+              }
+            }}
+            onFocus={() => {
+              if (createPresaleForm?.maxBuy) {
+                handleChangeForm({
+                  maxBuy: parseFloat(
+                    createPresaleForm?.maxBuy.replace(/,/g, "")
+                  ),
+                });
+              }
+            }}
             onChange={(e) => {
-              if (e.target.value) {
-                handleChangeForm({ maxBuy: e.target.value });
+              if (!e.target.value || !Number.isNaN(Number(e.target.value))) {
+                handleChangeForm({
+                  maxBuy: e.target.value,
+                });
+              } else {
+                e.target.value = "";
               }
             }}
             value={createPresaleForm?.maxBuy}
@@ -257,7 +393,11 @@ export default function CreatePresaleStep1() {
           {createPresaleForm?.listingOption === "auto" && (
             <>
               <Select
-                classNames={{ value: `placeholder:text-[#8E8E93] ${createPresaleForm?.router && 'text-black'}` }}
+                classNames={{
+                  value: `placeholder:text-[#8E8E93] ${
+                    createPresaleForm?.router && "text-black"
+                  }`,
+                }}
                 variant="bordered"
                 label="Router"
                 placeholder="RaydiumAmmV4"
@@ -281,6 +421,8 @@ export default function CreatePresaleStep1() {
                   variant="bordered"
                   label="Liquidity Percent (%)"
                   placeholder="51"
+                  type="number"
+                  max={100}
                   onChange={(e) => {
                     if (e.target.value) {
                       handleChangeForm({ liquidityPercent: e.target.value });
@@ -324,7 +466,11 @@ export default function CreatePresaleStep1() {
           {createPresaleForm?.listingOption === "auto" && (
             <>
               <Select
-                classNames={{ value: `placeholder:text-[#8E8E93] ${createPresaleForm?.liquidityType && 'text-black'}` }}
+                classNames={{
+                  value: `placeholder:text-[#8E8E93] ${
+                    createPresaleForm?.liquidityType && "text-black"
+                  }`,
+                }}
                 variant="bordered"
                 label="Liquidity Type"
                 placeholder="Auto Locking"

@@ -159,7 +159,33 @@ export default function CreateFairLaunchStep1() {
             variant="bordered"
             label="Total Selling Amount"
             placeholder="0"
-            onChange={(e) => handleChangeForm({ totalSale: e.target.value })}
+            onBlur={() => {
+              if (createFairLaunchForm?.totalSale) {
+                handleChangeForm({
+                  presaleRate: Number(
+                    createFairLaunchForm?.totalSale
+                  )?.toLocaleString(),
+                });
+              }
+            }}
+            onFocus={() => {
+              if (createFairLaunchForm?.totalSale) {
+                handleChangeForm({
+                  totalSale: parseFloat(
+                    createFairLaunchForm?.totalSale.replace(/,/g, "")
+                  ),
+                });
+              }
+            }}
+            onChange={(e) => {
+              if (!e.target.value || !Number.isNaN(Number(e.target.value))) {
+                handleChangeForm({
+                  totalSale: e.target.value,
+                });
+              } else {
+                e.target.value = "";
+              }
+            }}
             value={createFairLaunchForm?.totalSale}
           />
           <div>
@@ -169,7 +195,33 @@ export default function CreateFairLaunchStep1() {
               label="Softcap"
               placeholder="0"
               endContent={<p className="text-sm text-default-500">SOL</p>}
-              onChange={(e) => handleChangeForm({ softCap: e.target.value })}
+              onBlur={() => {
+                if (createFairLaunchForm?.softCap) {
+                  handleChangeForm({
+                    presaleRate: Number(
+                      createFairLaunchForm?.softCap
+                    )?.toLocaleString(),
+                  });
+                }
+              }}
+              onFocus={() => {
+                if (createFairLaunchForm?.softCap) {
+                  handleChangeForm({
+                    softCap: parseFloat(
+                      createFairLaunchForm?.softCap.replace(/,/g, "")
+                    ),
+                  });
+                }
+              }}
+              onChange={(e) => {
+                if (!e.target.value || !Number.isNaN(Number(e.target.value))) {
+                  handleChangeForm({
+                    softCap: e.target.value,
+                  });
+                } else {
+                  e.target.value = "";
+                }
+              }}
               value={createFairLaunchForm?.softCap}
             />
             <p className="text-[#1C1C1E] text-xs mt-1">
@@ -195,7 +247,33 @@ export default function CreateFairLaunchStep1() {
           placeholder="0"
           endContent={<p className="text-sm text-default-500">SOL</p>}
           isDisabled={!createFairLaunchForm?.isMaxBuy}
-          onChange={(e) => handleChangeForm({ maxBuy: e.target.value })}
+          onBlur={() => {
+            if (createFairLaunchForm?.maxBuy) {
+              handleChangeForm({
+                maxBuy: Number(
+                  createFairLaunchForm?.maxBuy
+                )?.toLocaleString(),
+              });
+            }
+          }}
+          onFocus={() => {
+            if (createFairLaunchForm?.maxBuy) {
+              handleChangeForm({
+                presaleRate: parseFloat(
+                  createFairLaunchForm?.maxBuy.replace(/,/g, "")
+                ),
+              });
+            }
+          }}
+          onChange={(e) => {
+            if (!e.target.value || !Number.isNaN(Number(e.target.value))) {
+              handleChangeForm({
+                maxBuy: e.target.value,
+              });
+            } else {
+              e.target.value = "";
+            }
+          }}
           value={createFairLaunchForm?.maxBuy}
         />
         <div className="grid grid-cols-2 gap-6 mt-6">
