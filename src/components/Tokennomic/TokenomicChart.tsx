@@ -27,6 +27,6 @@ export default function TokenomicChart({chartData}: {chartData: Array<ChartInter
       });
       chartRef.current.chart = myChart
     }
-  }, []);
+  }, [chartData]);
   return <canvas ref={chartRef} className="w-full"></canvas>;
 }

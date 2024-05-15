@@ -91,12 +91,13 @@ export default function ConfigTokenomic() {
     chart: [{ ...defaultChartItem }],
   });
   const [isShowChart, setIsShowChart] = useState(false);
+  const [chartData, setChartData] = useState(form.chart);
 
   const handleCheckShowChart = () => {
     const isValid = form.chart.every((item) => item.title && item.dataSource);
-
     if (isValid) {
       setIsShowChart(true);
+      setChartData(form.chart)
     } else {
       // Handle error or show a message indicating missing values
       alert(
@@ -213,7 +214,7 @@ export default function ConfigTokenomic() {
               {isShowChart && (
                 <div className="flex items-center justify-center">
                   <div className="w-1/2">
-                    <TokenomicChart chartData={form.chart}/>
+                    <TokenomicChart chartData={chartData}/>
                   </div>
                 </div>
               )}
