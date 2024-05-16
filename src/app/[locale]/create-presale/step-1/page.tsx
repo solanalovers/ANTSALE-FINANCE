@@ -14,7 +14,7 @@ import {
 import { debounce, isNumber } from "lodash";
 import React, { useContext, useEffect, useState } from "react";
 import { now } from "@internationalized/date";
-import { changeForm } from "@/function/form";
+import { changeForm, requiredField } from "@/function/form";
 
 export default function CreatePresaleStep1() {
   const { createPresaleForm, setCreatePresaleForm } =
@@ -39,17 +39,49 @@ export default function CreatePresaleStep1() {
     }
   }, [createPresaleForm?.tokenAddress]);
 
+  const calculateAutoListing = () => {
+    if (
+      createPresaleForm?.hardCap &&
+      createPresaleForm?.presaleRate &&
+      createPresaleForm?.listingRate &&
+      createPresaleForm?.liquidityPercent
+    ) {
+      const hardCap = parseFloat(createPresaleForm?.hardCap.replace(/,/g, ""));
+      const presaleRate = parseFloat(
+        createPresaleForm?.presaleRate.replace(/,/g, "")
+      );
+      const listingRate = parseFloat(
+        createPresaleForm?.listingRate.replace(/,/g, "")
+      );
+      const liquidityPercent = createPresaleForm?.liquidityPercent;
+
+      const total =
+        hardCap * presaleRate +
+        (hardCap * 0.95 * listingRate * liquidityPercent) / 100;
+
+      return `${total} ${createPresaleForm?.tokenInfo?.name}`;
+    } else {
+      return "?";
+    }
+  };
+
   return (
     <div>
       <CustomDivider />
       <div>
         <div>
           <Input
+            {...requiredField(createPresaleForm?.tokenAddress)}
             classNames={{ input: "placeholder:text-[#8E8E93]" }}
             variant="bordered"
             label="Token Address"
             placeholder="0x912CE59144191C1204E64559 E8253a0e49E6548"
             onChange={(e) => handleChangeForm({ tokenAddress: e.target.value })}
+            onBlur={() => {
+              if (!createPresaleForm?.tokenAddress) {
+                handleChangeForm({ tokenAddress: "" });
+              }
+            }}
           />
           <div className="mt-2 flex flex-col gap-y-1">
             <p className="text-xs leading-5 font-semibold text-[#8E8E93]">
@@ -160,6 +192,7 @@ export default function CreatePresaleStep1() {
           <div />
           <div>
             <Input
+              {...requiredField(createPresaleForm?.presaleRate)}
               classNames={{ input: "placeholder:text-[#8E8E93]" }}
               variant="bordered"
               label="PRESALE rate"
@@ -172,6 +205,8 @@ export default function CreatePresaleStep1() {
                       createPresaleForm?.presaleRate
                     )?.toLocaleString(),
                   });
+                } else {
+                  handleChangeForm({ presaleRate: "" });
                 }
               }}
               onFocus={() => {
@@ -193,19 +228,23 @@ export default function CreatePresaleStep1() {
                 }
               }}
             />
-            {createPresaleForm?.presaleRate &&
-              createPresaleForm?.tokenInfo?.name && (
-                <p className="text-[#1C1C1E] text-xs mt-1">
-                  1 SOL = {createPresaleForm?.presaleRate}{" "}
-                  {createPresaleForm?.tokenInfo?.name} <br />
-                  If I spend 1 SOL on how many tokens will i receive?
-                </p>
-              )}
+            <p className="text-[#1C1C1E] text-xs mt-1">
+              1 SOL ={" "}
+              {`${
+                createPresaleForm?.presaleRate &&
+                createPresaleForm?.tokenInfo?.name
+                  ? `${createPresaleForm?.presaleRate} ${createPresaleForm?.tokenInfo?.name}`
+                  : "?"
+              } `}{" "}
+              <br />
+              If I spend 1 SOL on how many tokens will i receive?
+            </p>
           </div>
           <div>
             {createPresaleForm?.listingOption === "auto" && (
               <>
                 <Input
+                  {...requiredField(createPresaleForm?.listingRate)}
                   classNames={{ input: "placeholder:text-[#8E8E93]" }}
                   variant="bordered"
                   label="LISTING rate"
@@ -217,6 +256,8 @@ export default function CreatePresaleStep1() {
                           createPresaleForm?.listingRate
                         )?.toLocaleString(),
                       });
+                    } else {
+                      handleChangeForm({ listingRate: "" });
                     }
                   }}
                   onFocus={() => {
@@ -242,41 +283,47 @@ export default function CreatePresaleStep1() {
                   }}
                   value={createPresaleForm?.listingRate}
                 />
-                {createPresaleForm?.listingRate &&
-                  createPresaleForm?.tokenInfo?.name && (
-                    <p className="text-[#1C1C1E] text-xs mt-1">
-                      1 SOL = {createPresaleForm?.listingRate}{" "}
-                      {createPresaleForm?.tokenInfo?.name}
-                      <br />
-                      If I spend 1 SOL on how many tokens will i receive?
-                      Usually this amount is lower than presale rate to allow
-                      for a higher listing price on
-                    </p>
-                  )}
+
+                <p className="text-[#1C1C1E] text-xs mt-1">
+                  1 SOL ={" "}
+                  {`${
+                    createPresaleForm?.presaleRate &&
+                    createPresaleForm?.tokenInfo?.name
+                      ? `${createPresaleForm?.presaleRate} ${createPresaleForm?.tokenInfo?.name}`
+                      : "?"
+                  } `}
+                  <br />
+                  If I spend 1 SOL on how many tokens will i receive? Usually
+                  this amount is lower than presale rate to allow for a higher
+                  listing price on
+                </p>
               </>
             )}
           </div>
 
           <div>
             <Input
+              {...requiredField(createPresaleForm?.softCap)}
               classNames={{ input: "placeholder:text-[#8E8E93]" }}
               variant="bordered"
               label="Softcap"
               placeholder="0"
               onBlur={() => {
-                if (createPresaleForm?.softcap) {
+                if (createPresaleForm?.softCap) {
                   handleChangeForm({
-                    softcap: Number(
-                      createPresaleForm?.softcap
+                    softCap: Number(
+                      createPresaleForm?.softCap
                     )?.toLocaleString(),
                   });
+                } else {
+                  handleChangeForm({ softCap: "" });
                 }
               }}
               onFocus={() => {
-                if (createPresaleForm?.softcap) {
+                if (createPresaleForm?.softCap) {
                   handleChangeForm({
-                    softcap: parseFloat(
-                      createPresaleForm?.softcap.replace(/,/g, "")
+                    softCap: parseFloat(
+                      createPresaleForm?.softCap.replace(/,/g, "")
                     ),
                   });
                 }
@@ -284,36 +331,41 @@ export default function CreatePresaleStep1() {
               onChange={(e) => {
                 if (!e.target.value || !Number.isNaN(Number(e.target.value))) {
                   handleChangeForm({
-                    softcap: e.target.value,
+                    softCap: e.target.value,
                   });
                 } else {
                   e.target.value = "";
                 }
               }}
-              value={createPresaleForm?.softcap}
+              value={createPresaleForm?.softCap}
             />
             <p className="text-[#1C1C1E] text-xs mt-1">
               Softcap must be greater than or equals 20% of Hardcap
             </p>
           </div>
           <Input
+            {...requiredField(createPresaleForm?.hardCap)}
             classNames={{ input: "placeholder:text-[#8E8E93]" }}
             variant="bordered"
             label="Hardcap"
             placeholder="0"
             endContent={<p className="text-sm text-default-500">SOL</p>}
             onBlur={() => {
-              if (createPresaleForm?.hardcap) {
+              if (createPresaleForm?.hardCap) {
                 handleChangeForm({
-                  hardcap: Number(createPresaleForm?.hardcap)?.toLocaleString(),
+                  hardCap: Number(createPresaleForm?.hardCap)?.toLocaleString(),
+                });
+              } else {
+                handleChangeForm({
+                  hardCap: "",
                 });
               }
             }}
             onFocus={() => {
-              if (createPresaleForm?.hardcap) {
+              if (createPresaleForm?.hardCap) {
                 handleChangeForm({
-                  hardcap: parseFloat(
-                    createPresaleForm?.hardcap.replace(/,/g, "")
+                  hardCap: parseFloat(
+                    createPresaleForm?.hardCap.replace(/,/g, "")
                   ),
                 });
               }
@@ -321,15 +373,16 @@ export default function CreatePresaleStep1() {
             onChange={(e) => {
               if (!e.target.value || !Number.isNaN(Number(e.target.value))) {
                 handleChangeForm({
-                  hardcap: e.target.value,
+                  hardCap: e.target.value,
                 });
               } else {
                 e.target.value = "";
               }
             }}
-            value={createPresaleForm?.hardcap}
+            value={createPresaleForm?.hardCap}
           />
           <Input
+            {...requiredField(createPresaleForm?.minBuy)}
             classNames={{ input: "placeholder:text-[#8E8E93]" }}
             variant="bordered"
             label="Minimum buy"
@@ -340,6 +393,8 @@ export default function CreatePresaleStep1() {
                 handleChangeForm({
                   minBuy: Number(createPresaleForm?.minBuy)?.toLocaleString(),
                 });
+              } else {
+                handleChangeForm({ minBuy: "" });
               }
             }}
             onFocus={() => {
@@ -363,6 +418,7 @@ export default function CreatePresaleStep1() {
             value={createPresaleForm?.minBuy}
           />
           <Input
+            {...requiredField(createPresaleForm?.maxBuy)}
             classNames={{ input: "placeholder:text-[#8E8E93]" }}
             variant="bordered"
             label="Maximum buy"
@@ -373,6 +429,8 @@ export default function CreatePresaleStep1() {
                 handleChangeForm({
                   maxBuy: Number(createPresaleForm?.maxBuy)?.toLocaleString(),
                 });
+              } else {
+                handleChangeForm({ maxBuy: "" });
               }
             }}
             onFocus={() => {
@@ -431,6 +489,11 @@ export default function CreatePresaleStep1() {
                   onChange={(e) => {
                     if (e.target.value) {
                       handleChangeForm({ liquidityPercent: e.target.value });
+                    }
+                  }}
+                  onBlur={() => {
+                    if (!createPresaleForm?.liquidityPercent) {
+                      handleChangeForm({ liquidityPercent: "" });
                     }
                   }}
                   value={createPresaleForm?.liquidityPercent}
@@ -501,6 +564,7 @@ export default function CreatePresaleStep1() {
               </Select>
               <div>
                 <Input
+                  {...requiredField(createPresaleForm?.liquidityLockupTime)}
                   classNames={{ input: "placeholder:text-[#8E8E93]" }}
                   variant="bordered"
                   label="Liquidity Lockup Time"
@@ -511,6 +575,11 @@ export default function CreatePresaleStep1() {
                   onChange={(e) => {
                     if (e.target.value) {
                       handleChangeForm({ liquidityLockupTime: e.target.value });
+                    }
+                  }}
+                  onBlur={() => {
+                    if (!createPresaleForm?.liquidityLockupTime) {
+                      handleChangeForm({ liquidityLockupTime: "" });
                     }
                   }}
                   value={createPresaleForm?.liquidityLockupTime}
@@ -564,14 +633,12 @@ export default function CreatePresaleStep1() {
             )}
           </div>
         </div>
-        {createPresaleForm?.tokenInfo?.name && (
-          <div className="rounded-lg overflow-hidden mt-6">
-            <ToastItem
-              status="info"
-              content={`Need <span class='font-bold'>321,600 ${createPresaleForm?.tokenInfo?.name}</span> to create launchpad`}
-            />
-          </div>
-        )}
+        <div className="rounded-lg overflow-hidden mt-6">
+          <ToastItem
+            status="info"
+            content={`Need <span class='font-bold'>${calculateAutoListing()}</span> to create launchpad`}
+          />
+        </div>
       </div>
     </div>
   );
