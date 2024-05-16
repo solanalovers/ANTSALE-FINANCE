@@ -193,10 +193,14 @@ export default function CreatePresaleStep1() {
                 }
               }}
             />
-            <p className="text-[#1C1C1E] text-xs mt-1">
-              1 SOL = 1000 COIN4 <br />
-              If I spend 1 SOL on how many tokens will i receive?
-            </p>
+            {createPresaleForm?.presaleRate &&
+              createPresaleForm?.tokenInfo?.name && (
+                <p className="text-[#1C1C1E] text-xs mt-1">
+                  1 SOL = {createPresaleForm?.presaleRate}{" "}
+                  {createPresaleForm?.tokenInfo?.name} <br />
+                  If I spend 1 SOL on how many tokens will i receive?
+                </p>
+              )}
           </div>
           <div>
             {createPresaleForm?.listingOption === "auto" && (
@@ -225,7 +229,10 @@ export default function CreatePresaleStep1() {
                     }
                   }}
                   onChange={(e) => {
-                    if (!e.target.value || !Number.isNaN(Number(e.target.value))) {
+                    if (
+                      !e.target.value ||
+                      !Number.isNaN(Number(e.target.value))
+                    ) {
                       handleChangeForm({
                         listingRate: e.target.value,
                       });
@@ -235,13 +242,17 @@ export default function CreatePresaleStep1() {
                   }}
                   value={createPresaleForm?.listingRate}
                 />
-                <p className="text-[#1C1C1E] text-xs mt-1">
-                  1 SOL = 800 COIN4
-                  <br />
-                  If I spend 1 SOL on how many tokens will i receive? Usually
-                  this amount is lower than presale rate to allow for a higher
-                  listing price on
-                </p>
+                {createPresaleForm?.listingRate &&
+                  createPresaleForm?.tokenInfo?.name && (
+                    <p className="text-[#1C1C1E] text-xs mt-1">
+                      1 SOL = {createPresaleForm?.listingRate}{" "}
+                      {createPresaleForm?.tokenInfo?.name}
+                      <br />
+                      If I spend 1 SOL on how many tokens will i receive?
+                      Usually this amount is lower than presale rate to allow
+                      for a higher listing price on
+                    </p>
+                  )}
               </>
             )}
           </div>
@@ -294,9 +305,7 @@ export default function CreatePresaleStep1() {
             onBlur={() => {
               if (createPresaleForm?.hardcap) {
                 handleChangeForm({
-                  hardcap: Number(
-                    createPresaleForm?.hardcap
-                  )?.toLocaleString(),
+                  hardcap: Number(createPresaleForm?.hardcap)?.toLocaleString(),
                 });
               }
             }}
@@ -329,9 +338,7 @@ export default function CreatePresaleStep1() {
             onBlur={() => {
               if (createPresaleForm?.minBuy) {
                 handleChangeForm({
-                  minBuy: Number(
-                    createPresaleForm?.minBuy
-                  )?.toLocaleString(),
+                  minBuy: Number(createPresaleForm?.minBuy)?.toLocaleString(),
                 });
               }
             }}
@@ -364,9 +371,7 @@ export default function CreatePresaleStep1() {
             onBlur={() => {
               if (createPresaleForm?.maxBuy) {
                 handleChangeForm({
-                  maxBuy: Number(
-                    createPresaleForm?.maxBuy
-                  )?.toLocaleString(),
+                  maxBuy: Number(createPresaleForm?.maxBuy)?.toLocaleString(),
                 });
               }
             }}
@@ -559,12 +564,14 @@ export default function CreatePresaleStep1() {
             )}
           </div>
         </div>
-        <div className="rounded-lg overflow-hidden mt-6">
-          <ToastItem
-            status="info"
-            content={`Need <span class='font-bold'>321,600 COIN4</span> to create launchpad`}
-          />
-        </div>
+        {createPresaleForm?.tokenInfo?.name && (
+          <div className="rounded-lg overflow-hidden mt-6">
+            <ToastItem
+              status="info"
+              content={`Need <span class='font-bold'>321,600 ${createPresaleForm?.tokenInfo?.name}</span> to create launchpad`}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
