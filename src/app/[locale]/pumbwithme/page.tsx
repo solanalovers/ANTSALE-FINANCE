@@ -30,7 +30,7 @@ export default function Pumpwithme() {
         {filter.type === "list" ? (
           <PumpList data={pumpData} />
         ) : (
-          <PumpTableList />
+          <PumpTableList data={pumpData} />
         )}
       </div>
     </div>
