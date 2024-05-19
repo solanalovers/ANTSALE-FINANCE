@@ -61,29 +61,29 @@ export default function CreatePresaleStep1() {
     if (form?.tokenAddress) {
       fetchDataAndLog();
     }
-  }, [createPresaleForm?.tokenAddress]);
+  }, [form?.tokenAddress]);
 
   const calculateAutoListing = () => {
     if (
-      createPresaleForm?.hardCap &&
-      createPresaleForm?.presaleRate &&
-      createPresaleForm?.listingRate &&
-      createPresaleForm?.liquidityPercent
+      form?.hardCap &&
+      form?.presaleRate &&
+      form?.listingRate &&
+      form?.liquidityPercent
     ) {
-      const hardCap = parseFloat(createPresaleForm?.hardCap.replace(/,/g, ""));
+      const hardCap = parseFloat(form?.hardCap.toString().replace(/,/g, ""));
       const presaleRate = parseFloat(
-        createPresaleForm?.presaleRate.replace(/,/g, "")
+        form?.presaleRate.toString().replace(/,/g, "")
       );
       const listingRate = parseFloat(
-        createPresaleForm?.listingRate.replace(/,/g, "")
+        form?.listingRate.toString().replace(/,/g, "")
       );
-      const liquidityPercent = createPresaleForm?.liquidityPercent;
+      const liquidityPercent = form?.liquidityPercent;
 
       const total =
         hardCap * presaleRate +
         (hardCap * 0.95 * listingRate * liquidityPercent) / 100;
 
-      return `${total} ${createPresaleForm?.tokenInfo?.name}`;
+      return `${total} ${form?.tokenInfo?.name}`;
     } else {
       return "?";
     }
@@ -101,7 +101,7 @@ export default function CreatePresaleStep1() {
             placeholder='HG1s2n414ke6yrDi3ZHnbDTHuP2ANMiwuR4DnJRZ6Kqu'
             onChange={(e) => handleChangeForm({ tokenAddress: e.target.value })}
             onBlur={() => {
-              if (!createPresaleForm?.tokenAddress) {
+              if (!form?.tokenAddress) {
                 handleChangeForm({ tokenAddress: "" });
               }
             }}
