@@ -37,7 +37,7 @@ export default function Navbar() {
     },
     {
       label: "PumpWithMe",
-      value: `/${locale}/pumb`,
+      value: `/${locale}/pumbwithme`,
     },
   ];
 

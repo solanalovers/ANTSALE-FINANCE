@@ -61,7 +61,33 @@ export default function CreatePresaleStep1() {
     if (form?.tokenAddress) {
       fetchDataAndLog();
     }
-  }, [form?.tokenAddress]);
+  }, [createPresaleForm?.tokenAddress]);
+
+  const calculateAutoListing = () => {
+    if (
+      createPresaleForm?.hardCap &&
+      createPresaleForm?.presaleRate &&
+      createPresaleForm?.listingRate &&
+      createPresaleForm?.liquidityPercent
+    ) {
+      const hardCap = parseFloat(createPresaleForm?.hardCap.replace(/,/g, ""));
+      const presaleRate = parseFloat(
+        createPresaleForm?.presaleRate.replace(/,/g, "")
+      );
+      const listingRate = parseFloat(
+        createPresaleForm?.listingRate.replace(/,/g, "")
+      );
+      const liquidityPercent = createPresaleForm?.liquidityPercent;
+
+      const total =
+        hardCap * presaleRate +
+        (hardCap * 0.95 * listingRate * liquidityPercent) / 100;
+
+      return `${total} ${createPresaleForm?.tokenInfo?.name}`;
+    } else {
+      return "?";
+    }
+  };
 
   return (
     <div>
@@ -74,6 +100,11 @@ export default function CreatePresaleStep1() {
             label='Token Address'
             placeholder='HG1s2n414ke6yrDi3ZHnbDTHuP2ANMiwuR4DnJRZ6Kqu'
             onChange={(e) => handleChangeForm({ tokenAddress: e.target.value })}
+            onBlur={() => {
+              if (!createPresaleForm?.tokenAddress) {
+                handleChangeForm({ tokenAddress: "" });
+              }
+            }}
           />
           <div className='mt-2 flex flex-col gap-y-1'>
             <p className='text-xs leading-5 font-semibold text-[#8E8E93]'>
