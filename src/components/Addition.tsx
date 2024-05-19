@@ -1,5 +1,5 @@
 import { Button, Image, Input } from '@nextui-org/react';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { Context, useContext, useEffect, useState } from 'react';
 import CustomAvatar from './CustomAvatar';
 import CustomEditor from './CustomEditor';
 import CustomDivider from './CustomDivider';
@@ -7,25 +7,23 @@ import { EditIcon } from './Icon';
 import ConfigTokenomic from './Tokennomic/ConfigTokenomic';
 import { CreateFairLaunchContext } from '@/provider/CreateFairLaunchProvider';
 import { changeForm } from '@/function/form';
+import { ProjectContext } from '@/provider/context';
 
-export default function Addition() {
-  const { form, setForm, setNext } = useContext(CreateFairLaunchContext);
+export default function Addition({
+  context,
+}: {
+  context: Context<ProjectContext>;
+}) {
+  const { form, setForm, setNext, checkValidStep2 } = useContext(context);
 
   const handleChangeForm = changeForm(setForm);
 
   useEffect(() => {
-    const projectInfoValid =
-      form.tokenInfo &&
-      form.totalSellingAmount &&
-      form.liquidityPercent &&
-      form.description &&
-      form.website &&
-      form.softCap >= 1;
-
-    const isMaxBuyValid = !form.isMaxBuy || (form.isMaxBuy && form.maxBuy);
-    const next = Boolean(projectInfoValid && isMaxBuyValid);
-
-    setNext(next);
+    if (checkValidStep2(form)) {
+      setNext(true);
+    } else {
+      setNext(false);
+    }
   }, [form]);
 
   return (

@@ -53,6 +53,8 @@ export default function CreateSaleFooter({
               setLoding(true);
               await createProject(form);
               setLoding(false);
+
+              router.push('/');
             }
           }}
           isDisabled={!next}

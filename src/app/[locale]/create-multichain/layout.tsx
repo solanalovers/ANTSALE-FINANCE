@@ -4,6 +4,7 @@ import Stepper from "@/components/Stepper";
 import CreateSaleFooter from "@/components/create-sale/CreateSaleFooter";
 import BorderContent from "@/components/detail/BorderContent";
 import { listStep } from "@/constant/listStep";
+import { CreateFairLaunchContext } from "@/provider/CreateFairLaunchProvider";
 import CreateMultiChainProvider, {
   CreateMultiChainContext,
 } from "@/provider/CreateMultiChainProvider";
@@ -28,13 +29,13 @@ export default function Layout({ children }: { children: ReactNode }) {
             listStep={listStep}
           />
           {children}
-          <CreateSaleFooter
+          {/* <CreateSaleFooter
             isFirst={step === 1}
             isLast={step === listStep.length}
             step={step}
             finalText="CREATE MULTICHAIN-LAUNCH"
             currentRoute={currentRoute}
-          />
+          /> */}
         </BorderContent>
       </div>
     </CreateMultiChainProvider>

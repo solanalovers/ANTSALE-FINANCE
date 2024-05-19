@@ -10,8 +10,8 @@ export default function CreateMultiChainStep3() {
   return (
     <div>
       <CustomDivider />
-      <TokenInfo />
-      <PoolInfo />
+      {/* <TokenInfo />
+      <PoolInfo /> */}
     </div>
   );
 }

@@ -10,7 +10,7 @@ export default function CreateMultiChainStep2() {
   return (
     <div>
       <CustomDivider />
-      <Addition />
+      {/* <Addition /> */}
     </div>
   );
 }

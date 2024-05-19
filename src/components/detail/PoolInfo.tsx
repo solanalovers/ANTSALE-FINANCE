@@ -1,10 +1,17 @@
 import { Project } from '@/interface/project-interface';
+import { ProjectContext } from '@/provider/context';
 import { Link } from '@nextui-org/react';
 import { Keypair } from '@solana/web3.js';
 import { Copy, Warning2 } from 'iconsax-react';
-import React from 'react';
+import React, { Context, useContext } from 'react';
 
-export default function PoolInfo({ form }: { form: Project }) {
+export default function PoolInfo({
+  context,
+}: {
+  context: Context<ProjectContext>;
+}) {
+  const { form } = useContext(context);
+
   const poolsAddress = Keypair.generate().publicKey;
 
   const tokenForPresale = 230000000;

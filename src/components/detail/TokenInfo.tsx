@@ -1,9 +1,16 @@
 import { TokenInfor } from '@/interface/project-interface';
+import { ProjectContext } from '@/provider/context';
 import { Divider, Link } from '@nextui-org/react';
 import { Copy, Warning2 } from 'iconsax-react';
-import React from 'react';
+import React, { Context, useContext } from 'react';
 
-export default function TokenInfo({ tokenInfo }: { tokenInfo: TokenInfor }) {
+export default function TokenInfo({
+  context,
+}: {
+  context: Context<ProjectContext>;
+}) {
+  const { form } = useContext(context);
+
   return (
     <div className=''>
       <p className='mb-5 font-medium text-lg'>Token</p>
@@ -16,17 +23,13 @@ export default function TokenInfo({ tokenInfo }: { tokenInfo: TokenInfor }) {
               href=''
               className='text-primary text-base leading-6 underline'
             >
-              9RFFhhe4XPV8UcBFJkgrDwGGtN3jmktBtw4RBia1bBVn
+              {form?.tokenAddress}
             </Link>
             <Copy
               className='hover:opacity-80 cursor-pointer'
               variant='Bold'
               size={20}
-              onClick={() =>
-                navigator.clipboard.writeText(
-                  '9RFFhhe4XPV8UcBFJkgrDwGGtN3jmktBtw4RBia1bBVn'
-                )
-              }
+              onClick={() => navigator.clipboard.writeText(form?.tokenAddress!)}
             />
           </div>
           <div className='flex justify-end items-center gap-x-2'>
@@ -40,26 +43,30 @@ export default function TokenInfo({ tokenInfo }: { tokenInfo: TokenInfor }) {
       <div className='my-[14px] w-full border-t border-dashed border-divider' />
       <div className='flex justify-between'>
         <p className='font-medium text-base'>Name</p>
-        <p className='text-base leading-6 text-[#1C1C1E]'>{tokenInfo.name}</p>
+        <p className='text-base leading-6 text-[#1C1C1E]'>
+          {form.tokenInfo?.name}
+        </p>
       </div>
       <div className='my-[14px] w-full border-t border-dashed border-divider' />
       <div className='flex justify-between'>
         <p className='font-medium text-base'>Symbol</p>
         <p className='text-base leading-6 text-[#1C1C1E]'>
-          S{tokenInfo.symbol}
+          {form.tokenInfo?.symbol}
         </p>
       </div>
       <div className='my-[14px] w-full border-t border-dashed border-divider' />
       <div className='flex justify-between'>
         <p className='font-medium text-base'>Decimals</p>
         <p className='text-base leading-6 text-[#1C1C1E]'>
-          {tokenInfo.decimals}
+          {form.tokenInfo?.decimals}
         </p>
       </div>
       <div className='my-[14px] w-full border-t border-dashed border-divider' />
       <div className='flex justify-between'>
         <p className='font-medium text-base'>Total Supply</p>
-        <p className='text-base leading-6 text-[#1C1C1E]'>{tokenInfo.supply}</p>
+        <p className='text-base leading-6 text-[#1C1C1E]'>
+          {form.tokenInfo?.supply}
+        </p>
       </div>
     </div>
   );

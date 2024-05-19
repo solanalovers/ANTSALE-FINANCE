@@ -18,14 +18,23 @@ import { changeForm } from '@/function/form';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { AppContext } from '@/provider/AppProvider';
 import { ListingOption, RefundType } from '@/interface/project-interface';
-import { handleInput } from '@/function/handleInput';
+import { FORMERR } from 'dns';
 
 export default function CreatePresaleStep1() {
-  const { form, setForm } = useContext(CreatePresaleContext);
+  const { form, setForm, setNext, checkValidStep1 } =
+    useContext(CreatePresaleContext);
   const handleChangeForm = changeForm(setForm);
   const { publicKey } = useWallet();
 
   const { cluster } = useContext(AppContext);
+
+  useEffect(() => {
+    if (checkValidStep1(form)) {
+      setNext(true);
+    } else {
+      setNext(false);
+    }
+  }, [form]);
 
   const fetchData = async () => {
     const isMainnet = cluster === 1;
@@ -63,7 +72,7 @@ export default function CreatePresaleStep1() {
             classNames={{ input: 'placeholder:text-[#8E8E93]' }}
             variant='bordered'
             label='Token Address'
-            placeholder='0x912CE59144191C1204E64559 E8253a0e49E6548'
+            placeholder='HG1s2n414ke6yrDi3ZHnbDTHuP2ANMiwuR4DnJRZ6Kqu'
             onChange={(e) => handleChangeForm({ tokenAddress: e.target.value })}
           />
           <div className='mt-2 flex flex-col gap-y-1'>
@@ -102,7 +111,8 @@ export default function CreatePresaleStep1() {
           >
             <Radio value='SOL'>
               <p className={'text-sm leading-5'}>
-                SOL (User will pay with SOL for your token)
+                {form?.currency} (User will pay with {form?.currency} for your
+                token)
               </p>
             </Radio>
           </RadioGroup>
@@ -116,7 +126,7 @@ export default function CreatePresaleStep1() {
           >
             <Radio value={form.feeOption.toString()}>
               <p className={'text-sm leading-5'}>
-                {form.feeOption}% SOL raised only (no hidden fees)
+                {form.feeOption}% {form?.currency} raised only (no hidden fees)
               </p>
             </Radio>
           </RadioGroup>
@@ -177,8 +187,10 @@ export default function CreatePresaleStep1() {
               label='PRESALE rate'
               type='number'
               placeholder='0'
-              isInvalid={form.presaleRate ? form.presaleRate <= 0 : false}
-              errorMessage='Presale rate must bigger than 0'
+              isInvalid={
+                form.presaleRate !== undefined && form.presaleRate <= 0
+              }
+              errorMessage='Presale rate must be bigger than 0'
               onChange={(e) => {
                 if (e.target.value) {
                   handleChangeForm({ presaleRate: Number(e.target.value) });
@@ -187,7 +199,8 @@ export default function CreatePresaleStep1() {
               value={String(form?.presaleRate)}
             />
             <p className='text-[#1C1C1E] text-xs mt-1'>
-              1 SOL = 1000 COIN4 <br />
+              1 {form.currency} ={' '}
+              {form?.presaleRate ? form.presaleRate : '1000'} COIN4 <br />
               If I spend 1 SOL on how many tokens will i receive?
             </p>
           </div>
@@ -200,8 +213,10 @@ export default function CreatePresaleStep1() {
                   label='LISTING rate'
                   type='number'
                   placeholder='0'
-                  isInvalid={form.listingRate ? form.listingRate <= 0 : false}
-                  errorMessage='Listing rate must bigger than 0'
+                  isInvalid={
+                    form.listingRate !== undefined && form.listingRate <= 0
+                  }
+                  errorMessage='Listing rate must be bigger than 0'
                   onChange={(e) => {
                     if (e.target.value) {
                       handleChangeForm({ listingRate: Number(e.target.value) });
@@ -210,7 +225,8 @@ export default function CreatePresaleStep1() {
                   value={String(form?.listingRate)}
                 />
                 <p className='text-[#1C1C1E] text-xs mt-1'>
-                  1 SOL = 800 COIN4
+                  1 {form.currency} ={' '}
+                  {form?.listingRate ? form.listingRate : '800'} COIN4
                   <br />
                   If I spend 1 SOL on how many tokens will i receive? Usually
                   this amount is lower than presale rate to allow for a higher
@@ -227,16 +243,27 @@ export default function CreatePresaleStep1() {
               label='Softcap'
               placeholder='0'
               type='number'
+              isInvalid={
+                form.softCap !== undefined &&
+                (form.hardCap === undefined
+                  ? form.softCap <= 0
+                  : form.softCap < form.hardCap * 0.2)
+              }
+              errorMessage={
+                form.hardCap === undefined
+                  ? 'Soft must be bigger than 0'
+                  : 'Soft must be greater than or equals 20% of Hardcap'
+              }
               onChange={(e) => {
                 if (e.target.value) {
-                  handleChangeForm({ softcap: Number(e.target.value) });
+                  handleChangeForm({ softCap: Number(e.target.value) });
                 }
               }}
               value={String(form?.softCap)}
             />
-            <p className='text-[#1C1C1E] text-xs mt-1'>
+            {/* <p className='text-[#1C1C1E] text-xs mt-1'>
               Softcap must be greater than or equals 20% of Hardcap
-            </p>
+            </p> */}
           </div>
           <Input
             classNames={{ input: 'placeholder:text-[#8E8E93]' }}
@@ -244,10 +271,12 @@ export default function CreatePresaleStep1() {
             label='Hardcap'
             placeholder='0'
             type='number'
+            isInvalid={form.hardCap !== undefined && form.hardCap <= 0}
+            errorMessage='Hard must be bigger than 0'
             endContent={<p className='text-sm text-default-500'>SOL</p>}
             onChange={(e) => {
               if (e.target.value) {
-                handleChangeForm({ hardcap: Number(e.target.value) });
+                handleChangeForm({ hardCap: Number(e.target.value) });
               }
             }}
             value={String(form?.hardCap)}
@@ -258,6 +287,8 @@ export default function CreatePresaleStep1() {
             label='Minimum buy'
             type='number'
             placeholder='0'
+            isInvalid={form.minBuy !== undefined && form.minBuy <= 0}
+            errorMessage='Minimum buy must be bigger than 0'
             endContent={<p className='text-sm text-default-500'>SOL</p>}
             onChange={(e) => {
               if (e.target.value) {
@@ -272,6 +303,8 @@ export default function CreatePresaleStep1() {
             label='Maximum buy'
             type='number'
             placeholder='0'
+            isInvalid={form.maxBuy !== undefined && form.maxBuy <= 0}
+            errorMessage='Max buy must be bigger than 0'
             endContent={<p className='text-sm text-default-500'>SOL</p>}
             onChange={(e) => {
               if (e.target.value) {
@@ -308,6 +341,11 @@ export default function CreatePresaleStep1() {
                   variant='bordered'
                   label='Liquidity Percent (%)'
                   placeholder='51'
+                  isInvalid={
+                    form.liquidityPercent !== undefined &&
+                    (form.liquidityPercent > 100 || form.liquidityPercent < 20)
+                  }
+                  errorMessage='Liquidity percent must be between 20-100%'
                   onChange={(e) => {
                     if (e.target.value) {
                       handleChangeForm({
@@ -432,12 +470,23 @@ export default function CreatePresaleStep1() {
             )}
           </div>
         </div>
-        <div className='rounded-lg overflow-hidden mt-6'>
-          <ToastItem
-            status='info'
-            content={`Need <span class='font-bold'>321,600 COIN4</span> to create launchpad`}
-          />
-        </div>
+        {form.hardCap &&
+          form.listingRate &&
+          form.liquidityPercent &&
+          form.presaleRate &&
+          form.tokenInfo && (
+            <div className='rounded-lg overflow-hidden mt-6'>
+              <ToastItem
+                status='info'
+                content={`Need <span class='font-bold'>${(
+                  form.hardCap * form.presaleRate +
+                  form.hardCap * 0.95 * form.listingRate * form.liquidityPercent
+                ).toLocaleString()} ${
+                  form.tokenInfo?.symbol
+                }</span> to create launchpad`}
+              />
+            </div>
+          )}
       </div>
     </div>
   );

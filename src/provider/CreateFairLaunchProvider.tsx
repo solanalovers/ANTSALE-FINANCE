@@ -16,13 +16,6 @@ const defaultFairLaunchConfig: Project = {
   presaleRate: 20,
 };
 
-export const CreateFairLaunchContext = createContext<ProjectContext>({
-  form: defaultFairLaunchConfig,
-  setForm: () => {},
-  next: false,
-  setNext: () => {},
-});
-
 export default function CreateFairLaunchProvider({
   children,
 }: {
@@ -33,8 +26,60 @@ export default function CreateFairLaunchProvider({
   const [next, setNext] = useState(false);
 
   return (
-    <CreateFairLaunchContext.Provider value={{ form, setForm, next, setNext }}>
+    <CreateFairLaunchContext.Provider
+      value={{
+        form,
+        setForm,
+        next,
+        setNext,
+        checkValidStep1: checkFairLaunchValidStep1,
+        checkValidStep2: checkFairLaunchValidStep2,
+      }}
+    >
       {children}
     </CreateFairLaunchContext.Provider>
   );
 }
+
+export const checkFairLaunchValidStep1 = (form: Project): boolean => {
+  if (
+    form.tokenAddress &&
+    form.tokenInfo &&
+    form.softCap &&
+    form.softCap >= 1 &&
+    form.totalSellingAmount &&
+    form.totalSellingAmount > 0 &&
+    form.liquidityPercent &&
+    form.liquidityPercent >= 20 &&
+    form.liquidityPercent <= 100
+  ) {
+    if (form.liquidityLockupTime && form.liquidityLockupTime < 0) {
+      return false;
+    }
+
+    if (form.isMaxBuy) {
+      if (form.maxBuy && form.maxBuy > 0) {
+        return true;
+      }
+      return false;
+    }
+    return true;
+  }
+  return false;
+};
+
+export const checkFairLaunchValidStep2 = (form: Project): boolean => {
+  if (form.website && form.description && checkFairLaunchValidStep1(form))
+    return true;
+
+  return false;
+};
+
+export const CreateFairLaunchContext = createContext<ProjectContext>({
+  form: defaultFairLaunchConfig,
+  setForm: () => {},
+  next: false,
+  setNext: () => {},
+  checkValidStep1: checkFairLaunchValidStep1,
+  checkValidStep2: checkFairLaunchValidStep2,
+});

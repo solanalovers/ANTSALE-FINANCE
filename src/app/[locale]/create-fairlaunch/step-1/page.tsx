@@ -23,22 +23,20 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { LiquidityType, ListingOption } from '@/interface/project-interface';
 
 export default function CreateFairLaunchStep1() {
-  const { form, setForm, setNext } = useContext(CreateFairLaunchContext);
+  const { form, setForm, setNext, checkValidStep1 } = useContext(
+    CreateFairLaunchContext
+  );
   const { publicKey } = useWallet();
 
   const { cluster } = useContext(AppContext);
   const handleChangeForm = changeForm(setForm);
 
   useEffect(() => {
-    const projectInfoValid =
-      form.tokenInfo &&
-      form.totalSellingAmount &&
-      form.liquidityPercent &&
-      form.softCap;
-    const isMaxBuyValid = !form.isMaxBuy || (form.isMaxBuy && form.maxBuy);
-    const next = Boolean(projectInfoValid && isMaxBuyValid);
-
-    setNext(next);
+    if (checkValidStep1(form)) {
+      setNext(true);
+    } else {
+      setNext(false);
+    }
   }, [form]);
 
   const fetchData = async () => {
@@ -176,6 +174,11 @@ export default function CreateFairLaunchStep1() {
             label='Total Selling Amount'
             placeholder='0'
             type='number'
+            isInvalid={
+              form.totalSellingAmount !== undefined &&
+              form.totalSellingAmount < 1
+            }
+            errorMessage={`Total Selling Amount must be bigger than 0`}
             onChange={(e) =>
               handleChangeForm({ totalSellingAmount: Number(e.target.value) })
             }
@@ -190,15 +193,14 @@ export default function CreateFairLaunchStep1() {
               endContent={
                 <p className='text-sm text-default-500'>{form.currency}</p>
               }
+              isInvalid={form.softCap !== undefined && form.softCap < 1}
+              errorMessage={`Softcap minimum must be 1 ${form?.currency}`}
               type='number'
               onChange={(e) =>
                 handleChangeForm({ softCap: Number(e.target.value) })
               }
               value={form?.softCap?.toString()}
             />
-            <p className='text-[#1C1C1E] text-xs mt-1'>
-              Softcap minimum must be 1 {form?.currency}
-            </p>
           </div>
         </div>
         <Checkbox
@@ -219,6 +221,8 @@ export default function CreateFairLaunchStep1() {
           type='number'
           endContent={<p className='text-sm text-default-500'>SOL</p>}
           isDisabled={!form.isMaxBuy}
+          isInvalid={form.maxBuy !== undefined && form.maxBuy <= 0}
+          errorMessage={`Max buy must be bigger than 0`}
           onChange={(e) => handleChangeForm({ maxBuy: Number(e.target.value) })}
           value={form?.maxBuy?.toString()}
         />
@@ -246,15 +250,16 @@ export default function CreateFairLaunchStep1() {
               label='Liquidity Percent (%)'
               placeholder='51'
               type='number'
+              isInvalid={
+                form.liquidityPercent !== undefined &&
+                (form.liquidityPercent > 100 || form.liquidityPercent < 20)
+              }
+              errorMessage='Liquidity percent must be between 20-100%'
               onChange={(e) =>
                 handleChangeForm({ liquidityPercent: Number(e.target.value) })
               }
               value={form?.liquidityPercent?.toString()}
             />
-            <p className='text-[#1C1C1E] text-xs mt-1'>
-              Enter the percentage of raised funds that should be allocated to
-              Liquidity on (Min 20%, Max 100%)
-            </p>
           </div>
           <DatePicker
             classNames={{ input: 'placeholder:text-[#8E8E93]' }}

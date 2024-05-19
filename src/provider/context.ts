@@ -14,6 +14,8 @@ export interface ProjectContext {
   setForm: React.Dispatch<React.SetStateAction<Project>>;
   next: boolean;
   setNext: React.Dispatch<React.SetStateAction<boolean>>;
+  checkValidStep1: (form: Project) => boolean;
+  checkValidStep2: (form: Project) => boolean;
 }
 
 export const defaultProjectConfig: Project = {
@@ -26,7 +28,8 @@ export const defaultProjectConfig: Project = {
   router: Router.Rayidum,
   backgroundImage: '/image/img-detail.png',
   image: '/image/token-image-1.png',
-  startTime: now('America/New_York'),
-  endTime: now('America/New_York'),
+  startTime: now('UTC'),
+  endTime: now('UTC'),
   refundType: RefundType.Refund,
+  description: 'This is project description'
 };

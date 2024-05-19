@@ -7,16 +7,17 @@ import { Input, Link, Select, SelectItem, Textarea } from '@nextui-org/react';
 import React, { useContext } from 'react';
 
 export default function CreateFairLaunchStep3() {
-  const { form } = useContext(CreateFairLaunchContext);
-
-  console.log(form);
+  const { form, checkValidStep2 } = useContext(CreateFairLaunchContext);
 
   return (
     <div>
       <CustomDivider />
-      {form.tokenInfo && <TokenInfo tokenInfo={form.tokenInfo} />}
-
-      <PoolInfo form={form} />
+      {checkValidStep2(form) && (
+        <>
+          <TokenInfo context={CreateFairLaunchContext} />
+          <PoolInfo context={CreateFairLaunchContext} />
+        </>
+      )}
     </div>
   );
 }

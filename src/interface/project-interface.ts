@@ -33,7 +33,7 @@ export type Project = {
 
 export enum ProjectType {
   Presale = 'Presale',
-  FairLaunch = 'Fairlaunch',
+  FairLaunch = 'FairLaunch',
 }
 
 export enum ListingOption {

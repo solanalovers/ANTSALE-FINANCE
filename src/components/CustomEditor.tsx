@@ -8,11 +8,7 @@ const QuillEditor = dynamic(() => import('react-quill'), { ssr: false });
 
 export default function CustomEditor() {
   const { form, setForm } = useContext(CreateFairLaunchContext);
-  const [content, setContent] = useState(
-    form?.description
-      ? form.description
-      : `This is fairlaunch project's description`
-  );
+  const [content, setContent] = useState(form?.description);
 
   const handleChangeForm = changeForm(setForm);
 
