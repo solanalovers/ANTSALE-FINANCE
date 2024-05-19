@@ -176,6 +176,7 @@ export default function CreateForm() {
               onChange={(e: any) =>
                 setForm((prev: any) => ({ ...prev, image: e.target.files[0] }))
               }
+              isRequired
             />
             <Textarea
               label='Description'

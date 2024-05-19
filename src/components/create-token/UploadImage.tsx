@@ -5,16 +5,21 @@ import { Image, Input } from "@nextui-org/react";
 interface UploadImageProps {
   value: File;
   onChange: ChangeEventHandler<HTMLInputElement>;
+  isRequired?: boolean;
 }
 
-export default function UploadImage({ onChange, value }: UploadImageProps) {
+export default function UploadImage({
+  onChange,
+  value,
+  isRequired = false,
+}: UploadImageProps) {
   return (
     <div className="relative">
       <Input
         label="Token Avatar"
         placeholder="Using image with ratio 1:1 (ex: 500px x 500px)"
         variant="bordered"
-        isRequired
+        isRequired={isRequired}
         readOnly
         value={value?.name}
         endContent={

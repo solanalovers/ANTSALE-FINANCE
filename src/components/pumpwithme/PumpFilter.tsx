@@ -6,13 +6,20 @@ import HomeDropdown from "../home/HomeDropdown";
 export default function PumpFilter({
   filter,
   setFilter,
+  onClickCreate,
 }: {
   filter: { type: string };
   setFilter: (value: any) => void;
+  onClickCreate: () => void;
 }) {
   return (
     <div className="flex items-center gap-x-6 container mx-auto">
-      <Button color="primary">CREATE PumpWithMe</Button>
+      <Button
+        color="primary"
+        onClick={onClickCreate}
+      >
+        CREATE PumpWithMe
+      </Button>
       <Input
         variant="bordered"
         className="flex-1 border-[base-default-200] placeholder:(text-[layout.foreground-500]) text-sm leading-5"
@@ -31,7 +38,7 @@ export default function PumpFilter({
       </div>
       <div className="flex items-center gap-x-2">
         <div
-        className="cursor-pointer hover:opacity-80"
+          className="cursor-pointer hover:opacity-80"
           onClick={() => setFilter((prev: any) => ({ ...prev, type: "list" }))}
         >
           <ListViewFilterIcon
@@ -39,7 +46,7 @@ export default function PumpFilter({
           />
         </div>
         <div
-        className="cursor-pointer hover:opacity-80"
+          className="cursor-pointer hover:opacity-80"
           onClick={() => setFilter((prev: any) => ({ ...prev, type: "table" }))}
         >
           <TableViewFilterIcon

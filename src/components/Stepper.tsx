@@ -17,12 +17,12 @@ export default function Stepper({
   const checkLastStep = (idx: number) => idx + 1 !== listStep.length;
   const checkCurrentStep = (idx: number) => idx + 1 === step;
   return (
-    <div className="flex py-2 justify-between items-center">
+    <div className={`flex py-2 justify-between items-center ${isPump && 'gap-x-3'}`}>
       {listStep.map(
         ({ title, desc }: { title: string; desc: string }, idx: number) => (
           <Fragment key={idx}>
             <div
-              className={`flex items-center gap-x-3 ${active && "max-w-56"} ${isPump && 'max-w-[273px]'}`}
+              className={`flex items-center gap-x-3 ${active && "max-w-56"} ${isPump && 'lg:max-w-[273px]'}`}
             >
               <p
                 className={`px-[15.5px] py-1.5 ${
