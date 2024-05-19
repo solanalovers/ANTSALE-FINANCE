@@ -568,6 +568,7 @@ export default function CreatePresaleStep1() {
                   classNames={{ input: "placeholder:text-[#8E8E93]" }}
                   variant="bordered"
                   label="Liquidity Lockup Time"
+                  isDisabled={createPresaleForm?.liquidityType === "auto"}
                   placeholder="0"
                   endContent={
                     <p className="text-sm text-default-500">Minutes</p>
