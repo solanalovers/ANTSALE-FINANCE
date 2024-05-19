@@ -90,16 +90,16 @@ export default function CreatePresaleStep1() {
             {createPresaleForm?.tokenInfo && (
               <>
                 <p className="text-xs leading-5 text-[#8E8E93]">
-                  Name: {createPresaleForm?.tokenInfoname}
+                  Name: {createPresaleForm?.tokenInfo?.name}
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
-                  Symbol: {createPresaleForm?.tokenInfosymbol}
+                  Symbol: {createPresaleForm?.tokenInfo?.symbol}
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
                   Total Supply: 223398198040.53727
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
-                  Decimals: {createPresaleForm?.tokenInfodecimals}
+                  Decimals: {createPresaleForm?.tokenInfo?.decimals}
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
                   Your balance: 223398198040.53727
