@@ -1,24 +1,39 @@
-"use client";
-import React, { createContext, useState } from "react";
+'use client';
+import {
+  LiquidityType,
+  ListingOption,
+  Project,
+  ProjectType,
+  Router,
+  SaleType,
+} from '@/interface/project-interface';
+import React, { createContext, useState } from 'react';
+import { ProjectContext, defaultProjectConfig } from './context';
 
-export const CreateFairLaunchContext = createContext<any>({});
+const defaultFairLaunchConfig: Project = {
+  ...defaultProjectConfig,
+  projectType: ProjectType.FairLaunch,
+  presaleRate: 20,
+};
+
+export const CreateFairLaunchContext = createContext<ProjectContext>({
+  form: defaultFairLaunchConfig,
+  setForm: () => {},
+  next: false,
+  setNext: () => {},
+});
 
 export default function CreateFairLaunchProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [createFairLaunchForm, setCreateFairLaunchForm] = useState({
-    currency: 'sol',
-    feeOption: '5%',
-    listingOption: "auto",
-    liquidityType: "lock",
-  });
+  const [form, setForm] = useState<Project>(defaultFairLaunchConfig);
+
+  const [next, setNext] = useState(false);
 
   return (
-    <CreateFairLaunchContext.Provider
-      value={{ createFairLaunchForm, setCreateFairLaunchForm }}
-    >
+    <CreateFairLaunchContext.Provider value={{ form, setForm, next, setNext }}>
       {children}
     </CreateFairLaunchContext.Provider>
   );

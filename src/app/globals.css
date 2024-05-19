@@ -18,29 +18,28 @@ button.wallet-adapter-button.wallet-adapter-button-trigger {
 }
 
 li.tap-highlight-transparent.select-none.touch-none.bg-transparent.data-\[pressed\=true\]\:scale-\[0\.97\].transition-transform-background.flex.flex-wrap.truncate.box-border.items-center.justify-center.text-default-foreground.outline-none.data-\[focus-visible\=true\]\:z-10.data-\[focus-visible\=true\]\:outline-2.data-\[focus-visible\=true\]\:outline-focus.data-\[focus-visible\=true\]\:outline-offset-2.data-\[disabled\=true\]\:text-default-300.data-\[disabled\=true\]\:pointer-events-none.\[\&\[data-hover\=true\]\:not\(\[data-active\=true\]\)\]\:bg-default-100.active\:bg-default-200.min-w-9.w-9.h-9.text-small.rounded-medium {
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
 }
 
 .quill {
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 5%);
-
 }
 
 .ql-toolbar.ql-snow {
-  background-color: #F1F1F1;
-  border: 2px solid #E4E4E7 !important;
+  background-color: #f1f1f1;
+  border: 2px solid #e4e4e7 !important;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 }
 
 .ql-container.ql-snow {
-  border: 2px solid #E4E4E7 !important;
+  border: 2px solid #e4e4e7 !important;
   border-top: 0px !important;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
 
-.ql-editor{
+.ql-editor {
   min-height: 200px;
 }
 
@@ -69,11 +68,11 @@ li.tap-highlight-transparent.select-none.touch-none.bg-transparent.data-\[presse
   width: 100px;
   height: 100%;
   box-shadow: 0 0 10px #29d, 0 0 5px #29d;
-  opacity: 1.0;
+  opacity: 1;
 
   -webkit-transform: rotate(3deg) translate(0px, -4px);
-      -ms-transform: rotate(3deg) translate(0px, -4px);
-          transform: rotate(3deg) translate(0px, -4px);
+  -ms-transform: rotate(3deg) translate(0px, -4px);
+  transform: rotate(3deg) translate(0px, -4px);
 }
 
 /* Remove these to get rid of the spinner */
@@ -96,7 +95,7 @@ li.tap-highlight-transparent.select-none.touch-none.bg-transparent.data-\[presse
   border-radius: 50%;
 
   -webkit-animation: nprogress-spinner 400ms linear infinite;
-          animation: nprogress-spinner 400ms linear infinite;
+  animation: nprogress-spinner 400ms linear infinite;
 }
 
 .nprogress-custom-parent {
@@ -110,10 +109,18 @@ li.tap-highlight-transparent.select-none.touch-none.bg-transparent.data-\[presse
 }
 
 @-webkit-keyframes nprogress-spinner {
-  0%   { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 @keyframes nprogress-spinner {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

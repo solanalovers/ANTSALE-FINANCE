@@ -1,25 +1,35 @@
-import * as splToken from '@solana/spl-token'
+import * as splToken from '@solana/spl-token';
 import { Connection, PublicKey } from '@solana/web3.js';
-import { Metaplex } from '@metaplex-foundation/js';
-import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
+import { ShyftSdk, Network } from '@shyft-to/js';
 
+const getTokenData = async (
+  wallet: string,
+  tokenAddress: string,
+  isMainnet: boolean
+) => {
+  try {
+    const shyft = new ShyftSdk({
+      apiKey: process.env.NEXT_PUBLIC_SHYFT_XAPI_KEY!,
+      network: isMainnet ? Network.Mainnet : Network.Devnet,
+    });
 
-const getTokenData = async (address: string) => {
-    const connection = new Connection(process.env.NEXT_PUBLIC_HELIUS_RPC_DEVNET || '');
+    const res: any = await shyft.wallet.getTokenBalance({
+      wallet: wallet,
+      token: tokenAddress,
+    });
 
-    const mintAddress = new PublicKey(address);
+    return {
+      name: res?.info?.name,
+      symbol: res?.info?.symbol,
+      decimals: Number(res?.info?.decimals),
+      balance: Number(res?.balance),
+      supply: Number(res?.balance),
+    };
+  } catch (err) {
+    console.error('Error: ', err);
 
-    try {
-        const mintInfo = await splToken.getMint(connection, mintAddress);
+    return {};
+  }
+};
 
-        const metaplex = Metaplex.make(connection);
-        const metadataPda = metaplex.nfts().pdas().metadata({ mint: mintAddress });
-        const account = await Metadata.fromAccountAddress(connection, metadataPda);
-        console.log(mintInfo)
-        return { supply: mintInfo.supply, decimals: mintInfo.decimals, ...account.data }
-    } catch (err) {
-        console.error("Error: ", err);
-    }
-}
-
-export { getTokenData }
+export { getTokenData };

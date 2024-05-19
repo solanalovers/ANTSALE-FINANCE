@@ -1,111 +1,141 @@
-import { Button, Image, Input } from "@nextui-org/react";
-import React from "react";
-import CustomAvatar from "./CustomAvatar";
-import CustomEditor from "./CustomEditor";
-import CustomDivider from "./CustomDivider";
-import { EditIcon } from "./Icon";
-import ConfigTokenomic from "./Tokennomic/ConfigTokenomic";
+import { Button, Image, Input } from '@nextui-org/react';
+import React, { useContext, useEffect, useState } from 'react';
+import CustomAvatar from './CustomAvatar';
+import CustomEditor from './CustomEditor';
+import CustomDivider from './CustomDivider';
+import { EditIcon } from './Icon';
+import ConfigTokenomic from './Tokennomic/ConfigTokenomic';
+import { CreateFairLaunchContext } from '@/provider/CreateFairLaunchProvider';
+import { changeForm } from '@/function/form';
 
 export default function Addition() {
+  const { form, setForm, setNext } = useContext(CreateFairLaunchContext);
+
+  const handleChangeForm = changeForm(setForm);
+
+  useEffect(() => {
+    const projectInfoValid =
+      form.tokenInfo &&
+      form.totalSellingAmount &&
+      form.liquidityPercent &&
+      form.description &&
+      form.website &&
+      form.softCap >= 1;
+
+    const isMaxBuyValid = !form.isMaxBuy || (form.isMaxBuy && form.maxBuy);
+    const next = Boolean(projectInfoValid && isMaxBuyValid);
+
+    setNext(next);
+  }, [form]);
+
   return (
-    <div className="flex flex-col gap-y-6">
+    <div className='flex flex-col gap-y-6'>
       <div>
-        <div className="relative">
+        <div className='relative'>
           <Image
-            src="/image/img-detail.png"
-            radius="none"
-            className="object-cover object-center h-[200px]"
-            width={"100%"}
+            src={form.backgroundImage}
+            radius='none'
+            className='object-cover object-center h-[200px]'
+            width={'100%'}
           />
           <Button
             color={undefined}
-            className="flex items-center absolute right-3 bottom-3 z-50"
-            size="sm"
+            className='flex items-center absolute right-3 bottom-3 z-50'
+            size='sm'
           >
             <EditIcon />
-            <p className="text-sm leading-5 font-medium">Edit background</p>
+            <p className='text-sm leading-5 font-medium'>Edit background</p>
             <input
-              className="absolute left-0 right-0 top-0 bottom-0 opacity-0 z-10 cursor-pointer"
-              type="file"
-              accept="image/*"
+              className='absolute left-0 right-0 top-0 bottom-0 opacity-0 z-10 cursor-pointer'
+              type='file'
+              accept='image/*'
+              onChange={(e: any) => {
+                handleChangeForm({
+                  backgroundImage: URL.createObjectURL(e.target.files[0]),
+                });
+              }}
             />
           </Button>
         </div>
-        <div className="relative mt-[-60px] z-20 ml-10 w-[120px] h-[120px]">
-          <Image
-            className="w-full h-full"
-            src="/image/token-image-1.png"
-          />
+        <div className='relative mt-[-60px] z-20 ml-10 w-[120px] h-[120px]'>
+          <Image className='w-full h-full' src={form.image} />
           <Button
             color={undefined}
-            className="absolute right-0 bottom-1 z-50 p-1.5 min-w-0 w-fit flex items-center"
-            size="sm"
-            radius="full"
+            className='absolute right-0 bottom-1 z-50 p-1.5 min-w-0 w-fit flex items-center'
+            size='sm'
+            radius='full'
           >
-            <EditIcon color="#006FEE" />
+            <EditIcon color='#006FEE' />
             <input
-              className="absolute left-0 right-0 top-0 bottom-0 opacity-0 z-10 cursor-pointer"
-              type="file"
-              accept="image/*"
+              className='absolute left-0 right-0 top-0 bottom-0 opacity-0 z-10 cursor-pointer'
+              type='file'
+              accept='image/*'
+              onChange={(e: any) =>
+                handleChangeForm({
+                  image: URL.createObjectURL(e.target.files[0]),
+                })
+              }
             />
           </Button>
         </div>
       </div>
       <Input
-        variant="bordered"
-        label="Website"
-        classNames={{ input: "placeholder:text-[#8E8E93]" }}
-        placeholder="http://example.com"
+        variant='bordered'
+        label='Website'
+        classNames={{ input: 'placeholder:text-[#8E8E93]' }}
+        placeholder='http://example.com'
+        value={form?.website}
+        onChange={(e) => handleChangeForm({ website: e.target.value })}
       />
       <CustomEditor />
-      <div className="grid grid-cols-2 gap-6">
+      <div className='grid grid-cols-2 gap-6'>
         <Input
-          variant="bordered"
-          label="Telegram"
-          classNames={{ input: "placeholder:text-[#8E8E93]" }}
-          placeholder="http://t.me/abc"
+          variant='bordered'
+          label='Telegram'
+          classNames={{ input: 'placeholder:text-[#8E8E93]' }}
+          placeholder='http://t.me/abc'
         />
         <Input
-          variant="bordered"
-          label="Discord"
-          classNames={{ input: "placeholder:text-[#8E8E93]" }}
-          placeholder="http://discord.com/abc"
+          variant='bordered'
+          label='Discord'
+          classNames={{ input: 'placeholder:text-[#8E8E93]' }}
+          placeholder='http://discord.com/abc'
         />
         <Input
-          variant="bordered"
-          label="Reddit"
-          classNames={{ input: "placeholder:text-[#8E8E93]" }}
-          placeholder="http://reddit.com/abc"
+          variant='bordered'
+          label='Reddit'
+          classNames={{ input: 'placeholder:text-[#8E8E93]' }}
+          placeholder='http://reddit.com/abc'
         />
         <Input
-          variant="bordered"
-          label="Youtube Video"
-          classNames={{ input: "placeholder:text-[#8E8E93]" }}
-          placeholder="http://youtube.com/abc"
+          variant='bordered'
+          label='Youtube Video'
+          classNames={{ input: 'placeholder:text-[#8E8E93]' }}
+          placeholder='http://youtube.com/abc'
         />
         <Input
-          variant="bordered"
-          label="Instagram"
-          classNames={{ input: "placeholder:text-[#8E8E93]" }}
-          placeholder="http://instagram.com/abc"
+          variant='bordered'
+          label='Instagram'
+          classNames={{ input: 'placeholder:text-[#8E8E93]' }}
+          placeholder='http://instagram.com/abc'
         />
         <Input
-          variant="bordered"
-          label="Github"
-          classNames={{ input: "placeholder:text-[#8E8E93]" }}
-          placeholder="http://github.com/abc"
+          variant='bordered'
+          label='Github'
+          classNames={{ input: 'placeholder:text-[#8E8E93]' }}
+          placeholder='http://github.com/abc'
         />
         <Input
-          variant="bordered"
-          label="Twitter"
-          classNames={{ input: "placeholder:text-[#8E8E93]" }}
-          placeholder="http://twitter.com/abc"
+          variant='bordered'
+          label='Twitter'
+          classNames={{ input: 'placeholder:text-[#8E8E93]' }}
+          placeholder='http://twitter.com/abc'
         />
         <Input
-          variant="bordered"
-          label="Facebook"
-          classNames={{ input: "placeholder:text-[#8E8E93]" }}
-          placeholder="http://facebook.com/abc"
+          variant='bordered'
+          label='Facebook'
+          classNames={{ input: 'placeholder:text-[#8E8E93]' }}
+          placeholder='http://facebook.com/abc'
         />
       </div>
       <ConfigTokenomic />

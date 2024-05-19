@@ -1,23 +1,38 @@
-"use client";
-import React, { createContext, useState } from "react";
+'use client';
+import {
+  LiquidityType,
+  ListingOption,
+  Project,
+  ProjectType,
+  Router,
+  SaleType,
+} from '@/interface/project-interface';
+import React, { createContext, useState } from 'react';
+import { ProjectContext, defaultProjectConfig } from './context';
 
-export const CreatePresaleContext = createContext<any>({});
+const defaultPresaleConfig: Project = {
+  ...defaultProjectConfig,
+  projectType: ProjectType.Presale,
+};
+
+export const CreatePresaleContext = createContext<ProjectContext>({
+  form: defaultPresaleConfig,
+  setForm: () => {},
+  next: false,
+  setNext: () => {},
+});
 
 export default function CreatePresaleProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [createPresaleForm, setCreatePresaleForm] = useState({
-    currency: 'sol',
-    feeOption: '5%',
-    listingOption: "auto",
-  });
+  const [form, setForm] = useState<Project>(defaultPresaleConfig);
+
+  const [next, setNext] = useState(false);
 
   return (
-    <CreatePresaleContext.Provider
-      value={{ createPresaleForm, setCreatePresaleForm }}
-    >
+    <CreatePresaleContext.Provider value={{ form, setForm, next, setNext }}>
       {children}
     </CreatePresaleContext.Provider>
   );
