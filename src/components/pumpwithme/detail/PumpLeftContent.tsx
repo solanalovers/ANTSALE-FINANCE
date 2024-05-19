@@ -10,7 +10,7 @@ export default function PumpLeftContent({ data }: { data: PumpItemInterface }) {
           <p className="text-sm leading-[22px] ">Rock Papers Scissors</p>
           <p className="text-sm leading-[22px] ">Ticket: RPS</p>
           <p className="text-sm leading-[22px] text-green-600">
-            Market cap: $4,086.201
+            Market cap: ${data.marketCap.toLocaleString()}
           </p>
           <p className="text-sm leading-[22px] text-green-600">
             Virtual liquidity: $8,799
