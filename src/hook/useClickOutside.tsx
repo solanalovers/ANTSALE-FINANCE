@@ -5,7 +5,7 @@ const useClickOutside = (initialState = false) => {
   const containerRef = useRef<any>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event:any) => {
+    const handleClickOutside = (event:MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(event.target)) {
         setIsOpen(false);
       }

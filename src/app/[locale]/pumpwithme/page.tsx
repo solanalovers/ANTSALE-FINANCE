@@ -90,8 +90,12 @@ export default function Pumpwithme() {
           />
           <UploadImage
             value={form?.image}
-            onChange={(e: any) =>
-              setForm((prev: any) => ({ ...prev, image: e.target.files[0] }))
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setForm((prev: any) =>
+                e?.target?.files
+                  ? { ...prev, image: e.target.files[0] }
+                  : { ...prev }
+              )
             }
           />
           <div
