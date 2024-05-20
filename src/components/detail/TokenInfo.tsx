@@ -1,4 +1,3 @@
-import { TokenInfor } from '@/interface/project-interface';
 import { ProjectContext } from '@/provider/context';
 import { Divider, Link } from '@nextui-org/react';
 import { Copy, Warning2 } from 'iconsax-react';
