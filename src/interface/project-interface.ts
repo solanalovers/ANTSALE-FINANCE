@@ -3,7 +3,7 @@ import { DateValue } from '@nextui-org/react';
 export type Project = {
   projectType?: ProjectType;
   tokenAddress?: string;
-  tokenInfo?: TokenInfor;
+  tokenInfo?: TokenInfo;
   currency: 'SOL';
   feeOption: number;
   listingOption: ListingOption;
@@ -72,7 +72,7 @@ export type Social = {
   Facebook?: string;
 };
 
-export type TokenInfor = {
+export type TokenInfo = {
   name: string;
   decimals: number;
   symbol: string;

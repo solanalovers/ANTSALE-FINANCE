@@ -4,8 +4,10 @@ import CustomAvatar from "../CustomAvatar";
 import { Button, Image, Progress } from "@nextui-org/react";
 import { calculateType } from "@/function/pumpwithme";
 import Description from "./PumpDescription";
+import { useRouter } from "next/navigation";
 
 export default function PumpCardItem({ data }: { data: PumpItemInterface }) {
+  const router = useRouter();
   return (
     <div
       className="p-4 rounded-lg flex flex-col gap-y-[14px]"
@@ -82,12 +84,14 @@ export default function PumpCardItem({ data }: { data: PumpItemInterface }) {
           <Button
             color="success"
             className="py-1.5 px-3 min-w-0 text-white font-medium"
+            onClick={() => router.push("/pumpwithme/1")}
           >
             BUY
           </Button>
           <Button
             color="danger"
             className="py-1.5 px-3 min-w-0 text-white font-medium"
+            onClick={() => router.push("/pumpwithme/1")}
           >
             SELL
           </Button>

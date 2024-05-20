@@ -1,8 +1,8 @@
-'use client';
-import CustomDivider from '@/components/CustomDivider';
-import ToastItem from '@/components/toast/ToastItem';
-import { getTokenData } from '@/function/token';
-import { CreatePresaleContext } from '@/provider/CreatePresaleProvider';
+"use client";
+import CustomDivider from "@/components/CustomDivider";
+import ToastItem from "@/components/toast/ToastItem";
+import { getTokenData } from "@/function/token";
+import { CreatePresaleContext } from "@/provider/CreatePresaleProvider";
 import {
   DatePicker,
   Input,
@@ -10,15 +10,15 @@ import {
   RadioGroup,
   Select,
   SelectItem,
-} from '@nextui-org/react';
-import { debounce } from 'lodash';
-import React, { useContext, useEffect, useState } from 'react';
-import { now } from '@internationalized/date';
-import { changeForm } from '@/function/form';
-import { useWallet } from '@solana/wallet-adapter-react';
-import { AppContext } from '@/provider/AppProvider';
-import { ListingOption, RefundType } from '@/interface/project-interface';
-import { FORMERR } from 'dns';
+} from "@nextui-org/react";
+import { debounce } from "lodash";
+import React, { useContext, useEffect, useState } from "react";
+import { now } from "@internationalized/date";
+import { changeForm, requiredField } from "@/function/form";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { AppContext } from "@/provider/AppProvider";
+import { ListingOption, RefundType } from "@/interface/project-interface";
+import { FORMERR } from "dns";
 
 export default function CreatePresaleStep1() {
   const { form, setForm, setNext, checkValidStep1 } =
@@ -95,10 +95,10 @@ export default function CreatePresaleStep1() {
       <div>
         <div>
           <Input
-            classNames={{ input: 'placeholder:text-[#8E8E93]' }}
-            variant='bordered'
-            label='Token Address'
-            placeholder='HG1s2n414ke6yrDi3ZHnbDTHuP2ANMiwuR4DnJRZ6Kqu'
+            classNames={{ input: "placeholder:text-[#8E8E93]" }}
+            variant="bordered"
+            label="Token Address"
+            placeholder="HG1s2n414ke6yrDi3ZHnbDTHuP2ANMiwuR4DnJRZ6Kqu"
             onChange={(e) => handleChangeForm({ tokenAddress: e.target.value })}
             onBlur={() => {
               if (!form?.tokenAddress) {
@@ -106,99 +106,99 @@ export default function CreatePresaleStep1() {
               }
             }}
           />
-          <div className='mt-2 flex flex-col gap-y-1'>
-            <p className='text-xs leading-5 font-semibold text-[#8E8E93]'>
+          <div className="mt-2 flex flex-col gap-y-1">
+            <p className="text-xs leading-5 font-semibold text-[#8E8E93]">
               Creation fee: FREE
             </p>
             {form?.tokenInfo && (
               <>
-                <p className='text-xs leading-5 text-[#8E8E93]'>
+                <p className="text-xs leading-5 text-[#8E8E93]">
                   Name: {form?.tokenInfo?.name}
                 </p>
-                <p className='text-xs leading-5 text-[#8E8E93]'>
+                <p className="text-xs leading-5 text-[#8E8E93]">
                   Symbol: {form?.tokenInfo?.symbol}
                 </p>
-                <p className='text-xs leading-5 text-[#8E8E93]'>
+                <p className="text-xs leading-5 text-[#8E8E93]">
                   Total Supply: {form?.tokenInfo?.supply}
                 </p>
-                <p className='text-xs leading-5 text-[#8E8E93]'>
+                <p className="text-xs leading-5 text-[#8E8E93]">
                   Decimals: {form?.tokenInfo?.decimals}
                 </p>
-                <p className='text-xs leading-5 text-[#8E8E93]'>
+                <p className="text-xs leading-5 text-[#8E8E93]">
                   Your balance: {form?.tokenInfo?.balance}
                 </p>
               </>
             )}
           </div>
         </div>
-        <div className='my-6 flex flex-col gap-y-6'>
+        <div className="my-6 flex flex-col gap-y-6">
           <RadioGroup
-            label='Currency'
-            className={'text-sm leading-5'}
+            label="Currency"
+            className={"text-sm leading-5"}
             value={form?.currency}
             onChange={(e) => {
               handleChangeForm({ currency: e.target.value });
             }}
           >
-            <Radio value='SOL'>
-              <p className={'text-sm leading-5'}>
+            <Radio value="SOL">
+              <p className={"text-sm leading-5"}>
                 {form?.currency} (User will pay with {form?.currency} for your
                 token)
               </p>
             </Radio>
           </RadioGroup>
           <RadioGroup
-            label='Fee options'
-            className={'text-sm leading-5'}
+            label="Fee options"
+            className={"text-sm leading-5"}
             value={String(form?.feeOption)}
             onChange={(e) => {
               handleChangeForm({ feeOption: Number(e.target.value) });
             }}
           >
             <Radio value={form.feeOption.toString()}>
-              <p className={'text-sm leading-5'}>
+              <p className={"text-sm leading-5"}>
                 {form.feeOption}% {form?.currency} raised only (no hidden fees)
               </p>
             </Radio>
           </RadioGroup>
           <RadioGroup
-            label='Listing Options'
-            defaultValue='auto'
-            className={'text-sm leading-5'}
+            label="Listing Options"
+            defaultValue="auto"
+            className={"text-sm leading-5"}
             onChange={(e) =>
               handleChangeForm({ listingOption: e.target.value })
             }
             value={form?.listingOption}
           >
             <Radio value={ListingOption.AutoListing}>
-              <p className={'text-sm leading-5'}>Auto Listing</p>
+              <p className={"text-sm leading-5"}>Auto Listing</p>
             </Radio>
             <Radio value={ListingOption.ManualListing}>
-              <p className={'text-sm leading-5'}>Manual Listing</p>
+              <p className={"text-sm leading-5"}>Manual Listing</p>
             </Radio>
           </RadioGroup>
         </div>
-        <div className='rounded-lg overflow-hidden'>
+        <div className="rounded-lg overflow-hidden">
           <ToastItem
             content={
               form?.listingOption === ListingOption.AutoListing
-                ? 'For auto listing, after you finalize the pool your token will be auto listed on DEX'
+                ? "For auto listing, after you finalize the pool your token will be auto listed on DEX"
                 : "For manual listing, AntSale won't charge tokens for liquidity.</br>You may withdraw SOL after the pool ends then do DEX listing yourself."
             }
-            status='caution'
+            status="caution"
           />
         </div>
         <CustomDivider />
-        <div className='grid grid-cols-2 gap-6'>
+        <div className="grid grid-cols-2 gap-6">
           <Select
             classNames={{
               value: `placeholder:text-[#8E8E93] ${
-                form?.saleType && 'text-black'
+                form?.saleType && "text-black"
               }`,
             }}
-            variant='bordered'
-            label='Sale Type'
-            placeholder='Public'
+            variant="bordered"
+            label="Sale Type"
+            placeholder="Public"
             onChange={(e) => {
               if (e.target.value) {
                 handleChangeForm({ saleType: e.target.value });
@@ -206,22 +206,25 @@ export default function CreatePresaleStep1() {
             }}
             value={form?.saleType}
           >
-            <SelectItem key={'Public'} value={'Public'}>
+            <SelectItem
+              key={"Public"}
+              value={"Public"}
+            >
               Public
             </SelectItem>
           </Select>
           <div />
           <div>
             <Input
-              classNames={{ input: 'placeholder:text-[#8E8E93]' }}
-              variant='bordered'
-              label='PRESALE rate'
-              type='number'
-              placeholder='0'
+              classNames={{ input: "placeholder:text-[#8E8E93]" }}
+              variant="bordered"
+              label="PRESALE rate"
+              type="number"
+              placeholder="0"
               isInvalid={
                 form.presaleRate !== undefined && form.presaleRate <= 0
               }
-              errorMessage='Presale rate must be bigger than 0'
+              errorMessage="Presale rate must be bigger than 0"
               onChange={(e) => {
                 if (e.target.value) {
                   handleChangeForm({ presaleRate: Number(e.target.value) });
@@ -229,9 +232,9 @@ export default function CreatePresaleStep1() {
               }}
               value={String(form?.presaleRate)}
             />
-            <p className='text-[#1C1C1E] text-xs mt-1'>
-              1 {form.currency} ={' '}
-              {form?.presaleRate ? form.presaleRate : '1000'} COIN4 <br />
+            <p className="text-[#1C1C1E] text-xs mt-1">
+              1 {form.currency} ={" "}
+              {form?.presaleRate ? form.presaleRate : "1000"} COIN4 <br />
               If I spend 1 SOL on how many tokens will i receive?
             </p>
           </div>
@@ -239,15 +242,15 @@ export default function CreatePresaleStep1() {
             {form?.listingOption === ListingOption.AutoListing && (
               <>
                 <Input
-                  classNames={{ input: 'placeholder:text-[#8E8E93]' }}
-                  variant='bordered'
-                  label='LISTING rate'
-                  type='number'
-                  placeholder='0'
+                  classNames={{ input: "placeholder:text-[#8E8E93]" }}
+                  variant="bordered"
+                  label="LISTING rate"
+                  type="number"
+                  placeholder="0"
                   isInvalid={
                     form.listingRate !== undefined && form.listingRate <= 0
                   }
-                  errorMessage='Listing rate must be bigger than 0'
+                  errorMessage="Listing rate must be bigger than 0"
                   onChange={(e) => {
                     if (e.target.value) {
                       handleChangeForm({ listingRate: Number(e.target.value) });
@@ -255,9 +258,9 @@ export default function CreatePresaleStep1() {
                   }}
                   value={String(form?.listingRate)}
                 />
-                <p className='text-[#1C1C1E] text-xs mt-1'>
-                  1 {form.currency} ={' '}
-                  {form?.listingRate ? form.listingRate : '800'} COIN4
+                <p className="text-[#1C1C1E] text-xs mt-1">
+                  1 {form.currency} ={" "}
+                  {form?.listingRate ? form.listingRate : "800"} COIN4
                   <br />
                   If I spend 1 SOL on how many tokens will i receive? Usually
                   this amount is lower than presale rate to allow for a higher
@@ -269,11 +272,11 @@ export default function CreatePresaleStep1() {
 
           <div>
             <Input
-              classNames={{ input: 'placeholder:text-[#8E8E93]' }}
-              variant='bordered'
-              label='Softcap'
-              placeholder='0'
-              type='number'
+              classNames={{ input: "placeholder:text-[#8E8E93]" }}
+              variant="bordered"
+              label="Softcap"
+              placeholder="0"
+              type="number"
               isInvalid={
                 form.softCap !== undefined &&
                 (form.hardCap === undefined
@@ -282,8 +285,8 @@ export default function CreatePresaleStep1() {
               }
               errorMessage={
                 form.hardCap === undefined
-                  ? 'Soft must be bigger than 0'
-                  : 'Soft must be greater than or equals 20% of Hardcap'
+                  ? "Soft must be bigger than 0"
+                  : "Soft must be greater than or equals 20% of Hardcap"
               }
               onChange={(e) => {
                 if (e.target.value) {
@@ -297,14 +300,14 @@ export default function CreatePresaleStep1() {
             </p> */}
           </div>
           <Input
-            classNames={{ input: 'placeholder:text-[#8E8E93]' }}
-            variant='bordered'
-            label='Hardcap'
-            placeholder='0'
-            type='number'
+            classNames={{ input: "placeholder:text-[#8E8E93]" }}
+            variant="bordered"
+            label="Hardcap"
+            placeholder="0"
+            type="number"
             isInvalid={form.hardCap !== undefined && form.hardCap <= 0}
-            errorMessage='Hard must be bigger than 0'
-            endContent={<p className='text-sm text-default-500'>SOL</p>}
+            errorMessage="Hard must be bigger than 0"
+            endContent={<p className="text-sm text-default-500">SOL</p>}
             onChange={(e) => {
               if (e.target.value) {
                 handleChangeForm({ hardCap: Number(e.target.value) });
@@ -313,14 +316,14 @@ export default function CreatePresaleStep1() {
             value={String(form?.hardCap)}
           />
           <Input
-            classNames={{ input: 'placeholder:text-[#8E8E93]' }}
-            variant='bordered'
-            label='Minimum buy'
-            type='number'
-            placeholder='0'
+            classNames={{ input: "placeholder:text-[#8E8E93]" }}
+            variant="bordered"
+            label="Minimum buy"
+            type="number"
+            placeholder="0"
             isInvalid={form.minBuy !== undefined && form.minBuy <= 0}
-            errorMessage='Minimum buy must be bigger than 0'
-            endContent={<p className='text-sm text-default-500'>SOL</p>}
+            errorMessage="Minimum buy must be bigger than 0"
+            endContent={<p className="text-sm text-default-500">SOL</p>}
             onChange={(e) => {
               if (e.target.value) {
                 handleChangeForm({ minBuy: Number(e.target.value) });
@@ -329,14 +332,14 @@ export default function CreatePresaleStep1() {
             value={String(form?.minBuy)}
           />
           <Input
-            classNames={{ input: 'placeholder:text-[#8E8E93]' }}
-            variant='bordered'
-            label='Maximum buy'
-            type='number'
-            placeholder='0'
+            classNames={{ input: "placeholder:text-[#8E8E93]" }}
+            variant="bordered"
+            label="Maximum buy"
+            type="number"
+            placeholder="0"
             isInvalid={form.maxBuy !== undefined && form.maxBuy <= 0}
-            errorMessage='Max buy must be bigger than 0'
-            endContent={<p className='text-sm text-default-500'>SOL</p>}
+            errorMessage="Max buy must be bigger than 0"
+            endContent={<p className="text-sm text-default-500">SOL</p>}
             onChange={(e) => {
               if (e.target.value) {
                 handleChangeForm({ maxBuy: Number(e.target.value) });
@@ -349,12 +352,12 @@ export default function CreatePresaleStep1() {
               <Select
                 classNames={{
                   value: `placeholder:text-[#8E8E93] ${
-                    form?.router && 'text-black'
+                    form?.router && "text-black"
                   }`,
                 }}
-                variant='bordered'
-                label='Router'
-                placeholder='RaydiumAmmV4'
+                variant="bordered"
+                label="Router"
+                placeholder="RaydiumAmmV4"
                 onChange={(e) => {
                   if (e.target.value) {
                     handleChangeForm({ router: e.target.value });
@@ -362,21 +365,24 @@ export default function CreatePresaleStep1() {
                 }}
                 value={form?.router}
               >
-                <SelectItem key={1} value={'raydium'}>
+                <SelectItem
+                  key={1}
+                  value={"raydium"}
+                >
                   RaydiumAmmV4
                 </SelectItem>
               </Select>
               <div>
                 <Input
-                  classNames={{ input: 'placeholder:text-[#8E8E93]' }}
-                  variant='bordered'
-                  label='Liquidity Percent (%)'
-                  placeholder='51'
+                  classNames={{ input: "placeholder:text-[#8E8E93]" }}
+                  variant="bordered"
+                  label="Liquidity Percent (%)"
+                  placeholder="51"
                   isInvalid={
                     form.liquidityPercent !== undefined &&
                     (form.liquidityPercent > 100 || form.liquidityPercent < 20)
                   }
-                  errorMessage='Liquidity percent must be between 20-100%'
+                  errorMessage="Liquidity percent must be between 20-100%"
                   onChange={(e) => {
                     if (e.target.value) {
                       handleChangeForm({
@@ -386,7 +392,7 @@ export default function CreatePresaleStep1() {
                   }}
                   value={form?.liquidityPercent?.toString()}
                 />
-                <p className='text-[#1C1C1E] text-xs mt-1'>
+                <p className="text-[#1C1C1E] text-xs mt-1">
                   Enter the percentage of raised funds that should be allocated
                   to Liquidity on (Min 20%, Max 100%)
                 </p>
@@ -394,11 +400,11 @@ export default function CreatePresaleStep1() {
             </>
           )}
           <DatePicker
-            classNames={{ input: 'placeholder:text-[#8E8E93]' }}
-            label='Start Time (UTC)'
-            variant='bordered'
+            classNames={{ input: "placeholder:text-[#8E8E93]" }}
+            label="Start Time (UTC)"
+            variant="bordered"
             showMonthAndYearPickers
-            defaultValue={now('Etc/Universal')}
+            defaultValue={now("Etc/Universal")}
             onChange={(e) => {
               if (e) {
                 handleChangeForm({ startTime: e });
@@ -407,11 +413,11 @@ export default function CreatePresaleStep1() {
             value={form?.startTime}
           />
           <DatePicker
-            classNames={{ input: 'placeholder:text-[#8E8E93]' }}
-            label='End Time (UTC)'
-            variant='bordered'
+            classNames={{ input: "placeholder:text-[#8E8E93]" }}
+            label="End Time (UTC)"
+            variant="bordered"
             showMonthAndYearPickers
-            defaultValue={now('Etc/Universal')}
+            defaultValue={now("Etc/Universal")}
             onChange={(e) => {
               if (e) {
                 handleChangeForm({ endTime: e });
@@ -424,12 +430,12 @@ export default function CreatePresaleStep1() {
               <Select
                 classNames={{
                   value: `placeholder:text-[#8E8E93] ${
-                    form?.liquidityType && 'text-black'
+                    form?.liquidityType && "text-black"
                   }`,
                 }}
-                variant='bordered'
-                label='Liquidity Type'
-                placeholder='Auto Locking'
+                variant="bordered"
+                label="Liquidity Type"
+                placeholder="Auto Locking"
                 onChange={(e) => {
                   if (e.target.value) {
                     handleChangeForm({ liquidityType: e.target.value });
@@ -437,22 +443,30 @@ export default function CreatePresaleStep1() {
                 }}
                 value={form?.liquidityType}
               >
-                <SelectItem key={'lock'} value={'lock'}>
+                <SelectItem
+                  key={"AutoLocking"}
+                  value={"AutoLocking"}
+                >
                   Auto Locking
                 </SelectItem>
-                <SelectItem key={'burn'} value={'burn'}>
+                <SelectItem
+                  key={"AutoBurning"}
+                  value={"AutoBurning"}
+                >
                   Auto Burning
                 </SelectItem>
               </Select>
               <div>
                 <Input
-                  classNames={{ input: 'placeholder:text-[#8E8E93]' }}
-                  variant='bordered'
-                  label='Liquidity Lockup Time'
-                  placeholder='0'
+                  {...requiredField(form?.liquidityLockupTime)}
+                  classNames={{ input: "placeholder:text-[#8E8E93]" }}
+                  variant="bordered"
+                  label="Liquidity Lockup Time"
+                  placeholder="0"
                   endContent={
-                    <p className='text-sm text-default-500'>Minutes</p>
+                    <p className="text-sm text-default-500">Minutes</p>
                   }
+                  isDisabled={form?.liquidityType === 'Auto Locking'}
                   onChange={(e) => {
                     if (e.target.value) {
                       handleChangeForm({
@@ -462,7 +476,7 @@ export default function CreatePresaleStep1() {
                   }}
                   value={form?.liquidityLockupTime?.toString()}
                 />
-                <p className='text-[#1C1C1E] text-xs mt-1'>
+                <p className="text-[#1C1C1E] text-xs mt-1">
                   Liquidity lock up time must be greater than 30 days
                 </p>
               </div>
@@ -472,29 +486,35 @@ export default function CreatePresaleStep1() {
             <Select
               classNames={{
                 value: `placeholder:text-[#8E8E93] ${
-                  form?.refundType && 'text-black'
+                  form?.refundType && "text-black"
                 }`,
               }}
-              variant='bordered'
-              label='Unsold Tokens Refund Type'
-              placeholder='Refund'
+              variant="bordered"
+              label="Unsold Tokens Refund Type"
+              placeholder="Refund"
               onChange={(e) => {
                 if (e.target.value) {
                   handleChangeForm({ refundType: e.target.value });
                 }
               }}
               selectedKeys={form?.refundType ? [form?.refundType] : undefined}
-              selectionMode='single'
+              selectionMode="single"
             >
-              <SelectItem key={RefundType.Refund} value={RefundType.Refund}>
+              <SelectItem
+                key={RefundType.Refund}
+                value={RefundType.Refund}
+              >
                 Refund
               </SelectItem>
-              <SelectItem key={RefundType.Burn} value={RefundType.Burn}>
+              <SelectItem
+                key={RefundType.Burn}
+                value={RefundType.Burn}
+              >
                 Burn
               </SelectItem>
             </Select>
             {form?.listingOption === ListingOption.AutoListing && (
-              <p className='text-[#1C1C1E] text-xs mt-1'>
+              <p className="text-[#1C1C1E] text-xs mt-1">
                 Auto Burning can only see selected if the Listing Options is
                 Auto Listing
               </p>
@@ -506,15 +526,10 @@ export default function CreatePresaleStep1() {
           form.liquidityPercent &&
           form.presaleRate &&
           form.tokenInfo && (
-            <div className='rounded-lg overflow-hidden mt-6'>
+            <div className="rounded-lg overflow-hidden mt-6">
               <ToastItem
-                status='info'
-                content={`Need <span class='font-bold'>${(
-                  form.hardCap * form.presaleRate +
-                  form.hardCap * 0.95 * form.listingRate * form.liquidityPercent
-                ).toLocaleString()} ${
-                  form.tokenInfo?.symbol
-                }</span> to create launchpad`}
+                status="info"
+                content={`Need <span class='font-bold'>${calculateAutoListing()}</span> to create launchpad`}
               />
             </div>
           )}
