@@ -444,21 +444,20 @@ export default function CreatePresaleStep1() {
                 value={form?.liquidityType}
               >
                 <SelectItem
-                  key={"AutoLocking"}
-                  value={"AutoLocking"}
+                  key={"Auto Locking"}
+                  value={"Auto Locking"}
                 >
                   Auto Locking
                 </SelectItem>
                 <SelectItem
-                  key={"AutoBurning"}
-                  value={"AutoBurning"}
+                  key={"Auto Burning"}
+                  value={"Auto Burning"}
                 >
                   Auto Burning
                 </SelectItem>
               </Select>
               <div>
                 <Input
-                  {...requiredField(form?.liquidityLockupTime)}
                   classNames={{ input: "placeholder:text-[#8E8E93]" }}
                   variant="bordered"
                   label="Liquidity Lockup Time"
@@ -466,14 +465,15 @@ export default function CreatePresaleStep1() {
                   endContent={
                     <p className="text-sm text-default-500">Minutes</p>
                   }
-                  isDisabled={form?.liquidityType === 'Auto Locking'}
+                  isDisabled={form?.liquidityType === 'Auto Burning'}
                   onChange={(e) => {
-                    if (e.target.value) {
                       handleChangeForm({
                         liquidityLockupTime: Number(e.target.value),
                       });
-                    }
                   }}
+                  type="number"
+                  min={43200}
+                  isRequired
                   value={form?.liquidityLockupTime?.toString()}
                 />
                 <p className="text-[#1C1C1E] text-xs mt-1">
