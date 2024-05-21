@@ -1,0 +1,63 @@
+{
+  "Index": {
+    "title": "안녕하세요!"
+  },
+  "header": {
+    "myService": "내 서비스",
+    "project": "프로젝트 목록",
+    "token": "토큰 생성",
+    "presale": "사전 판매",
+    "faillaunch": "페어런치 생성",
+    "multichain": "멀티체인 런치 생성",
+    "pump": "PumpWithMe",
+    "faq": "자주 묻는 질문",
+    "my": {
+      "project": "내 프로젝트",
+      "contribute": "내 기여자들",
+      "community": "커뮤니티 구축",
+      "pump": "PumpWithMe"
+    },
+    "search": "검색"
+  },
+  "wallet": {
+    "connect": "지갑 연결"
+  },
+  "home": {
+    "presale": "사전 판매",
+    "fairlaunch": "페어런치",
+    "multichain": "멀티체인 런치",
+    "search": "검색"
+  },
+  "footer": {
+    "info": "면책 조항: Solsale.fi는 나열된 프로젝트에 투자하도록 권장하지 않으며, 따라서 발생하는 손실에 대해 책임을 지지 않습니다. 사용자 자신의 책임 하에 자체 조사를 수행하고 전문가에게 재정적 조언을 구해야 합니다. (DYOR)에 대한 자세한 정보는 다음에서 찾을 수 있습니다",
+    "follow": "팔로우하기",
+    "interface": "인터페이스",
+    "darkMode": "다크 모드",
+    "lightMode": "라이트 모드"
+  },
+  "card": {
+    "end": "판매 종료",
+    "view": "보기",
+    "progress": "진행 상황"
+  },
+  "chip": {
+    "coming": "곧 시작",
+    "live": "판매 중",
+    "canceled": "취소됨",
+    "ended": "종료됨"
+  },
+  "createToken": {
+    "connect": "지갑 연결",
+    "cost": "배포 비용",
+    "step1": "단계 1", 
+    "step2": "단계 2", 
+    "step3": "단계 3", 
+    "step4": "단계 4", 
+    "step5": "단계 5",
+    "step1Desc": "Solana 지갑을 연결하세요", 
+    "step2Desc": "토큰 이름, 토큰 심볼, 토큰 이미지를 지정하세요", 
+    "step3Desc": "토큰의 공급량과 소수점을 결정하세요.", 
+    "step4Desc": "토큰에 대한 추가 정보를 입력하세요: 웹사이트, 트위터(X), 텔레그램, 디스코드 ... (선택 사항)", 
+    "step5Desc": "생성 버튼을 클릭하고 지갑에서 거래를 승인한 후 토큰이 준비될 때까지 기다리세요."
+  }
+}

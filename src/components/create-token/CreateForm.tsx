@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import BorderContent from "../detail/BorderContent";
 import {
   Button,
@@ -22,6 +22,7 @@ import { uploadData } from "@/function/uploadData";
 import axios from "axios";
 import { AppContext } from "@/provider/AppProvider";
 import { Connection, Transaction } from "@solana/web3.js";
+import useTrans from "@/hook/useTrans";
 
 const listStep = [
   {
@@ -51,7 +52,7 @@ export default function CreateForm() {
   const [form, setForm] = useState<any>({});
   const { publicKey, sendTransaction } = useWallet();
   const [loading, setLoading] = useState(false);
-
+  const t = useTrans("createToken");
   const { cluster } = useContext(AppContext);
 
   const createToken = async () => {
@@ -282,14 +283,13 @@ export default function CreateForm() {
         <div className="rounded-lg overflow-hidden">
           <ToastItem
             status="info"
-            content={`Cost to deploy SPL TOKEN: ~0.02 SOL`}
+            content={`${t("cost")} SPL TOKEN: ~0.02 SOL`}
           />
         </div>
         <div className="-mx-6 border-t border-default-300 border-dashed" />
-        <Button
+        <div
           color="primary"
           className="w-fit mx-auto px-44 py-3 font-medium text-base leading-6 h-10 bg-primary relative hover:opacity-50 rounded-lg flex items-center justify-center text-white"
-          isLoading={loading}
           onClick={async () => {
             if (publicKey) {
               if (!valid || !sendTransaction) {
@@ -306,12 +306,12 @@ export default function CreateForm() {
           {!publicKey ? (
             <>
               <WalletMultiButton />
-              Connect your wallet
+              {t("connect")}
             </>
           ) : (
             <>{!loading && "Create Token"}</>
           )}
-        </Button>
+        </div>
       </div>
     </BorderContent>
   );

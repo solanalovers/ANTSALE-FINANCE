@@ -5,38 +5,40 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import DropdownNavbar from "./DropdownNavbar";
 import Link from "next/link";
+import useTrans from "@/hook/useTrans";
 
 export default function Navbar() {
   const locale = useLocale();
   const pathname = usePathname();
   const { theme } = useTheme();
+  const t = useTrans("header");
 
   const navlink = [
     {
-      label: "PROJECT LIST",
+      label: "project",
       value: `/${locale}`,
     },
     {
-      label: "CREATE TOKEN",
+      label: "token",
       value: `/${locale}/create-token`,
     },
     {
-      label: "CREATE PRESALE",
+      label: "presale",
       value: `/${locale}/create-presale`,
       isHaveStepper: true,
     },
     {
-      label: "CREATE FAIRLAUNCH",
+      label: "faillaunch",
       value: `/${locale}/create-fairlaunch`,
       isHaveStepper: true,
     },
     {
-      label: "CREATE MULTICHAIN-LAUNCH",
+      label: "multichain",
       value: `/${locale}/create-multichain`,
       isHaveStepper: true,
     },
     {
-      label: "PumpWithMe",
+      label: "pump",
       value: `/${locale}/pumpwithme`,
     },
   ];
@@ -54,9 +56,10 @@ export default function Navbar() {
               (pathname === link.value ||
                 pathname.startsWith(`${link.value}/step-`)) &&
               "text-primary font-bold after:absolute after:h-[2px] after:bg-primary after:w-full after:left-0 after:bottom-[-10px]"
-            }`}
+            }
+            hover:opacity-50`}
           >
-            {link.label}
+            {t(link.label)}
           </Link>
         ))}
       </div>
@@ -65,9 +68,11 @@ export default function Navbar() {
           href={"/faq"}
           className={`mx-3 text-sm leading-5 text-default-500 font-semibold ${
             theme === "dark" ? "header-link" : "header-link light"
-          } ${pathname === "FAQ" && "text-primary font-bold"}`}
+          } ${pathname === "FAQ" && "text-primary font-bold"}
+          hover:opacity-50
+          `}
         >
-          FAQ
+          {t("faq")}
         </Link>
         {/* <Link
           href={"/services"}

@@ -18,7 +18,7 @@ import { ArrowDownIcon } from "@/components/Icon";
 export default function LocaleSelect() {
   const locale = useLocale();
   const localeRouter = useLocaleRouter();
-
+console.log(locale);
   const getCurrentLocale = () => {
     return localeList.filter((item: { label: string; value: string }) => {
       return item.value === locale;

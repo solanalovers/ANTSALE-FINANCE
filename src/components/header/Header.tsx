@@ -11,9 +11,11 @@ import Navbar from "./Navbar/Navbar";
 import { useTheme } from "next-themes";
 import ClusterSelect from "./ClusterSelect";
 import { SearchIcon } from "../Icon";
+import useTrans from "@/hook/useTrans";
 
 export default function Header() {
   const { publicKey } = useWallet();
+  const t = useTrans('wallet');
 
   return (
     <div>
@@ -42,7 +44,7 @@ export default function Header() {
                 <div className="h-10 py-2 px-[26px] bg-primary relative hover:opacity-50 rounded-lg">
                   <WalletMultiButton />
                   <p className="font-medium text-base leading-6 text-white">
-                    Connect wallet
+                    {t('connect')}
                   </p>
                 </div>
               ) : (

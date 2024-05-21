@@ -13,6 +13,7 @@ import Chips from "../Chips";
 import { FireIcon } from "../Icon";
 import { useRouter } from "next/navigation";
 import { countdownToSaleEnd } from "@/function/timer";
+import useTrans from "@/hook/useTrans";
 
 interface CardItemProps {
   data: any;
@@ -21,6 +22,7 @@ interface CardItemProps {
 export default function CardItem({ data }: CardItemProps) {
   const router = useRouter();
   const [timer, setTimer] = useState("00:00:00:00");
+  const t = useTrans('card')
   useEffect(() => {
     const countdown = setInterval(() => {
       const timeleft = countdownToSaleEnd(data.saleEndsIn);
@@ -72,7 +74,7 @@ export default function CardItem({ data }: CardItemProps) {
           </div>
           <div>
             <p className="text-[14px] leading-[22px]">
-              Progress
+              {t('progress')}
               <span className="ml-2 text-[#8E8E93]">
                 ({data.progress.percentage})
               </span>
@@ -102,14 +104,14 @@ export default function CardItem({ data }: CardItemProps) {
           <Divider />
           <div className="flex items-center justify-between">
             <div>
-              <p>Sale Ends In</p>
+              <p>{t('end')}</p>
               <p>{timer}</p>
             </div>
             <Button
               color="primary"
               onClick={() => router.push(`/detail/${data.id}`)}
             >
-              View
+              {t('view')}
             </Button>
           </div>
         </div>

@@ -1,11 +1,13 @@
 import { Chip } from "@nextui-org/react";
 import React, { ReactNode } from "react";
 import { CheckIcon } from "./Icon";
+import useTrans from "@/hook/useTrans";
 
 interface ChipProps {
   status: "upcoming" | "live" | "canceled" | "ended";
 }
 export default function Chips({ status }: ChipProps) {
+  const t = useTrans("chip");
   const chipValueList: {
     [key in ChipProps["status"]]: {
       value: string;
@@ -15,25 +17,25 @@ export default function Chips({ status }: ChipProps) {
     };
   } = {
     upcoming: {
-      value: "Upcoming",
+      value: "coming",
       icon: <CheckIcon fill="#F5A524" />,
       bg: "warning-50",
       cl: "warning",
     },
     live: {
-      value: "Sale Live",
+      value: "live",
       icon: <CheckIcon fill="#17C964" />,
       bg: "success-50",
       cl: "success",
     },
     canceled: {
-      value: "Canceled",
+      value: "canceled",
       icon: <CheckIcon fill="#000000" />,
       bg: "default-100",
       cl: "default-foreground",
     },
     ended: {
-      value: "Ended",
+      value: "ended",
       icon: <CheckIcon fill="#EA3354" />,
       bg: "danger-50",
       cl: "chart-pink",
@@ -44,7 +46,7 @@ export default function Chips({ status }: ChipProps) {
       className={`bg-${chipValueList[status].bg} text-${chipValueList[status].cl} text-sm leading-5`}
       startContent={chipValueList[status].icon}
     >
-      {chipValueList[status].value}
+      {t(chipValueList[status].value)}
     </Chip>
   );
 }

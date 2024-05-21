@@ -3,11 +3,13 @@ import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon } from "../Icon";
 import { useEffect, useState } from "react";
 import { Image, Link } from "@nextui-org/react";
+import useTrans from "@/hook/useTrans";
 
 export default function Footer() {
   const { theme, setTheme } = useTheme();
   const [sunbg, setSunbg] = useState("#8E8E93");
   const [moonbg, setMoonbg] = useState("#8E8E93");
+  const t = useTrans("footer");
 
   useEffect(() => {
     console.log(theme);
@@ -25,14 +27,12 @@ export default function Footer() {
       <div className="h-2 bg-gradient-to-t from-[rgba(000,000,000,0.03)] to-transparent"></div>
       <div className="container mx-auto">
         <p className="text-center py-10 border-b border-b-divider border-dashed text-sm">
-          Disclaimer: Solsale.fi will never endorse or encourage that you invest
-          in any of the projects listed and therefore, accept no liability for
-          any loss occasioned. It is the user(s) responsibility to do their own
-          research and seek financial advice from a professional. More
-          information about (DYOR) can be found via{" "}
+          {t("info")}{" "}
           <Link
             className="font-medium text-primary underline"
-            href={"https://academy.binance.com/en/glossary/do-your-own-research"}
+            href={
+              "https://academy.binance.com/en/glossary/do-your-own-research"
+            }
             isExternal
           >
             Binance Academy.
@@ -40,7 +40,7 @@ export default function Footer() {
         </p>
         <div className="py-10 flex items-center justify-between">
           <div className="flex items-center gap-x-2">
-            <p>FOLLOW US</p>
+            <p>{t("follow")}</p>
             <Link
               href={""}
               isExternal
@@ -87,23 +87,23 @@ export default function Footer() {
             </Link>
           </div>
           <div className="flex items-center gap-x-6">
-            <p>INTERFACE</p>
+            <p>{t("interface")}</p>
             <div
               className="flex items-center gap-x-2"
               onClick={() => setTheme("light")}
             >
               <SunIcon color={sunbg} />
-              <p className={`font-medium text-[${sunbg}]`}>Light Mode</p>
+              <p className={`font-medium text-[${sunbg}]`}>{t("lightMode")}</p>
             </div>
             <div
               className="flex items-center gap-x-2 pointer-events-none"
               onClick={() => setTheme("dark")}
             >
               <MoonIcon
-              // color={moonbg}
-              color={'#ccc'}
-               />
-              <p className={`font-medium text-[#ccc]`}>Dark Mode</p>
+                // color={moonbg}
+                color={"#ccc"}
+              />
+              <p className={`font-medium text-[#ccc]`}>{t("darkMode")}</p>
             </div>
           </div>
         </div>

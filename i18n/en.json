@@ -1,5 +1,63 @@
 {
-    "Index": {
-      "title": "Hello world!"
-    }
+  "Index": {
+    "title": "Hello world!"
+  },
+  "header": {
+    "myService": "MY SERVICE",
+    "project": "PROJECT LIST",
+    "token": "CREATE TOKEN",
+    "presale": "CREATE PRESALE",
+    "faillaunch": "CREATE FAIRLAUNCH",
+    "multichain": "CREATE MULTICHAIN-LAUNCH",
+    "pump": "PumpWithMe",
+    "faq": "FAQ",
+    "my": {
+      "project": "My Project",
+      "contribute": "My contributors",
+      "community": "Build Community",
+      "pump": "PumpWithMe"
+    },
+    "search": "Search"
+  },
+  "wallet": {
+    "connect": "Connect wallet"
+  },
+  "home": {
+    "presale": "PRESALE",
+    "fairlaunch": "FAIRLAUNCH",
+    "multichain": "MULTICHAIN-LAUNCH",
+    "search": "Search"
+  },
+  "footer": {
+    "info": "Disclaimer: Solsale.fi will never endorse or encourage that you invest in any of the projects listed and therefore, accept no liability for any loss occasioned. It is the user(s) responsibility to do their own research and seek financial advice from a professional. More information about (DYOR) can be found via",
+    "follow": "FOLLOW US",
+    "interface": "INTERFACE",
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode"
+  },
+  "card": {
+    "end": "Sale Ends In",
+    "view": "View",
+    "progress": "Progress"
+  },
+  "chip": {
+    "coming": "Upcoming",
+    "live": "Sale Live",
+    "canceled": "Canceled",
+    "ended": "Ended"
+  },
+  "createToken": {
+    "connect": "Connect your wallet",
+    "cost": "Cost to deploy",
+    "step1": "Step 1", 
+    "step2": "Step 2", 
+    "step3": "Step 3", 
+    "step4": "Step 4", 
+    "step5": "Step 5",
+    "step1Desc": "Connect your Solana wallet", 
+    "step2Desc": "Specify the token name, token symbol, token image", 
+    "step3Desc": "Determine the Supply and Decimals of your Token.", 
+    "step4Desc": "Add more information about token: website, twitter (X), telegram, discord ... (optional)", 
+    "step5Desc": "Click on create, accept the transaction on your wallet and wait until your tokens ready."
   }
+}

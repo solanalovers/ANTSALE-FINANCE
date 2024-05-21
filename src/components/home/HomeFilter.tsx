@@ -2,6 +2,7 @@ import { Tabs, Tab, Input } from "@nextui-org/react";
 import React, { Key } from "react";
 import HomeDropdown from "./HomeDropdown";
 import { SearchIcon } from "../Icon";
+import useTrans from "@/hook/useTrans";
 
 interface HomeFilterProps {
   currentList: string;
@@ -12,6 +13,7 @@ export default function HomeFilter({
   currentList,
   setCurrentList,
 }: HomeFilterProps) {
+  const t = useTrans("home");
   return (
     <div className="flex items-center gap-x-6">
       <Tabs
@@ -23,15 +25,15 @@ export default function HomeFilter({
       >
         <Tab
           key="presale"
-          title="PRE SALE"
+          title={t('presale')}
         />
         <Tab
           key="fairlaunch"
-          title="FAIRLAUNCH"
+          title={t('fairlaunch')}
         />
         <Tab
           key="multichain"
-          title="MULTICHAIN-LAUNCH"
+          title={t('multichain')}
         />
       </Tabs>
       <Input

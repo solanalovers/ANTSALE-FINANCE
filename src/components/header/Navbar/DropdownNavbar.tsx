@@ -1,4 +1,11 @@
-import { ArrowDownIcon, ContributeIcon, GroupAddIcon, ProjectsIcon, RocketIcon } from "@/components/Icon";
+import {
+  ArrowDownIcon,
+  ContributeIcon,
+  GroupAddIcon,
+  ProjectsIcon,
+  RocketIcon,
+} from "@/components/Icon";
+import useTrans from "@/hook/useTrans";
 import {
   Dropdown,
   DropdownItem,
@@ -10,6 +17,7 @@ import React, { useState } from "react";
 
 export default function DropdownNavbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const t = useTrans("header");
 
   const handleMouseEnter = () => {
     setIsOpen(true);
@@ -26,7 +34,7 @@ export default function DropdownNavbar() {
       >
         <div className="flex items-center gap-1 cursor-pointer">
           <p className="text-sm leading-5 text-default-500 font-semibold">
-            MY SERVICES
+            {t("myService")}
           </p>
           <ArrowDownIcon
             color="#71717A"
@@ -44,7 +52,7 @@ export default function DropdownNavbar() {
             className={`text-base leading-6 text-[#11181C] flex items-center gap-x-3`}
           >
             <ContributeIcon />
-            <p>My Contributors</p>
+            <p>{t('my.contribute')}</p>
           </Link>
         </DropdownItem>
         <DropdownItem>
@@ -53,7 +61,7 @@ export default function DropdownNavbar() {
             className={`text-base leading-6 text-[#11181C] flex items-center gap-x-3`}
           >
             <ProjectsIcon />
-            <p>My Projects</p>
+            <p>{t('my.project')}</p>
           </Link>
         </DropdownItem>
         <DropdownItem>
@@ -62,7 +70,7 @@ export default function DropdownNavbar() {
             className={`text-base leading-6 text-[#11181C] flex items-center gap-x-3`}
           >
             <GroupAddIcon />
-            <p>Build Community</p>
+            <p>{t('my.community')}</p>
           </Link>
         </DropdownItem>
         <DropdownItem>
@@ -71,7 +79,7 @@ export default function DropdownNavbar() {
             className={`text-base leading-6 text-[#11181C] flex items-center gap-x-3`}
           >
             <RocketIcon />
-            <p>PumpWithMe</p>
+            <p>{t('my.pump')}</p>
           </Link>
         </DropdownItem>
       </DropdownMenu>
