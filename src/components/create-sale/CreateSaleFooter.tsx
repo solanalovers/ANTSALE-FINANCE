@@ -24,7 +24,7 @@ export default function CreateSaleFooter({
   const router = useRouter();
 
   const { next, form } = useContext(context);
-  const [loading, setLoding] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   return (
     <div>
@@ -50,9 +50,9 @@ export default function CreateSaleFooter({
             if (!isLast) {
               router.push(`${currentRoute}/step-${step + 1}`);
             } else {
-              setLoding(true);
+              setLoading(true);
               await createProject(form);
-              setLoding(false);
+              setLoading(false);
 
               router.push('/');
             }
