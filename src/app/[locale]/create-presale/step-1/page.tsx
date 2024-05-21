@@ -621,19 +621,19 @@ export default function CreatePresaleStep1() {
               selectionMode="single"
             >
               <SelectItem
-                key={"refund"}
-                value={"refund"}
+                key={RefundType.Refund}
+                value={RefundType.Refund}
               >
                 Refund
               </SelectItem>
               <SelectItem
-                key={"burn"}
-                value={"burn"}
+                key={RefundType.Burn}
+                value={RefundType.Burn}
               >
                 Burn
               </SelectItem>
             </Select>
-            {form?.listingOption === "Auto Listing" && (
+            {form?.listingOption === ListingOption.AutoListing && (
               <p className="text-[#1C1C1E] text-xs mt-1">
                 Auto Burning can only see selected if the Listing Options is
                 Auto Listing
