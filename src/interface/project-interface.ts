@@ -37,6 +37,12 @@ export enum ProjectType {
   FairLaunch = 'FairLaunch',
 }
 
+export enum PriceModel {
+  fixedPrice = 'fixed-price',
+  multiPrice = 'multi-price',
+  purchaseCurrency = 'purchase-currency'
+}
+
 export enum ListingOption {
   AutoListing = 'Auto Listing',
   ManualListing = 'Manual Listing',

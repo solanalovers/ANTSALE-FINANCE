@@ -23,6 +23,7 @@ import { MinusIcon, PlusIcon } from "@/components/Icon";
 import { changeForm } from "@/function/form";
 import { AppContext } from "@/provider/AppProvider";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { ListingOption, PriceModel, RefundType } from "@/interface/project-interface";
 
 const CurrencySelect = ({ image, name, symbol, value, setValue }: any) => {
   const [isActive, setIsActive] = useState(false);
@@ -182,10 +183,10 @@ export default function CreateMultiChainStep1() {
           </div>
           <RadioGroup
             label="Fee options"
-            defaultValue="5%"
             className={"text-sm leading-5"}
+            value={createMultiChainForm?.fee?.toString()}
           >
-            <Radio value="5%">
+            <Radio value="5">
               <p className={"text-sm leading-5"}>
                 5% SOL raised only (no hidden fees)
               </p>
@@ -193,14 +194,13 @@ export default function CreateMultiChainStep1() {
           </RadioGroup>
           <RadioGroup
             label="Listing Options"
-            defaultValue="manual"
             className={"text-sm leading-5"}
             onChange={(e) =>
               handleChangeForm({ listingOption: e.target.value })
             }
             value={createMultiChainForm?.listingOption}
           >
-            <Radio value="manual">
+            <Radio value={ListingOption.ManualListing}>
               <p className={"text-sm leading-5"}>Manual Listing</p>
             </Radio>
           </RadioGroup>
@@ -251,30 +251,30 @@ export default function CreateMultiChainStep1() {
             onChange={handleChangePriceModel}
             value={createMultiChainForm?.priceModel}
             disabledKeys={
-              createMultiChainForm?.multiWallet ? [] : ["purchase-currency"]
+              createMultiChainForm?.multiWallet ? [] : [PriceModel.purchaseCurrency]
             }
           >
             <SelectItem
-              key={"fixed-price"}
-              value={"fixed-price"}
+              key={PriceModel.fixedPrice}
+              value={PriceModel.fixedPrice}
             >
               Fixed a price in USDT
             </SelectItem>
             <SelectItem
-              key={"multi-price"}
-              value={"multi-price"}
+              key={PriceModel.multiPrice}
+              value={PriceModel.multiPrice}
             >
               Fixed multi prices in USDT
             </SelectItem>
             <SelectItem
-              key={"purchase-currency"}
-              value={"purchase-currency"}
+              key={PriceModel.purchaseCurrency}
+              value={PriceModel.purchaseCurrency}
             >
               Distribute based on purchase currency
             </SelectItem>
           </Select>
           <div>
-            {createMultiChainForm?.priceModel === "fixed-price" && (
+            {createMultiChainForm?.priceModel === PriceModel.fixedPrice && (
               <div className="grid grid-cols-2 gap-6">
                 <Input
                   classNames={{ input: "placeholder:text-[#8E8E93]" }}
@@ -292,7 +292,7 @@ export default function CreateMultiChainStep1() {
                 />
               </div>
             )}
-            {createMultiChainForm?.priceModel === "purchase-currency" && (
+            {createMultiChainForm?.priceModel === PriceModel.purchaseCurrency && (
               <div className="flex flex-col gap-y-3">
                 {createMultiChainForm?.multiWallet &&
                   Object.entries(createMultiChainForm?.multiWallet).map(
@@ -309,7 +309,7 @@ export default function CreateMultiChainStep1() {
                   )}
               </div>
             )}
-            {createMultiChainForm?.priceModel === "multi-price" && (
+            {createMultiChainForm?.priceModel === PriceModel.multiPrice && (
               <div>
                 <div className="grid grid-cols-2 gap-6 min-h-10 max-h-[400px] overflow-y-scroll">
                   {createMultiChainForm?.poolList?.map(
@@ -427,13 +427,13 @@ export default function CreateMultiChainStep1() {
           >
             <SelectItem
               key={1}
-              value={"refund"}
+              value={RefundType.Refund}
             >
               Refund
             </SelectItem>
             <SelectItem
               key={1}
-              value={"burn"}
+              value={RefundType.Burn}
             >
               Burn
             </SelectItem>
