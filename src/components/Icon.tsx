@@ -455,6 +455,23 @@ const ListViewFilterIcon = ({ size = "24", color = "#006FEE" }) => (
   </svg>
 );
 
+const HeartIcon = ({ size = "22", color = "black" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox={`0 0 ${size} ${size}`}
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M19.4788 8.8309C19.4697 6.50636 18.2501 4.32029 15.8457 3.54572C14.1947 3.01295 12.3963 3.30923 10.9997 5.31441C9.603 3.30923 7.8046 3.01295 6.15362 3.54572C3.74897 4.32038 2.52941 6.50686 2.52059 8.8317C2.49834 13.4551 7.18325 16.993 10.9985 18.684L10.9997 18.6835L11.0009 18.684C14.8163 16.9929 19.5016 13.4547 19.4788 8.8309Z"
+      stroke={color}
+      strokeWidth="1.5"
+      strokeLinecap="square"
+    />
+  </svg>
+);
+
 export {
   CheckIcon,
   FireIcon,
@@ -476,4 +493,5 @@ export {
   EditIcon,
   TableViewFilterIcon,
   ListViewFilterIcon,
+  HeartIcon
 };

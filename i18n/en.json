@@ -59,5 +59,9 @@
     "step3Desc": "Determine the Supply and Decimals of your Token.", 
     "step4Desc": "Add more information about token: website, twitter (X), telegram, discord ... (optional)", 
     "step5Desc": "Click on create, accept the transaction on your wallet and wait until your tokens ready."
+  },
+  "pump": {
+    "trades": "Trades",
+    "thread": "Thread"
   }
 }
