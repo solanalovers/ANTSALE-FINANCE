@@ -4,7 +4,6 @@ import "@solana/wallet-adapter-react-ui/styles.css";
 import { ProviderWrapper } from "@/provider/ProviderWrapper";
 import { Inter } from "next/font/google";
 import { CookiesProvider } from "next-client-cookies/server";
-import { inter } from "@/utils/fonts";
 
 export const metadata: Metadata = {
   title: "Antsale",
@@ -23,7 +22,6 @@ export default function RootLayout({
     <html
       lang={locale}
       suppressHydrationWarning
-      className={`${inter.className}`}
     >
       <body>
         <CookiesProvider>

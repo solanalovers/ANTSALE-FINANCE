@@ -1,11 +1,28 @@
 "use client";
 import DefaultLayout from "@/components/layout/DefaultLayout";
-import React from "react";
+import Loading from "@/components/loading";
+import { inter } from "@/utils/fonts";
+import React, { Suspense, useEffect, useState } from "react";
 
 export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <DefaultLayout>{children}</DefaultLayout>;
+  const [isLoaded, setIsLoaded] = useState(false);
+  useEffect(() => {
+    const loaded = setTimeout(() => {
+      setIsLoaded(true);
+    }, 500);
+
+    return () => clearTimeout(loaded);
+  }, []);
+  if (!isLoaded) return <Loading />;
+  return (
+    <Suspense fallback={<Loading />}>
+      <div style={{ fontFamily: inter.style.fontFamily }}>
+        <DefaultLayout>{children}</DefaultLayout>;
+      </div>
+    </Suspense>
+  );
 }
