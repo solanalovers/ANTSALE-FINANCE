@@ -29,6 +29,7 @@ export type Project = {
   presaleRate?: number;
   listingRate?: number;
   refundType: RefundType;
+  totalSale?: number
 };
 
 export enum ProjectType {

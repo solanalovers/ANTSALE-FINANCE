@@ -77,7 +77,7 @@ export default function CreateFairLaunchStep1() {
             classNames={{ input: "placeholder:text-[#8E8E93]" }}
             variant="bordered"
             label="Token Address"
-            placeholder="HG1s2n414ke6yrDi3ZHnbDTHuP2ANMiwuR4DnJRZ6Kqu"
+            placeholder="0x912CE59144191C1204E64559 E8253a0e49E6548"
             onChange={(e) => handleChangeForm({ tokenAddress: e.target.value })}
           />
           <div className="mt-2 flex flex-col gap-y-1">
@@ -92,13 +92,13 @@ export default function CreateFairLaunchStep1() {
                 <p className="text-xs leading-5 text-[#8E8E93]">
                   Symbol: {form?.tokenInfo?.symbol}
                 </p>
-                <p className="text-xs leading-5 text-[#8E8E93]">
+                <p className='text-xs leading-5 text-[#8E8E93]'>
                   Total Supply: {form?.tokenInfo?.supply}
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
                   Decimals: {form?.tokenInfo?.decimals}
                 </p>
-                <p className="text-xs leading-5 text-[#8E8E93]">
+                <p className='text-xs leading-5 text-[#8E8E93]'>
                   Your balance: {form?.tokenInfo?.balance}
                 </p>
               </>
@@ -109,32 +109,40 @@ export default function CreateFairLaunchStep1() {
           <RadioGroup
             label="Currency"
             className={"text-sm leading-5"}
-            value={form.currency}
+            value={form?.currency}
+            onChange={(e) => {
+              handleChangeForm({ currency: e.target.value });
+            }}
           >
-            <Radio value="SOL">
+            <Radio value="sol">
               <p className={"text-sm leading-5"}>
-                {form.currency} (User will pay with {form.currency} for your
-                token)
+                SOL (User will pay with SOL for your token)
               </p>
             </Radio>
           </RadioGroup>
           <RadioGroup
             label="Fee options"
             className={"text-sm leading-5"}
-            value={form?.feeOption.toString()}
+            value={form?.feeOption?.toString()}
+            onChange={(e) => {
+              handleChangeForm({ feeOption: e.target.value });
+            }}
           >
-            <Radio value={form.feeOption.toString()}>
+            <Radio value="5%">
               <p className={"text-sm leading-5"}>
-                {form.feeOption}% SOL raised only (no hidden fees)
+                5% SOL raised only (no hidden fees)
               </p>
             </Radio>
           </RadioGroup>
           <RadioGroup
             label="Listing Options"
             className={"text-sm leading-5"}
+            onChange={(e) =>
+              handleChangeForm({ listingOption: e.target.value })
+            }
             value={form?.listingOption}
           >
-            <Radio value={ListingOption.AutoListing}>
+            <Radio value="auto">
               <p className={"text-sm leading-5"}>Auto Listing</p>
             </Radio>
           </RadioGroup>
@@ -164,8 +172,8 @@ export default function CreateFairLaunchStep1() {
             value={form?.saleType}
           >
             <SelectItem
-              key={"Public"}
-              value={"Public"}
+              key={"public"}
+              value={"public"}
             >
               Public
             </SelectItem>
@@ -176,16 +184,34 @@ export default function CreateFairLaunchStep1() {
             variant="bordered"
             label="Total Selling Amount"
             placeholder="0"
-            type="number"
-            isInvalid={
-              form.totalSellingAmount !== undefined &&
-              form.totalSellingAmount < 1
-            }
-            errorMessage={`Total Selling Amount must be bigger than 0`}
-            onChange={(e) =>
-              handleChangeForm({ totalSellingAmount: Number(e.target.value) })
-            }
-            value={form?.totalSellingAmount?.toString()}
+            onBlur={() => {
+              if (form?.totalSale) {
+                handleChangeForm({
+                  presaleRate: Number(
+                    form?.totalSale
+                  )?.toLocaleString(),
+                });
+              }
+            }}
+            onFocus={() => {
+              if (form?.totalSale) {
+                handleChangeForm({
+                  totalSale: parseFloat(
+                    form?.totalSale?.toString()?.replace(/,/g, "")
+                  ),
+                });
+              }
+            }}
+            onChange={(e) => {
+              if (!e.target.value || !Number.isNaN(Number(e.target.value))) {
+                handleChangeForm({
+                  totalSale: e.target.value,
+                });
+              } else {
+                e.target.value = "";
+              }
+            }}
+            value={form?.totalSale?.toString()}
           />
           <div>
             <Input
@@ -193,23 +219,46 @@ export default function CreateFairLaunchStep1() {
               variant="bordered"
               label="Softcap"
               placeholder="0"
-              endContent={
-                <p className="text-sm text-default-500">{form.currency}</p>
-              }
-              isInvalid={form.softCap !== undefined && form.softCap < 1}
-              errorMessage={`Softcap minimum must be 1 ${form?.currency}`}
-              type="number"
-              onChange={(e) =>
-                handleChangeForm({ softCap: Number(e.target.value) })
-              }
+              endContent={<p className="text-sm text-default-500">SOL</p>}
+              onBlur={() => {
+                if (form?.softCap) {
+                  handleChangeForm({
+                    presaleRate: Number(
+                      form?.softCap
+                    )?.toLocaleString(),
+                  });
+                }
+              }}
+              onFocus={() => {
+                if (form?.softCap) {
+                  handleChangeForm({
+                    softCap: parseFloat(
+                      form?.softCap?.toString()?.replace(/,/g, "")
+                    ),
+                  });
+                }
+              }}
+              onChange={(e) => {
+                if (!e.target.value || !Number.isNaN(Number(e.target.value))) {
+                  handleChangeForm({
+                    softCap: e.target.value,
+                  });
+                } else {
+                  e.target.value = "";
+                }
+              }}
               value={form?.softCap?.toString()}
             />
+            <p className="text-[#1C1C1E] text-xs mt-1">
+              Softcap minimum must be 1 SOL
+            </p>
           </div>
         </div>
         <Checkbox
           className="text-sm leading-5 mb-3"
           radius="none"
           size="sm"
+          value={form?.isMaxBuy?.toString()}
           onChange={(e) => {
             handleChangeForm({ isMaxBuy: e.target.checked });
           }}
@@ -221,12 +270,35 @@ export default function CreateFairLaunchStep1() {
           variant="bordered"
           label="Max Buy"
           placeholder="0"
-          type="number"
           endContent={<p className="text-sm text-default-500">SOL</p>}
-          isDisabled={!form.isMaxBuy}
-          isInvalid={form.maxBuy !== undefined && form.maxBuy <= 0}
-          errorMessage={`Max buy must be bigger than 0`}
-          onChange={(e) => handleChangeForm({ maxBuy: Number(e.target.value) })}
+          isDisabled={!form?.isMaxBuy}
+          onBlur={() => {
+            if (form?.maxBuy) {
+              handleChangeForm({
+                maxBuy: Number(
+                  form?.maxBuy
+                )?.toLocaleString(),
+              });
+            }
+          }}
+          onFocus={() => {
+            if (form?.maxBuy) {
+              handleChangeForm({
+                presaleRate: parseFloat(
+                  form?.maxBuy?.toString()?.replace(/,/g, "")
+                ),
+              });
+            }
+          }}
+          onChange={(e) => {
+            if (!e.target.value || !Number.isNaN(Number(e.target.value))) {
+              handleChangeForm({
+                maxBuy: e.target.value,
+              });
+            } else {
+              e.target.value = "";
+            }
+          }}
           value={form?.maxBuy?.toString()}
         />
         <div className="grid grid-cols-2 gap-6 mt-6">
@@ -255,17 +327,15 @@ export default function CreateFairLaunchStep1() {
               variant="bordered"
               label="Liquidity Percent (%)"
               placeholder="51"
-              type="number"
-              isInvalid={
-                form.liquidityPercent !== undefined &&
-                (form.liquidityPercent > 100 || form.liquidityPercent < 20)
-              }
-              errorMessage="Liquidity percent must be between 20-100%"
               onChange={(e) =>
-                handleChangeForm({ liquidityPercent: Number(e.target.value) })
+                handleChangeForm({ liquidityPercent: e.target.value })
               }
               value={form?.liquidityPercent?.toString()}
             />
+            <p className="text-[#1C1C1E] text-xs mt-1">
+              Enter the percentage of raised funds that should be allocated to
+              Liquidity on (Min 20%, Max 100%)
+            </p>
           </div>
           <DatePicker
             classNames={{ input: "placeholder:text-[#8E8E93]" }}
@@ -282,62 +352,66 @@ export default function CreateFairLaunchStep1() {
             variant="bordered"
             showMonthAndYearPickers
             defaultValue={now("Etc/Universal")}
-            onChange={(e) => {
-              handleChangeForm({ endTime: e });
-            }}
+            onChange={(e) => handleChangeForm({ endTime: e })}
             value={form?.endTime}
           />
-          <Select
-            classNames={{
-              value: `placeholder:text-[#8E8E93] ${
-                form?.liquidityType && "text-black"
-              }`,
-            }}
-            variant="bordered"
-            label="Liquidity Type"
-            placeholder="Auto Locking"
-            onChange={(e) => {
-              if (e.target.value) {
-                handleChangeForm({ liquidityType: e.target.value });
-              }
-            }}
-            value={form?.liquidityType}
-          >
-            <SelectItem
-              key={"Auto Locking"}
-              value={"Auto Locking"}
-            >
-              Auto Locking
-            </SelectItem>
-            <SelectItem
-              key={"Auto Burning"}
-              value={"Auto Burning"}
-            >
-              Auto Burning
-            </SelectItem>
-          </Select>
-          <div>
-            <Input
-              classNames={{ input: "placeholder:text-[#8E8E93]" }}
-              variant="bordered"
-              label="Liquidity Lockup Time"
-              placeholder="0"
-              endContent={<p className="text-sm text-default-500">Minutes</p>}
-              isDisabled={form?.liquidityType === "Auto Burning"}
-              onChange={(e) => {
-                handleChangeForm({
-                  liquidityLockupTime: Number(e.target.value),
-                });
-              }}
-              type="number"
-              min={43200}
-              isRequired
-              value={form?.liquidityLockupTime?.toString()}
-            />
-            <p className="text-[#1C1C1E] text-xs mt-1">
-              Liquidity lock up time must be greater than 30 days
-            </p>
-          </div>
+              <Select
+                classNames={{
+                  value: `placeholder:text-[#8E8E93] ${
+                    form?.liquidityType && "text-black"
+                  }`,
+                }}
+                variant="bordered"
+                label="Liquidity Type"
+                placeholder="Auto Listing"
+                onChange={(e) => {
+                  if (e.target.value) {
+                    handleChangeForm({ liquidityType: e.target.value });
+                  }
+                }}
+                value={form?.liquidityType}
+              >
+                <SelectItem
+                  key={"Auto Locking"}
+                  value={"Auto Locking"}
+                >
+                  Auto Locking
+                </SelectItem>
+                <SelectItem
+                  key={"Auto Burning"}
+                  value={"Auto Burning"}
+                >
+                  Auto Burning
+                </SelectItem>
+              </Select>
+              <div>
+                <Input
+                  // {...requiredField(form?.liquidityLockupTime)}
+                  classNames={{ input: "placeholder:text-[#8E8E93]" }}
+                  variant="bordered"
+                  label="Liquidity Lockup Time"
+                  placeholder="0"
+                  isDisabled={form?.liquidityType === "Auto Burning"}
+                  isRequired
+                  type="number"
+                  min={43200}
+                  endContent={
+                    <p className="text-sm text-default-500">Minutes</p>
+                  }
+                  onChange={(e) => {
+                      handleChangeForm({ liquidityLockupTime: e.target.value });
+                  }}
+                  onBlur={() => {
+                    if (!form?.liquidityLockupTime) {
+                      handleChangeForm({ liquidityLockupTime: "" });
+                    }
+                  }}
+                  value={form?.liquidityLockupTime?.toString()}
+                />
+                <p className="text-[#1C1C1E] text-xs mt-1">
+                  Liquidity lock up time must be greater than 30 days
+                </p>
+              </div>
         </div>
         {form?.tokenInfo?.name && (
           <div className="rounded-lg overflow-hidden mt-6">
