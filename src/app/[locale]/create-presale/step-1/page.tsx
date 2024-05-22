@@ -140,7 +140,7 @@ export default function CreatePresaleStep1() {
               handleChangeForm({ currency: e.target.value });
             }}
           >
-            <Radio value="sol">
+            <Radio value="SOL">
               <p className={"text-sm leading-5"}>
                 SOL (User will pay with SOL for your token)
               </p>
@@ -154,7 +154,7 @@ export default function CreatePresaleStep1() {
               handleChangeForm({ feeOption: e.target.value });
             }}
           >
-            <Radio value="5%">
+            <Radio value="5">
               <p className={"text-sm leading-5"}>
                 5% SOL raised only (no hidden fees)
               </p>
@@ -169,10 +169,10 @@ export default function CreatePresaleStep1() {
             }
             value={form?.listingOption}
           >
-            <Radio value="auto">
+            <Radio value={ListingOption.AutoListing}>
               <p className={"text-sm leading-5"}>Auto Listing</p>
             </Radio>
-            <Radio value="manual">
+            <Radio value={ListingOption.ManualListing}>
               <p className={"text-sm leading-5"}>Manual Listing</p>
             </Radio>
           </RadioGroup>
@@ -180,7 +180,7 @@ export default function CreatePresaleStep1() {
         <div className="rounded-lg overflow-hidden">
           <ToastItem
             content={
-              form?.listingOption === "Auto Listing"
+              form?.listingOption === ListingOption.AutoListing
                 ? "For auto listing, after you finalize the pool your token will be auto listed on DEX"
                 : "For manual listing, AntSale won't charge tokens for liquidity.</br>You may withdraw SOL after the pool ends then do DEX listing yourself."
             }
@@ -573,21 +573,20 @@ export default function CreatePresaleStep1() {
               </Select>
               <div>
                 <Input
-                  {...requiredField(form?.liquidityLockupTime)}
+                  // {...requiredField(form?.liquidityLockupTime)}
                   classNames={{ input: "placeholder:text-[#8E8E93]" }}
                   variant="bordered"
                   label="Liquidity Lockup Time"
                   placeholder="0"
                   isDisabled={form?.liquidityType === "Auto Burning"}
+                  isRequired
                   type="number"
                   min={43200}
                   endContent={
                     <p className="text-sm text-default-500">Minutes</p>
                   }
                   onChange={(e) => {
-                    if (e.target.value) {
                       handleChangeForm({ liquidityLockupTime: e.target.value });
-                    }
                   }}
                   onBlur={() => {
                     if (!form?.liquidityLockupTime) {

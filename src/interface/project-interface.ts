@@ -29,11 +29,18 @@ export type Project = {
   presaleRate?: number;
   listingRate?: number;
   refundType: RefundType;
+  totalSale?: number
 };
 
 export enum ProjectType {
   Presale = 'Presale',
   FairLaunch = 'FairLaunch',
+}
+
+export enum PriceModel {
+  fixedPrice = 'fixed-price',
+  multiPrice = 'multi-price',
+  purchaseCurrency = 'purchase-currency'
 }
 
 export enum ListingOption {

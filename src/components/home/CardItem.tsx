@@ -36,7 +36,7 @@ export default function CardItem({ data }: CardItemProps) {
         <CustomAvatar tokenAvatar={data.tokenAvatar} />
         <div className="flex items-end flex-col">
           <Chips status={data.status} />
-          <div className="flex items-center gap-x-1 mt-2">
+          {/* <div className="flex items-center gap-x-1 mt-2">
             <Chip
               color="secondary"
               className="rounded-lg text-sm leading-5"
@@ -55,7 +55,7 @@ export default function CardItem({ data }: CardItemProps) {
             >
               KYC
             </Chip>
-          </div>
+          </div> */}
         </div>
       </CardHeader>
       <CardBody className="p-0 mt-[30px]">
