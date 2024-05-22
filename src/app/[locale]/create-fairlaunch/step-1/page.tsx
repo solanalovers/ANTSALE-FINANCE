@@ -114,7 +114,7 @@ export default function CreateFairLaunchStep1() {
               handleChangeForm({ currency: e.target.value });
             }}
           >
-            <Radio value="sol">
+            <Radio value="SOL">
               <p className={"text-sm leading-5"}>
                 SOL (User will pay with SOL for your token)
               </p>
@@ -128,7 +128,7 @@ export default function CreateFairLaunchStep1() {
               handleChangeForm({ feeOption: e.target.value });
             }}
           >
-            <Radio value="5%">
+            <Radio value="5">
               <p className={"text-sm leading-5"}>
                 5% SOL raised only (no hidden fees)
               </p>
@@ -142,7 +142,7 @@ export default function CreateFairLaunchStep1() {
             }
             value={form?.listingOption}
           >
-            <Radio value="auto">
+            <Radio value={ListingOption.AutoListing}>
               <p className={"text-sm leading-5"}>Auto Listing</p>
             </Radio>
           </RadioGroup>
