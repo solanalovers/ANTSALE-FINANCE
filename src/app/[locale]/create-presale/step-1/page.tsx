@@ -98,7 +98,7 @@ export default function CreatePresaleStep1() {
             classNames={{ input: "placeholder:text-[#8E8E93]" }}
             variant="bordered"
             label="Token Address"
-            placeholder="0x912CE59144191C1204E64559 E8253a0e49E6548"
+            placeholder="HG1s2n414ke6yrDi3ZHnbDTHuP2ANMiwuR4DnJRZ6Kqu"
             onChange={(e) => handleChangeForm({ tokenAddress: e.target.value })}
             onBlur={() => {
               if (!form?.tokenAddress) {

@@ -18,12 +18,18 @@ const getTokenData = async (
       token: tokenAddress,
     });
 
+    const res1 = await shyft.token.getInfo({
+      tokenAddress: tokenAddress,
+    });
+
+    console.log(res, res1);
+
     return {
       name: res?.info?.name,
       symbol: res?.info?.symbol,
       decimals: Number(res?.info?.decimals),
       balance: Number(res?.balance),
-      supply: Number(res?.balance),
+      supply: Number(res1?.current_supply),
     };
   } catch (err) {
     console.error('Error: ', err);
