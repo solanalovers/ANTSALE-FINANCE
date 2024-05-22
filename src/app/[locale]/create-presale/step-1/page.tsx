@@ -586,9 +586,7 @@ export default function CreatePresaleStep1() {
                     <p className="text-sm text-default-500">Minutes</p>
                   }
                   onChange={(e) => {
-                    if (e.target.value) {
                       handleChangeForm({ liquidityLockupTime: e.target.value });
-                    }
                   }}
                   onBlur={() => {
                     if (!form?.liquidityLockupTime) {
