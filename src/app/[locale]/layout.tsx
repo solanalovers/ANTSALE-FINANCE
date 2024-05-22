@@ -1,6 +1,6 @@
 "use client";
 import DefaultLayout from "@/components/layout/DefaultLayout";
-import Loading from "@/components/loading";
+import Loading from "@/components/Loading";
 import { inter } from "@/utils/fonts";
 import React, { Suspense, useEffect, useState } from "react";
 
