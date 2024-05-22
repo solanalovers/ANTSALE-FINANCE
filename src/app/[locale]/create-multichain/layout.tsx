@@ -29,13 +29,14 @@ export default function Layout({ children }: { children: ReactNode }) {
             listStep={listStep}
           />
           {children}
-          {/* <CreateSaleFooter
+          <CreateSaleFooter
             isFirst={step === 1}
             isLast={step === listStep.length}
             step={step}
             finalText="CREATE MULTICHAIN-LAUNCH"
             currentRoute={currentRoute}
-          /> */}
+            context={CreateMultiChainContext}
+          />
         </BorderContent>
       </div>
     </CreateMultiChainProvider>
