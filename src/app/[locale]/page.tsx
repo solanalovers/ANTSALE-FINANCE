@@ -1,8 +1,13 @@
 "use client";
 import Banner from "@/components/Banner";
-import HomeFilter from "@/components/home/HomeFilter";
-import HomeList from "@/components/home/HomeList";
+import dynamic from "next/dynamic";
 import React, { useState } from "react";
+const HomeList = dynamic(() => import('@/components/home/HomeList'), {
+  ssr: false,
+})
+const HomeFilter = dynamic(() => import('@/components/home/HomeFilter'), {
+  ssr: false,
+})
 
 export default function Home() {
   const [currentList, setCurrentlist] = useState<any>('presale')
