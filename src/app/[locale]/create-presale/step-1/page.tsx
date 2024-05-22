@@ -140,7 +140,7 @@ export default function CreatePresaleStep1() {
               handleChangeForm({ currency: e.target.value });
             }}
           >
-            <Radio value="sol">
+            <Radio value="SOL">
               <p className={"text-sm leading-5"}>
                 SOL (User will pay with SOL for your token)
               </p>
@@ -154,7 +154,7 @@ export default function CreatePresaleStep1() {
               handleChangeForm({ feeOption: e.target.value });
             }}
           >
-            <Radio value="5%">
+            <Radio value="5">
               <p className={"text-sm leading-5"}>
                 5% SOL raised only (no hidden fees)
               </p>
@@ -573,12 +573,13 @@ export default function CreatePresaleStep1() {
               </Select>
               <div>
                 <Input
-                  {...requiredField(form?.liquidityLockupTime)}
+                  // {...requiredField(form?.liquidityLockupTime)}
                   classNames={{ input: "placeholder:text-[#8E8E93]" }}
                   variant="bordered"
                   label="Liquidity Lockup Time"
                   placeholder="0"
                   isDisabled={form?.liquidityType === "Auto Burning"}
+                  isRequired
                   type="number"
                   min={43200}
                   endContent={
