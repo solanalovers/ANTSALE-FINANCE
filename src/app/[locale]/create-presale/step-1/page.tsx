@@ -169,10 +169,10 @@ export default function CreatePresaleStep1() {
             }
             value={form?.listingOption}
           >
-            <Radio value="auto">
+            <Radio value={ListingOption.AutoListing}>
               <p className={"text-sm leading-5"}>Auto Listing</p>
             </Radio>
-            <Radio value="manual">
+            <Radio value={ListingOption.ManualListing}>
               <p className={"text-sm leading-5"}>Manual Listing</p>
             </Radio>
           </RadioGroup>
@@ -180,7 +180,7 @@ export default function CreatePresaleStep1() {
         <div className="rounded-lg overflow-hidden">
           <ToastItem
             content={
-              form?.listingOption === "Auto Listing"
+              form?.listingOption === ListingOption.AutoListing
                 ? "For auto listing, after you finalize the pool your token will be auto listed on DEX"
                 : "For manual listing, AntSale won't charge tokens for liquidity.</br>You may withdraw SOL after the pool ends then do DEX listing yourself."
             }
