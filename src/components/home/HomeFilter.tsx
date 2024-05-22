@@ -25,15 +25,16 @@ export default function HomeFilter({
       >
         <Tab
           key="presale"
-          title={t('presale')}
+          title={t("presale")}
         />
         <Tab
           key="fairlaunch"
-          title={t('fairlaunch')}
+          title={t("fairlaunch")}
         />
         <Tab
+          isDisabled
           key="multichain"
-          title={t('multichain')}
+          title={t("multichain")}
         />
       </Tabs>
       <Input
