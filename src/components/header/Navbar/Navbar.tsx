@@ -16,7 +16,7 @@ export default function Navbar() {
   const navlink = [
     {
       label: "project",
-      value: `/${locale}`,
+      value: `/${locale}/list`,
     },
     {
       label: "token",

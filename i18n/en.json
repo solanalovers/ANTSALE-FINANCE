@@ -49,19 +49,85 @@
   "createToken": {
     "connect": "Connect your wallet",
     "cost": "Cost to deploy",
-    "step1": "Step 1", 
-    "step2": "Step 2", 
-    "step3": "Step 3", 
-    "step4": "Step 4", 
+    "step1": "Step 1",
+    "step2": "Step 2",
+    "step3": "Step 3",
+    "step4": "Step 4",
     "step5": "Step 5",
-    "step1Desc": "Connect your Solana wallet", 
-    "step2Desc": "Specify the token name, token symbol, token image", 
-    "step3Desc": "Determine the Supply and Decimals of your Token.", 
-    "step4Desc": "Add more information about token: website, twitter (X), telegram, discord ... (optional)", 
+    "step1Desc": "Connect your Solana wallet",
+    "step2Desc": "Specify the token name, token symbol, token image",
+    "step3Desc": "Determine the Supply and Decimals of your Token.",
+    "step4Desc": "Add more information about token: website, twitter (X), telegram, discord ... (optional)",
     "step5Desc": "Click on create, accept the transaction on your wallet and wait until your tokens ready."
   },
   "pump": {
     "trades": "Trades",
     "thread": "Thread"
+  },
+  "landing": {
+    "hero": {
+      "title": "The Web3 Crowdfunding platform",
+      "content1": "Join AntSale in building a future where your online socialgraph is owned and built by you, not companies.",
+      "content2": "Download the app and start building your own network, powered by Lens Protocol, CyberConnect and dozens of the coolest projects in Web3."
+    },
+    "ads": {
+      "seed": "Seed",
+      "token": "Tokenomics",
+      "seedSale": "Seed sale",
+      "fairlaunchSale": "Fairlaunch sale",
+      "liquidity": "Liquidity",
+      "cex": "CEX listing",
+      "dev": "Dev team",
+      "airdrop": "Airdrop",
+      "total": "Total supply",
+      "maxSupply": "Max supply",
+      "howtobuy": "How to buy with",
+      "faq1": "Press “ Buy Now” above and connect wallet",
+      "faq2": "Enter amount of SOL to swap for $ANTF",
+      "faq3": "Hit “Buy Now” again and confirm transaction",
+      "fairContent1": "If you can’t connect your wallet just send SOL to ",
+      "fairContent2": " and tokens will be airdropped to the sending wallet NB: Don’t use a CEX to send SOL! Use your own wallet",
+      "fairlaunch": "Fairlaunch",
+      "goal": "Our goal for the seed sale is to raise a minimum of 200 SOL and a maximum of 1000 SOL. This is a great opportunity to participate in as it is a one-time sale only.",
+      "buy": "BUY NOW",
+      "saleStart": "Sale Starts In",
+      "amount": "Amount (MAX: 5 ",
+      "max": "MAX"
+    },
+    "why": {
+      "open": {
+        "tag": "open",
+        "title": "Everyone is welcome",
+        "content-1": "No whitelists or hoops to jump through, just use with your wallets and start fund raising or investing.",
+        "content-2": "Soon users will also be able to create their first wallet when signing up, without any added complexities."
+      },
+      "multi-chain": {
+        "tag": "MULTI-CHAIN",
+        "title": "Bring your own socials",
+        "content-1": "Connect your Lens Protocol and CyberConnect accounts to take your posting and following on-chain.",
+        "content-2": "Everything in your wallets can be used as a building block of your own social graph."
+      },
+      "multi-gamingfy": {
+        "tag": "MULTI-GAMIFIED",
+        "title": "Build up your Cred",
+        "content-1": "Connect your Web3 collectibles, badges and credentials and build up your credibility to level up and receive unique perks!"
+      },
+      "reward": {
+        "tag": "REWARDING",
+        "title": "Get rewarded fairly",
+        "content-1": "Gamified and farming-resistant reward mechanisms ensure the right people earn Phaver Points and future token rewards for their contributions."
+      }
+    },
+    "partner": "Our partners",
+    "roadmap": {
+      "title": "Take a peek at our Roadmap",
+      "description": "Learn more about the future plans, Solana’s economy and AntSale's vision for more ethical social media",
+      "btn": "VIEW ROADMAP"
+    },
+    "join": {
+      "content1": "Join over million others.",
+      "content2": "Start using",
+      "content3": "today"
+    }
   }
 }

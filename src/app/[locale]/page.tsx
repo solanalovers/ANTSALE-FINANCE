@@ -1,23 +1,23 @@
 "use client";
-import Banner from "@/components/Banner";
-import dynamic from "next/dynamic";
-import React, { useState } from "react";
-const HomeList = dynamic(() => import('@/components/home/HomeList'), {
-  ssr: false,
-})
-const HomeFilter = dynamic(() => import('@/components/home/HomeFilter'), {
-  ssr: false,
-})
+import ANTFAds from "@/components/LandingPage/ANTFAds";
+import Hero from "@/components/LandingPage/Hero";
+import JoinWithUs from "@/components/LandingPage/JoinWithUs";
+import Partner from "@/components/LandingPage/Partner";
+import Roadmap from "@/components/LandingPage/Roadmap";
+import Why from "@/components/LandingPage/Why";
+import React from "react";
 
-export default function Home() {
-  const [currentList, setCurrentlist] = useState<any>('presale')
+export default function HomePage() {
   return (
-    <div>
-      {/* <Banner /> */}
-      <div className="container mx-auto mt-10">
-        <HomeFilter currentList={currentList} setCurrentList={setCurrentlist}/>
-        <HomeList currentList={currentList}/>
+    <div className="my-[3vw] flex flex-col gap-y-[3vw]">
+      <div className="container mx-auto flex flex-col gap-y-[3vw]">
+        <Hero />
+        <ANTFAds />
+        <Why />
+        <Partner />
+        <Roadmap />
       </div>
+      <JoinWithUs />
     </div>
   );
 }
