@@ -69,7 +69,7 @@ const MainContent = ({
         <Input
           placeholder="0"
           label={`${t("ads.amount")} ${
-            publicKey ? `(${t("ads.max")}: ${balance} SOL)` : ""
+            publicKey ? `(Your balances: ${balance} SOL)` : ""
           }`}
           onChange={(e) => {
             if (
