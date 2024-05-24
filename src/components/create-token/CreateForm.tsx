@@ -122,6 +122,7 @@ export default function CreateForm() {
         listStep={listStep}
         step={1}
         active
+        type='createToken'
       />
       <CustomDivider />
       <RadioGroup

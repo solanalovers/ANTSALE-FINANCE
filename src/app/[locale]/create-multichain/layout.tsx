@@ -27,6 +27,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           <Stepper
             step={step}
             listStep={listStep}
+            type="createSale"
           />
           {children}
           <CreateSaleFooter

@@ -60,9 +60,18 @@
     "step4Desc": "Add more information about token: website, twitter (X), telegram, discord ... (optional)",
     "step5Desc": "Click on create, accept the transaction on your wallet and wait until your tokens ready."
   },
+  "createSale": {
+    "step1": "Verify Token & Config Launchpad",
+    "step2": "Add Additional Info",
+    "step3": "Finalize",
+    "step1Desc": "Enter the token address and launchpad info",
+    "step2Desc": "Let people know who you are",
+    "step3Desc": "Review your information"
+  },
   "pump": {
     "trades": "Trades",
-    "thread": "Thread"
+    "thread": "Thread",
+    "detail": {}
   },
   "landing": {
     "hero": {
@@ -89,7 +98,7 @@
       "fairContent2": " and tokens will be airdropped to the sending wallet NB: Don’t use a CEX to send SOL! Use your own wallet",
       "fairlaunch": "Fairlaunch",
       "seedDesc": "Our goal for the seed sale is to raise a minimum of 200 SOL and a maximum of 1000 SOL. This is a great opportunity to participate in as it is a one-time sale only.",
-      "fairlaunchDesc":"All SOL raised during the Fairlaunch Sale will be used to create liquidity on DEXs and invest in the first 100 projects listed on AntSale, with each project receiving an investment of 20-50 SOL. All tokens obtained from these investments will be airdropped back to users who stake ANTF for at least 30 days.",
+      "fairlaunchDesc": "All SOL raised during the Fairlaunch Sale will be used to create liquidity on DEXs and invest in the first 100 projects listed on AntSale, with each project receiving an investment of 20-50 SOL. All tokens obtained from these investments will be airdropped back to users who stake ANTF for at least 30 days.",
       "buy": "BUY NOW",
       "saleStart": "Sale Starts In",
       "amount": "Amount",

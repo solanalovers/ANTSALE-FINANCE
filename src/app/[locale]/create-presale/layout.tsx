@@ -25,7 +25,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       {/* <Banner /> */}
       <div className='container mx-auto mt-10'>
         <BorderContent>
-          <Stepper step={step} listStep={listStep} />
+          <Stepper step={step} listStep={listStep} type='createSale'/>
           {children}
           <CreateSaleFooter
             isFirst={step === 1}

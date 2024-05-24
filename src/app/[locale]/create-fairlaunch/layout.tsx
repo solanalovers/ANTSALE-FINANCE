@@ -1,14 +1,14 @@
-'use client';
-import Banner from '@/components/Banner';
-import Stepper from '@/components/Stepper';
-import CreateSaleFooter from '@/components/create-sale/CreateSaleFooter';
-import BorderContent from '@/components/detail/BorderContent';
-import { listStep } from '@/constant/listStep';
+"use client";
+import Banner from "@/components/Banner";
+import Stepper from "@/components/Stepper";
+import CreateSaleFooter from "@/components/create-sale/CreateSaleFooter";
+import BorderContent from "@/components/detail/BorderContent";
+import { listStep } from "@/constant/listStep";
 import CreateFairLaunchProvider, {
   CreateFairLaunchContext,
-} from '@/provider/CreateFairLaunchProvider';
-import { usePathname } from 'next/navigation';
-import React, { ReactNode, useEffect } from 'react';
+} from "@/provider/CreateFairLaunchProvider";
+import { usePathname } from "next/navigation";
+import React, { ReactNode, useEffect } from "react";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -21,15 +21,19 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <CreateFairLaunchProvider>
       {/* <Banner /> */}
-      <div className='container mx-auto mt-10'>
+      <div className="container mx-auto mt-10">
         <BorderContent>
-          <Stepper step={step} listStep={listStep} />
+          <Stepper
+            step={step}
+            listStep={listStep}
+            type="createSale"
+          />
           {children}
           <CreateSaleFooter
             isFirst={step === 1}
             isLast={step === listStep.length}
             step={step}
-            finalText='CREATE FAIRLAUNCH'
+            finalText="CREATE FAIRLAUNCH"
             currentRoute={currentRoute}
             context={CreateFairLaunchContext}
           />
