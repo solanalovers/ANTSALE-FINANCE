@@ -7,6 +7,7 @@ import useTrans from "@/hook/useTrans";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { AppContext } from "@/provider/AppProvider";
 import { SaleType } from "@/interface/project-interface";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 const ContentBox = ({ children }: { children: ReactNode }) => (
   <div
@@ -26,6 +27,7 @@ const MainContent = ({
   content: { image: string; saleType: string; desc: string };
 }) => {
   const t = useTrans("landing");
+  const t1 = useTrans("wallet");
   const saleEndTime = new Date();
   saleEndTime.setHours(saleEndTime.getHours() + 17);
   const [timer, setTimer] = useState("00:00:00:00");
@@ -86,7 +88,6 @@ const MainContent = ({
                 <p
                   className="absolute right-2 cursor-pointer"
                   onClick={() => {
-                    console.log("aaa");
                     if (publicKey) {
                       setAmount(balance);
                     }
@@ -103,14 +104,19 @@ const MainContent = ({
           classNames={{ inputWrapper: "bg-white" }}
         />
         <div className="w-[40%]">
-          <Button
+          <div
             color="primary"
-            size="lg"
-            className="w-full"
-            isDisabled={content.saleType === "Fairlaunch"}
+            className="w-full font-medium text-base leading-6 h-10 bg-primary relative hover:opacity-50 rounded-lg flex items-center justify-center text-white"
           >
-            {t("ads.buy")}
-          </Button>
+            {!publicKey ? (
+              <>
+                <WalletMultiButton />
+                {t1("connect")}
+              </>
+            ) : (
+              t("ads.buy")
+            )}
+          </div>
         </div>
       </div>
       <p className="text-[20px] leading-[28px] font-semibold text-[#1C1C1E]">

@@ -15,7 +15,8 @@ import useTrans from "@/hook/useTrans";
 
 export default function Header() {
   const { publicKey } = useWallet();
-  const t = useTrans('wallet');
+  const pathName = usePathname();
+  const t = useTrans("wallet");
 
   return (
     <div>
@@ -31,12 +32,14 @@ export default function Header() {
                 className="object-contain object-center"
               />
             </Link>
-            {/* <Input
-              variant="bordered"
-              className="flex-1 border-[base-default-200] placeholder:(text-[layout.foreground-500]) text-sm leading-5"
-              placeholder="Search"
-              startContent={<SearchIcon color={"#71717A"} />}
-            /> */}
+            {pathName.split("/")?.length > 2 && (
+              <Input
+                variant="bordered"
+                className="flex-1 border-[base-default-200] placeholder:(text-[layout.foreground-500]) text-sm leading-5"
+                placeholder="Search"
+                startContent={<SearchIcon color={"#71717A"} />}
+              />
+            )}
             <div className="flex gap-x-4 items-center">
               <ClusterSelect />
               <LocaleSelect />
@@ -44,7 +47,7 @@ export default function Header() {
                 <div className="h-10 py-2 px-[26px] bg-primary relative hover:opacity-50 rounded-lg">
                   <WalletMultiButton />
                   <p className="font-medium text-base leading-6 text-white">
-                    {t('connect')}
+                    {t("connect")}
                   </p>
                 </div>
               ) : (
@@ -57,7 +60,7 @@ export default function Header() {
         </div>
       </div>
       <div className={`border-b border-default-300`}>
-      <Navbar />
+        <Navbar />
       </div>
     </div>
   );
