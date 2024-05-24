@@ -106,16 +106,10 @@ const MainContent = ({
         <div className="w-[40%]">
           <div
             color="primary"
-            className="w-full font-medium text-base leading-6 h-10 bg-primary relative hover:opacity-50 rounded-lg flex items-center justify-center text-white"
+            className="w-full font-medium text-base leading-6 h-12 px-4 bg-primary relative hover:opacity-50 rounded-lg flex items-center justify-center text-white"
           >
-            {!publicKey ? (
-              <>
-                <WalletMultiButton />
-                {t1("connect")}
-              </>
-            ) : (
-              t("ads.buy")
-            )}
+            {!publicKey && <WalletMultiButton />}
+            {t("ads.buy")}
           </div>
         </div>
       </div>
