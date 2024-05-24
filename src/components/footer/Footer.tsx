@@ -12,7 +12,6 @@ export default function Footer() {
   const t = useTrans("footer");
 
   useEffect(() => {
-    console.log(theme);
     if (theme === "dark") {
       setMoonbg("#006FEE");
       setSunbg("#8E8E93");

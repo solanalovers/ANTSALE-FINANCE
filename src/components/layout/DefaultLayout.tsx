@@ -12,7 +12,6 @@ export default function DefaultLayout({ children }: any) {
 
   useEffect(() => {
     NProgress.done();
-    console.log("aaa");
     return () => {
       NProgress.start();
     };
