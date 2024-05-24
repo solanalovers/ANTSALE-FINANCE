@@ -28,7 +28,7 @@ const WhyItem = ({
         {title}
       </p>
       <p
-        className="font-medium text-[#1C1C1E] text-[1.146vw] leading-[1.563vw]"
+        className="text-[#1C1C1E] text-base leading-6"
         dangerouslySetInnerHTML={{ __html: content }}
       />
     </div>

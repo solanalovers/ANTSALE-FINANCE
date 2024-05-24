@@ -1,16 +1,18 @@
 import { countdownToSaleEnd } from "@/function/timer";
 import { Button, Image, Input } from "@nextui-org/react";
 import { Copy } from "iconsax-react";
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useContext, useEffect, useState } from "react";
 import CustomDivider from "../CustomDivider";
 import useTrans from "@/hook/useTrans";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { AppContext } from "@/provider/AppProvider";
 
 const ContentBox = ({ children }: { children: ReactNode }) => (
   <div
     className="bg-yellow-50 p-10 rounded-2xl"
     style={{
       boxShadow:
-        "0px 15px 10px -3px rgba(245,165,46,0.4), 0px 6px 4px -2px rgba(0,0,0,0.05)",
+        "0px 5px 15px -3px rgba(245,165,46,0.4), 0px 6px 4px -2px rgba(0,0,0,0.05)",
     }}
   >
     {children}
@@ -20,12 +22,16 @@ const ContentBox = ({ children }: { children: ReactNode }) => (
 const MainContent = ({
   content,
 }: {
-  content: { image: string; saleType: string };
+  content: { image: string; saleType: string, desc: string };
 }) => {
   const t = useTrans("landing");
   const saleEndTime = new Date();
   saleEndTime.setHours(saleEndTime.getHours() + 17);
   const [timer, setTimer] = useState("00:00:00:00");
+  const { publicKey } = useWallet();
+  const { balance } = useContext(AppContext);
+  const [amount, setAmount] = useState<number>(0);
+
   useEffect(() => {
     const countdown = setInterval(() => {
       const timeleft = countdownToSaleEnd(saleEndTime.toLocaleString());
@@ -42,7 +48,7 @@ const MainContent = ({
       <p className="text-[20px] leading-[34px] font-semibold text-[#1C1C1E] text-center">
         $ANTF <span className="font-bold">{content.saleType} Sale</span>
       </p>
-      <p className="text-center text-sm leading-[22px]">{t("ads.goal")}</p>
+      <p className="text-center text-sm leading-[22px]">{content.desc}</p>
       <div className="flex items-center gap-x-1">
         <p className="text-[13px] leading-[32px] text-[#1C1C1E] underline">
           9RFFhhe4XPV8UcBFJkgrDwGGtN3jmktBtw4RBia1bBVn
@@ -61,15 +67,42 @@ const MainContent = ({
       </div>
       <div className="grid grid-cols-2 items-center gap-x-4 w-full">
         <Input
-          type="number"
-          max={5}
           placeholder="0"
-          label={`${t("ads.amount")}SOL)`}
-          endContent={t("ads.max")}
+          label={`${t("ads.amount")} ${
+            publicKey ? `(${t("ads.max")}: ${balance} SOL)` : ""
+          }`}
+          onChange={(e) => {
+            if (
+              !e.target.value ||
+              !Number.isNaN(Number(e.target.value))
+            ) {
+              setAmount(Number(e.target.value))
+            } else {
+              e.target.value = "";
+            }
+          }}
+          value={amount?.toString()}
+          endContent={
+            <>
+              {publicKey && (
+                <p
+                  className="absolute right-2 cursor-pointer"
+                  onClick={() => {
+                    console.log("aaa");
+                    if (publicKey) {
+                      setAmount(balance);
+                    }
+                  }}
+                >
+                  {t("ads.max")}
+                </p>
+              )}
+            </>
+          }
           size="sm"
           variant="flat"
           color="default"
-          classNames={{inputWrapper: 'bg-white'}}
+          classNames={{ inputWrapper: "bg-white" }}
         />
         <Button
           color="primary"
@@ -99,6 +132,7 @@ export default function ANTFAds() {
           content={{
             saleType: t("ads.seed"),
             image: "/image/landing/seed.png",
+            desc: t("ads.seedDesc")
           }}
         />
         <Divider />
@@ -108,49 +142,49 @@ export default function ANTFAds() {
           </p>
           <ul className="list-disc ml-4 mt-6">
             <li>
-              <p className="text-[22px] leading-[30px]">
+              <p className="text-base leading-6">
                 <span className="font-medium">{t("ads.seedSale")}:</span>{" "}
                 100,000 ANTF (10%)
               </p>
             </li>
             <li>
-              <p className="text-[22px] leading-[30px]">
+              <p className="text-base leading-6">
                 <span className="font-medium">{t("ads.fairlaunchSale")}:</span>{" "}
                 500,000 ANTF (50%)
               </p>
             </li>
             <li>
-              <p className="text-[22px] leading-[30px]">
+              <p className="text-base leading-6">
                 <span className="font-medium">{t("ads.liquidity")}:</span>{" "}
                 200,000 ANTF (20%)
               </p>
             </li>
             <li>
-              <p className="text-[22px] leading-[30px]">
+              <p className="text-base leading-6">
                 <span className="font-medium">{t("ads.cex")}:</span> 100,000
                 ANTF (10%)
               </p>
             </li>
             <li>
-              <p className="text-[22px] leading-[30px]">
+              <p className="text-base leading-6">
                 <span className="font-medium">{t("ads.dev")}:</span> 50,000 ANTF
                 (5%)
               </p>
             </li>
             <li>
-              <p className="text-[22px] leading-[30px]">
+              <p className="text-base leading-6">
                 <span className="font-medium">{t("ads.airdrop")}:</span> 50,000
                 ANTF (5%)
               </p>
             </li>
             <li>
-              <p className="text-[22px] leading-[30px]">
+              <p className="text-base leading-6">
                 <span className="font-medium">{t("ads.total")}:</span> 1,000,000
                 ANTF
               </p>
             </li>
             <li>
-              <p className="text-[22px] leading-[30px]">
+              <p className="text-base leading-6">
                 <span className="font-medium">{t("ads.maxSupply")}:</span>{" "}
                 1,000,000 ANTF
               </p>
@@ -195,6 +229,7 @@ export default function ANTFAds() {
           content={{
             saleType: t("ads.fairlaunch"),
             image: "/image/landing/fairlaunch.png",
+            desc: t("ads.fairlaunchDesc")
           }}
         />
       </ContentBox>

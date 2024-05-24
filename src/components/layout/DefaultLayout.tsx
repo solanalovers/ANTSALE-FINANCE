@@ -19,7 +19,7 @@ export default function DefaultLayout({ children }: any) {
   }, [pathname, searchParams]);
   return (
     <div className="min-h-screen">
-      {pathname.split("/").length === 2 && <AdsItem content={`Introducing: <span class='font-semibold text-primary-500'>$ANTF Seed Sale!</span> Read more here or visit Magic Eden Launchpad for minting`} />}
+      {pathname.split("/").length === 2 && <AdsItem content={`Introducing: <span class='font-semibold text-primary-500'>$ANTF Seed Sale!</span> Once-in-a-lifetime opportunity in the blockchain space, don't miss out`} />}
       <Header />
       {children}
       <Footer />

@@ -88,10 +88,11 @@
       "fairContent1": "If you can’t connect your wallet just send SOL to ",
       "fairContent2": " and tokens will be airdropped to the sending wallet NB: Don’t use a CEX to send SOL! Use your own wallet",
       "fairlaunch": "Fairlaunch",
-      "goal": "Our goal for the seed sale is to raise a minimum of 200 SOL and a maximum of 1000 SOL. This is a great opportunity to participate in as it is a one-time sale only.",
+      "seedDesc": "Our goal for the seed sale is to raise a minimum of 200 SOL and a maximum of 1000 SOL. This is a great opportunity to participate in as it is a one-time sale only.",
+      "fairlaunchDesc":"All SOL raised during the Fairlaunch Sale will be used to create liquidity on DEXs and invest in the first 100 projects listed on AntSale, with each project receiving an investment of 20-50 SOL. All tokens obtained from these investments will be airdropped back to users who stake ANTF for at least 30 days.",
       "buy": "BUY NOW",
       "saleStart": "Sale Starts In",
-      "amount": "Amount (MAX: 5 ",
+      "amount": "Amount",
       "max": "MAX"
     },
     "why": {

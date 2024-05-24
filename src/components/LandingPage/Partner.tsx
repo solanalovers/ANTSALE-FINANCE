@@ -20,9 +20,14 @@ export default function Partner() {
   const t = useTrans("landing");
   return (
     <div>
-      <p className="mb-6 text-center p-[10px] text-[#1C1C1E] text-[2.083vw] leading-[2.5vw] font-bold">{t("partner")}</p>
-      <div className="flex items-center flex-wrap px-10 gap-[60px] justify-center">
-        {listPartner.map((value,idx)=><Image radius="none" key={idx} src={`/image/landing/partner/${value}.png`}/>)}
+      <p className="mb-6 text-center p-[10px] text-[#1C1C1E] text-[2.083vw] leading-[2.5vw] font-bold">
+        {t("partner")}
+      </p>
+      <div className="px-10">
+        <Image
+          radius="none"
+          src={`/image/landing/partner.png`}
+        />
       </div>
     </div>
   );
