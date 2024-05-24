@@ -31,12 +31,12 @@ export default function Header() {
                 className="object-contain object-center"
               />
             </Link>
-            <Input
+            {/* <Input
               variant="bordered"
               className="flex-1 border-[base-default-200] placeholder:(text-[layout.foreground-500]) text-sm leading-5"
               placeholder="Search"
               startContent={<SearchIcon color={"#71717A"} />}
-            />
+            /> */}
             <div className="flex gap-x-4 items-center">
               <ClusterSelect />
               <LocaleSelect />

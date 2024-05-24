@@ -6,6 +6,7 @@ import CustomDivider from "../CustomDivider";
 import useTrans from "@/hook/useTrans";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { AppContext } from "@/provider/AppProvider";
+import { SaleType } from "@/interface/project-interface";
 
 const ContentBox = ({ children }: { children: ReactNode }) => (
   <div
@@ -22,7 +23,7 @@ const ContentBox = ({ children }: { children: ReactNode }) => (
 const MainContent = ({
   content,
 }: {
-  content: { image: string; saleType: string, desc: string };
+  content: { image: string; saleType: string; desc: string };
 }) => {
   const t = useTrans("landing");
   const saleEndTime = new Date();
@@ -65,18 +66,15 @@ const MainContent = ({
           }
         />
       </div>
-      <div className="grid grid-cols-2 items-center gap-x-4 w-full">
+      <div className="flex items-center gap-x-4 w-full">
         <Input
           placeholder="0"
           label={`${t("ads.amount")} ${
             publicKey ? `(Your balances: ${balance} SOL)` : ""
           }`}
           onChange={(e) => {
-            if (
-              !e.target.value ||
-              !Number.isNaN(Number(e.target.value))
-            ) {
-              setAmount(Number(e.target.value))
+            if (!e.target.value || !Number.isNaN(Number(e.target.value))) {
+              setAmount(Number(e.target.value));
             } else {
               e.target.value = "";
             }
@@ -104,12 +102,16 @@ const MainContent = ({
           color="default"
           classNames={{ inputWrapper: "bg-white" }}
         />
-        <Button
-          color="primary"
-          size="lg"
-        >
-          {t("ads.buy")}
-        </Button>
+        <div className="w-[40%]">
+          <Button
+            color="primary"
+            size="lg"
+            className="w-full"
+            isDisabled={content.saleType === "Fairlaunch"}
+          >
+            {t("ads.buy")}
+          </Button>
+        </div>
       </div>
       <p className="text-[20px] leading-[28px] font-semibold text-[#1C1C1E]">
         {t("ads.saleStart")}{" "}
@@ -120,7 +122,23 @@ const MainContent = ({
 };
 
 const Divider = () => (
-  <div className="my-8 border-primary-300 border-t border-dashed" />
+  <div className="my-8">
+    <svg
+      width="100%"
+      height="1"
+      viewBox="0 0 100% 1"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <line
+        y1="0.5"
+        x2="100%"
+        y2="0.5"
+        stroke="#66AAF9"
+        stroke-dasharray="12 12"
+      />
+    </svg>
+  </div>
 );
 
 export default function ANTFAds() {
@@ -132,7 +150,7 @@ export default function ANTFAds() {
           content={{
             saleType: t("ads.seed"),
             image: "/image/landing/seed.png",
-            desc: t("ads.seedDesc")
+            desc: t("ads.seedDesc"),
           }}
         />
         <Divider />
@@ -229,7 +247,7 @@ export default function ANTFAds() {
           content={{
             saleType: t("ads.fairlaunch"),
             image: "/image/landing/fairlaunch.png",
-            desc: t("ads.fairlaunchDesc")
+            desc: t("ads.fairlaunchDesc"),
           }}
         />
       </ContentBox>
