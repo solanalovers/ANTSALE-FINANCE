@@ -307,8 +307,8 @@ export default function CreatePresaleStep1() {
                 <p className="text-[#1C1C1E] text-xs mt-1">
                   1 SOL ={" "}
                   {`${
-                    form?.presaleRate && form?.tokenInfo?.name
-                      ? `${form?.presaleRate} ${form?.tokenInfo?.name}`
+                    form?.listingRate && form?.tokenInfo?.name
+                      ? `${form?.listingRate} ${form?.tokenInfo?.name}`
                       : "?"
                   } `}
                   <br />

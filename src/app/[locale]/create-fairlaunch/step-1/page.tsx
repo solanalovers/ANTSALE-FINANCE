@@ -77,7 +77,7 @@ export default function CreateFairLaunchStep1() {
             classNames={{ input: "placeholder:text-[#8E8E93]" }}
             variant="bordered"
             label="Token Address"
-            placeholder="0x912CE59144191C1204E64559 E8253a0e49E6548"
+            placeholder="4LU6qSioai7RSwSBaNErE4pcj6z7dCtUY2UTNHXstxsg"
             onChange={(e) => handleChangeForm({ tokenAddress: e.target.value })}
           />
           <div className="mt-2 flex flex-col gap-y-1">
@@ -125,7 +125,7 @@ export default function CreateFairLaunchStep1() {
             className={"text-sm leading-5"}
             value={form?.feeOption?.toString()}
             onChange={(e) => {
-              handleChangeForm({ feeOption: e.target.value });
+              handleChangeForm({ feeOption: Number(e.target.value) });
             }}
           >
             <Radio value="5">
@@ -138,7 +138,7 @@ export default function CreateFairLaunchStep1() {
             label="Listing Options"
             className={"text-sm leading-5"}
             onChange={(e) =>
-              handleChangeForm({ listingOption: e.target.value })
+              handleChangeForm({ listingOption: Number(e.target.value) })
             }
             value={form?.listingOption}
           >
@@ -205,7 +205,7 @@ export default function CreateFairLaunchStep1() {
             onChange={(e) => {
               if (!e.target.value || !Number.isNaN(Number(e.target.value))) {
                 handleChangeForm({
-                  totalSale: e.target.value,
+                  totalSale: Number(e.target.value),
                 });
               } else {
                 e.target.value = "";
@@ -241,7 +241,7 @@ export default function CreateFairLaunchStep1() {
               onChange={(e) => {
                 if (!e.target.value || !Number.isNaN(Number(e.target.value))) {
                   handleChangeForm({
-                    softCap: e.target.value,
+                    softCap: Number(e.target.value),
                   });
                 } else {
                   e.target.value = "";
@@ -293,7 +293,7 @@ export default function CreateFairLaunchStep1() {
           onChange={(e) => {
             if (!e.target.value || !Number.isNaN(Number(e.target.value))) {
               handleChangeForm({
-                maxBuy: e.target.value,
+                maxBuy: Number(e.target.value),
               });
             } else {
               e.target.value = "";
@@ -328,7 +328,7 @@ export default function CreateFairLaunchStep1() {
               label="Liquidity Percent (%)"
               placeholder="51"
               onChange={(e) =>
-                handleChangeForm({ liquidityPercent: e.target.value })
+                handleChangeForm({ liquidityPercent: Number(e.target.value) })
               }
               value={form?.liquidityPercent?.toString()}
             />
@@ -399,7 +399,7 @@ export default function CreateFairLaunchStep1() {
                     <p className="text-sm text-default-500">Minutes</p>
                   }
                   onChange={(e) => {
-                      handleChangeForm({ liquidityLockupTime: e.target.value });
+                      handleChangeForm({ liquidityLockupTime: Number(e.target.value) });
                   }}
                   onBlur={() => {
                     if (!form?.liquidityLockupTime) {

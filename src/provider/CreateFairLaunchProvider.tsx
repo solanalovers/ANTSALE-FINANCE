@@ -42,21 +42,21 @@ export default function CreateFairLaunchProvider({
 }
 
 export const checkFairLaunchValidStep1 = (form: Project): boolean => {
+  console.log('Check valid', form);
+
   if (
     form.tokenAddress &&
     form.tokenInfo &&
     form.softCap &&
     form.softCap >= 1 &&
-    form.totalSellingAmount &&
-    form.totalSellingAmount > 0 &&
+    form.totalSale &&
+    form.totalSale > 0 &&
     form.liquidityPercent &&
     form.liquidityPercent >= 20 &&
-    form.liquidityPercent <= 100
+    form.liquidityPercent <= 100 &&
+    form.liquidityLockupTime &&
+    form.liquidityLockupTime >= 43200
   ) {
-    if (form.liquidityLockupTime && form.liquidityLockupTime < 0) {
-      return false;
-    }
-
     if (form.isMaxBuy) {
       if (form.maxBuy && form.maxBuy > 0) {
         return true;
