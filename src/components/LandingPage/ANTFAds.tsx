@@ -227,9 +227,11 @@ const MainContent = ({
               content.saleType === "Fairlaunch"
                 ? "bg-[#ccc] pointer-events-none text-default-500"
                 : "bg-primary hover:opacity-50 text-white"
-            } relative rounded-lg flex items-center justify-center`}
+            }
+            ${loading && 'pointer-events-none'} 
+            relative rounded-lg flex items-center justify-center`}
             onClick={async () => {
-              if (wallet.publicKey) {
+              if (wallet.publicKey && !loading) {
                 await earlyBuy();
               }
             }}
