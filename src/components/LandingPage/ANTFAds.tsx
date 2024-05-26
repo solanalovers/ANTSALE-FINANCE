@@ -1,5 +1,5 @@
 import { countdownToSaleEnd } from "@/function/timer";
-import { Button, Image, Input, Spinner, spinner } from "@nextui-org/react";
+import { Button, Image, Input, Spinner } from "@nextui-org/react";
 import { Copy } from "iconsax-react";
 import React, { ReactNode, useContext, useEffect, useState } from "react";
 import CustomDivider from "../CustomDivider";
@@ -238,7 +238,7 @@ const MainContent = ({
               <WalletMultiButton />
             )}
             {!loading && t("ads.buy")}
-            {loading && <Spinner />}
+            {loading && <Spinner color="white"/>}
           </div>
         </div>
       </div>
