@@ -1,0 +1,435 @@
+{
+  "address": "GWtJnKUfMkQAGbJHDNHvPteizoD84SyXL3sFqUf9eghY",
+  "metadata": {
+    "name": "antsale_contract",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "create_project",
+      "discriminator": [148, 219, 181, 42, 221, 114, 145, 190],
+      "accounts": [
+        {
+          "name": "creator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "mint"
+        },
+        {
+          "name": "project",
+          "writable": true,
+          "pda": {
+            "seeds": []
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "create_project_args",
+          "type": {
+            "defined": {
+              "name": "CreateProjectArgs"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "invest",
+      "discriminator": [13, 245, 180, 103, 254, 182, 121, 4],
+      "accounts": [
+        {
+          "name": "investor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "invest_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [105, 110, 118, 101, 115, 116]
+              },
+              {
+                "kind": "account",
+                "path": "investor"
+              }
+            ]
+          }
+        },
+        {
+          "name": "destination",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "InvestConfig",
+      "discriminator": [13, 210, 139, 136, 185, 244, 23, 39]
+    },
+    {
+      "name": "Project",
+      "discriminator": [205, 168, 189, 202, 181, 247, 142, 19]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "PublicKeyMismatch",
+      "msg": "The publicKey provide doesn't match with config publicKey"
+    }
+  ],
+  "types": [
+    {
+      "name": "CreateProjectArgs",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "project_type",
+            "type": {
+              "defined": {
+                "name": "ProjectType"
+              }
+            }
+          },
+          {
+            "name": "token_address",
+            "type": "pubkey"
+          },
+          {
+            "name": "currency",
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "fee_option",
+            "type": "i32"
+          },
+          {
+            "name": "listing_option",
+            "type": {
+              "defined": {
+                "name": "ListingOption"
+              }
+            }
+          },
+          {
+            "name": "sale_type",
+            "type": {
+              "defined": {
+                "name": "SaleType"
+              }
+            }
+          },
+          {
+            "name": "total_selling_amount",
+            "type": "i32"
+          },
+          {
+            "name": "soft_cap",
+            "type": "i32"
+          },
+          {
+            "name": "hard_cap",
+            "type": "i32"
+          },
+          {
+            "name": "min_buy",
+            "type": "i32"
+          },
+          {
+            "name": "max_buy",
+            "type": "i32"
+          },
+          {
+            "name": "router",
+            "type": {
+              "defined": {
+                "name": "Router"
+              }
+            }
+          },
+          {
+            "name": "liquidity_percent",
+            "type": "i32"
+          },
+          {
+            "name": "start_time",
+            "type": "i64"
+          },
+          {
+            "name": "end_time",
+            "type": "i64"
+          },
+          {
+            "name": "liquidity_type",
+            "type": {
+              "defined": {
+                "name": "LiquidityType"
+              }
+            }
+          },
+          {
+            "name": "liquidity_lockup_time",
+            "type": "i32"
+          },
+          {
+            "name": "presale_rate",
+            "type": "i32"
+          },
+          {
+            "name": "listing_rate",
+            "type": "i32"
+          },
+          {
+            "name": "refund_type",
+            "type": {
+              "defined": {
+                "name": "RefundType"
+              }
+            }
+          },
+          {
+            "name": "total_sale",
+            "type": "i32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "InvestConfig",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "invested",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "LiquidityType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "AutoLocking"
+          },
+          {
+            "name": "AutoBurning"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ListingOption",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "AutoListing"
+          },
+          {
+            "name": "ManualListing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Project",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "project_type",
+            "type": {
+              "defined": {
+                "name": "ProjectType"
+              }
+            }
+          },
+          {
+            "name": "token_address",
+            "type": "pubkey"
+          },
+          {
+            "name": "currency",
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "fee_option",
+            "type": "i32"
+          },
+          {
+            "name": "listing_option",
+            "type": {
+              "defined": {
+                "name": "ListingOption"
+              }
+            }
+          },
+          {
+            "name": "sale_type",
+            "type": {
+              "defined": {
+                "name": "SaleType"
+              }
+            }
+          },
+          {
+            "name": "total_selling_amount",
+            "type": "i32"
+          },
+          {
+            "name": "soft_cap",
+            "type": "i32"
+          },
+          {
+            "name": "hard_cap",
+            "type": "i32"
+          },
+          {
+            "name": "min_buy",
+            "type": "i32"
+          },
+          {
+            "name": "max_buy",
+            "type": "i32"
+          },
+          {
+            "name": "router",
+            "type": {
+              "defined": {
+                "name": "Router"
+              }
+            }
+          },
+          {
+            "name": "liquidity_percent",
+            "type": "i32"
+          },
+          {
+            "name": "start_time",
+            "type": "i64"
+          },
+          {
+            "name": "end_time",
+            "type": "i64"
+          },
+          {
+            "name": "liquidity_type",
+            "type": {
+              "defined": {
+                "name": "LiquidityType"
+              }
+            }
+          },
+          {
+            "name": "liquidity_lockup_time",
+            "type": "i32"
+          },
+          {
+            "name": "presale_rate",
+            "type": "i32"
+          },
+          {
+            "name": "listing_rate",
+            "type": "i32"
+          },
+          {
+            "name": "refund_type",
+            "type": {
+              "defined": {
+                "name": "RefundType"
+              }
+            }
+          },
+          {
+            "name": "total_sale",
+            "type": "i32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProjectType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Presale"
+          },
+          {
+            "name": "FairLaunch"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RefundType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Refund"
+          },
+          {
+            "name": "Burn"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Router",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Rayidum"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SaleType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Public"
+          },
+          {
+            "name": "Private"
+          }
+        ]
+      }
+    }
+  ]
+}
