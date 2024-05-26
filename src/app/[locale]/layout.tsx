@@ -3,6 +3,8 @@ import DefaultLayout from "@/components/layout/DefaultLayout";
 import Loading from "@/components/Loading";
 import { inter } from "@/utils/fonts";
 import React, { Suspense, useEffect, useState } from "react";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Layout({
   children,
@@ -23,6 +25,7 @@ export default function Layout({
       <div style={{ fontFamily: inter.style.fontFamily }}>
         <DefaultLayout>{children}</DefaultLayout>;
       </div>
+      <ToastContainer />
     </Suspense>
   );
 }
