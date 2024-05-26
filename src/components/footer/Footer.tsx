@@ -12,7 +12,6 @@ export default function Footer() {
   const t = useTrans("footer");
 
   useEffect(() => {
-    console.log(theme);
     if (theme === "dark") {
       setMoonbg("#006FEE");
       setSunbg("#8E8E93");
@@ -42,7 +41,7 @@ export default function Footer() {
           <div className="flex items-center gap-x-2">
             <p>{t("follow")}</p>
             <Link
-              href={""}
+              href={"https://x.com/antsale_finance"}
               isExternal
             >
               <Image
@@ -53,7 +52,7 @@ export default function Footer() {
               />
             </Link>
             <Link
-              href={""}
+              href={"https://t.me/antsale_finance"}
               isExternal
             >
               <Image
@@ -63,7 +62,7 @@ export default function Footer() {
                 height={40}
               />
             </Link>
-            <Link
+            {/* <Link
               href={""}
               isExternal
             >
@@ -84,7 +83,7 @@ export default function Footer() {
                 width={40}
                 height={40}
               />
-            </Link>
+            </Link> */}
           </div>
           <div className="flex items-center gap-x-6">
             <p>{t("interface")}</p>

@@ -14,15 +14,22 @@ import React from "react";
 import { useLocale } from "next-intl";
 import { useRouter as useLocaleRouter } from "@/navigation";
 import { ArrowDownIcon } from "@/components/Icon";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function LocaleSelect() {
   const locale = useLocale();
-  const localeRouter = useLocaleRouter();
-console.log(locale);
+  const router = useRouter();
+  const pathname = usePathname();
   const getCurrentLocale = () => {
     return localeList.filter((item: { label: string; value: string }) => {
       return item.value === locale;
     })[0].label;
+  };
+
+  const getCurrentPathName = (locale: string) => {
+    const currentPathName = pathname.split("/");
+    currentPathName[1] = locale;
+    return currentPathName.join().replaceAll(",", "/");
   };
   return (
     <Dropdown className="p-0">
@@ -52,9 +59,7 @@ console.log(locale);
           ) => (
             <DropdownItem
               key={idx}
-              onClick={() =>
-                localeRouter.replace("/pathnames", { locale: item.value })
-              }
+              onClick={() => router.replace(getCurrentPathName(item.value))}
             >
               <div className="flex items-center gap-x-2">
                 <Image

@@ -8,8 +8,6 @@ import React, { useContext } from 'react';
 export default function CreatePresaleStep3() {
   const { form, checkValidStep2 } = useContext(CreatePresaleContext);
 
-  console.log(checkValidStep2(form));
-
   return (
     <div>
       <CustomDivider />
