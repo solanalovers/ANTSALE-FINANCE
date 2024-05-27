@@ -76,8 +76,8 @@
   "landing": {
     "hero": {
       "title": "The Web3 Crowdfunding platform",
-      "content1": "Join AntSale in building a future where your online socialgraph is owned and built by you, not companies.",
-      "content2": "Download the app and start building your own network, powered by Lens Protocol, CyberConnect and dozens of the coolest projects in Web3."
+      "content1": "Web3 and blockchain are transforming traditional financial systems in extremely innovative ways every day, and we will not miss this wave",
+      "content2": "With Antsale, we aim to create a secure, fair, and easy-to-use fundraising platform to connect investors with potential projects."
     },
     "ads": {
       "seed": "Seed",
@@ -101,37 +101,38 @@
       "fairlaunchDesc": "All SOL raised during the Fairlaunch Sale will be used to create liquidity on DEXs and invest in the first 100 projects listed on AntSale, with each project receiving an investment of 20-50 SOL. All tokens obtained from these investments will be airdropped back to users who stake ANTF for at least 30 days.",
       "buy": "BUY NOW",
       "saleStart": "Sale Starts In",
+      "saleEnd": "Sale Ends In",
       "amount": "Amount",
       "max": "MAX"
     },
     "why": {
       "open": {
         "tag": "open",
-        "title": "Everyone is welcome",
-        "content-1": "No whitelists or hoops to jump through, just use with your wallets and start fund raising or investing.",
-        "content-2": "Soon users will also be able to create their first wallet when signing up, without any added complexities."
+        "title": "Everyone is welcome at AntSale.",
+        "content-1": "If you want to raise funds for your potential project, we will help you. If you want to find potential projects to invest in, we will find them for you.",
+        "content-2": "On the AntSale platform, you are free to bring all your ideas to life."
       },
       "multi-chain": {
         "tag": "MULTI-CHAIN",
-        "title": "Bring your own socials",
-        "content-1": "Connect your Lens Protocol and CyberConnect accounts to take your posting and following on-chain.",
-        "content-2": "Everything in your wallets can be used as a building block of your own social graph."
+        "title": "Bring your projects to multichain",
+        "content-1": "With the AntSale platform, your project can launch simultaneously on multiple blockchains such as Solana, Ethereum, Ton, Polygon, BNB, and more.",
+        "content-2": "Your project will reach hundreds of millions of users across multiple blockchain platforms, instead of being limited to a single blockchain platform."
       },
       "multi-gamingfy": {
         "tag": "MULTI-GAMIFIED",
-        "title": "Build up your Cred",
-        "content-1": "Connect your Web3 collectibles, badges and credentials and build up your credibility to level up and receive unique perks!"
+        "title": "Fairness for project owners",
+        "content-1": "When you launch your project for fundraising on AntSale, you won't pay any fees if your fundraising is not successful. We only charge a fee when we have helped make your fundraising successful."
       },
       "reward": {
         "tag": "REWARDING",
-        "title": "Get rewarded fairly",
-        "content-1": "Gamified and farming-resistant reward mechanisms ensure the right people earn Phaver Points and future token rewards for their contributions."
+        "title": "Get a lot of rewards",
+        "content-1": "Holding ANTF tokens from AntSale will grant you numerous rewards: early access to potential projects, free tokens from projects listing on the AntSale platform, and earning interest when you stake ANTF for a certain period, among others."
       }
     },
     "partner": "Our partners",
     "roadmap": {
       "title": "Take a peek at our Roadmap",
-      "description": "Learn more about the future plans, Solana’s economy and AntSale's vision for more ethical social media",
+      "description": "Learn more about the future plans, Solana’s economy, Ton's economy and AntSale's vision for more opportunities",
       "btn": "VIEW ROADMAP"
     },
     "join": {

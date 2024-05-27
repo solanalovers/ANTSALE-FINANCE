@@ -20,6 +20,8 @@ import { getProgram } from "@/function/getProgram";
 import { BN } from "@coral-xyz/anchor";
 import { bs58 } from "@coral-xyz/anchor/dist/cjs/utils/bytes";
 import { toast } from "react-toastify";
+import { contextType } from "react-quill";
+import { checkNumber } from "@/function/form";
 
 const ContentBox = ({ children }: { children: ReactNode }) => (
   <div
@@ -40,8 +42,7 @@ const MainContent = ({
 }) => {
   const t = useTrans("landing");
   const t1 = useTrans("wallet");
-  const saleEndTime = new Date();
-  saleEndTime.setHours(saleEndTime.getHours() + 17);
+  const saleEndTime = new Date("2024-06-28T11:45:00");
   const [timer, setTimer] = useState("00:00:00:00");
   const { balance } = useContext(AppContext);
   const [amount, setAmount] = useState<any>(null);
@@ -195,10 +196,11 @@ const MainContent = ({
           }`}
           onChange={(e) => {
             const value = e.target.value;
-            setAmount(value);
+            if (checkNumber(value)) {
+              setAmount(value);
+            }
           }}
-          type="number"
-          value={amount?.toString()}
+          value={amount}
           endContent={
             <>
               {wallet.publicKey && (
@@ -206,7 +208,7 @@ const MainContent = ({
                   className="absolute right-2 cursor-pointer"
                   onClick={() => {
                     if (wallet.publicKey) {
-                      setAmount(balance.toString());
+                      setAmount((balance - 0.01).toString().replace(",", "."));
                     }
                   }}
                 >
@@ -228,7 +230,7 @@ const MainContent = ({
                 ? "bg-[#ccc] pointer-events-none text-default-500"
                 : "bg-primary hover:opacity-50 text-white"
             }
-            ${loading && 'pointer-events-none'} 
+            ${loading && "pointer-events-none"} 
             relative rounded-lg flex items-center justify-center`}
             onClick={async () => {
               if (wallet.publicKey && !loading) {
@@ -240,12 +242,14 @@ const MainContent = ({
               <WalletMultiButton />
             )}
             {!loading && t("ads.buy")}
-            {loading && <Spinner color="white"/>}
+            {loading && <Spinner color="white" />}
           </div>
         </div>
       </div>
       <p className="text-[20px] leading-[28px] font-semibold text-[#1C1C1E]">
-        {t("ads.saleStart")}{" "}
+        {content.saleType !== "Fairlaunch"
+          ? t("ads.saleEnd")
+          : t("ads.saleStart")}{" "}
         <span className="font-bold text-primary">{timer}</span>
       </p>
     </div>

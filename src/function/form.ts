@@ -8,4 +8,6 @@ const requiredField = (value: any) => ({
     isRequired: true
 })
 
-export { changeForm, requiredField }
+const checkNumber = (value: string) => /^\d*\.?\d*$/.test(value);
+
+export { changeForm, requiredField, checkNumber }
