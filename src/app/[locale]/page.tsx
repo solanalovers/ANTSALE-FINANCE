@@ -10,7 +10,7 @@ import React from "react";
 export default function HomePage() {
   return (
     <div className="my-[3vw] flex flex-col gap-y-[6vw]">
-      <div className="container mx-auto flex flex-col gap-y-[6vw]">
+      <div className="container mx-auto flex flex-col gap-y-[6.5vw]">
         <Hero />
         <ANTFAds />
         <Why />
