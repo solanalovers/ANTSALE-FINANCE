@@ -2,6 +2,10 @@ function countdownToSaleEnd(saleEndTime: string): any {
     // Parse saleEndTime to get milliseconds
     const endTime = new Date(saleEndTime).getTime();
 
+    if (isNaN(endTime)) {
+        return "Invalid Date";
+    }
+
     // Update the countdown every second
     // Get current time
     const now = new Date().getTime();
