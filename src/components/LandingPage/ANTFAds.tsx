@@ -174,7 +174,7 @@ const MainContent = ({
       <p className="text-center text-sm leading-[22px]">{content.desc}</p>
       <div className="flex items-center gap-x-1">
         <p className="text-[13px] leading-[32px] text-[#1C1C1E] underline">
-          9RFFhhe4XPV8UcBFJkgrDwGGtN3jmktBtw4RBia1bBVn
+          9gGj9FKJka7JmspN1MZfAGTFGLkoXCU4VKTQaoyjrgTA
         </p>
         <Copy
           className="hover:opacity-80 cursor-pointer"
@@ -183,7 +183,7 @@ const MainContent = ({
           color="#006FEE"
           onClick={() =>
             navigator.clipboard.writeText(
-              "9RFFhhe4XPV8UcBFJkgrDwGGtN3jmktBtw4RBia1bBVn"
+              "9gGj9FKJka7JmspN1MZfAGTFGLkoXCU4VKTQaoyjrgTA"
             )
           }
         />
@@ -359,7 +359,7 @@ export default function ANTFAds() {
             <p>{t("ads.fairContent1")}</p>
             <p className="text-base leading-6 text-[#1C1C1E]">
               <span className="text-primary underline">
-                9RFFhhe4XPV8UcBFJkgrDwGGtN3jmktBtw4RBia1bBVn
+                9gGj9FKJka7JmspN1MZfAGTFGLkoXCU4VKTQaoyjrgTA
               </span>
               {` `}
               <Copy
@@ -369,7 +369,7 @@ export default function ANTFAds() {
                 color="#006FEE"
                 onClick={() =>
                   navigator.clipboard.writeText(
-                    "9RFFhhe4XPV8UcBFJkgrDwGGtN3jmktBtw4RBia1bBVn"
+                    "9gGj9FKJka7JmspN1MZfAGTFGLkoXCU4VKTQaoyjrgTA"
                   )
                 }
               />
