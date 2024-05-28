@@ -1,8 +1,8 @@
-"use client";
-import React, { createContext, useEffect, useState } from "react";
-import { useWallet } from "@solana/wallet-adapter-react";
-import { getBalance } from "@/function/wallet";
-import { useCookies } from "next-client-cookies";
+'use client';
+import React, { createContext, useEffect, useState } from 'react';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { getBalance } from '@/function/wallet';
+import { useCookies } from 'next-client-cookies';
 
 export const AppContext = createContext<any>({});
 
@@ -13,10 +13,10 @@ export default function AppProvider({
 }) {
   const cookieStore = useCookies();
   const [cluster, setCluster] = useState<number>(() => {
-    if (!cookieStore.get("cluster")) {
-      cookieStore.set("cluster", '0');
+    if (!cookieStore.get('cluster')) {
+      cookieStore.set('cluster', '0');
       return 0;
-    } else{
+    } else {
       const result = cookieStore.get('cluster');
       return Number(result);
     }
@@ -27,7 +27,8 @@ export default function AppProvider({
   const getWalletBalance = async () => {
     if (publicKey) {
       // change to cluster
-      const balance: any = await getBalance(publicKey, false);
+      const isMainnet = cluster === 1;
+      const balance: any = await getBalance(publicKey, isMainnet);
       setBalance(balance.toFixed(4));
     }
   };
@@ -36,10 +37,10 @@ export default function AppProvider({
     (async () => {
       await getWalletBalance();
     })();
-  }, [publicKey]);
+  }, [publicKey, cluster]);
 
   useEffect(() => {
-    cookieStore.set("cluster", cluster.toString());
+    cookieStore.set('cluster', cluster.toString());
   }, [cluster]);
 
   return (
