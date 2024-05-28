@@ -157,7 +157,7 @@ const MainContent = ({
 
   useEffect(() => {
     const countdown = setInterval(() => {
-      const timeleft = countdownToSaleEnd(saleEndTime.toLocaleString());
+      const timeleft = countdownToSaleEnd(saleEndTime.toISOString());
       setTimer(timeleft);
     }, 1000);
     return () => clearInterval(countdown);
