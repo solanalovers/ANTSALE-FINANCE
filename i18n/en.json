@@ -2,6 +2,10 @@
   "Index": {
     "title": "Hello world!"
   },
+  "anouncement": {
+    "home": "Introducing: <span class='font-semibold text-primary-500'>$ANTF Seed Sale!</span> Once-in-a-lifetime opportunity in the blockchain space, don't miss out",
+    "other": "Our product is currently under development. You can test it on Devnet from June 20th, 2024"
+  },
   "header": {
     "myService": "MY SERVICE",
     "project": "PROJECT LIST",

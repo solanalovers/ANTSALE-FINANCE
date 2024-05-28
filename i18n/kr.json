@@ -2,6 +2,10 @@
   "Index": {
     "title": "안녕하세요, 세계!"
   },
+  "anouncement": {
+    "home": "소개합니다: <span class='font-semibold text-primary-500'>$ANTF 시드 판매!</span> 블록체인 분야에서 일생일대의 기회, 놓치지 마세요",
+    "other": "저희 제품은 현재 개발 중입니다. 2024년 6월 20일부터 Devnet에서 테스트할 수 있습니다."
+  },
   "header": {
     "myService": "내 서비스",
     "project": "프로젝트 목록",
