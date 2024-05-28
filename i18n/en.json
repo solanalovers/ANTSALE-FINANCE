@@ -77,7 +77,7 @@
     "hero": {
       "title": "The Web3 Crowdfunding platform",
       "content1": "Web3 and blockchain are transforming traditional financial systems in extremely innovative ways every day, and we will not miss this wave",
-      "content2": "With Antsale, we aim to create a secure, fair, and easy-to-use fundraising platform to connect investors with potential projects."
+      "content2": "Antsale - a cutting-edge fundraising platform designed to securely, fairly, and effortlessly connect investors with high-potential projects."
     },
     "ads": {
       "seed": "Seed",
@@ -109,8 +109,7 @@
       "open": {
         "tag": "open",
         "title": "Everyone is welcome at AntSale.",
-        "content-1": "If you want to raise funds for your potential project, we will help you. If you want to find potential projects to invest in, we will find them for you.",
-        "content-2": "On the AntSale platform, you are free to bring all your ideas to life."
+        "content-1": " Whether you're seeking funds for your next big idea or searching for exciting investment opportunities, we've got you covered. Our platform is your playground for bringing ideas to life."
       },
       "multi-chain": {
         "tag": "MULTI-CHAIN",
@@ -121,7 +120,7 @@
       "multi-gamingfy": {
         "tag": "FAIRPLAY",
         "title": "Fairness for project owners",
-        "content-1": "When you launch your project for fundraising on AntSale, you won't pay any fees if your fundraising is not successful. We only charge a fee when we have helped make your fundraising successful."
+        "content-1": "When you launch your project for fundraising, there are no fees unless your campaign succeeds. We only charge a fee when we've helped you achieve your fundraising goals. It's our way of ensuring that your success is our success."
       },
       "reward": {
         "tag": "REWARDING",
