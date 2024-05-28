@@ -53,9 +53,7 @@ export default function Why() {
           image="/image/landing/why/1.png"
           tag={t("why.open.tag")}
           title={t("why.open.title")}
-          content={`${t("why.open.content-1")}<br/><br/>${t(
-            "why.open.content-2"
-          )}`}
+          content={`${t("why.open.content-1")}`}
         />
         <WhyItem
           image="/image/landing/why/2.png"
