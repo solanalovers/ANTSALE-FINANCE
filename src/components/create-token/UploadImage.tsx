@@ -6,18 +6,22 @@ interface UploadImageProps {
   value: File;
   onChange: ChangeEventHandler<HTMLInputElement>;
   isRequired?: boolean;
+  label?: string;
+  placeholder?: string;
 }
 
 export default function UploadImage({
   onChange,
   value,
   isRequired = false,
+  label = "Token Avatar",
+  placeholder = "Using image with ratio 1:1 (ex: 500px x 500px)",
 }: UploadImageProps) {
   return (
     <div className="relative">
       <Input
-        label="Token Avatar"
-        placeholder="Using image with ratio 1:1 (ex: 500px x 500px)"
+        label={label}
+        placeholder={placeholder}
         variant="bordered"
         isRequired={isRequired}
         readOnly

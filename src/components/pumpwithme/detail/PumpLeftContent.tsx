@@ -5,6 +5,7 @@ import PumpChart from "./PumpChart";
 import useTrans from "@/hook/useTrans";
 import PumpProjectInfo from "./PumpProjectInfo";
 import PumpComment from "./PumpComment";
+import PumpAddComment from "./PumpAddComment";
 
 export default function PumpLeftContent({ data }: { data: PumpItemInterface }) {
   const [currentView, setCurrentView] = useState<any>("thread");
@@ -58,12 +59,15 @@ export default function PumpLeftContent({ data }: { data: PumpItemInterface }) {
           />
         </Tabs>
         {currentView === "thread" && (
-          <div className="flex flex-col gap-y-4">
-            <PumpProjectInfo />
-            {[...Array(10)].map((item: any, idx: number) => (
-              <PumpComment key={idx} />
-            ))}
-          </div>
+          <>
+            <div className="flex flex-col gap-y-4">
+              <PumpProjectInfo />
+              {[...Array(10)].map((item: any, idx: number) => (
+                <PumpComment key={idx} />
+              ))}
+            </div>
+            <PumpAddComment />
+          </>
         )}
       </div>
     </div>

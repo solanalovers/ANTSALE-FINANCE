@@ -1,7 +1,10 @@
 import BorderContent from "@/components/detail/BorderContent";
-import { Button, Image, Input } from "@nextui-org/react";
+import { Button, Image, Input, Progress } from "@nextui-org/react";
 import React from "react";
 import PumpChip from "../PumpChip";
+import PumpProjectInfo from "./PumpProjectInfo";
+import PumpRightProjectInfo from "./PumpRightProjectInfo";
+import PumpRightDistribute from "./PumpRightDistribute";
 
 export default function PumpRightContent() {
   return (
@@ -61,6 +64,8 @@ export default function PumpRightContent() {
           </Button>
         </div>
       </BorderContent>
+      <PumpRightProjectInfo />
+      <PumpRightDistribute />
     </div>
   );
 }

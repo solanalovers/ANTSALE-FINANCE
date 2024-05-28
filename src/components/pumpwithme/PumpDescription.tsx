@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 
 const Description = ({
@@ -9,6 +10,7 @@ const Description = ({
 }) => {
   const [isNeedExpand, setIsNeedExpand] = useState(false);
   const contentRef = useRef<any>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const textElement = contentRef.current;
@@ -37,7 +39,8 @@ const Description = ({
         <span
           className="text-primary font-semibold underline cursor-pointer hover:opacity-50"
           onClick={() => {
-            setIsNeedExpand(false);
+            // setIsNeedExpand(false);
+            router.push("/pumpwithme/1")
           }}
         >
           Show More

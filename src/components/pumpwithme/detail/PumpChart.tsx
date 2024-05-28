@@ -6,7 +6,7 @@ export default function PumpChart() {
   useEffect(() => {
     if (chartRef.current) {
       const chart = createChart(chartRef.current, {
-        height: 350
+        height: 450
       });
       const candlestickSeries = chart.addCandlestickSeries({
         upColor: "#26a69a",

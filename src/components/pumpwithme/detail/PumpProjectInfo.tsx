@@ -4,10 +4,12 @@ import React from "react";
 export default function PumpProjectInfo() {
   return (
     <div className="flex gap-x-3">
-      <Image
-        src="/image/token-image.png"
-        className="w-[138px] h-[138px] object-cover object-center rounded-lg"
-      />
+      <div className="w-[138px] h-[138px] flex-shrink-0">
+        <Image
+          src="/image/token-image.png"
+          className="object-cover object-center rounded-lg flex-shrink-0"
+        />
+      </div>
       <div className="flex flex-col gap-y-2">
         <p className="text-base font-semibold">Gilltardio (ticker: GILLTARD)</p>
         <div className="flex items-center gap-x-3">
