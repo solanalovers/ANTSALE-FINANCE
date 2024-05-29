@@ -472,6 +472,24 @@ const HeartIcon = ({ size = "22", color = "black" }) => (
   </svg>
 );
 
+const RefreshIcon = ({ size = "14", color = "#71717A" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox={`0 0 ${size} ${size}`}
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M13.3278 7.0013C13.3278 10.2213 10.7145 12.8346 7.49447 12.8346C4.27447 12.8346 2.30863 9.5913 2.30863 9.5913M2.30863 9.5913H4.9453M2.30863 9.5913V12.508M1.66113 7.0013C1.66113 3.7813 4.25113 1.16797 7.49447 1.16797C11.3853 1.16797 13.3278 4.4113 13.3278 4.4113M13.3278 4.4113V1.49464M13.3278 4.4113H10.7378"
+      stroke={color}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 export {
   CheckIcon,
   FireIcon,
@@ -493,5 +511,6 @@ export {
   EditIcon,
   TableViewFilterIcon,
   ListViewFilterIcon,
-  HeartIcon
+  HeartIcon,
+  RefreshIcon
 };

@@ -6,6 +6,7 @@ import useTrans from "@/hook/useTrans";
 import PumpProjectInfo from "./PumpProjectInfo";
 import PumpComment from "./PumpComment";
 import PumpAddComment from "./PumpAddComment";
+import PumpTrade from "./PumpTrade";
 
 export default function PumpLeftContent({ data }: { data: PumpItemInterface }) {
   const [currentView, setCurrentView] = useState<any>("thread");
@@ -69,6 +70,7 @@ export default function PumpLeftContent({ data }: { data: PumpItemInterface }) {
             <PumpAddComment />
           </>
         )}
+        {currentView === "trades" && <PumpTrade />}
       </div>
     </div>
   );
