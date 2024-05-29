@@ -73,8 +73,8 @@
     "step3Desc": "Review your information"
   },
   "pump": {
-    "trades": "Trades",
-    "thread": "Thread",
+    "trades": "TRADES",
+    "thread": "THREAD",
     "detail": {}
   },
   "landing": {
