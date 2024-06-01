@@ -42,6 +42,7 @@ export default function LocaleSelect() {
             <Image
               src={`/image/locale/${locale}.png`}
               className="w-5 h-[14px] rounded-none"
+              radius="none"
             />
             {getCurrentLocale()}
             <ArrowDownIcon
@@ -66,6 +67,7 @@ export default function LocaleSelect() {
                   src={item.icon}
                   width={"20px"}
                   height={"14px"}
+                  radius="none"
                 />
                 <p>{item.label}</p>
               </div>

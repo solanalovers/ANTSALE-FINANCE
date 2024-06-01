@@ -12,7 +12,7 @@ export const localeList = [
     {
         label: 'China',
         value: 'cn',
-        icon: '/image/locale/kr.png'
+        icon: '/image/locale/cn.png'
     },
     {
         label: 'Japan',
