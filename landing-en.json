@@ -1,0 +1,70 @@
+  {
+    "landing": {
+      "hero": {
+        "title": "The Web3 Crowdfunding platform",
+        "content1": "Web3 and blockchain are transforming traditional financial systems in extremely innovative ways every day, and we will not miss this wave",
+        "content2": "Antsale - a cutting-edge fundraising platform designed to securely, fairly, and effortlessly connect investors with high-potential projects."
+      },
+      "ads": {
+        "seed": "Seed",
+        "token": "Tokenomics",
+        "seedSale": "Seed sale",
+        "fairlaunchSale": "Fairlaunch sale",
+        "liquidity": "Liquidity",
+        "cex": "CEX listing",
+        "dev": "Dev team",
+        "airdrop": "Airdrop",
+        "total": "Total supply",
+        "maxSupply": "Max supply",
+        "howtobuy": "How to buy with",
+        "faq1": "Press “ Buy Now” above and connect wallet",
+        "faq2": "Enter amount of SOL to swap for $ANTF",
+        "faq3": "Hit “Buy Now” again and confirm transaction",
+        "fairContent1": "If you can’t connect your wallet just send SOL to ",
+        "fairContent2": " and tokens will be airdropped to the sending wallet",
+        "fairContent3": "NB: Don’t use a CEX to send SOL! Use your own wallet",
+        "fairlaunch": "Fairlaunch",
+        "seedDesc": "Our goal for the seed sale is to raise a minimum of 200 SOL and a maximum of 1000 SOL. This is a great opportunity to participate in as it is a one-time sale only.",
+        "fairlaunchDesc": "All SOL raised during the Fairlaunch Sale will be used to create liquidity on DEXs and invest in the first 100 projects listed on AntSale, with each project receiving an investment of 20-50 SOL. All tokens obtained from these investments will be airdropped back to users who stake ANTF for at least 30 days.",
+        "buy": "BUY NOW",
+        "saleStart": "Sale Starts In",
+        "saleEnd": "Sale Ends In",
+        "amount": "Amount",
+        "max": "MAX"
+      },
+      "why": {
+        "open": {
+          "tag": "open",
+          "title": "Everyone is welcome at AntSale",
+          "content-1": " Whether you're seeking funds for your next big idea or searching for exciting investment opportunities, we've got you covered. Our platform is your playground for bringing ideas to life."
+        },
+        "multi-chain": {
+          "tag": "MULTI-CHAIN",
+          "title": "Bring your projects to multichain",
+          "content-1": "With the AntSale platform, your project can launch simultaneously on multiple blockchains such as Solana, Ethereum, Ton, Polygon, BNB, and more.",
+          "content-2": "Your project will reach hundreds of millions of users across multiple blockchain platforms, instead of being limited to a single blockchain platform."
+        },
+        "multi-gamingfy": {
+          "tag": "FAIRPLAY",
+          "title": "Fairness for project owners",
+          "content-1": "When you launch your project for fundraising, there are no fees unless your campaign succeeds. We only charge a fee when we've helped you achieve your fundraising goals. It's our way of ensuring that your success is our success."
+        },
+        "reward": {
+          "tag": "REWARDING",
+          "title": "Get a lot of rewards",
+          "content-1": "Holding ANTF tokens from AntSale will grant you numerous rewards: early access to potential projects, free tokens from projects listing on the AntSale platform, and earning interest when you stake ANTF for a certain period, among others."
+        }
+      },
+      "partner": "Our partners",
+      "roadmap": {
+        "title": "Take a peek at our Roadmap",
+        "description": "Learn more about the future plans, Solana’s economy, Ton's economy and AntSale's vision for more opportunities",
+        "btn": "VIEW ROADMAP"
+      },
+      "join": {
+        "content1": "Join over million others.",
+        "content2": "Start using",
+        "content3": "today"
+      }
+    }
+  }

@@ -1,0 +1,149 @@
+{
+    "Index": {
+      "title": "你好，世界！"
+    },
+    "anouncement": {
+      "home": "介绍：<span class='font-semibold text-primary-500'>$ANTF 种子销售！</span> 区块链领域的一次千载难逢的机会，不要错过",
+      "other": "我们的产品目前正在开发中。您可以在 2024 年 6 月 20 日在 Devnet 上测试它"
+    },
+    "header": {
+      "myService": "我的服务",
+      "project": "项目列表",
+      "token": "创建代币",
+      "presale": "创建预售",
+      "faillaunch": "创建公平发布",
+      "multichain": "创建多链发布",
+      "pump": "与我共振",
+      "faq": "常见问题",
+      "my": {
+        "project": "我的项目",
+        "contribute": "我的贡献者",
+        "community": "建立社区",
+        "pump": "与我共振"
+      },
+      "search": "搜索"
+    },
+    "wallet": {
+      "connect": "连接钱包"
+    },
+    "home": {
+      "presale": "预售",
+      "fairlaunch": "公平发布",
+      "multichain": "多链发布",
+      "search": "搜索"
+    },
+    "footer": {
+      "info": "免责声明：antsale.finance 永远不会推荐或鼓励您投资任何列出的项目，因此不对任何损失负责。用户有责任自行进行研究并向专业人士寻求财务建议。有关 (DYOR) 的更多信息，请访问",
+      "follow": "关注我们",
+      "interface": "界面",
+      "darkMode": "深色模式",
+      "lightMode": "浅色模式"
+    },
+    "card": {
+      "end": "销售结束于",
+      "view": "查看",
+      "progress": "进展"
+    },
+    "chip": {
+      "coming": "即将到来",
+      "live": "销售中",
+      "canceled": "已取消",
+      "ended": "已结束"
+    },
+    "createToken": {
+      "connect": "连接您的钱包",
+      "cost": "部署成本",
+      "step1": "步骤 1",
+      "step2": "步骤 2",
+      "step3": "步骤 3",
+      "step4": "步骤 4",
+      "step5": "步骤 5",
+      "step1Desc": "连接您的 Solana 钱包",
+      "step2Desc": "指定代币名称、代币符号、代币图片",
+      "step3Desc": "确定代币的供应量和小数点位数。",
+      "step4Desc": "添加更多关于代币的信息：网站、推特 (X)、电报、Discord ...（可选）",
+      "step5Desc": "点击创建，在您的钱包上接受交易并等待您的代币准备好。"
+    },
+    "createSale": {
+      "step1": "验证代币和配置启动板",
+      "step2": "添加附加信息",
+      "step3": "完成",
+      "step1Desc": "输入代币地址和启动板信息",
+      "step2Desc": "让人们了解你是谁",
+      "step3Desc": "审核您的信息"
+    },
+    "pump": {
+      "trades": "交易",
+      "thread": "线程",
+      "detail": {}
+    },
+    "landing": {
+      "hero": {
+        "title": "Web3 众筹平台",
+        "content1": "Web3 和区块链每天都在以极其创新的方式改变传统金融系统，我们不会错过这股浪潮",
+        "content2": "Antsale - 一个尖端的筹资平台，旨在安全、公平且轻松地将投资者与高潜力项目连接起来。"
+      },
+      "ads": {
+        "seed": "种子",
+        "token": "代币经济学",
+        "seedSale": "种子销售",
+        "fairlaunchSale": "公平发布销售",
+        "liquidity": "流动性",
+        "cex": "CEX 上市",
+        "dev": "开发团队",
+        "airdrop": "空投",
+        "total": "总供应量",
+        "maxSupply": "最大供应量",
+        "howtobuy": "如何购买",
+        "faq1": "点击上方的“立即购买”并连接钱包",
+        "faq2": "输入要用 SOL 兑换的 $ANTF 数量",
+        "faq3": "再次点击“立即购买”并确认交易",
+        "fairContent1": "如果您无法连接钱包，只需发送 SOL 到 ",
+        "fairContent2": " 并且代币将空投到发送钱包",
+        "fairContent3": "注意：不要使用 CEX 发送 SOL！使用您自己的钱包",
+        "fairlaunch": "公平发布",
+        "seedDesc": "我们的种子销售目标是筹集至少 200 SOL 和最多 1000 SOL。这是一个仅一次的销售机会，值得参与。",
+        "fairlaunchDesc": "在公平发布销售期间筹集的所有 SOL 将用于在 DEX 上创建流动性，并投资于 AntSale 上列出的前 100 个项目，每个项目将获得 20-50 SOL 的投资。从这些投资中获得的所有代币将空投给至少质押 ANTF 30 天的用户。",
+        "buy": "立即购买",
+        "saleStart": "销售开始于",
+        "saleEnd": "销售结束于",
+        "amount": "数量",
+        "max": "最大"
+      },
+      "why": {
+        "open": {
+          "tag": "开放",
+          "title": "AntSale 欢迎每个人",
+          "content-1": "无论您是为下一个大创意寻求资金，还是寻找令人兴奋的投资机会，我们都能满足您的需求。我们的平台是将创意变为现实的游乐场。"
+        },
+        "multi-chain": {
+          "tag": "多链",
+          "title": "将您的项目带到多链",
+          "content-1": "通过 AntSale 平台，您的项目可以同时在多个区块链上发布，例如 Solana、Ethereum、Ton、Polygon、BNB 等。",
+          "content-2": "您的项目将覆盖多个区块链平台上的数亿用户，而不仅限于单一的区块链平台。"
+        },
+        "multi-gamingfy": {
+          "tag": "公平",
+          "title": "为项目所有者提供公平",
+          "content-1": "当您为筹款启动项目时，除非您的活动成功，否则不收取任何费用。我们只有在帮助您实现筹款目标后才收取费用。这是我们确保您的成功就是我们的成功的方式。"
+        },
+        "reward": {
+          "tag": "奖励",
+          "title": "获得大量奖励",
+          "content-1": "持有 AntSale 的 ANTF 代币将为您带来许多奖励：早期访问潜在项目、从在 AntSale 平台上列出的项目中获得免费代币，以及在您质押 ANTF 一段时间后赚取利息等。"
+        }
+      },
+      "partner": "我们的合作伙伴",
+      "roadmap": {
+        "title": "看看我们的路线图",
+        "description": "了解更多关于未来计划、Solana 经济、Ton 经济以及 AntSale 的愿景的更多机会",
+        "btn": "查看路线图"
+      },
+      "join": {
+        "content1": "加入超过百万的其他人。",
+        "content2": "开始使用",
+        "content3": "今天"
+      }
+    }
+  }
+  
