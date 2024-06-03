@@ -12,7 +12,6 @@ import {
 
 import React from "react";
 import { useLocale } from "next-intl";
-import { useRouter as useLocaleRouter } from "@/navigation";
 import { ArrowDownIcon } from "@/components/Icon";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -58,11 +57,11 @@ export default function LocaleSelect() {
             item: { label: string; value: string; icon: string },
             idx: number
           ) => (
-            <DropdownItem
-              key={idx}
-              onClick={() => router.replace(getCurrentPathName(item.value))}
-            >
-              <div className="flex items-center gap-x-2">
+            <DropdownItem key={idx}>
+              <div
+                className="flex items-center gap-x-2"
+                onClick={() => router.replace(getCurrentPathName(item.value))}
+              >
                 <Image
                   src={item.icon}
                   width={"20px"}
