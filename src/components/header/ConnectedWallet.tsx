@@ -10,7 +10,7 @@ export default function ConnectedWallet({ address }: { address: string }) {
   const { disconnect } = useWallet();
 
   return (
-    <div className="flex px-3 py-1 gap-x-4 items-center rounded-lg border border-[#11111126]">
+    <div className="flex px-3 md:py-1 gap-x-4 items-center rounded-lg border border-[#11111126]">
       <div className="flex gap-x-3 items-center">
         <Image
           src={`/image/wallet/${walletName}.png`}
@@ -18,10 +18,10 @@ export default function ConnectedWallet({ address }: { address: string }) {
           height={"26px"}
         />
         <div>
-          <p className="text-xs leading-5">
+          <p className="text-xs leading-4 md:leading-5">
             {address.slice(0, 4)}...{address.slice(-4)}
           </p>
-          <p className="text-xs leading-5 text-[#006FEE]">{balance} SOL</p>
+          <p className="text-xs leading-4 md:leading-5 text-[#006FEE]">{balance} SOL</p>
         </div>
       </div>
       <div className="w-[1px] bg-[#11111126] h-10" />

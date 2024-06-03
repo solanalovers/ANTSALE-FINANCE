@@ -5,12 +5,12 @@ import React from "react";
 export default function Roadmap() {
   const t = useTrans("landing");
   return (
-    <div className="p-10 flex bg-primary-50 rounded-2xl items-center">
+    <div className="p-10 flex flex-col md:flex-row bg-primary-50 rounded-2xl items-center">
       <div>
-        <p className="text-[3.125vw] leading-[4.0625vw] font-semibold">
+        <p className="text-[56px] leading-[64px] md:text-[60px] md:leading-[78px] font-semibold">
           {t("roadmap.title")}
         </p>
-        <p className="text-[#8E8E93] text-[1.354vw] leading-[1.771vw] font-medium my-6">
+        <p className="text-[#8E8E93] text-[26px] leading-[34px] font-medium my-6">
           {t("roadmap.description")}
         </p>
         <Button
@@ -20,7 +20,7 @@ export default function Roadmap() {
           {t("roadmap.btn")}
         </Button>
       </div>
-      <div className="w-[21.302vw] h-[21.302vw] flex-shrink-0">
+      <div className="w-[311px] h-[311px] md:w-[409px] md:h-[409px] flex-shrink-0">
         <Image
           src="/image/landing/roadmap.png"
           className="w-full h-full object-cover object-center"

@@ -37,7 +37,7 @@ export default function Footer() {
             Binance Academy.
           </Link>
         </p>
-        <div className="py-10 flex items-center justify-between">
+        <div className="py-10 flex flex-col gap-y-6 md:flex-row items-center justify-between">
           <div className="flex items-center gap-x-2">
             <p>{t("follow")}</p>
             <Link
@@ -86,7 +86,7 @@ export default function Footer() {
             </Link> */}
           </div>
           <div className="flex items-center gap-x-6">
-            <p>{t("interface")}</p>
+            <p className="hidden md:block">{t("interface")}</p>
             <div
               className="flex items-center gap-x-2"
               onClick={() => setTheme("light")}

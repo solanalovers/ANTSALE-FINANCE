@@ -8,13 +8,16 @@ export default function JoinWithUs() {
     <div>
       <Image
         src="/image/landing/full.png"
-        className="object-cover object-center h-[623px] w-screen"
+        className="object-cover object-center h-[623px] w-screen hidden md:block"
       />
-      <p className="mt-12 p-[10px] text-center font-bold text-[3.646vw] leading-[4.427vw] text-[#1C1C1E]">
+      <Image
+        src="/image/landing/full.png"
+        className="object-cover object-center w-screen md:hidden"
+      />
+      <p className="mt-12 p-[10px] text-center font-bold text-[56px] leading-[64px] md:text-[70px] md:leading-[85px] text-[#1C1C1E]">
         {t("join.content1")}
         <br /> {t("join.content2")}{" "}
-        <span className="text-primary">Solana, Ton</span>{" "}
-        {t("join.content3")}
+        <span className="text-primary">Solana, Ton</span> {t("join.content3")}
       </p>
     </div>
   );

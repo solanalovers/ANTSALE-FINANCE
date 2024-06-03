@@ -5,10 +5,10 @@ import React from "react";
 export default function Hero() {
   const t = useTrans('landing')
   return (
-    <div className="flex justify-between gap-16">
+    <div className="flex flex-col md:flex-row justify-between gap-x-16">
       <div className="flex-1">
-        <p className="text-[5vw] leading-[5.417vw] font-bold text-[#001731]">{t('hero.title')}</p>
-        <p className="mt-6 text-[#8E8E93] text-[1.354vw] leading-[1.771vw]">
+        <p className="text-[48px] leading-[56px] md:text-[5vw] md:leading-[5.417vw] font-bold text-[#001731]">{t('hero.title')}</p>
+        <p className="mt-6 text-[#8E8E93] text-xl leading-7 md:text-[1.354vw] md:leading-[1.771vw]">
           {t('hero.content1')}
           <br/>
           <br/>
@@ -17,7 +17,7 @@ export default function Hero() {
       </div>
       <Image
         src="/image/landing/hero.png"
-        className="w-[37.57vw] h-[37.57vw]"
+        className="w-screen md:w-[37.57vw] md:h-[37.57vw]"
       />
     </div>
   );

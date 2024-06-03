@@ -20,13 +20,19 @@ export default function Partner() {
   const t = useTrans("landing");
   return (
     <div>
-      <p className="mb-6 text-center p-[10px] text-[#1C1C1E] text-[2.083vw] leading-[2.5vw] font-bold">
+      <p className="mb-6 text-center p-[10px] text-[#1C1C1E] text-[40px] leading-[48px] font-bold">
         {t("partner")}
       </p>
       <div className="px-10">
         <Image
           radius="none"
+          className="hidden md:block"
           src={`/image/landing/partner.png`}
+        />
+        <Image
+          radius="none"
+          className="md:hidden"
+          src={`/image/landing/partner-mobile.png`}
         />
       </div>
     </div>

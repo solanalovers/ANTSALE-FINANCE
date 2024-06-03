@@ -12,6 +12,7 @@ import { useTheme } from "next-themes";
 import ClusterSelect from "./ClusterSelect";
 import { SearchIcon } from "../Icon";
 import useTrans from "@/hook/useTrans";
+import MobileNavbar from "./Navbar/MobileNavbar";
 
 export default function Header() {
   const { publicKey } = useWallet();
@@ -27,9 +28,7 @@ export default function Header() {
               <Image
                 src={"/image/logo-ant.png"}
                 radius="none"
-                width={96}
-                height={90}
-                className="object-contain object-center"
+                className="w-[50px] h-[38.89] md:w-[96px] md:h-[90px] object-contain object-center"
               />
             </Link>
             {pathName.split("/")?.length > 2 && (
@@ -41,12 +40,16 @@ export default function Header() {
               />
             )}
             <div className="flex gap-x-4 items-center">
-              <ClusterSelect />
-              <LocaleSelect />
+              <div className="hidden md:block">
+                <ClusterSelect />
+              </div>
+              <div className="hidden md:block">
+                <LocaleSelect />
+              </div>
               {!publicKey ? (
-                <div className="h-10 py-2 px-[26px] bg-primary relative hover:opacity-50 rounded-lg">
+                <div className="h-8 px-3 py-1.5 md:h-10 md:py-2 md:px-[26px] bg-primary relative hover:opacity-50 rounded-lg">
                   <WalletMultiButton />
-                  <p className="font-medium text-base leading-6 text-white">
+                  <p className="font-medium text-sm leading-5 md:text-base md:leading-6 text-white">
                     {t("connect")}
                   </p>
                 </div>
@@ -55,11 +58,12 @@ export default function Header() {
                   address={JSON.stringify(publicKey)?.split('"')[1]}
                 />
               )}
+              <MobileNavbar />
             </div>
           </div>
         </div>
       </div>
-      <div className={`border-b border-default-300`}>
+      <div className={`border-b border-default-300 hidden md:block`}>
         <Navbar />
       </div>
     </div>

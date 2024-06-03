@@ -23,7 +23,7 @@ export default function Layout({
   return (
     <Suspense fallback={<Loading />}>
       <div style={{ fontFamily: inter.style.fontFamily }}>
-        <DefaultLayout>{children}</DefaultLayout>;
+        <DefaultLayout>{children}</DefaultLayout>
       </div>
       <ToastContainer />
     </Suspense>

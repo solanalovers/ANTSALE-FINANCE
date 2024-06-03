@@ -136,3 +136,10 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+@media screen and (max-width: 769px) {
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

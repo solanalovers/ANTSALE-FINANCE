@@ -21,20 +21,20 @@ const WhyItem = ({
     }`}
   >
     <div className="flex flex-col gap-y-6">
-      <p className="text-primary-500 text-[0.833vw] leading-[1.146vw] font-semibold">
+      <p className="text-primary-500 text-sm leading-[22px] font-semibold">
         {tag.toUpperCase()}
       </p>
-      <p className="text-[#1C1C1E] font-semibold text-[1.875vw] leading-[2.188vw]">
+      <p className="text-[#1C1C1E] font-semibold text-[36px] leading-[42px]">
         {title}
       </p>
       <p
-        className="text-[#1C1C1E] text-base leading-6"
+        className="text-[#1C1C1E] text-[22px] md:text-base leading-[30px]"
         dangerouslySetInnerHTML={{ __html: content }}
       />
     </div>
     <div className="flex items-center justify-center">
       <Image
-        className="w-[25.573vw] h-[25.573vw] object-cover object-center"
+        className="w-[343px] h-[343px] md:w-[491px] md:h-[491px] object-cover object-center"
         src={image}
       />
     </div>
@@ -45,7 +45,7 @@ export default function Why() {
   const t = useTrans("landing");
   return (
     <div>
-      <p className="text-center mb-10 p-[10px] text-[3.646vw] leading-[4.063vw] text-[#1C1C1E] font-bold">
+      <p className="md:text-center mb-10 p-[10px] text-[60px] break-words md:break-normal md:text-[70px] md:leading-[76px] text-[#1C1C1E] font-bold">
         Why AntSale?
       </p>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
