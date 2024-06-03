@@ -51,17 +51,18 @@ export default function LocaleSelect() {
           </div>
         </Button>
       </DropdownTrigger>
-      <DropdownMenu>
+      <DropdownMenu selectionMode="single" onAction={(item:any)=>router.replace(getCurrentPathName(item))}>
         {localeList.map(
           (
             item: { label: string; value: string; icon: string },
             idx: number
           ) => (
-            <DropdownItem key={idx}>
-              <div
-                className="flex items-center gap-x-2"
-                onClick={() => router.replace(getCurrentPathName(item.value))}
-              >
+            <DropdownItem
+              key={item.value}
+              className="min-w-full"
+              // onClick={() => router.replace(getCurrentPathName(item.value))}
+            >
+              <div className="flex items-center gap-x-2">
                 <Image
                   src={item.icon}
                   width={"20px"}
