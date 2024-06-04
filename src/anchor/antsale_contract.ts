@@ -98,6 +98,86 @@ export type AntsaleContract = {
       ]
     },
     {
+      "name": "createPresale",
+      "discriminator": [
+        176,
+        144,
+        197,
+        158,
+        61,
+        119,
+        75,
+        135
+      ],
+      "accounts": [
+        {
+          "name": "creator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "mint"
+        },
+        {
+          "name": "project",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  101,
+                  115,
+                  97,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "creator"
+              },
+              {
+                "kind": "arg",
+                "path": "projectId"
+              }
+            ]
+          }
+        },
+        {
+          "name": "fromAta",
+          "writable": true
+        },
+        {
+          "name": "vaultAta",
+          "writable": true
+        },
+        {
+          "name": "tokenProgram"
+        },
+        {
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "projectId",
+          "type": "string"
+        },
+        {
+          "name": "config",
+          "type": {
+            "defined": {
+              "name": "presaleConfig"
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "invest",
       "discriminator": [
         13,
@@ -180,6 +260,19 @@ export type AntsaleContract = {
         244,
         23,
         39
+      ]
+    },
+    {
+      "name": "presale",
+      "discriminator": [
+        38,
+        215,
+        222,
+        14,
+        115,
+        220,
+        52,
+        168
       ]
     }
   ],
@@ -331,6 +424,144 @@ export type AntsaleContract = {
           },
           {
             "name": "manualListing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "presale",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "name": "tokenAddress",
+            "type": "pubkey"
+          },
+          {
+            "name": "currency",
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "config",
+            "type": {
+              "defined": {
+                "name": "presaleConfig"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "presaleConfig",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "feeOption",
+            "type": "f32"
+          },
+          {
+            "name": "listingOption",
+            "type": {
+              "defined": {
+                "name": "listingOption"
+              }
+            }
+          },
+          {
+            "name": "saleType",
+            "type": {
+              "defined": {
+                "name": "saleType"
+              }
+            }
+          },
+          {
+            "name": "presaleRate",
+            "type": "u32"
+          },
+          {
+            "name": "listingRate",
+            "type": {
+              "option": "u32"
+            }
+          },
+          {
+            "name": "softCap",
+            "type": "f32"
+          },
+          {
+            "name": "hardCap",
+            "type": "f32"
+          },
+          {
+            "name": "minBuy",
+            "type": "f32"
+          },
+          {
+            "name": "maxBuy",
+            "type": "f32"
+          },
+          {
+            "name": "router",
+            "type": {
+              "defined": {
+                "name": "router"
+              }
+            }
+          },
+          {
+            "name": "liquidityPercent",
+            "type": "f32"
+          },
+          {
+            "name": "startTime",
+            "type": "i64"
+          },
+          {
+            "name": "endTime",
+            "type": "i64"
+          },
+          {
+            "name": "liquidityType",
+            "type": {
+              "defined": {
+                "name": "liquidityType"
+              }
+            }
+          },
+          {
+            "name": "liquidityLockupTime",
+            "type": "i32"
+          },
+          {
+            "name": "refundType",
+            "type": {
+              "defined": {
+                "name": "refundType"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "refundType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "refund"
+          },
+          {
+            "name": "burn"
           }
         ]
       }

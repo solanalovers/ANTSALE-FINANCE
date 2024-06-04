@@ -92,6 +92,86 @@
       ]
     },
     {
+      "name": "create_presale",
+      "discriminator": [
+        176,
+        144,
+        197,
+        158,
+        61,
+        119,
+        75,
+        135
+      ],
+      "accounts": [
+        {
+          "name": "creator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "mint"
+        },
+        {
+          "name": "project",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  101,
+                  115,
+                  97,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "creator"
+              },
+              {
+                "kind": "arg",
+                "path": "project_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "from_ata",
+          "writable": true
+        },
+        {
+          "name": "vault_ata",
+          "writable": true
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "project_id",
+          "type": "string"
+        },
+        {
+          "name": "config",
+          "type": {
+            "defined": {
+              "name": "PresaleConfig"
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "invest",
       "discriminator": [
         13,
@@ -174,6 +254,19 @@
         244,
         23,
         39
+      ]
+    },
+    {
+      "name": "Presale",
+      "discriminator": [
+        38,
+        215,
+        222,
+        14,
+        115,
+        220,
+        52,
+        168
       ]
     }
   ],
@@ -325,6 +418,144 @@
           },
           {
             "name": "ManualListing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Presale",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "name": "token_address",
+            "type": "pubkey"
+          },
+          {
+            "name": "currency",
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "config",
+            "type": {
+              "defined": {
+                "name": "PresaleConfig"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "PresaleConfig",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "fee_option",
+            "type": "f32"
+          },
+          {
+            "name": "listing_option",
+            "type": {
+              "defined": {
+                "name": "ListingOption"
+              }
+            }
+          },
+          {
+            "name": "sale_type",
+            "type": {
+              "defined": {
+                "name": "SaleType"
+              }
+            }
+          },
+          {
+            "name": "presale_rate",
+            "type": "u32"
+          },
+          {
+            "name": "listing_rate",
+            "type": {
+              "option": "u32"
+            }
+          },
+          {
+            "name": "soft_cap",
+            "type": "f32"
+          },
+          {
+            "name": "hard_cap",
+            "type": "f32"
+          },
+          {
+            "name": "min_buy",
+            "type": "f32"
+          },
+          {
+            "name": "max_buy",
+            "type": "f32"
+          },
+          {
+            "name": "router",
+            "type": {
+              "defined": {
+                "name": "Router"
+              }
+            }
+          },
+          {
+            "name": "liquidity_percent",
+            "type": "f32"
+          },
+          {
+            "name": "start_time",
+            "type": "i64"
+          },
+          {
+            "name": "end_time",
+            "type": "i64"
+          },
+          {
+            "name": "liquidity_type",
+            "type": {
+              "defined": {
+                "name": "LiquidityType"
+              }
+            }
+          },
+          {
+            "name": "liquidity_lockup_time",
+            "type": "i32"
+          },
+          {
+            "name": "refund_type",
+            "type": {
+              "defined": {
+                "name": "RefundType"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "RefundType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Refund"
+          },
+          {
+            "name": "Burn"
           }
         ]
       }
