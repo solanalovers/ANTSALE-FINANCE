@@ -49,8 +49,8 @@ export const checkFairLaunchValidStep1 = (form: Project): boolean => {
     form.tokenInfo &&
     form.softCap &&
     form.softCap >= 1 &&
-    form.totalSale &&
-    form.totalSale > 0 &&
+    form.totalSellingAmount &&
+    form.totalSellingAmount > 0 &&
     form.liquidityPercent &&
     form.liquidityPercent >= 20 &&
     form.liquidityPercent <= 100 &&

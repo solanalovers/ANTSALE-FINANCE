@@ -28,7 +28,7 @@ export default function Navbar() {
       isHaveStepper: true,
     },
     {
-      label: "faillaunch",
+      label: "fairlaunch",
       value: `/${locale}/create-fairlaunch`,
       isHaveStepper: true,
     },

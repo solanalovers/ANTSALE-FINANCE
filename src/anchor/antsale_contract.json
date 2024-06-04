@@ -8,8 +8,101 @@
   },
   "instructions": [
     {
+      "name": "create_fair_launch",
+      "discriminator": [
+        124,
+        57,
+        210,
+        172,
+        172,
+        17,
+        70,
+        157
+      ],
+      "accounts": [
+        {
+          "name": "creator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "mint"
+        },
+        {
+          "name": "project",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  105,
+                  114,
+                  95,
+                  108,
+                  97,
+                  117,
+                  110,
+                  99,
+                  104
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "creator"
+              },
+              {
+                "kind": "arg",
+                "path": "project_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "from_ata",
+          "writable": true
+        },
+        {
+          "name": "vault_ata",
+          "writable": true
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "project_id",
+          "type": "string"
+        },
+        {
+          "name": "config",
+          "type": {
+            "defined": {
+              "name": "FairLaunchConfig"
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "invest",
-      "discriminator": [13, 245, 180, 103, 254, 182, 121, 4],
+      "discriminator": [
+        13,
+        245,
+        180,
+        103,
+        254,
+        182,
+        121,
+        4
+      ],
       "accounts": [
         {
           "name": "investor",
@@ -23,7 +116,14 @@
             "seeds": [
               {
                 "kind": "const",
-                "value": [105, 110, 118, 101, 115, 116]
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  115,
+                  116
+                ]
               },
               {
                 "kind": "account",
@@ -51,8 +151,30 @@
   ],
   "accounts": [
     {
+      "name": "FairLaunch",
+      "discriminator": [
+        66,
+        0,
+        62,
+        83,
+        227,
+        66,
+        175,
+        18
+      ]
+    },
+    {
       "name": "InvestConfig",
-      "discriminator": [13, 210, 139, 136, 185, 244, 23, 39]
+      "discriminator": [
+        13,
+        210,
+        139,
+        136,
+        185,
+        244,
+        23,
+        39
+      ]
     }
   ],
   "errors": [
@@ -64,6 +186,110 @@
   ],
   "types": [
     {
+      "name": "FairLaunch",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "name": "token_address",
+            "type": "pubkey"
+          },
+          {
+            "name": "currency",
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "config",
+            "type": {
+              "defined": {
+                "name": "FairLaunchConfig"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "FairLaunchConfig",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "fee_option",
+            "type": "f32"
+          },
+          {
+            "name": "listing_option",
+            "type": {
+              "defined": {
+                "name": "ListingOption"
+              }
+            }
+          },
+          {
+            "name": "sale_type",
+            "type": {
+              "defined": {
+                "name": "SaleType"
+              }
+            }
+          },
+          {
+            "name": "total_selling_amount",
+            "type": "f32"
+          },
+          {
+            "name": "soft_cap",
+            "type": "f32"
+          },
+          {
+            "name": "hard_cap",
+            "type": {
+              "option": "f32"
+            }
+          },
+          {
+            "name": "router",
+            "type": {
+              "defined": {
+                "name": "Router"
+              }
+            }
+          },
+          {
+            "name": "liquidity_percent",
+            "type": "f32"
+          },
+          {
+            "name": "start_time",
+            "type": "i64"
+          },
+          {
+            "name": "end_time",
+            "type": "i64"
+          },
+          {
+            "name": "liquidity_type",
+            "type": {
+              "defined": {
+                "name": "LiquidityType"
+              }
+            }
+          },
+          {
+            "name": "liquidity_lockup_time",
+            "type": "i32"
+          }
+        ]
+      }
+    },
+    {
       "name": "InvestConfig",
       "type": {
         "kind": "struct",
@@ -71,6 +297,59 @@
           {
             "name": "invested",
             "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "LiquidityType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "AutoLocking"
+          },
+          {
+            "name": "AutoBurning"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ListingOption",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "AutoListing"
+          },
+          {
+            "name": "ManualListing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Router",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Raydium"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SaleType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Public"
+          },
+          {
+            "name": "Private"
           }
         ]
       }

@@ -11,7 +11,7 @@
     "project": "PROJECT LIST",
     "token": "CREATE TOKEN",
     "presale": "CREATE PRESALE",
-    "faillaunch": "CREATE FAIRLAUNCH",
+    "fairlaunch": "CREATE FAIRLAUNCH",
     "multichain": "CREATE MULTICHAIN-LAUNCH",
     "pump": "PumpWithMe",
     "faq": "FAQ",
