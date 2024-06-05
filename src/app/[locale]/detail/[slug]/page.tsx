@@ -41,7 +41,7 @@ export default function Detail({ params }: { params: { slug: string } }) {
     <div>
       {/* <Banner /> */}
       <div
-        className={`container mx-auto flex gap-x-6 mt-10 ${
+        className={`container mx-auto flex flex-col md:flex-row gap-6 mt-10 ${
           loading && "justify-center"
         }`}
       >
@@ -52,7 +52,7 @@ export default function Detail({ params }: { params: { slug: string } }) {
             <div className="flex-1">
               <LeftContent data={data} />
             </div>
-            <div className="w-[34.2%]">
+            <div className="md:w-[34.2%]">
               <RightContent
                 type={type}
                 data={data}

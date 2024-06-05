@@ -21,7 +21,7 @@ export default function HomeList({ data,loading }: HomeListProps) {
   return (
     <div>
       <div
-        className="grid grid-cols-3 gap-6 my-10"
+        className="grid grid-cols-1 md:grid-cols-3 gap-6 my-10"
         ref={containerRef}
       >
         {data.map((item: any, idx: number) => (

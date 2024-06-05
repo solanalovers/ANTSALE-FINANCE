@@ -16,7 +16,7 @@ export default function HomeFilter({
 }: HomeFilterProps) {
   const t = useTrans("home");
   return (
-    <div className="flex items-center gap-x-6">
+    <div className="flex flex-col-reverse md:flex-row md:items-center gap-6">
       <Tabs
         size={"md"}
         color="primary"
