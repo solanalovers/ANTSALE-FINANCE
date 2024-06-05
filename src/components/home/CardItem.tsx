@@ -37,7 +37,7 @@ export default function CardItem({ data }: CardItemProps) {
     setStatus(calculateProjectStatus(data.startTime, data.endTime));
     return () => clearInterval(countdown);
   }, []);
-  
+
   return (
     <Card className="p-4">
       <CardHeader className="flex items-center justify-between p-0">
@@ -117,7 +117,7 @@ export default function CardItem({ data }: CardItemProps) {
           <Divider />
           <div className="flex items-center justify-between">
             <div>
-              <p>{t("end")}</p>
+              {status !== "ended" && <p>{t("end")}</p>}
               <p>{timer}</p>
             </div>
             <Button
