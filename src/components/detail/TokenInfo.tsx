@@ -1,14 +1,10 @@
+import { Project } from '@/interface/project-interface';
 import { ProjectContext } from '@/provider/context';
 import { Divider, Link } from '@nextui-org/react';
 import { Copy, Warning2 } from 'iconsax-react';
 import React, { Context, useContext } from 'react';
 
-export default function TokenInfo({
-  context,
-}: {
-  context: Context<ProjectContext>;
-}) {
-  const { form } = useContext(context);
+export default function TokenInfo({data}:{data:Project}) {
 
   return (
     <div className=''>
@@ -22,13 +18,13 @@ export default function TokenInfo({
               href=''
               className='text-primary text-base leading-6 underline'
             >
-              {form?.tokenAddress}
+              {data?.tokenAddress}
             </Link>
             <Copy
               className='hover:opacity-80 cursor-pointer'
               variant='Bold'
               size={20}
-              onClick={() => navigator.clipboard.writeText(form?.tokenAddress!)}
+              onClick={() => navigator.clipboard.writeText(data?.tokenAddress!)}
             />
           </div>
           <div className='flex justify-end items-center gap-x-2'>
@@ -43,28 +39,28 @@ export default function TokenInfo({
       <div className='flex justify-between'>
         <p className='font-medium text-base'>Name</p>
         <p className='text-base leading-6 text-[#1C1C1E]'>
-          {form.tokenInfo?.name}
+          {data.tokenInfo?.name}
         </p>
       </div>
       <div className='my-[14px] w-full border-t border-dashed border-divider' />
       <div className='flex justify-between'>
         <p className='font-medium text-base'>Symbol</p>
         <p className='text-base leading-6 text-[#1C1C1E]'>
-          {form.tokenInfo?.symbol}
+          {data.tokenInfo?.symbol}
         </p>
       </div>
       <div className='my-[14px] w-full border-t border-dashed border-divider' />
       <div className='flex justify-between'>
         <p className='font-medium text-base'>Decimals</p>
         <p className='text-base leading-6 text-[#1C1C1E]'>
-          {form.tokenInfo?.decimals}
+          {data.tokenInfo?.decimals}
         </p>
       </div>
       <div className='my-[14px] w-full border-t border-dashed border-divider' />
       <div className='flex justify-between'>
         <p className='font-medium text-base'>Total Supply</p>
         <p className='text-base leading-6 text-[#1C1C1E]'>
-          {form.tokenInfo?.supply}
+          {data.tokenInfo?.supply}
         </p>
       </div>
     </div>

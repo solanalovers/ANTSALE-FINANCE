@@ -1,4 +1,6 @@
-function countdownToSaleEnd(saleEndTime: string): any {
+import { DateValue } from "@nextui-org/react";
+
+function countdownToSaleEnd(saleEndTime: any): any {
     // Parse saleEndTime to get milliseconds
     const endTime = new Date(saleEndTime).getTime();
 
@@ -28,4 +30,19 @@ function countdownToSaleEnd(saleEndTime: string): any {
     return `${days.toString().padStart(2, "0")}:${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 }
 
-export { countdownToSaleEnd };
+const calculateProjectStatus = (startTime: DateValue | string, endTime: DateValue | string) => {
+    const current = new Date().getTime();
+    const startDate = new Date(startTime.toString()).getTime();
+    const endDate = new Date(endTime.toString()).getTime();
+    if (startDate > current) {
+        return "upcoming";
+    } else {
+        if (endDate > current) {
+            return "live";
+        } else {
+            return "ended";
+        }
+    }
+}
+
+export { countdownToSaleEnd, calculateProjectStatus };

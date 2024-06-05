@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from "react";
-import BorderContent from "./BorderContent";
-import { Button, Input, Progress } from "@nextui-org/react";
-import { countdownToSaleEnd } from "@/function/timer";
-import Countdown from "./Countdown";
 import BaseRightContent from "./right-content/BaseRightContent";
 import PurchaseCurrencyRightContent from "./right-content/PurchaseCurrencyRightContent ";
 import FixedRightContent from "./right-content/FixedRightContent";
+import { Project } from "@/interface/project-interface";
+import { calculateProjectStatus } from "@/function/timer";
 
-export default function RightContent({ type }: { type: string }) {
+export default function RightContent({
+  type,
+  data,
+}: {
+  type: string;
+  data: Project;
+}) {
+  const [status, setStatus] = useState("upcoming");
+  useEffect(() => {
+    setStatus(calculateProjectStatus(data.startTime, data.endTime));
+  }, []);
   return (
     <div className="flex flex-col gap-y-10">
       <div className="bg-warning-50 border border-warning py-[10px]">
@@ -16,7 +24,12 @@ export default function RightContent({ type }: { type: string }) {
           <span className="font-semibold">solsale.fi</span>
         </p>
       </div>
-      {type === "normal" && <BaseRightContent />}
+      {type === "normal" && (
+        <BaseRightContent
+          data={data}
+          status={status}
+        />
+      )}
       {type === "purchase-currency" && <PurchaseCurrencyRightContent />}
       {(type === "fixed-price" || type === "multi-price") && (
         <FixedRightContent type={type} />

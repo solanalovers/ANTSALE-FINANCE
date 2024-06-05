@@ -3,10 +3,11 @@ import React, { Key } from "react";
 import HomeDropdown from "./HomeDropdown";
 import { SearchIcon } from "../Icon";
 import useTrans from "@/hook/useTrans";
+import { ProjectType } from "@/interface/project-interface";
 
 interface HomeFilterProps {
   currentList: string;
-  setCurrentList: (key: Key) => void;
+  setCurrentList: (key: any) => void;
 }
 
 export default function HomeFilter({
@@ -24,16 +25,16 @@ export default function HomeFilter({
         onSelectionChange={setCurrentList}
       >
         <Tab
-          key="presale"
+          key={ProjectType.Presale}
           title={t("presale")}
         />
         <Tab
-          key="fairlaunch"
+          key={ProjectType.FairLaunch}
           title={t("fairlaunch")}
         />
         <Tab
           isDisabled
-          key="multichain"
+          key={"multichain"}
           title={t("multichain")}
         />
       </Tabs>
