@@ -244,9 +244,9 @@ const MainContent = ({
               }
             }}
           >
-            {!wallet.publicKey && content.saleType !== "Fairlaunch" && (
+            {/* {!wallet.publicKey && content.saleType !== "Fairlaunch" && (
               <WalletMultiButton />
-            )}
+            )} */}
             {!loading && t("ads.buy")}
             {loading && <Spinner color="white" />}
           </div>
