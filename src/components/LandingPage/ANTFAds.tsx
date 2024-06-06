@@ -42,11 +42,12 @@ const MainContent = ({
 }) => {
   const t = useTrans("landing");
   const t1 = useTrans("wallet");
-  console.log(content.saleType);
   const saleEndTime = new Date(content.timeEnd);
   const [timer, setTimer] = useState("00:00:00:00");
   const { balance, cluster } = useContext(AppContext);
   const [amount, setAmount] = useState<any>(null);
+  const [errorCode, setErrorCode] = useState("");
+  const [isInvalid, setIsInvalid] = useState<boolean>(false);
 
   const [loading, setLoading] = useState(false);
 
@@ -159,6 +160,20 @@ const MainContent = ({
     setLoading(false);
   };
 
+  const validate = () => {
+    if (amount) {
+      if (Number(amount) < 0.3) {
+        setErrorCode("Min buy is 0.3 SOL");
+        return setIsInvalid(true);
+      }
+      if (Number(amount > 5)) {
+        setErrorCode("Max buy is 5 SOL");
+        return setIsInvalid(true);
+      }
+      setIsInvalid(false);
+    }
+  };
+
   useEffect(() => {
     const countdown = setInterval(() => {
       const timeleft = countdownToSaleEnd(saleEndTime.toISOString());
@@ -194,6 +209,7 @@ const MainContent = ({
       </div>
       <div className="flex flex-col md:flex-row items-center gap-4 w-full">
         <Input
+          errorMessage={errorCode}
           placeholder="0"
           label={`${t("ads.amount")} ${
             wallet.publicKey ? `(Your balances: ${balance} SOL)` : ""
@@ -204,6 +220,8 @@ const MainContent = ({
               setAmount(value);
             }
           }}
+          onBlur={validate}
+          isInvalid={isInvalid}
           value={amount}
           endContent={
             <>
@@ -319,7 +337,7 @@ export default function ANTFAds() {
                 saleType: t("ads.seed"),
                 image: "/image/landing/seed.png",
                 desc: t("ads.seedDesc"),
-                timeEnd: "2024-06-17T00:00:00"
+                timeEnd: "2024-06-17T00:00:00",
               }}
             />
             <Divider />
@@ -425,7 +443,7 @@ export default function ANTFAds() {
                 saleType: t("ads.fairlaunch"),
                 image: "/image/landing/fairlaunch.png",
                 desc: t("ads.fairlaunchDesc"),
-                timeEnd: "2024-07-17T00:00:00"
+                timeEnd: "2024-07-17T00:00:00",
               }}
             />
             <div className="block md:hidden mb-5" />
