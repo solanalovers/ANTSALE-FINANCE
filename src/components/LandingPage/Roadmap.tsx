@@ -16,6 +16,9 @@ export default function Roadmap() {
         <Button
           color="primary"
           size="lg"
+          onClick={()=>{
+            window.open('https://drive.google.com/file/d/10jnYqbkhvjYhXDjYjNDya9bh14fUn-YW/view?usp=drive_link')
+          }}
         >
           {t("roadmap.btn")}
         </Button>
