@@ -190,8 +190,16 @@ const MainContent = ({
       <p className="text-[20px] leading-[34px] font-semibold text-[#1C1C1E] text-center">
         $ANTF <span className="font-bold">{content.saleType} Sale</span>
       </p>
-      <p className="text-center text-sm leading-[22px]">{content.desc}</p>
-      <div className="flex items-center gap-x-1 w-[100%]">
+      <div>
+        <p className="text-center text-sm leading-[22px]">{content.desc}</p>
+        {content.saleType === "Seed" && (
+          <p className="text-orange-500 text-center text-sm leading-[22px]">
+            NB: only SOL addresses on the whitelist can join in the Seed Sale"
+            và "Min Buy: 0.3 SOL - Max Buy: 2 SOL per wallet
+          </p>
+        )}
+      </div>
+      <div className="flex items-center gap-x-1 w-[100%] justify-center">
         <p className="text-[13px] leading-[32px] text-primary underline break-all text-center">
           9gGj9FKJka7JmspN1MZfAGTFGLkoXCU4VKTQaoyjrgTA
         </p>
