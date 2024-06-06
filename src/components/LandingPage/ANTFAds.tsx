@@ -38,11 +38,12 @@ const ContentBox = ({ children }: { children: ReactNode }) => (
 const MainContent = ({
   content,
 }: {
-  content: { image: string; saleType: string; desc: string };
+  content: { image: string; saleType: string; desc: string; timeEnd: string };
 }) => {
   const t = useTrans("landing");
   const t1 = useTrans("wallet");
-  const saleEndTime = new Date("2024-06-28T11:45:00");
+  console.log(content.saleType);
+  const saleEndTime = new Date(content.timeEnd);
   const [timer, setTimer] = useState("00:00:00:00");
   const { balance, cluster } = useContext(AppContext);
   const [amount, setAmount] = useState<any>(null);
@@ -228,11 +229,13 @@ const MainContent = ({
 
         <div className="w-full md:w-[40%]">
           <div
-            className={`w-full font-medium text-base leading-6 h-12 px-4 ${
-              content.saleType === "Fairlaunch"
-                ? "bg-[#ccc] pointer-events-none text-default-500"
-                : "bg-primary hover:opacity-50 text-white"
-            }
+            // ${
+            //   content.saleType === "Fairlaunch"
+            //     ? "bg-[#ccc] pointer-events-none text-default-500"
+            //     : "bg-primary hover:opacity-50 text-white"
+            // }
+            className={`w-full font-medium text-base leading-6 h-12 px-4 
+            bg-[#ccc] pointer-events-none text-default-500
             ${loading && "pointer-events-none"} 
             relative rounded-lg flex items-center justify-center`}
             onClick={async () => {
@@ -250,9 +253,10 @@ const MainContent = ({
         </div>
       </div>
       <p className="text-[20px] leading-[28px] font-semibold text-[#1C1C1E]">
-        {content.saleType !== "Fairlaunch"
+        {/* {content.saleType !== "Fairlaunch"
           ? t("ads.saleEnd")
-          : t("ads.saleStart")}{" "}
+          : t("ads.saleStart")} */}
+        {t("ads.saleStart")}{" "}
         <span className="font-bold text-primary">{timer}</span>
       </p>
     </div>
@@ -289,7 +293,10 @@ export default function ANTFAds() {
           <Tabs
             color="primary"
             className="font-medium text-sm leading-5"
-            classNames={{tabContent:'text-primary',tabList:'bg-white border border-primary p-0'}}
+            classNames={{
+              tabContent: "text-primary",
+              tabList: "bg-white border border-primary p-0",
+            }}
             selectedKey={currentView}
             onSelectionChange={setCurrentView}
           >
@@ -312,6 +319,7 @@ export default function ANTFAds() {
                 saleType: t("ads.seed"),
                 image: "/image/landing/seed.png",
                 desc: t("ads.seedDesc"),
+                timeEnd: "2024-06-27T00:00:00"
               }}
             />
             <Divider />
@@ -417,6 +425,7 @@ export default function ANTFAds() {
                 saleType: t("ads.fairlaunch"),
                 image: "/image/landing/fairlaunch.png",
                 desc: t("ads.fairlaunchDesc"),
+                timeEnd: "2024-07-17T00:00:00"
               }}
             />
             <div className="block md:hidden mb-5" />
