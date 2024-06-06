@@ -13,6 +13,7 @@ import {
   RadioGroup,
   Select,
   SelectItem,
+  Spinner,
 } from "@nextui-org/react";
 import { debounce } from "lodash";
 import React, { useContext, useEffect, useState } from "react";
@@ -23,7 +24,11 @@ import { MinusIcon, PlusIcon } from "@/components/Icon";
 import { changeForm } from "@/function/form";
 import { AppContext } from "@/provider/AppProvider";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { ListingOption, PriceModel, RefundType } from "@/interface/project-interface";
+import {
+  ListingOption,
+  PriceModel,
+  RefundType,
+} from "@/interface/project-interface";
 
 const CurrencySelect = ({ image, name, symbol, value, setValue }: any) => {
   const [isActive, setIsActive] = useState(false);
@@ -73,6 +78,7 @@ export default function CreateMultiChainStep1() {
     CreateMultiChainContext
   );
   const { publicKey } = useWallet();
+  const [loading, setLoading] = useState(false);
 
   const { cluster } = useContext(AppContext);
 
@@ -97,21 +103,25 @@ export default function CreateMultiChainStep1() {
       return {};
     }
 
-    return await new Promise((resolve) => {
-      const debouncedFetch = debounce(() => {
-        resolve(
-          getTokenData(publicKey?.toString(), createMultiChainForm.tokenAddress!, isMainnet)
-        );
-      }, 1000);
-
-      debouncedFetch();
-    });
+    return getTokenData(
+      publicKey?.toString(),
+      createMultiChainForm.tokenAddress!,
+      isMainnet
+    );
   };
+
+  const debouncedFetchData = debounce(async () => {
+    setLoading(true);
+    await fetchData();
+    setLoading(false);
+  }, 1000);
+
   useEffect(() => {
     const fetchDataAndLog = async () => {
-      const tokenInfo = await fetchData();
+      const tokenInfo = await debouncedFetchData();
       handleChangeForm({ tokenInfo });
     };
+
     if (createMultiChainForm?.tokenAddress) {
       fetchDataAndLog();
     }
@@ -138,6 +148,16 @@ export default function CreateMultiChainStep1() {
             label="Token Address"
             placeholder="0x912CE59144191C1204E64559 E8253a0e49E6548"
             onChange={(e) => handleChangeForm({ tokenAddress: e.target.value })}
+            endContent={
+              <>
+                {loading && (
+                  <Spinner
+                    color="primary"
+                    size="sm"
+                  />
+                )}
+              </>
+            }
           />
           <div className="mt-2 flex flex-col gap-y-1">
             <p className="text-xs leading-5 font-semibold text-[#8E8E93]">
@@ -251,7 +271,9 @@ export default function CreateMultiChainStep1() {
             onChange={handleChangePriceModel}
             value={createMultiChainForm?.priceModel}
             disabledKeys={
-              createMultiChainForm?.multiWallet ? [] : [PriceModel.purchaseCurrency]
+              createMultiChainForm?.multiWallet
+                ? []
+                : [PriceModel.purchaseCurrency]
             }
           >
             <SelectItem
@@ -292,7 +314,8 @@ export default function CreateMultiChainStep1() {
                 />
               </div>
             )}
-            {createMultiChainForm?.priceModel === PriceModel.purchaseCurrency && (
+            {createMultiChainForm?.priceModel ===
+              PriceModel.purchaseCurrency && (
               <div className="flex flex-col gap-y-3">
                 {createMultiChainForm?.multiWallet &&
                   Object.entries(createMultiChainForm?.multiWallet).map(
@@ -416,13 +439,15 @@ export default function CreateMultiChainStep1() {
             value={createMultiChainForm?.endTime}
           />
           <Select
-            classNames={{ value: `placeholder:text-[#8E8E93] ${createMultiChainForm?.refundType && 'text-black'}` }}
+            classNames={{
+              value: `placeholder:text-[#8E8E93] ${
+                createMultiChainForm?.refundType && "text-black"
+              }`,
+            }}
             variant="bordered"
             label="Unsold Tokens Refund Type"
             placeholder="Refund"
-            onChange={(e) =>
-              handleChangeForm({ refundType: e.target.value })
-            }
+            onChange={(e) => handleChangeForm({ refundType: e.target.value })}
             value={createMultiChainForm?.refundType}
           >
             <SelectItem
