@@ -319,7 +319,7 @@ export default function ANTFAds() {
                 saleType: t("ads.seed"),
                 image: "/image/landing/seed.png",
                 desc: t("ads.seedDesc"),
-                timeEnd: "2024-06-27T00:00:00"
+                timeEnd: "2024-06-17T00:00:00"
               }}
             />
             <Divider />
