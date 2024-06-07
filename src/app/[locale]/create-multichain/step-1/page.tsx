@@ -110,15 +110,11 @@ export default function CreateMultiChainStep1() {
     );
   };
 
-  const debouncedFetchData = debounce(async () => {
-    setLoading(true);
-    await fetchData();
-    setLoading(false);
-  }, 1000);
-
   useEffect(() => {
     const fetchDataAndLog = async () => {
-      const tokenInfo = await debouncedFetchData();
+      setLoading(true);
+      const tokenInfo = await fetchData();
+      setLoading(false);
       handleChangeForm({ tokenInfo });
     };
 

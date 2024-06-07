@@ -47,15 +47,11 @@ export default function CreatePresaleStep1() {
     return getTokenData(publicKey?.toString(), form.tokenAddress!, isMainnet);
   };
 
-  const debouncedFetchData = debounce(async () => {
-    setLoading(true);
-    await fetchData();
-    setLoading(false);
-  }, 1000);
-
   useEffect(() => {
     const fetchDataAndLog = async () => {
-      const tokenInfo = await debouncedFetchData();
+      setLoading(true);
+      const tokenInfo = await fetchData();
+      setLoading(false);
       handleChangeForm({ tokenInfo });
     };
 
@@ -135,7 +131,7 @@ export default function CreatePresaleStep1() {
                   Symbol: {form?.tokenInfo?.symbol}
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
-                  Total Supply: {form?.tokenInfo?.supply}
+                  Total Supply: {form?.tokenInfo?.supply?.toLocaleString()}
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
                   Decimals: {form?.tokenInfo?.decimals}
