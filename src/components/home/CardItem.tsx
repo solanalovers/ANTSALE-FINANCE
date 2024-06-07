@@ -14,7 +14,7 @@ import { FireIcon } from "../Icon";
 import { useRouter } from "next/navigation";
 import { calculateProjectStatus, countdownToSaleEnd } from "@/function/timer";
 import useTrans from "@/hook/useTrans";
-import { Project } from "@/interface/project-interface";
+import { Project, ProjectType } from "@/interface/project-interface";
 
 interface DataInterface extends Project {
   id: number;
@@ -73,7 +73,7 @@ export default function CardItem({ data }: CardItemProps) {
               {data.tokenInfo?.name}
             </p>
             <p className="text-[14px] leading-[22px] text-[#8E8E93]">
-              {data.projectType}
+              {data.projectType === ProjectType.Presale ? `Ticker: ${data.tokenInfo?.symbol}` : data.projectType}
             </p>
           </div>
           <div>
