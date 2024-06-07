@@ -4,8 +4,8 @@ import { Link } from "@nextui-org/react";
 import React, { Context, useContext, useEffect, useState } from "react";
 
 interface PoolData extends Project {
-    tokenForPresale?: number;
-    tokenForLiquidity?: number
+  tokenForPresale?: number;
+  tokenForLiquidity?: number;
 }
 
 export default function PoolInfo({ data }: { data: PoolData }) {
@@ -40,31 +40,40 @@ export default function PoolInfo({ data }: { data: PoolData }) {
       {/*        </div>*/}
       {/*    </div>*/}
       {/*</div> */}
+      {/* <div className="my-[14px] w-full border-t border-dashed border-divider" /> */}
+      <div className="flex justify-between">
+        <p className="font-medium text-base">Listing type</p>
+        <p className="text-base leading-6 text-[#1C1C1E]">
+          {data.listingOption}
+        </p>
+      </div>
       <div className="my-[14px] w-full border-t border-dashed border-divider" />
       <div className="flex justify-between">
         <p className="font-medium text-base">Tokens For Presale</p>
         <p className="text-base leading-6 text-[#1C1C1E]">
-          {data.tokenForPresale} {data.tokenInfo?.symbol}
+          {data.tokenForPresale?.toLocaleString()} {data.tokenInfo?.symbol}
         </p>
       </div>
       <div className="my-[14px] w-full border-t border-dashed border-divider" />
       <div className="flex justify-between">
         <p className="font-medium text-base">Tokens For Liquidity</p>
         <p className="text-base leading-6 text-[#1C1C1E]">
-          {data.tokenForLiquidity} {data.tokenInfo?.symbol}
+          {data.tokenForLiquidity?.toLocaleString()} {data.tokenInfo?.symbol}
         </p>
       </div>
       <div className="my-[14px] w-full border-t border-dashed border-divider" />
       <div className="flex justify-between">
         <p className="font-medium text-base">Soft Cap</p>
         <p className="text-base leading-6 text-[#1C1C1E]">
-          {data.softCap} {data.currency}
+          {data.softCap?.toLocaleString()} {data.currency}
         </p>
       </div>
       <div className="my-[14px] w-full border-t border-dashed border-divider" />
       <div className="flex justify-between">
         <p className="font-medium text-base">Hard Cap</p>
-        <p className="text-base leading-6 text-[#1C1C1E]">{data.hardCap || '-'}</p>
+        <p className="text-base leading-6 text-[#1C1C1E]">
+          {data.hardCap?.toLocaleString() || "-"}
+        </p>
       </div>
       <div className="my-[14px] w-full border-t border-dashed border-divider" />
       <div className="flex justify-between">
@@ -78,6 +87,13 @@ export default function PoolInfo({ data }: { data: PoolData }) {
         <p className="font-medium text-base">End Time</p>
         <p className="text-base leading-6 text-[#1C1C1E]">
           {new Date(data.endTime.toString()).toUTCString()}
+        </p>
+      </div>
+      <div className="my-[14px] w-full border-t border-dashed border-divider" />
+      <div className="flex justify-between">
+        <p className="font-medium text-base">Unsold Tokens</p>
+        <p className="text-base leading-6 text-[#1C1C1E]">
+          {data.refundType}
         </p>
       </div>
       <div className="my-[14px] w-full border-t border-dashed border-divider" />
@@ -102,7 +118,7 @@ export default function PoolInfo({ data }: { data: PoolData }) {
       <div className="flex justify-between">
         <p className="font-medium text-base">Liquidity Lockup Time</p>
         <p className="text-base leading-6 text-green-500">
-          Burned after liquidity is added
+          {data.liquidityLockupTime? `${data.liquidityLockupTime} Minute` : "🔥Burned after liquidity is added"}
         </p>
       </div>
     </div>

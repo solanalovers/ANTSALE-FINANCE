@@ -60,7 +60,7 @@ export default function TokenInfo({data}:{data:Project}) {
       <div className='flex justify-between'>
         <p className='font-medium text-base'>Total Supply</p>
         <p className='text-base leading-6 text-[#1C1C1E]'>
-          {data.tokenInfo?.supply}
+          {data.tokenInfo?.supply?.toLocaleString()}
         </p>
       </div>
     </div>
