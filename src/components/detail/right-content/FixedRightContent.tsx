@@ -30,7 +30,7 @@ export default function FixedRightContent({ type }: any) {
           <p className="leading-5 text-base font-medium">
             MULTICHAIN-LAUNCH Ends In
           </p>
-          <Countdown multichain />
+          {/* <Countdown multichain /> */}
         </div>
         <p className="font-semibold text-base leading-5 text-center mt-6">
           USDT RAISED: $8,140,987.05/ $8,832,636

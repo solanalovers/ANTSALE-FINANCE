@@ -25,7 +25,7 @@ export default function PurchaseCurrencyRightContent() {
           <p className="leading-5 text-base font-medium">
             MULTICHAIN-LAUNCH Ends In
           </p>
-          <Countdown multichain/>
+          {/* <Countdown multichain/> */}
         </div>
         <div className="mt-6">
           <p className="font-semibold text-base leading-5 text-center mb-2">
