@@ -18,7 +18,7 @@ import { now } from "@internationalized/date";
 import { changeForm, requiredField } from "@/function/form";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { AppContext } from "@/provider/AppProvider";
-import { ListingOption, RefundType } from "@/interface/project-interface";
+import { LiquidityType, ListingOption, RefundType } from "@/interface/project-interface";
 
 export default function CreatePresaleStep1() {
   const { form, setForm, setNext, checkValidStep1 } =
@@ -36,7 +36,7 @@ export default function CreatePresaleStep1() {
       setNext(false);
     }
   }, [form]);
-
+console.log(form)
   const fetchData = async () => {
     const isMainnet = cluster === 1;
 
@@ -581,23 +581,23 @@ export default function CreatePresaleStep1() {
                 }}
                 variant="bordered"
                 label="Liquidity Type"
-                placeholder="Auto Listing"
                 onChange={(e) => {
                   if (e.target.value) {
                     handleChangeForm({ liquidityType: e.target.value });
                   }
                 }}
-                value={form?.liquidityType}
+                selectionMode="single"
+                selectedKeys={[form.liquidityType]}
               >
                 <SelectItem
-                  key={"Auto Locking"}
-                  value={"Auto Locking"}
+                  key={LiquidityType.AutoLocking}
+                  value={LiquidityType.AutoLocking}
                 >
                   Auto Locking
                 </SelectItem>
                 <SelectItem
-                  key={"Auto Burning"}
-                  value={"Auto Burning"}
+                  key={LiquidityType.AutoBurning}
+                  value={LiquidityType.AutoBurning}
                 >
                   Auto Burning
                 </SelectItem>
