@@ -1,149 +1,155 @@
 {
-    "Index": {
-      "title": "Xin chào thế giới!"
+  "Index": {
+    "title": "Xin chào thế giới!"
+  },
+  "anouncement": {
+    "home": "Giới thiệu: <span class='font-semibold text-primary-500'>$ANTF Seed Sale!</span> Cơ hội có một không hai trong không gian blockchain, đừng bỏ lỡ",
+    "other": "Sản phẩm của chúng tôi hiện đang được phát triển. Bạn có thể thử nghiệm trên Devnet từ ngày 20 tháng 6 năm 2024"
+  },
+  "header": {
+    "myService": "DỊCH VỤ CỦA TÔI",
+    "project": "DANH SÁCH DỰ ÁN",
+    "token": "TẠO TOKEN",
+    "presale": "TẠO PRESALE",
+    "fairlaunch": "TẠO FAIRLAUNCH",
+    "multichain": "TẠO MULTICHAIN-LAUNCH",
+    "pump": "PumpWithMe",
+    "faq": "FAQ",
+    "blog": "BLOG",
+    "my": {
+      "project": "Dự án của tôi",
+      "contribute": "Người đóng góp của tôi",
+      "community": "Xây dựng cộng đồng",
+      "pump": "PumpWithMe"
     },
-    "anouncement": {
-      "home": "Giới thiệu: <span class='font-semibold text-primary-500'>$ANTF Bán hạt giống!</span> Cơ hội duy nhất trong đời trong không gian blockchain, đừng bỏ lỡ",
-      "other": "Sản phẩm của chúng tôi hiện đang trong quá trình phát triển. Bạn có thể thử nghiệm trên Devnet từ ngày 20 tháng 6 năm 2024"
+    "search": "Tìm kiếm"
+  },
+  "wallet": {
+    "connect": "Kết nối ví"
+  },
+  "home": {
+    "presale": "PRESALE",
+    "fairlaunch": "FAIRLAUNCH",
+    "multichain": "MULTICHAIN-LAUNCH",
+    "search": "Tìm kiếm"
+  },
+  "footer": {
+    "info": "Tuyên bố từ chối trách nhiệm: antsale.finance sẽ không bao giờ xác nhận hoặc khuyến khích bạn đầu tư vào bất kỳ dự án nào được liệt kê và do đó, không chịu trách nhiệm về bất kỳ tổn thất nào. Người dùng chịu trách nhiệm tự nghiên cứu và tìm kiếm lời khuyên tài chính từ chuyên gia. Thông tin thêm về (DYOR) có thể được tìm thấy qua",
+    "follow": "THEO DÕI CHÚNG TÔI",
+    "interface": "GIAO DIỆN",
+    "darkMode": "Chế độ tối",
+    "lightMode": "Chế độ sáng"
+  },
+  "card": {
+    "end": "Bán kết thúc trong",
+    "view": "Xem",
+    "progress": "Tiến trình"
+  },
+  "chip": {
+    "coming": "Sắp ra mắt",
+    "live": "Đang bán",
+    "canceled": "Đã hủy",
+    "ended": "Đã kết thúc"
+  },
+  "createToken": {
+    "connect": "Kết nối ví của bạn",
+    "cost": "Chi phí triển khai",
+    "step1": "Bước 1",
+    "step2": "Bước 2",
+    "step3": "Bước 3",
+    "step4": "Bước 4",
+    "step5": "Bước 5",
+    "step1Desc": "Kết nối ví Solana của bạn",
+    "step2Desc": "Chỉ định tên token, ký hiệu token, hình ảnh token",
+    "step3Desc": "Xác định nguồn cung và số thập phân của token của bạn.",
+    "step4Desc": "Thêm thông tin về token: website, twitter (X), telegram, discord ... (tùy chọn)",
+    "step5Desc": "Nhấn tạo, chấp nhận giao dịch trên ví của bạn và chờ đợi cho đến khi token của bạn sẵn sàng."
+  },
+  "createSale": {
+    "step1": "Xác minh Token & Cấu hình Launchpad",
+    "step2": "Thêm thông tin bổ sung",
+    "step3": "Hoàn tất",
+    "step1Desc": "Nhập địa chỉ token và thông tin launchpad",
+    "step2Desc": "Cho mọi người biết bạn là ai",
+    "step3Desc": "Xem lại thông tin của bạn"
+  },
+  "pump": {
+    "trades": "GIAO DỊCH",
+    "thread": "CHỦ ĐỀ",
+    "detail": {}
+  },
+  "landing": {
+    "hero": {
+      "title": "Nền tảng huy động vốn cộng đồng Web3",
+      "content1": "Web3 và blockchain đang biến đổi các hệ thống tài chính truyền thống một cách sáng tạo mỗi ngày, và chúng tôi sẽ không bỏ lỡ làn sóng này",
+      "content2": "Antsale - nền tảng huy động vốn tiên tiến được thiết kế để kết nối nhà đầu tư với các dự án tiềm năng một cách an toàn, công bằng và dễ dàng."
     },
-    "header": {
-      "myService": "DỊCH VỤ CỦA TÔI",
-      "project": "DANH SÁCH DỰ ÁN",
-      "token": "TẠO TOKEN",
-      "presale": "TẠO PRESALE",
-      "fairlaunch": "TẠO FAIRLAUNCH",
-      "multichain": "TẠO MULTICHAIN-LAUNCH",
-      "pump": "PumpWithMe",
-      "faq": "FAQ",
-      "my": {
-        "project": "Dự án của tôi",
-        "contribute": "Người đóng góp của tôi",
-        "community": "Xây dựng cộng đồng",
-        "pump": "PumpWithMe"
+    "ads": {
+      "seed": "Seed",
+      "token": "Tokenomics",
+      "seedSale": "Bán seed",
+      "fairlaunchSale": "Bán fairlaunch",
+      "tokenforsale": "Token để bán",
+      "softcap": "Soft Cap",
+      "hardcap": "Hard Cap",
+      "duration": "Thời gian: Tối đa 30 ngày hoặc cho đến khi đạt được Hard Cap",
+      "eligibility": "Đủ điều kiện: Chỉ những ví SOL được whitelist",
+      "limit": "Giới hạn mua: 0.3 SOL - 5 SOL mỗi ví",
+      "liquidity": "Thanh khoản",
+      "cex": "Niêm yết CEX",
+      "dev": "Nhóm phát triển",
+      "airdrop": "Airdrop",
+      "total": "Tổng cung",
+      "maxSupply": "Cung tối đa",
+      "howtobuy": "Cách mua với",
+      "faq1": "Nhấn “Mua ngay” ở trên và kết nối ví",
+      "faq2": "Nhập số lượng SOL để đổi lấy $ANTF",
+      "faq3": "Nhấn “Mua ngay” lần nữa và xác nhận giao dịch",
+      "fairContent1": "Nếu bạn không thể kết nối ví của mình, chỉ cần gửi SOL đến",
+      "fairContent2": "và token sẽ được airdrop vào ví gửi",
+      "fairContent3": "Lưu ý: Đừng sử dụng CEX để gửi SOL! Hãy sử dụng ví của riêng bạn",
+      "fairlaunch": "Fairlaunch",
+      "seedDesc": "Mục tiêu của chúng tôi cho việc bán seed là huy động tối thiểu 200 SOL và tối đa 1000 SOL. Đây là cơ hội tuyệt vời để tham gia vì đây là lần bán duy nhất.",
+      "fairlaunchDesc": "Tất cả SOL thu được trong suốt đợt bán fairlaunch sẽ được sử dụng để tạo thanh khoản trên DEX và đầu tư vào 100 dự án đầu tiên được liệt kê trên AntSale, mỗi dự án sẽ nhận được đầu tư từ 20-50 SOL. Tất cả token thu được từ các khoản đầu tư này sẽ được airdrop lại cho người dùng staking ANTF trong ít nhất 30 ngày.",
+      "buy": "MUA NGAY",
+      "saleStart": "Bán bắt đầu trong",
+      "saleEnd": "Bán kết thúc trong",
+      "amount": "Số lượng",
+      "max": "TỐI ĐA"
+    },
+    "why": {
+      "open": {
+        "tag": "mở",
+        "title": "AntSale chào đón tất cả mọi người",
+        "content-1": "Dù bạn đang tìm kiếm nguồn vốn cho ý tưởng lớn tiếp theo hay đang tìm kiếm cơ hội đầu tư thú vị, chúng tôi đều sẵn sàng hỗ trợ. Nền tảng của chúng tôi là sân chơi của bạn để biến ý tưởng thành hiện thực."
       },
-      "search": "Tìm kiếm"
-    },
-    "wallet": {
-      "connect": "Kết nối ví"
-    },
-    "home": {
-      "presale": "PRESALE",
-      "fairlaunch": "FAIRLAUNCH",
-      "multichain": "MULTICHAIN-LAUNCH",
-      "search": "Tìm kiếm"
-    },
-    "footer": {
-      "info": "Tuyên bố từ chối trách nhiệm: antsale.finance sẽ không bao giờ tán thành hoặc khuyến khích bạn đầu tư vào bất kỳ dự án nào được liệt kê và do đó, không chịu trách nhiệm pháp lý về bất kỳ tổn thất nào xảy ra. Người dùng có trách nhiệm tự nghiên cứu và tìm kiếm lời khuyên tài chính từ chuyên gia. Thông tin thêm về (DYOR) có thể được tìm thấy qua",
-      "follow": "THEO DÕI CHÚNG TÔI",
-      "interface": "GIAO DIỆN",
-      "darkMode": "Chế độ tối",
-      "lightMode": "Chế độ sáng"
-    },
-    "card": {
-      "end": "Bán kết thúc trong",
-      "view": "Xem",
-      "progress": "Tiến độ"
-    },
-    "chip": {
-      "coming": "Sắp tới",
-      "live": "Đang bán",
-      "canceled": "Đã hủy",
-      "ended": "Đã kết thúc"
-    },
-    "createToken": {
-      "connect": "Kết nối ví của bạn",
-      "cost": "Chi phí triển khai",
-      "step1": "Bước 1",
-      "step2": "Bước 2",
-      "step3": "Bước 3",
-      "step4": "Bước 4",
-      "step5": "Bước 5",
-      "step1Desc": "Kết nối ví Solana của bạn",
-      "step2Desc": "Chỉ định tên token, ký hiệu token, hình ảnh token",
-      "step3Desc": "Xác định nguồn cung và số thập phân của token.",
-      "step4Desc": "Thêm thông tin về token: trang web, twitter (X), telegram, discord... (tùy chọn)",
-      "step5Desc": "Nhấp vào tạo, chấp nhận giao dịch trên ví của bạn và chờ đợi cho đến khi token của bạn sẵn sàng."
-    },
-    "createSale": {
-      "step1": "Xác minh Token & Cấu hình Launchpad",
-      "step2": "Thêm thông tin bổ sung",
-      "step3": "Hoàn tất",
-      "step1Desc": "Nhập địa chỉ token và thông tin launchpad",
-      "step2Desc": "Cho mọi người biết bạn là ai",
-      "step3Desc": "Xem lại thông tin của bạn"
-    },
-    "pump": {
-      "trades": "GIAO DỊCH",
-      "thread": "CHỦ ĐỀ",
-      "detail": {}
-    },
-    "landing": {
-      "hero": {
-        "title": "Nền tảng gây quỹ Web3",
-        "content1": "Web3 và blockchain đang thay đổi các hệ thống tài chính truyền thống theo những cách cực kỳ sáng tạo mỗi ngày, và chúng tôi sẽ không bỏ lỡ làn sóng này",
-        "content2": "Antsale - một nền tảng gây quỹ tiên tiến được thiết kế để kết nối nhà đầu tư với các dự án tiềm năng cao một cách an toàn, công bằng và dễ dàng."
+      "multi-chain": {
+        "tag": "MULTI-CHAIN",
+        "title": "Mang dự án của bạn đến với multi-chain",
+        "content-1": "Với nền tảng AntSale, dự án của bạn có thể ra mắt đồng thời trên nhiều blockchain như Solana, Ethereum, Ton, Polygon, BNB và nhiều hơn nữa.",
+        "content-2": "Dự án của bạn sẽ tiếp cận hàng trăm triệu người dùng trên nhiều nền tảng blockchain, thay vì bị giới hạn trên một nền tảng blockchain duy nhất."
       },
-      "ads": {
-        "seed": "Seed",
-        "token": "Tokenomics",
-        "seedSale": "Bán hạt giống",
-        "fairlaunchSale": "Bán fairlaunch",
-        "liquidity": "Thanh khoản",
-        "cex": "Niêm yết CEX",
-        "dev": "Đội ngũ phát triển",
-        "airdrop": "Airdrop",
-        "total": "Tổng cung",
-        "maxSupply": "Tổng cung tối đa",
-        "howtobuy": "Cách mua với",
-        "faq1": "Nhấn “Mua ngay” ở trên và kết nối ví",
-        "faq2": "Nhập số lượng SOL để hoán đổi lấy $ANTF",
-        "faq3": "Nhấn lại “Mua ngay” và xác nhận giao dịch",
-        "fairContent1": "Nếu bạn không thể kết nối ví của mình, chỉ cần gửi SOL đến",
-        "fairContent2": "và token sẽ được airdrop đến ví gửi",
-        "fairContent3": "Lưu ý: Đừng sử dụng CEX để gửi SOL! Hãy sử dụng ví của bạn",
-        "fairlaunch": "Fairlaunch",
-        "seedDesc": "Mục tiêu của chúng tôi cho bán hạt giống là huy động tối thiểu 200 SOL và tối đa 1000 SOL. Đây là cơ hội tuyệt vời để tham gia vì đây chỉ là một đợt bán duy nhất.",
-        "fairlaunchDesc": "Tất cả SOL huy động được trong đợt bán Fairlaunch sẽ được sử dụng để tạo thanh khoản trên DEXs và đầu tư vào 100 dự án đầu tiên được liệt kê trên AntSale, mỗi dự án sẽ nhận được khoản đầu tư từ 20-50 SOL. Tất cả token nhận được từ các khoản đầu tư này sẽ được airdrop lại cho người dùng đã stake ANTF trong ít nhất 30 ngày.",
-        "buy": "MUA NGAY",
-        "saleStart": "Bán bắt đầu trong",
-        "saleEnd": "Bán kết thúc trong",
-        "amount": "Số lượng",
-        "max": "Tối đa"
+      "multi-gamingfy": {
+        "tag": "CÔNG BẰNG",
+        "title": "Sự công bằng cho chủ dự án",
+        "content-1": "Khi bạn khởi chạy dự án của mình để huy động vốn, sẽ không có phí trừ khi chiến dịch của bạn thành công. Chúng tôi chỉ thu phí khi giúp bạn đạt được mục tiêu huy động vốn. Đó là cách chúng tôi đảm bảo rằng thành công của bạn là thành công của chúng tôi."
       },
-      "why": {
-        "open": {
-          "tag": "mở",
-          "title": "Mọi người đều được chào đón tại AntSale",
-          "content-1": "Cho dù bạn đang tìm kiếm quỹ cho ý tưởng lớn tiếp theo của mình hay tìm kiếm cơ hội đầu tư thú vị, chúng tôi đều có mặt. Nền tảng của chúng tôi là sân chơi của bạn để biến ý tưởng thành hiện thực."
-        },
-        "multi-chain": {
-          "tag": "MULTI-CHAIN",
-          "title": "Mang dự án của bạn đến đa chuỗi",
-          "content-1": "Với nền tảng AntSale, dự án của bạn có thể ra mắt đồng thời trên nhiều blockchain như Solana, Ethereum, Ton, Polygon, BNB và nhiều hơn nữa.",
-          "content-2": "Dự án của bạn sẽ tiếp cận hàng trăm triệu người dùng trên nhiều nền tảng blockchain, thay vì bị giới hạn trong một nền tảng blockchain duy nhất."
-        },
-        "multi-gamingfy": {
-          "tag": "CÔNG BẰNG",
-          "title": "Công bằng cho chủ dự án",
-          "content-1": "Khi bạn khởi chạy dự án của mình để gây quỹ, sẽ không có phí trừ khi chiến dịch của bạn thành công. Chúng tôi chỉ tính phí khi chúng tôi đã giúp bạn đạt được mục tiêu gây quỹ của mình. Đó là cách chúng tôi đảm bảo rằng thành công của bạn là thành công của chúng tôi."
-        },
-        "reward": {
-          "tag": "THƯỞNG",
-          "title": "Nhận nhiều phần thưởng",
-          "content-1": "Giữ token ANTF từ AntSale sẽ mang lại cho bạn nhiều phần thưởng: quyền truy cập sớm vào các dự án tiềm năng, token miễn phí từ các dự án niêm yết trên nền tảng AntSale và kiếm lãi khi bạn stake ANTF trong một khoảng thời gian nhất định, trong số những thứ khác."
-        }
-      },
-      "partner": "Đối tác của chúng tôi",
-      "roadmap": {
-        "title": "Xem lộ trình của chúng tôi",
-        "description": "Tìm hiểu thêm về các kế hoạch tương lai, nền kinh tế của Solana, nền kinh tế của Ton và tầm nhìn của AntSale về nhiều cơ hội hơn",
-        "btn": "XEM LỘ TRÌNH"
-      },
-      "join": {
-        "content1": "Tham gia cùng hàng triệu người khác.",
-        "content2": "Bắt đầu sử dụng",
-        "content3": "hôm nay"
+      "reward": {
+        "tag": "PHẦN THƯỞNG",
+        "title": "Nhận nhiều phần thưởng",
+        "content-1": "Việc sở hữu token ANTF từ AntSale sẽ mang lại cho bạn nhiều phần thưởng: quyền truy cập sớm vào các dự án tiềm năng, token miễn phí từ các dự án được liệt kê trên nền tảng AntSale, và nhận lãi suất khi staking ANTF trong một khoảng thời gian nhất định, và nhiều hơn nữa."
       }
+    },
+    "partner": "Đối tác của chúng tôi",
+    "roadmap": {
+      "title": "Hãy xem qua kế hoạch của chúng tôi",
+      "description": "Tìm hiểu thêm về các kế hoạch tương lai, nền kinh tế Solana, nền kinh tế Ton và tầm nhìn của AntSale cho nhiều cơ hội hơn",
+      "btn": "XEM KẾ HOẠCH"
+    },
+    "join": {
+      "content1": "Tham gia cùng hàng triệu người khác.",
+      "content2": "Bắt đầu sử dụng",
+      "content3": "hôm nay"
     }
   }
-  
+}

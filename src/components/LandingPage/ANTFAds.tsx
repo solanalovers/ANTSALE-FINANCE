@@ -355,53 +355,38 @@ export default function ANTFAds() {
               </p>
               <ul className="list-disc ml-4 mt-6">
                 <li>
-                  <p className="text-base leading-6">
-                    <span className="font-medium">{t("ads.seedSale")}:</span>{" "}
-                    100,000 ANTF (10%)
+                  <p className="text-[22px] leading-[30px] text-[#1C1C1E] font-medium">
+                    {t("ads.tokenforsale")}:{" "}
+                    100,000 ANTF
                   </p>
                 </li>
                 <li>
-                  <p className="text-base leading-6">
-                    <span className="font-medium">
-                      {t("ads.fairlaunchSale")}:
-                    </span>{" "}
-                    500,000 ANTF (50%)
+                  <p className="text-[22px] leading-[30px] text-[#1C1C1E] font-medium">
+                    
+                      {t("ads.softcap")}:
+                    {" "}
+                    200 SOL
                   </p>
                 </li>
                 <li>
-                  <p className="text-base leading-6">
-                    <span className="font-medium">{t("ads.liquidity")}:</span>{" "}
-                    200,000 ANTF (20%)
+                  <p className="text-[22px] leading-[30px] text-[#1C1C1E] font-medium">
+                    {t("ads.hardcap")}:{" "}
+                    1,000 SOL
                   </p>
                 </li>
                 <li>
-                  <p className="text-base leading-6">
-                    <span className="font-medium">{t("ads.cex")}:</span> 100,000
-                    ANTF (10%)
+                  <p className="text-[22px] leading-[30px] text-[#1C1C1E] font-medium">
+                    {t("ads.duration")}
                   </p>
                 </li>
                 <li>
-                  <p className="text-base leading-6">
-                    <span className="font-medium">{t("ads.dev")}:</span> 50,000
-                    ANTF (5%)
+                  <p className="text-[22px] leading-[30px] text-[#1C1C1E] font-medium">
+                    {t("ads.eligibility")}
                   </p>
                 </li>
                 <li>
-                  <p className="text-base leading-6">
-                    <span className="font-medium">{t("ads.airdrop")}:</span>{" "}
-                    50,000 ANTF (5%)
-                  </p>
-                </li>
-                <li>
-                  <p className="text-base leading-6">
-                    <span className="font-medium">{t("ads.total")}:</span>{" "}
-                    1,000,000 ANTF
-                  </p>
-                </li>
-                <li>
-                  <p className="text-base leading-6">
-                    <span className="font-medium">{t("ads.maxSupply")}:</span>{" "}
-                    1,000,000 ANTF
+                  <p className="text-[22px] leading-[30px] text-[#1C1C1E] font-medium">
+                    {t("ads.limit")}
                   </p>
                 </li>
               </ul>
