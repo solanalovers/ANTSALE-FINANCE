@@ -194,8 +194,8 @@ const MainContent = ({
         <p className="text-center text-sm leading-[22px]">{content.desc}</p>
         {content.saleType === "Seed" && (
           <p className="text-orange-500 text-center text-sm leading-[22px]">
-            NB: only SOL addresses on the whitelist can join in the Seed Sale"
-            và "Min Buy: 0.3 SOL - Max Buy: 2 SOL per wallet
+            {`NB: only SOL addresses on the whitelist can join in the Seed Sale"
+            và "Min Buy: 0.3 SOL - Max Buy: 2 SOL per wallet`}
           </p>
         )}
       </div>
