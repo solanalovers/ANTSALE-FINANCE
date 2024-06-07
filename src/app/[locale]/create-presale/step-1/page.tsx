@@ -617,6 +617,7 @@ export default function CreatePresaleStep1() {
                   isRequired
                   type="number"
                   min={43200}
+                  errorMessage={'Value must be greater than or equal 43200 minutes (30 days)'}
                   endContent={
                     <p className="text-sm text-default-500">Minutes</p>
                   }
