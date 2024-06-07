@@ -1,14 +1,14 @@
 import { countdownToSaleEnd } from "@/function/timer";
+import { DateValue } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 
-const saleEndTime = new Date();
-saleEndTime.setHours(saleEndTime.getHours() + 17);
 
-export default function Countdown({ multichain }: { multichain?: boolean }) {
+
+export default function Countdown({ multichain, endTime }: { multichain?: boolean, endTime: DateValue }) {
   const [timer, setTimer] = useState("00:00:00:00");
   useEffect(() => {
     const countdown = setInterval(() => {
-      const timeleft = countdownToSaleEnd(saleEndTime.toLocaleDateString());
+      const timeleft = countdownToSaleEnd(endTime);
       setTimer(timeleft);
     }, 1000);
     return () => clearInterval(countdown);

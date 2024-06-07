@@ -31,7 +31,7 @@ export default function BaseRightContent({
               <p className="leading-5 text-base font-medium">
                 {data.projectType} Ends In
               </p>
-              <Countdown />
+              <Countdown endTime={data.endTime}/>
             </>
           )}
         </div>
