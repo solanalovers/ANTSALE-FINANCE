@@ -21,7 +21,7 @@ export default function RightContent({
       <div className="bg-warning-50 border border-warning py-[10px]">
         <p className="text-sm leading-5 text-center">
           Make sure the website is{" "}
-          <span className="font-semibold">solsale.fi</span>
+          <span className="font-semibold">antsale.finance</span>
         </p>
       </div>
       {type === "normal" && (
