@@ -27,7 +27,7 @@ export default function LeftContent({ data }: { data: Project }) {
       <BorderContent>
         <div>
           <Image
-            src="/image/img-detail.png"
+            src={data.backgroundImage}
             radius="none"
             className="object-cover object-center h-[200px]"
             width={"100%"}
@@ -35,7 +35,7 @@ export default function LeftContent({ data }: { data: Project }) {
           <div className="flex justify-between">
             <div className="mt-[-60px] z-20 ml-10">
               <CustomAvatar
-                tokenAvatar="/image/token-image-1.png"
+                tokenAvatar={data.image}
                 size={120}
                 networkSize={38}
               />
@@ -111,7 +111,7 @@ export default function LeftContent({ data }: { data: Project }) {
             <p className="text-lg font-semibold leading-[22px]">
               {data.tokenInfo?.name}
             </p>
-            <p className="mt-1 text-sm leading-4">Spread: 16.67%</p>
+            <p className="mt-1 text-sm leading-4">Ticker: {data.tokenInfo?.supply}</p>
           </div>
           <p
             className="text-sm leading-[22px]"

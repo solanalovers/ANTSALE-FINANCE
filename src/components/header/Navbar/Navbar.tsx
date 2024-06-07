@@ -65,14 +65,15 @@ export default function Navbar() {
       </div>
       <div className="flex items-center">
         <Link
-          href={"/faq"}
+        target="_blank"
+          href={"https://blog.antsale.finance/"}
           className={`mx-3 text-sm leading-5 text-default-500 font-semibold ${
             theme === "dark" ? "header-link" : "header-link light"
-          } ${pathname === "FAQ" && "text-primary font-bold"}
+          } ${pathname === "blog" && "text-primary font-bold"}
           hover:opacity-50
           `}
         >
-          {t("faq")}
+          {t("blog")}
         </Link>
         {/* <Link
           href={"/services"}
