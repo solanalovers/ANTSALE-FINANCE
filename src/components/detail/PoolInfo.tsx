@@ -1,6 +1,7 @@
 import { Project } from "@/interface/project-interface";
 import { ProjectContext } from "@/provider/context";
 import { Link } from "@nextui-org/react";
+import { usePathname } from "next/navigation";
 import React, { Context, useContext, useEffect, useState } from "react";
 
 interface PoolData extends Project {
@@ -9,6 +10,7 @@ interface PoolData extends Project {
 }
 
 export default function PoolInfo({ data }: { data: PoolData }) {
+  const pathname = usePathname();
   return (
     <div className="mt-6">
       <p className="mb-5 font-medium text-lg">Pool Info</p>
@@ -92,9 +94,7 @@ export default function PoolInfo({ data }: { data: PoolData }) {
       <div className="my-[14px] w-full border-t border-dashed border-divider" />
       <div className="flex justify-between">
         <p className="font-medium text-base">Unsold Tokens</p>
-        <p className="text-base leading-6 text-[#1C1C1E]">
-          {data.refundType}
-        </p>
+        <p className="text-base leading-6 text-[#1C1C1E]">{data.refundType}</p>
       </div>
       <div className="my-[14px] w-full border-t border-dashed border-divider" />
       <div className="flex justify-between">
@@ -108,17 +108,28 @@ export default function PoolInfo({ data }: { data: PoolData }) {
         </Link>
       </div>
       <div className="my-[14px] w-full border-t border-dashed border-divider" />
-      <div className="flex justify-between">
-        <p className="font-medium text-base">Liquidity Percent</p>
-        <p className="text-base leading-6 text-[#1C1C1E]">
-          {data.liquidityPercent}%
-        </p>
+      <div className="flex justify-between gap-4 items-center">
+        <p className="font-medium text-base line-clamp-1 flex-shrink-0">Liquidity Percent</p>
+        <div className="flex flex-col items-end">
+          <p className="text-base leading-6 text-[#1C1C1E]">
+            {data.liquidityPercent}%
+          </p>
+          {pathname.includes("detail") &&
+            data.liquidityPercent &&
+            data.liquidityPercent < 51 && (
+              <p className="text-right text-red-500 text-[12.5px] leading-5">
+                {`Low LP launchpad This project will add less than 51% of raised funds to Liquidity. Small presale to liquidity ration results in more volatile price action, Please assess necessary risks before investing into lower liquidity projects.`}
+              </p>
+            )}
+        </div>
       </div>
       <div className="my-[14px] w-full border-t border-dashed border-divider" />
       <div className="flex justify-between">
         <p className="font-medium text-base">Liquidity Lockup Time</p>
         <p className="text-base leading-6 text-green-500">
-          {data.liquidityLockupTime? `${data.liquidityLockupTime} Minute` : "🔥Burned after liquidity is added"}
+          {data.liquidityLockupTime
+            ? `${data.liquidityLockupTime} Minute`
+            : "🔥Burned after liquidity is added"}
         </p>
       </div>
     </div>
