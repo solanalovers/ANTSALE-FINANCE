@@ -22,6 +22,7 @@ import { bs58 } from "@coral-xyz/anchor/dist/cjs/utils/bytes";
 import { toast } from "react-toastify";
 import { contextType } from "react-quill";
 import { checkNumber } from "@/function/form";
+import { checkWhitelist } from "@/supabase/antf-sale";
 
 const ContentBox = ({ children }: { children: ReactNode }) => (
   <div
@@ -37,8 +38,12 @@ const ContentBox = ({ children }: { children: ReactNode }) => (
 
 const MainContent = ({
   content,
+  isWhitelist = false,
+  maxBuy = 5,
 }: {
   content: { image: string; saleType: string; desc: string; timeEnd: string };
+  isWhitelist?: boolean;
+  maxBuy?: number;
 }) => {
   const t = useTrans("landing");
   const t1 = useTrans("wallet");
@@ -55,107 +60,115 @@ const MainContent = ({
 
   const earlyBuy = async () => {
     setLoading(true);
-    const _amount = Number(amount);
-    if (wallet && wallet.publicKey && wallet.signTransaction && _amount > 0) {
-      try {
-        const isMainnet = cluster === 1;
-        const connection = new Connection(
-          isMainnet
-            ? process.env.NEXT_PUBLIC_HELIUS_RPC_MAINNET!
-            : process.env.NEXT_PUBLIC_HELIUS_RPC_DEVNET!,
-          "confirmed"
-        );
-
-        const program = getProgram(connection, wallet);
-
-        const buyIns = await program.methods
-          .invest(new BN(_amount * LAMPORTS_PER_SOL))
-          .accounts({
-            investor: wallet.publicKey,
-            destination: new PublicKey(process.env.NEXT_PUBLIC_DESTINATION!),
-          })
-          .instruction();
-
-        const blockhash = await connection.getLatestBlockhashAndContext(
-          "confirmed"
-        );
-
-        const setComputeUnitPriceIx = ComputeBudgetProgram.setComputeUnitPrice({
-          microLamports: 100000,
-        });
-
-        const messageV0 = new TransactionMessage({
-          payerKey: wallet.publicKey,
-          recentBlockhash: blockhash.value.blockhash,
-          instructions: [setComputeUnitPriceIx, buyIns],
-        }).compileToV0Message();
-
-        const transactionV0 = new VersionedTransaction(messageV0);
-
-        const signature = await wallet.signTransaction(transactionV0);
-
-        const signatureEncode = bs58.encode(signature?.signatures?.[0]);
-
-        const blockHeight = await connection.getBlockHeight({
-          commitment: "confirmed",
-          minContextSlot: blockhash.context.slot,
-        });
-
-        const transactionTTL = blockHeight + 151;
-        const waitToConfirm = () =>
-          new Promise((resolve) => setTimeout(resolve, 5000));
-        const waitToRetry = () =>
-          new Promise((resolve) => setTimeout(resolve, 2000));
-
-        const numTry = 30;
-
-        for (let i = 0; i < numTry; i++) {
-          // check transaction TTL
-          const blockHeight = await connection.getBlockHeight("confirmed");
-          if (blockHeight >= transactionTTL) {
-            throw new Error("ONCHAIN_TIMEOUT");
-          }
-
-          await connection.simulateTransaction(transactionV0, {
-            replaceRecentBlockhash: true,
-            commitment: "confirmed",
-          });
-
-          await connection?.sendRawTransaction(signature.serialize(), {
-            skipPreflight: process.env.NODE_ENV === "development",
-            maxRetries: 0,
-            preflightCommitment: "confirmed",
-          });
-
-          await waitToConfirm();
-
-          const sigStatus = await connection.getSignatureStatus(
-            signatureEncode
+    if(isWhitelist) {
+      const _amount = Number(amount);
+      if (wallet && wallet.publicKey && wallet.signTransaction && _amount > 0) {
+        try {
+          const isMainnet = cluster === 1;
+          const connection = new Connection(
+            isMainnet
+              ? process.env.NEXT_PUBLIC_HELIUS_RPC_MAINNET!
+              : process.env.NEXT_PUBLIC_HELIUS_RPC_DEVNET!,
+            "confirmed"
           );
-
-          if (sigStatus.value?.err) {
-            throw new Error("UNKNOWN_TRANSACTION");
-          }
-
-          if (sigStatus.value?.confirmationStatus === "confirmed") {
-            toast("Confirmed", {
-              position: "top-center",
-              theme: "colored",
-              type: "success",
+  
+          const program = getProgram(connection, wallet);
+  
+          const buyIns = await program.methods
+            .invest(new BN(_amount * LAMPORTS_PER_SOL))
+            .accounts({
+              investor: wallet.publicKey,
+              destination: new PublicKey(process.env.NEXT_PUBLIC_DESTINATION!),
+            })
+            .instruction();
+  
+          const blockhash = await connection.getLatestBlockhashAndContext(
+            "confirmed"
+          );
+  
+          const setComputeUnitPriceIx = ComputeBudgetProgram.setComputeUnitPrice({
+            microLamports: 100000,
+          });
+  
+          const messageV0 = new TransactionMessage({
+            payerKey: wallet.publicKey,
+            recentBlockhash: blockhash.value.blockhash,
+            instructions: [setComputeUnitPriceIx, buyIns],
+          }).compileToV0Message();
+  
+          const transactionV0 = new VersionedTransaction(messageV0);
+  
+          const signature = await wallet.signTransaction(transactionV0);
+  
+          const signatureEncode = bs58.encode(signature?.signatures?.[0]);
+  
+          const blockHeight = await connection.getBlockHeight({
+            commitment: "confirmed",
+            minContextSlot: blockhash.context.slot,
+          });
+  
+          const transactionTTL = blockHeight + 151;
+          const waitToConfirm = () =>
+            new Promise((resolve) => setTimeout(resolve, 5000));
+          const waitToRetry = () =>
+            new Promise((resolve) => setTimeout(resolve, 2000));
+  
+          const numTry = 30;
+  
+          for (let i = 0; i < numTry; i++) {
+            // check transaction TTL
+            const blockHeight = await connection.getBlockHeight("confirmed");
+            if (blockHeight >= transactionTTL) {
+              throw new Error("ONCHAIN_TIMEOUT");
+            }
+  
+            await connection.simulateTransaction(transactionV0, {
+              replaceRecentBlockhash: true,
+              commitment: "confirmed",
             });
-            break;
+  
+            await connection?.sendRawTransaction(signature.serialize(), {
+              skipPreflight: process.env.NODE_ENV === "development",
+              maxRetries: 0,
+              preflightCommitment: "confirmed",
+            });
+  
+            await waitToConfirm();
+  
+            const sigStatus = await connection.getSignatureStatus(
+              signatureEncode
+            );
+  
+            if (sigStatus.value?.err) {
+              throw new Error("UNKNOWN_TRANSACTION");
+            }
+  
+            if (sigStatus.value?.confirmationStatus === "confirmed") {
+              toast("Confirmed", {
+                position: "top-center",
+                theme: "colored",
+                type: "success",
+              });
+              break;
+            }
+  
+            await waitToRetry();
           }
-
-          await waitToRetry();
+        } catch (error) {
+          console.log("Send transaction error: ", error);
+          toast("Some thing when wrong", {
+            position: "top-center",
+            theme: "colored",
+            type: "error",
+          });
         }
-      } catch (error) {
-        console.log("Send transaction error: ", error);
-        toast("Some thing when wrong", {
-          position: "top-center",
-          theme: "colored",
-          type: "error",
-        });
       }
+    } else{
+      toast("Sorry, your SOL address is not on the whitelist", {
+        position: "top-center",
+        theme: "colored",
+        type: "error",
+      });
     }
     setLoading(false);
   };
@@ -166,7 +179,7 @@ const MainContent = ({
         setErrorCode("Min buy is 0.3 SOL");
         return setIsInvalid(true);
       }
-      if (Number(amount > 5)) {
+      if (Number(amount > maxBuy)) {
         setErrorCode("Max buy is 5 SOL");
         return setIsInvalid(true);
       }
@@ -313,6 +326,25 @@ const Divider = () => (
 export default function ANTFAds() {
   const t = useTrans("landing");
   const [currentView, setCurrentView] = useState<any>(null);
+  const [maxBuy, setMaxBuy] = useState(5);
+  const [isWhitelist, setIsWhitelist] = useState(false);
+  const { publicKey } = useWallet();
+
+  useEffect(() => {
+    const _checkWhiteList = async (publicKey: PublicKey) => {
+      const data = await checkWhitelist(publicKey);
+      if (data && data.length > 0) {
+        setIsWhitelist(true);
+        setMaxBuy(5 - Number(data[0].amount));
+      } else {
+        setIsWhitelist(false);
+      }
+    };
+    if (publicKey) {
+      _checkWhiteList(publicKey);
+    }
+  }, [publicKey]);
+
   return (
     <>
       {window.innerWidth <= 768 && (
@@ -348,6 +380,8 @@ export default function ANTFAds() {
                 desc: t("ads.seedDesc"),
                 timeEnd: "2024-06-17T00:00:00",
               }}
+              isWhitelist={isWhitelist}
+              maxBuy={maxBuy}
             />
             <Divider />
             <div>
@@ -391,7 +425,7 @@ export default function ANTFAds() {
                 </li>
                 <li>
                   <p className="text-[16px] leading-[24px] text-[#1C1C1E]">
-                  <span className="font-medium">
+                    <span className="font-medium">
                       {t("ads.limit").split(":")[0]}
                     </span>
                     :{t("ads.limit").split(":")[1]}
