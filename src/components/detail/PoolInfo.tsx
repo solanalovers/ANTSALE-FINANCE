@@ -81,14 +81,22 @@ export default function PoolInfo({ data }: { data: PoolData }) {
       <div className="flex justify-between">
         <p className="font-medium text-base">Start Time</p>
         <p className="text-base leading-6 text-[#1C1C1E]">
-          {new Date(data.startTime.toString()).toUTCString()}
+          {pathname.includes("detail") ? (
+            <>{new Date(data.startTime.toString()).toUTCString()}</>
+          ) : (
+            <>{data.startTime.toDate("").toUTCString()}</>
+          )}
         </p>
       </div>
       <div className="my-[14px] w-full border-t border-dashed border-divider" />
       <div className="flex justify-between">
         <p className="font-medium text-base">End Time</p>
         <p className="text-base leading-6 text-[#1C1C1E]">
-          {new Date(data.endTime.toString()).toUTCString()}
+          {pathname.includes("detail") ? (
+            <>{new Date(data.endTime.toString()).toUTCString()}</>
+          ) : (
+            <>{data.endTime.toDate("").toUTCString()}</>
+          )}
         </p>
       </div>
       <div className="my-[14px] w-full border-t border-dashed border-divider" />
@@ -109,7 +117,9 @@ export default function PoolInfo({ data }: { data: PoolData }) {
       </div>
       <div className="my-[14px] w-full border-t border-dashed border-divider" />
       <div className="flex justify-between gap-4 items-center">
-        <p className="font-medium text-base line-clamp-1 flex-shrink-0">Liquidity Percent</p>
+        <p className="font-medium text-base line-clamp-1 flex-shrink-0">
+          Liquidity Percent
+        </p>
         <div className="flex flex-col items-end">
           <p className="text-base leading-6 text-[#1C1C1E]">
             {data.liquidityPercent}%
