@@ -1,4 +1,4 @@
-import { Project } from "@/interface/project-interface";
+import { Project, ProjectType } from "@/interface/project-interface";
 import { ProjectContext } from "@/provider/context";
 import { Link } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
@@ -72,10 +72,22 @@ export default function PoolInfo({ data }: { data: PoolData }) {
       </div>
       <div className="my-[14px] w-full border-t border-dashed border-divider" />
       <div className="flex justify-between">
-        <p className="font-medium text-base">Hard Cap</p>
-        <p className="text-base leading-6 text-[#1C1C1E]">
-          {data.hardCap?.toLocaleString() || "-"}
-        </p>
+        {data.projectType === ProjectType.Presale && (
+          <>
+            <p className="font-medium text-base">Hard Cap</p>
+            <p className="text-base leading-6 text-[#1C1C1E]">
+              {`${data.hardCap?.toLocaleString()} ${data.currency}` || "-"}
+            </p>
+          </>
+        )}
+        {data.projectType === ProjectType.FairLaunch && (
+          <>
+            <p className="font-medium text-base">Max Buy</p>
+            <p className="text-base leading-6 text-[#1C1C1E]">
+              {`${data.maxBuy?.toLocaleString()} ${data.currency}` || "-"}
+            </p>
+          </>
+        )}
       </div>
       <div className="my-[14px] w-full border-t border-dashed border-divider" />
       <div className="flex justify-between">
