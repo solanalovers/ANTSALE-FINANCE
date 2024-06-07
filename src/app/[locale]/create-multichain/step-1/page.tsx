@@ -162,19 +162,19 @@ export default function CreateMultiChainStep1() {
             {createMultiChainForm?.tokenInfo && (
               <>
                 <p className="text-xs leading-5 text-[#8E8E93]">
-                  Name: {createMultiChainForm?.tokenInfoname}
+                  Name: {createMultiChainForm?.tokenInfo?.name}
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
-                  Symbol: {createMultiChainForm?.tokenInfosymbol}
+                  Symbol: {createMultiChainForm?.tokenInfo?.symbol}
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
-                  Total Supply: 223398198040.53727
+                  Total Supply: {createMultiChainForm?.tokenInfo?.supply?.toLocaleString()}
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
-                  Decimals: {createMultiChainForm?.tokenInfodecimals}
+                  Decimals: {createMultiChainForm?.tokenInfo?.decimals}
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
-                  Your balance: 223398198040.53727
+                  Your balance: {createMultiChainForm?.tokenInfo?.balance}
                 </p>
               </>
             )}

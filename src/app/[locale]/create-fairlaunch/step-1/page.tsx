@@ -111,7 +111,7 @@ export default function CreateFairLaunchStep1() {
                   Symbol: {form?.tokenInfo?.symbol}
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
-                  Total Supply: {form?.tokenInfo?.supply}
+                  Total Supply: {form?.tokenInfo?.supply?.toLocaleString()}
                 </p>
                 <p className="text-xs leading-5 text-[#8E8E93]">
                   Decimals: {form?.tokenInfo?.decimals}
