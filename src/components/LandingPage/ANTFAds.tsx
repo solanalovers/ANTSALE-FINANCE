@@ -194,7 +194,8 @@ const MainContent = ({
         <p className="text-center text-sm leading-[22px]">{content.desc}</p>
         {content.saleType === "Seed" && (
           <p className="text-orange-500 text-center text-sm leading-[22px]">
-            {`NB: only SOL addresses on the whitelist can join in the Seed Sale`}<br/>
+            {`NB: only SOL addresses on the whitelist can join in the Seed Sale`}
+            <br />
             {`Min Buy: 0.3 SOL - Max Buy: 5 SOL per wallet`}
           </p>
         )}
@@ -355,38 +356,45 @@ export default function ANTFAds() {
               </p>
               <ul className="list-disc ml-4 mt-6">
                 <li>
-                  <p className="text-[22px] leading-[30px] text-[#1C1C1E] font-medium">
-                    {t("ads.tokenforsale")}:{" "}
-                    100,000 ANTF
+                  <p className="text-[16px] leading-[24px] text-[#1C1C1E]">
+                    <span className="font-medium">{t("ads.tokenforsale")}</span>
+                    : 100,000 ANTF
                   </p>
                 </li>
                 <li>
-                  <p className="text-[22px] leading-[30px] text-[#1C1C1E] font-medium">
-                    
-                      {t("ads.softcap")}:
-                    {" "}
-                    200 SOL
+                  <p className="text-[16px] leading-[24px] text-[#1C1C1E]">
+                    <span className="font-medium">{t("ads.softcap")}</span>: 200
+                    SOL
                   </p>
                 </li>
                 <li>
-                  <p className="text-[22px] leading-[30px] text-[#1C1C1E] font-medium">
-                    {t("ads.hardcap")}:{" "}
+                  <p className="text-[16px] leading-[24px] text-[#1C1C1E]">
+                    <span className="font-medium">{t("ads.hardcap")}</span>:{" "}
                     1,000 SOL
                   </p>
                 </li>
                 <li>
-                  <p className="text-[22px] leading-[30px] text-[#1C1C1E] font-medium">
-                    {t("ads.duration")}
+                  <p className="text-[16px] leading-[24px] text-[#1C1C1E]">
+                    <span className="font-medium">
+                      {t("ads.duration").split(":")[0]}
+                    </span>
+                    :{t("ads.duration").split(":")[1]}
                   </p>
                 </li>
                 <li>
-                  <p className="text-[22px] leading-[30px] text-[#1C1C1E] font-medium">
-                    {t("ads.eligibility")}
+                  <p className="text-[16px] leading-[24px] text-[#1C1C1E]">
+                    <span className="font-medium">
+                      {t("ads.eligibility").split(":")[0]}
+                    </span>
+                    :{t("ads.eligibility").split(":")[1]}
                   </p>
                 </li>
                 <li>
-                  <p className="text-[22px] leading-[30px] text-[#1C1C1E] font-medium">
-                    {t("ads.limit")}
+                  <p className="text-[16px] leading-[24px] text-[#1C1C1E]">
+                  <span className="font-medium">
+                      {t("ads.limit").split(":")[0]}
+                    </span>
+                    :{t("ads.limit").split(":")[1]}
                   </p>
                 </li>
               </ul>
