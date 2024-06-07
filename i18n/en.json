@@ -15,6 +15,7 @@
     "multichain": "CREATE MULTICHAIN-LAUNCH",
     "pump": "PumpWithMe",
     "faq": "FAQ",
+    "blog": "BLOG",
     "my": {
       "project": "My Project",
       "contribute": "My contributors",
