@@ -2,8 +2,13 @@ import React from "react";
 import BorderContent from "../BorderContent";
 import Countdown from "../Countdown";
 import { Button, Input, Progress } from "@nextui-org/react";
-import { Project } from "@/interface/project-interface";
+import {
+  ListingOption,
+  Project,
+  SaleType,
+} from "@/interface/project-interface";
 import { toTitleCase } from "@/function/text";
+import { CautionIcon } from "@/components/Icon";
 
 export default function BaseRightContent({
   data,
@@ -57,6 +62,19 @@ export default function BaseRightContent({
             >
               BUY WITH SOL
             </Button>
+            {data.listingOption === ListingOption.ManualListing && (
+              <div className="flex bg-[#FFF3DF] px-4 py-3 gap-x-3 mt-4">
+                <div className="flex-shrink-0">
+                  <CautionIcon />
+                </div>
+                <div>
+                  <p className="text-sm leading-6 font-bold">
+                    Manual Listing Launchpad
+                  </p>
+                  <p className="text-sm leading-6 text-[#2D3748]">{`Manual listing can lead to complete control of funds to project owners and thereby does not always guarantee token listings. This can sometimes result into mishandling of funds. Please assess necessary risks before investing into manually listing projects.`}</p>
+                </div>
+              </div>
+            )}
           </>
         )}
       </BorderContent>
@@ -75,12 +93,16 @@ export default function BaseRightContent({
         <div className="my-[14px] w-full border-t border-dashed border-divider" />
         <div className="flex items-center justify-between">
           <p className="text-base font-medium">Min Buy</p>
-          <p className="text-base leading-6 text-[#1C1C1E]">{data.minBuy} SOL</p>
+          <p className="text-base leading-6 text-[#1C1C1E]">
+            {data.minBuy} SOL
+          </p>
         </div>
         <div className="my-[14px] w-full border-t border-dashed border-divider" />
         <div className="flex items-center justify-between">
           <p className="text-base font-medium">Max Buy</p>
-          <p className="text-base leading-6 text-[#1C1C1E]">{data.maxBuy} SOL</p>
+          <p className="text-base leading-6 text-[#1C1C1E]">
+            {data.maxBuy} SOL
+          </p>
         </div>
         <div className="my-[14px] w-full border-t border-dashed border-divider" />
         <div className="flex items-center justify-between">
