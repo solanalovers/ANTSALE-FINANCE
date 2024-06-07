@@ -17,7 +17,7 @@ export default function RightContent({
     setStatus(calculateProjectStatus(data.startTime, data.endTime));
   }, []);
   return (
-    <div className="flex flex-col gap-y-10">
+    <div className="flex flex-col gap-y-5">
       <div className="bg-warning-50 border border-warning py-[10px]">
         <p className="text-sm leading-5 text-center">
           Make sure the website is{" "}
