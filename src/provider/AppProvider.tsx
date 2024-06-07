@@ -3,6 +3,7 @@ import React, { createContext, useEffect, useState } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { getBalance } from '@/function/wallet';
 import { useCookies } from 'next-client-cookies';
+import { usePathname } from 'next/navigation';
 
 export const AppContext = createContext<any>({});
 
@@ -12,6 +13,7 @@ export default function AppProvider({
   children: React.ReactNode;
 }) {
   const cookieStore = useCookies();
+  const pathname = usePathname();
   const [cluster, setCluster] = useState<number>(() => {
     if (!cookieStore.get('cluster')) {
       cookieStore.set('cluster', '0');
@@ -38,6 +40,12 @@ export default function AppProvider({
       await getWalletBalance();
     })();
   }, [publicKey, cluster]);
+
+  useEffect(()=>{
+    if(pathname.includes('/create-token')) {
+      setCluster(1)
+    }
+  },[pathname])
 
   useEffect(() => {
     cookieStore.set('cluster', cluster.toString());
