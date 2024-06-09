@@ -23,6 +23,7 @@ import axios from "axios";
 import { AppContext } from "@/provider/AppProvider";
 import { Connection, Transaction } from "@solana/web3.js";
 import useTrans from "@/hook/useTrans";
+import { toast } from "react-toastify";
 
 const listStep = [
   {
@@ -106,12 +107,23 @@ export default function CreateForm() {
 
         console.log("Create token signature: ", signature);
 
+        toast(`Create token signature: ${signature}`, {
+          type: "success",
+          position: "top-center",
+          theme: "colored",
+        });
+
         setForm({});
       } else {
         throw Error("Server is error");
       }
     } catch (error) {
       console.log("Error: ", error);
+      toast(`Error:: ${error}`, {
+        type: "error",
+        position: "top-center",
+        theme: "colored",
+      });
     }
   };
 
