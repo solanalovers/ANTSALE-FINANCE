@@ -4,7 +4,9 @@ import BorderContent from "../detail/BorderContent";
 import {
   Button,
   Checkbox,
+  Image,
   Input,
+  Link,
   Radio,
   RadioGroup,
   Spinner,
@@ -24,6 +26,7 @@ import { AppContext } from "@/provider/AppProvider";
 import { Connection, Transaction } from "@solana/web3.js";
 import useTrans from "@/hook/useTrans";
 import { toast } from "react-toastify";
+import { CheckIcon, CloseCircleIcon, CloseIcon } from "../Icon";
 
 const listStep = [
   {
@@ -52,6 +55,7 @@ export default function CreateForm() {
   const [currentEdit, setCurrentEdit] = useState("token");
   const [form, setForm] = useState<any>({});
   const { publicKey, sendTransaction } = useWallet();
+  const [successData, setSuccessData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const t = useTrans("createToken");
   const { cluster } = useContext(AppContext);
@@ -107,11 +111,7 @@ export default function CreateForm() {
 
         console.log("Create token signature: ", signature);
 
-        toast(`Create token signature: ${signature}`, {
-          type: "success",
-          position: "top-center",
-          theme: "colored",
-        });
+        setSuccessData({ ...form });
 
         setForm({});
       } else {
@@ -144,6 +144,51 @@ export default function CreateForm() {
         type="createToken"
       />
       <CustomDivider />
+      {successData && (
+        <div
+          className="bg-[#F0FFF4] px-6 mb-6 rounded-lg"
+          style={{
+            boxShadow: "0px 4px 4px 0px rgba(0,0,0,0.1)",
+          }}
+        >
+          <div className="flex items-center justify-between py-3">
+            <div className="flex items-center gap-2.5">
+              <CheckIcon fill="#38A169" />
+              <p className="text-base leading-7 font-semibold text-[#2D3748]">
+                Your token has been successfully generated
+              </p>
+            </div>
+            <div
+              className="hover:opacity-50 cursor-pointer"
+              onClick={() => setSuccessData(null)}
+            >
+              <CloseIcon />
+            </div>
+          </div>
+          <div className="flex items-center gap-x-3 pb-4">
+            {successData?.image && (
+              <Image
+                src={window.URL.createObjectURL(successData.image)}
+                className="w-[68px] h-[68px] rounded-md object-cover object-center"
+              />
+            )}
+            <div>
+              <p className="text-base leading-6 font-bold text-[rgba(0,0,0,0.8)]">
+                {successData.name}
+              </p>
+              <p className="text-base leading-6 font-medium text-[#3182CE]">
+                {successData.symbol}
+              </p>
+              <Link
+                href={`https://explorer.solana.com/${successData?.sig}`}
+                className="text-base leading-6 text-[#3182CE] underline"
+              >
+                {successData?.sig}
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
       <RadioGroup
         value={currentEdit}
         onChange={(e) => setCurrentEdit(e.target.value)}
