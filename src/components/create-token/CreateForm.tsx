@@ -111,7 +111,7 @@ export default function CreateForm() {
 
         console.log("Create token signature: ", signature);
 
-        setSuccessData({ ...form });
+        setSuccessData({ ...form, sig: signature });
 
         setForm({});
       } else {
