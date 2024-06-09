@@ -109,9 +109,12 @@ export default function CreateForm() {
           skipPreflight: true,
         });
 
+        console.log(res);
+
         console.log("Create token signature: ", signature);
 
-        setSuccessData({ ...form, sig: signature });
+
+        setSuccessData({ ...form, address: res.data.data.mint });
 
         setForm({});
       } else {
@@ -180,11 +183,11 @@ export default function CreateForm() {
                 {successData.symbol}
               </p>
               <Link
-                href={`https://explorer.solana.com/${successData?.sig}`}
+                href={`https://explorer.solana.com/address/${successData?.address}`}
                 className="text-base leading-6 text-[#3182CE] underline"
                 isExternal
               >
-                {successData?.sig}
+                {successData?.address}
               </Link>
             </div>
           </div>
