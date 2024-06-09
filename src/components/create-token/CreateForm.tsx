@@ -182,6 +182,7 @@ export default function CreateForm() {
               <Link
                 href={`https://explorer.solana.com/${successData?.sig}`}
                 className="text-base leading-6 text-[#3182CE] underline"
+                isExternal
               >
                 {successData?.sig}
               </Link>
