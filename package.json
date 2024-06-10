@@ -23,6 +23,7 @@
     "@solana/web3.js": "^1.91.6",
     "@supabase/supabase-js": "^2.42.5",
     "arweave": "^1.15.1",
+    "bs58": "^5.0.0",
     "chart.js": "^4.4.2",
     "framer-motion": "^11.1.7",
     "iconsax-react": "^0.0.8",

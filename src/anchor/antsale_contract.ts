@@ -134,6 +134,34 @@ export type AntsaleContract = {
           }
         },
         {
+          "name": "claimRecord",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  108,
+                  97,
+                  105,
+                  109,
+                  101,
+                  100
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "projectId"
+              },
+              {
+                "kind": "account",
+                "path": "investor"
+              }
+            ]
+          }
+        },
+        {
           "name": "vaultPdaAta",
           "writable": true
         },

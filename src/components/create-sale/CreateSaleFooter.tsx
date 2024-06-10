@@ -60,11 +60,11 @@ export default function CreateSaleFooter({
               setLoading(true);
               const error = await createProject(form, cluster === 1, wallet);
               setLoading(false);
-              // if (error) {
-              //   console.log("Error: ", error);
-              // } else {
-              //   router.push("/list");
-              // }
+              if (error) {
+                console.log("Error: ", error);
+              } else {
+                router.push("/list");
+              }
             }
           }}
           isDisabled={!next}
