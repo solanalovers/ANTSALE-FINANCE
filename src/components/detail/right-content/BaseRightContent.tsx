@@ -4,26 +4,19 @@ import Countdown from "../Countdown";
 import { Button, Input, Progress } from "@nextui-org/react";
 import {
   ListingOption,
-  Project,
-  SaleType,
 } from "@/interface/project-interface";
 import { toTitleCase } from "@/function/text";
 import { CautionIcon } from "@/components/Icon";
 import {AppContext} from "@/provider/AppProvider";
 import {invest} from "@/function/invest";
 import {useWallet} from "@solana/wallet-adapter-react";
-import { useRouter } from 'next/router';
-import {useParams, useSearchParams} from "next/navigation";
-
-interface BaseRightContentData extends Project {
-  id: number
-}
+import {DetailData} from "@/app/[locale]/detail/[slug]/page";
 
 export default function BaseRightContent({
   data,
   status,
 }: {
-  data: BaseRightContentData;
+  data: DetailData;
   status: string;
 }) {
   const { cluster } = useContext(AppContext);

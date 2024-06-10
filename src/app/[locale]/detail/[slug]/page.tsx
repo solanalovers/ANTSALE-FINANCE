@@ -7,9 +7,13 @@ import { getProjectDetail } from "@/supabase/projects";
 import { Spinner } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 
+export interface DetailData extends Project {
+  id: number
+}
+
 export default function Detail({ params }: { params: { slug: string } }) {
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<Project>();
+  const [data, setData] = useState<DetailData>();
   // const [type] = useState(() => {
   //   switch (params.slug) {
   //     case "4":

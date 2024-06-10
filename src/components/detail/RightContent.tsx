@@ -4,13 +4,14 @@ import PurchaseCurrencyRightContent from "./right-content/PurchaseCurrencyRightC
 import FixedRightContent from "./right-content/FixedRightContent";
 import { Project } from "@/interface/project-interface";
 import { calculateProjectStatus } from "@/function/timer";
+import {DetailData} from "@/app/[locale]/detail/[slug]/page";
 
 export default function RightContent({
   type,
   data,
 }: {
   type: string;
-  data: Project;
+  data: DetailData;
 }) {
   const [status, setStatus] = useState("upcoming");
   useEffect(() => {
