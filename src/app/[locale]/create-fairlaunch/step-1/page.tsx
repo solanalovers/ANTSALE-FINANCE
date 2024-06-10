@@ -45,7 +45,7 @@ export default function CreateFairLaunchStep1() {
     const isMainnet = cluster === 1;
 
     if (!publicKey) {
-      return {};
+      return;
     }
 
     return getTokenData(publicKey?.toString(), form.tokenAddress!, isMainnet);

@@ -8,6 +8,7 @@ const getTokenData = async (
   isMainnet: boolean
 ) => {
   try {
+
     const shyft = new ShyftSdk({
       apiKey: process.env.NEXT_PUBLIC_SHYFT_XAPI_KEY!,
       network: isMainnet ? Network.Mainnet : Network.Devnet,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext, useState} from "react";
 import BorderContent from "../BorderContent";
 import Countdown from "../Countdown";
 import { Button, Input, Progress } from "@nextui-org/react";
@@ -9,14 +9,27 @@ import {
 } from "@/interface/project-interface";
 import { toTitleCase } from "@/function/text";
 import { CautionIcon } from "@/components/Icon";
+import {AppContext} from "@/provider/AppProvider";
+import {invest} from "@/function/invest";
+import {useWallet} from "@solana/wallet-adapter-react";
+import { useRouter } from 'next/router';
+import {useParams, useSearchParams} from "next/navigation";
+
+interface BaseRightContentData extends Project {
+  id: number
+}
 
 export default function BaseRightContent({
   data,
   status,
 }: {
-  data: Project;
+  data: BaseRightContentData;
   status: string;
 }) {
+  const { cluster } = useContext(AppContext);
+  const[ amount, setAmount] = useState<any>(0);
+  const wallet  = useWallet()
+  const [loading, setLoading] = useState(false);
   return (
     <>
       <BorderContent>
@@ -48,17 +61,29 @@ export default function BaseRightContent({
               </div>
             </div>
             <Input
-              inputMode="numeric"
-              label="Amount (MAX: 0.0009 SOL)"
-              defaultValue="0"
-              placeholder="0"
-              labelPlacement="inside"
-              endContent={<p className="text-default-600">MAX</p>}
+                classNames={{ input: "placeholder:text-[#8E8E93]" }}
+                variant="bordered"
+                label="Amount (MAX: 0.0009 SOL)"
+                onChange={(e) => {
+                  setAmount(e.target.value)
+                }}
+                value={amount.toString()}
+                defaultValue="0"
+                placeholder="0"
+                labelPlacement="inside"
+                endContent={<p className="text-default-600">MAX</p>}
+                isDisabled={loading}
             />
             <Button
               color="primary"
               className="mt-4 w-full"
               size="lg"
+              isLoading={loading}
+              onClick={async () => {
+                setLoading(true)
+                await  invest(data.id, cluster === 1, wallet, amount)
+                setLoading(false)
+              }}
             >
               BUY WITH SOL
             </Button>

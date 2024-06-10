@@ -8,6 +8,149 @@
   },
   "instructions": [
     {
+      "name": "claim_fair_launch",
+      "discriminator": [
+        157,
+        184,
+        177,
+        25,
+        21,
+        175,
+        252,
+        182
+      ],
+      "accounts": [
+        {
+          "name": "investor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "vault_pda"
+        },
+        {
+          "name": "mint"
+        },
+        {
+          "name": "project",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  105,
+                  114,
+                  95,
+                  108,
+                  97,
+                  117,
+                  110,
+                  99,
+                  104
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "_project_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "project_counter",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  105,
+                  114,
+                  95,
+                  108,
+                  97,
+                  117,
+                  110,
+                  99,
+                  104,
+                  95,
+                  99,
+                  111,
+                  117,
+                  110,
+                  116,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "_project_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "invest_counter",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  115,
+                  116,
+                  95,
+                  99,
+                  111,
+                  117,
+                  110,
+                  116,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "_project_id"
+              },
+              {
+                "kind": "account",
+                "path": "investor"
+              }
+            ]
+          }
+        },
+        {
+          "name": "vault_pda_ata",
+          "writable": true
+        },
+        {
+          "name": "to_ata",
+          "writable": true
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "project_id",
+          "type": "string"
+        }
+      ]
+    },
+    {
       "name": "create_fair_launch",
       "discriminator": [
         124,
@@ -50,8 +193,40 @@
                 ]
               },
               {
-                "kind": "account",
-                "path": "creator"
+                "kind": "arg",
+                "path": "project_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "project_counter",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  105,
+                  114,
+                  95,
+                  108,
+                  97,
+                  117,
+                  110,
+                  99,
+                  104,
+                  95,
+                  99,
+                  111,
+                  117,
+                  110,
+                  116,
+                  101,
+                  114
+                ]
               },
               {
                 "kind": "arg",
@@ -59,6 +234,10 @@
               }
             ]
           }
+        },
+        {
+          "name": "vault_pda_ata",
+          "writable": true
         },
         {
           "name": "from_ata",
@@ -227,6 +406,142 @@
           "type": "u64"
         }
       ]
+    },
+    {
+      "name": "invest_fair_launch",
+      "discriminator": [
+        54,
+        173,
+        36,
+        229,
+        88,
+        225,
+        229,
+        236
+      ],
+      "accounts": [
+        {
+          "name": "investor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "project",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  105,
+                  114,
+                  95,
+                  108,
+                  97,
+                  117,
+                  110,
+                  99,
+                  104
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "_project_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "project_counter",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  105,
+                  114,
+                  95,
+                  108,
+                  97,
+                  117,
+                  110,
+                  99,
+                  104,
+                  95,
+                  99,
+                  111,
+                  117,
+                  110,
+                  116,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "_project_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "invest_counter",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  115,
+                  116,
+                  95,
+                  99,
+                  111,
+                  117,
+                  110,
+                  116,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "_project_id"
+              },
+              {
+                "kind": "account",
+                "path": "investor"
+              }
+            ]
+          }
+        },
+        {
+          "name": "vault",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "project_id",
+          "type": "string"
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
     }
   ],
   "accounts": [
@@ -244,6 +559,19 @@
       ]
     },
     {
+      "name": "FairLaunchCounter",
+      "discriminator": [
+        93,
+        78,
+        23,
+        98,
+        32,
+        238,
+        121,
+        252
+      ]
+    },
+    {
       "name": "InvestConfig",
       "discriminator": [
         13,
@@ -254,6 +582,19 @@
         244,
         23,
         39
+      ]
+    },
+    {
+      "name": "InvestorCounter",
+      "discriminator": [
+        251,
+        167,
+        25,
+        236,
+        170,
+        228,
+        32,
+        52
       ]
     },
     {
@@ -275,6 +616,31 @@
       "code": 6000,
       "name": "PublicKeyMismatch",
       "msg": "The publicKey provide doesn't match with config publicKey"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidTimestamp",
+      "msg": "Time for this project is invalid"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidProjectConfig",
+      "msg": "This project have invalid config"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidInvestmentTime",
+      "msg": "Too early or too late to invest"
+    },
+    {
+      "code": 6004,
+      "name": "ExceededQuantity",
+      "msg": "Exceeded quantity purchased"
+    },
+    {
+      "code": 6005,
+      "name": "NotClaimTime",
+      "msg": ""
     }
   ],
   "types": [
@@ -304,6 +670,10 @@
                 "name": "FairLaunchConfig"
               }
             }
+          },
+          {
+            "name": "creator",
+            "type": "pubkey"
           }
         ]
       }
@@ -342,7 +712,7 @@
             "type": "f32"
           },
           {
-            "name": "hard_cap",
+            "name": "max_buy",
             "type": {
               "option": "f32"
             }
@@ -377,7 +747,19 @@
           },
           {
             "name": "liquidity_lockup_time",
-            "type": "i32"
+            "type": "u32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "FairLaunchCounter",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "total_amount",
+            "type": "u64"
           }
         ]
       }
@@ -389,6 +771,26 @@
         "fields": [
           {
             "name": "invested",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "InvestorCounter",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "project_id",
+            "type": "string"
+          },
+          {
+            "name": "wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "total_invested_amount",
             "type": "u64"
           }
         ]
