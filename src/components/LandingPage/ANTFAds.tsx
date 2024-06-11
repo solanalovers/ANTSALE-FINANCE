@@ -448,7 +448,7 @@ export default function ANTFAds() {
               </ul>
               <div>
                 <p>{t("ads.fairContent1")}</p>
-                <p className="text-base leading-6 text-[#1C1C1E]">
+                {/* <p className="text-base leading-6 text-[#1C1C1E]">
                   <span className="text-primary underline break-all">
                     9gGj9FKJka7JmspN1MZfAGTFGLkoXCU4VKTQaoyjrgTA
                   </span>
@@ -469,7 +469,7 @@ export default function ANTFAds() {
                   <span className="text-orange-500">
                     {t("ads.fairContent3")}
                   </span>
-                </p>
+                </p> */}
               </div>
             </div>
             <Divider />
