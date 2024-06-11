@@ -50,7 +50,7 @@ export const checkFairLaunchValidStep1 = (form: Project): boolean => {
     form.softCap &&
     form.softCap >= 1 &&
     form.totalSellingAmount &&
-    form.totalSellingAmount > 0 &&
+    parseFloat(form?.totalSellingAmount?.toString()?.replace(/,/g, "")) > 0 &&
     form.liquidityPercent &&
     form.liquidityPercent >= 20 &&
     form.liquidityPercent <= 100;
