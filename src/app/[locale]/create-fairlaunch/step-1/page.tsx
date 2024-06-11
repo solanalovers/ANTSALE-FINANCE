@@ -67,11 +67,14 @@ export default function CreateFairLaunchStep1() {
   const calculateAutoListing = () => {
     if (form.totalSellingAmount && form.tokenInfo && form.liquidityPercent) {
       const total = (
-        form.totalSellingAmount +
-        (form.totalSellingAmount * form.liquidityPercent * 0.95) / 100
+        parseFloat(form?.totalSellingAmount?.toString()?.replace(/,/g, "")) +
+        (parseFloat(form?.totalSellingAmount?.toString()?.replace(/,/g, "")) *
+          form.liquidityPercent *
+          0.95) /
+          100
       ).toLocaleString();
-
-      return `${total} ${form?.tokenInfo?.name}`;
+      
+      return `${total} ${form?.tokenInfo.name}`;
     }
     return "?";
   };
@@ -205,9 +208,9 @@ export default function CreateFairLaunchStep1() {
             onBlur={() => {
               if (form?.totalSellingAmount) {
                 handleChangeForm({
-                  presaleRate: Number(
+                  totalSellingAmount: Number(
                     form?.totalSellingAmount
-                  )?.toLocaleString(),
+                  ).toLocaleString(),
                 });
               }
             }}
@@ -377,23 +380,23 @@ export default function CreateFairLaunchStep1() {
             }}
             variant="bordered"
             label="Liquidity Type"
-            placeholder="Auto Listing"
             onChange={(e) => {
               if (e.target.value) {
                 handleChangeForm({ liquidityType: e.target.value });
               }
             }}
-            value={form?.liquidityType}
+            selectionMode="single"
+            selectedKeys={[form.liquidityType]}
           >
             <SelectItem
-              key={"Auto Locking"}
-              value={"Auto Locking"}
+              key={LiquidityType.AutoLocking}
+              value={LiquidityType.AutoLocking}
             >
               Auto Locking
             </SelectItem>
             <SelectItem
-              key={"Auto Burning"}
-              value={"Auto Burning"}
+              key={LiquidityType.AutoBurning}
+              value={LiquidityType.AutoBurning}
             >
               Auto Burning
             </SelectItem>
@@ -409,7 +412,9 @@ export default function CreateFairLaunchStep1() {
               isRequired
               type="number"
               min={43200}
-              errorMessage={'Value must be greater than or equal 43200 minutes (30 days)'}
+              errorMessage={
+                "Value must be greater than or equal 43200 minutes (30 days)"
+              }
               endContent={<p className="text-sm text-default-500">Minutes</p>}
               onChange={(e) => {
                 handleChangeForm({

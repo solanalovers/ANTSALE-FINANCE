@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import {
   LiquidityType,
   ListingOption,
@@ -6,9 +6,9 @@ import {
   ProjectType,
   Router,
   SaleType,
-} from '@/interface/project-interface';
-import React, { createContext, useState } from 'react';
-import { ProjectContext, defaultProjectConfig } from './context';
+} from "@/interface/project-interface";
+import React, { createContext, useState } from "react";
+import { ProjectContext, defaultProjectConfig } from "./context";
 
 const defaultFairLaunchConfig: Project = {
   ...defaultProjectConfig,
@@ -42,9 +42,9 @@ export default function CreateFairLaunchProvider({
 }
 
 export const checkFairLaunchValidStep1 = (form: Project): boolean => {
-  console.log('Check valid', form);
+  console.log("Check valid", form);
 
-  if (
+  const isBaseValid =
     form.tokenAddress &&
     form.tokenInfo &&
     form.softCap &&
@@ -53,19 +53,24 @@ export const checkFairLaunchValidStep1 = (form: Project): boolean => {
     form.totalSellingAmount > 0 &&
     form.liquidityPercent &&
     form.liquidityPercent >= 20 &&
-    form.liquidityPercent <= 100 &&
-    form.liquidityLockupTime &&
-    form.liquidityLockupTime >= 43200
-  ) {
-    if (form.isMaxBuy) {
-      if (form.maxBuy && form.maxBuy > 0) {
-        return true;
-      }
-      return false;
-    }
-    return true;
+    form.liquidityPercent <= 100;
+
+  if (!isBaseValid) {
+    return false;
   }
-  return false;
+
+  if (form.isMaxBuy && form.maxBuy) {
+    return form.maxBuy > 0;
+  }
+
+  if (
+    form.liquidityType === LiquidityType.AutoLocking &&
+    form.liquidityLockupTime
+  ) {
+    return form.liquidityLockupTime >= 43200;
+  }
+
+  return true;
 };
 
 export const checkFairLaunchValidStep2 = (form: Project): boolean => {
