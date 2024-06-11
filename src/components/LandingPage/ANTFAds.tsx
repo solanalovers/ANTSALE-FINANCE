@@ -213,7 +213,7 @@ const MainContent = ({
           </p>
         )}
       </div>
-      <div className="flex items-center gap-x-1 w-[100%] justify-center">
+      {/* <div className="flex items-center gap-x-1 w-[100%] justify-center">
         <p className="text-[13px] leading-[32px] text-primary underline break-all text-center">
           9gGj9FKJka7JmspN1MZfAGTFGLkoXCU4VKTQaoyjrgTA
         </p>
@@ -228,7 +228,7 @@ const MainContent = ({
             )
           }
         />
-      </div>
+      </div> */}
       <div className="flex flex-col md:flex-row items-center gap-4 w-full">
         <Input
           errorMessage={errorCode}
@@ -448,7 +448,7 @@ export default function ANTFAds() {
               </ul>
               <div>
                 <p>{t("ads.fairContent1")}</p>
-                {/* <p className="text-base leading-6 text-[#1C1C1E]">
+                <p className="text-base leading-6 text-[#1C1C1E]">
                   <span className="text-primary underline break-all">
                     9gGj9FKJka7JmspN1MZfAGTFGLkoXCU4VKTQaoyjrgTA
                   </span>
@@ -469,7 +469,7 @@ export default function ANTFAds() {
                   <span className="text-orange-500">
                     {t("ads.fairContent3")}
                   </span>
-                </p> */}
+                </p>
               </div>
             </div>
             <Divider />
