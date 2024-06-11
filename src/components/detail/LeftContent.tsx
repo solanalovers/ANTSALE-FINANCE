@@ -112,7 +112,7 @@ export default function LeftContent({ data }: { data: Project }) {
               {data.tokenInfo?.name}
             </p>
             <p className="mt-1 text-sm leading-4">
-              Ticker: {data.tokenInfo?.supply}
+              Ticker: {data.tokenInfo?.symbol}
             </p>
           </div>
           <p

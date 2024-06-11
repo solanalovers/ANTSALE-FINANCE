@@ -11,6 +11,13 @@ interface PoolData extends Project {
 
 export default function PoolInfo({ data }: { data: PoolData }) {
   const pathname = usePathname();
+
+  const calculateLockupTime = () => {
+    const endTime = new Date(data.endTime.toString()).getTime();
+    const lockupTime = endTime + Number(data.liquidityLockupTime);
+    return lockupTime;
+  }
+
   return (
     <div className="mt-6">
       <p className="mb-5 font-medium text-lg">Pool Info</p>
@@ -150,8 +157,8 @@ export default function PoolInfo({ data }: { data: PoolData }) {
         <p className="font-medium text-base">Liquidity Lockup Time</p>
         <p className="text-base leading-6 text-green-500">
           {data.liquidityLockupTime
-            ? `${data.liquidityLockupTime} Minute`
-            : "🔥Burned after liquidity is added"}
+            ? `${new Date(calculateLockupTime()).toUTCString()}`
+            : "🔥 Burned after liquidity is added"}
         </p>
       </div>
     </div>

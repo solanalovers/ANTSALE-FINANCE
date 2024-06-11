@@ -7,6 +7,7 @@ import { ProjectContext } from "@/provider/context";
 import { createProject } from "@/supabase/createProject";
 import { AppContext } from "@/provider/AppProvider";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { toast } from "react-toastify";
 
 export default function CreateSaleFooter({
   step,
@@ -62,7 +63,17 @@ export default function CreateSaleFooter({
               setLoading(false);
               if (error) {
                 console.log("Error: ", error);
+                toast(JSON.stringify(error), {
+                  position: "top-center",
+                  theme: "colored",
+                  type: "error",
+                });
               } else {
+                toast(`Create ${form.projectType} Success`, {
+                  position: "top-center",
+                  theme: "colored",
+                  type: "success",
+                });
                 router.push("/list");
               }
             }

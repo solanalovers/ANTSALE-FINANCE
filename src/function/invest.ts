@@ -1,8 +1,9 @@
-import {Project} from "@/interface/project-interface";
-import {WalletContextState} from "@solana/wallet-adapter-react";
-import {Connection, LAMPORTS_PER_SOL, PublicKey, Transaction} from "@solana/web3.js";
-import {getProgram} from "@/function/getProgram";
+import { Project } from "@/interface/project-interface";
+import { WalletContextState } from "@solana/wallet-adapter-react";
+import { Connection, LAMPORTS_PER_SOL, PublicKey, Transaction } from "@solana/web3.js";
+import { getProgram } from "@/function/getProgram";
 import { BN } from "@coral-xyz/anchor";
+import { toast } from "react-toastify";
 
 export const invest = async (projectId: any, isMainnet: boolean, wallet: WalletContextState, amount: number) => {
     try {
@@ -34,12 +35,23 @@ export const invest = async (projectId: any, isMainnet: boolean, wallet: WalletC
                 skipPreflight: true
             })
 
+            toast(`Buy Success`, {
+                position: "top-center",
+                theme: "colored",
+                type: "success",
+            });
+
             console.log(
                 "Transaction sig: ", sig
             )
         }
     } catch (e) {
         console.log('Error: ', e)
+        toast(JSON.stringify(e), {
+            position: "top-center",
+            theme: "colored",
+            type: "error",
+        });
     }
 
 

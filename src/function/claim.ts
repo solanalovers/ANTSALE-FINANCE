@@ -1,14 +1,15 @@
-import {Connection, LAMPORTS_PER_SOL, PublicKey, Transaction} from "@solana/web3.js";
-import {WalletContextState} from "@solana/wallet-adapter-react";
+import { Connection, LAMPORTS_PER_SOL, PublicKey, Transaction } from "@solana/web3.js";
+import { WalletContextState } from "@solana/wallet-adapter-react";
 import * as bs58 from "bs58";
-import {getProgram} from "../function/getProgram";
+import { getProgram } from "../function/getProgram";
 import idl from '../anchor/antsale_contract.json'
-import {DetailData} from "@/app/[locale]/detail/[slug]/page";
+import { DetailData } from "@/app/[locale]/detail/[slug]/page";
 import {
     createAssociatedTokenAccountInstruction,
     getAssociatedTokenAddressSync,
     TOKEN_PROGRAM_ID
 } from "@solana/spl-token";
+import { toast } from "react-toastify";
 
 export const fetchClaimable = async (projectId: any, isMainnet: boolean, wallet: WalletContextState) => {
     try {
@@ -54,7 +55,7 @@ export const fetchClaimable = async (projectId: any, isMainnet: boolean, wallet:
             const investorCounterData = await program.account.investorCounter.fetch(investorCounter)
             totalPurchased = investorCounterData.totalInvestedAmount.toNumber() / LAMPORTS_PER_SOL
 
-            const [claimRecord] = PublicKey.findProgramAddressSync([Buffer.from('claimed'),  Buffer.from(shortId), wallet.publicKey?.toBuffer()], program.programId)
+            const [claimRecord] = PublicKey.findProgramAddressSync([Buffer.from('claimed'), Buffer.from(shortId), wallet.publicKey?.toBuffer()], program.programId)
             const claimRecordData = await connection.getAccountInfo(claimRecord)
 
             if (!claimRecordData && totalPurchased) {
@@ -132,6 +133,12 @@ export const claim = async (project: DetailData, isMainnet: boolean, wallet: Wal
         const sig = await wallet.sendTransaction(claimTxn, connection, {
             skipPreflight: true
         })
+
+        toast(`Claim Success`, {
+            position: "top-center",
+            theme: "colored",
+            type: "success",
+        });
 
         console.log(
             "Transaction sig: ", sig
