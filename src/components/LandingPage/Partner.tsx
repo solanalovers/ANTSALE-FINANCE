@@ -29,11 +29,12 @@ export default function Partner() {
           className="hidden md:block"
           src={`/image/landing/partner.png`}
         />
-        <Image
-          radius="none"
-          className="md:hidden"
-          src={`/image/landing/partner-mobile.png`}
-        />
+        <div className="md:hidden flex justify-center">
+          <Image
+            radius="none"
+            src={`/image/landing/partner-mobile.png`}
+          />
+        </div>
       </div>
     </div>
   );
