@@ -14,6 +14,7 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   const [isLoaded, setIsLoaded] = useState(false);
+  const pathname = usePathname();
   useEffect(() => {
     const loaded = setTimeout(() => {
       setIsLoaded(true);
@@ -22,7 +23,6 @@ export default function Layout({
     return () => clearTimeout(loaded);
   }, []);
   if (!isLoaded) return <Loading />;
-  const pathname = usePathname();
   return (
     <Suspense fallback={<Loading />}>
       {window.innerWidth <= 1024 && pathname.split("/").length > 2 ? (
