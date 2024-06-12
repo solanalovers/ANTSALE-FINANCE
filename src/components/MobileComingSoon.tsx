@@ -1,15 +1,15 @@
-import { Image } from "@nextui-org/react";
+import { Image, Link } from "@nextui-org/react";
 import React from "react";
 
 export default function MobileComingSoon() {
   return (
     <div>
-      <div className="flex items-center justify-center mt-10">
+      <Link className="flex items-center justify-center mt-10" href="/">
         <Image
           src="/image/logo-ant.png"
           radius="none"
         />
-      </div>
+      </Link>
       <div className="container mx-auto my-10">
         <p className="text-base leading-6">
           <span className="text-[28px] leading-6 font-semibold">
