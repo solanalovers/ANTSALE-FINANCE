@@ -21,6 +21,7 @@ export const createProject = async (project: Project, isMainnet: boolean, wallet
         const parsedProject: any = {...project};
         parsedProject.startTime = project.startTime.toDate('UTC');
         parsedProject.endTime = project.endTime.toDate('UTC');
+        parsedProject.totalSellingAmount = parseFloat(project?.totalSellingAmount?.toString()?.replace(/,/g, "")!) || 0;
 
         const connection = new Connection(
             isMainnet
@@ -81,7 +82,7 @@ export const createProject = async (project: Project, isMainnet: boolean, wallet
                     saleType: {
                         public: {}
                     },
-                    totalSellingAmount: project.totalSellingAmount!,
+                    totalSellingAmount: parseFloat(project?.totalSellingAmount?.toString()?.replace(/,/g, "")!),
                     softCap: project.softCap!,
                     maxBuy: null,
                     router: {
