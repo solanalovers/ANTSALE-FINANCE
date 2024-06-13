@@ -104,7 +104,8 @@ export const createProject = async (project: Project, isMainnet: boolean, wallet
                     tokenProgram: TOKEN_PROGRAM_ID
                 }).instruction()
                 tx.add(createFairLaunchIns);
-
+                parsedProject.totalSellingAmount = parseFloat(project?.totalSellingAmount?.toString()?.replace(/,/g, "")!) || 0;
+                delete parsedProject.isMaxBuy;
             } else if (project.projectType === ProjectType.Presale) {
                 const presaleConfig: PresaleConfig = {
                     feeOption: project.feeOption,
@@ -142,8 +143,6 @@ export const createProject = async (project: Project, isMainnet: boolean, wallet
                     tokenProgram: TOKEN_PROGRAM_ID
                 }).instruction()
                 tx.add(createPresaleIns)
-                parsedProject.totalSellingAmount = parseFloat(project?.totalSellingAmount?.toString()?.replace(/,/g, "")!) || 0;
-                delete parsedProject.isMaxBuy;
             }
 
             tx.feePayer = wallet.publicKey;

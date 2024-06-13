@@ -8,10 +8,10 @@ import React, { useContext } from "react";
 
 export default function CreateFairLaunchStep3() {
   const { form, checkValidStep2 } = useContext(CreateFairLaunchContext);
-  const tokenForPresale = form.totalSellingAmount ? form.totalSellingAmount : 0;
+  const tokenForPresale = form.totalSellingAmount ? parseFloat(form?.totalSellingAmount?.toString()?.replace(/,/g, "")!) : 0;
   const tokenForLiquidity =
     form.totalSellingAmount && form.liquidityPercent
-      ? ((form.totalSellingAmount * form.liquidityPercent) / 100) * 0.95
+      ? ((parseFloat(form?.totalSellingAmount?.toString()?.replace(/,/g, "")!) * form.liquidityPercent) / 100) * 0.95
       : 0;
 
   return (
