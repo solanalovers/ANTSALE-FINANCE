@@ -1,27 +1,26 @@
-import {supabase} from '@/function/supabaseClients';
-import {Project, ProjectType} from '@/interface/project-interface';
-import {WalletContextState} from "@solana/wallet-adapter-react";
-import {getProgram} from "@/function/getProgram";
-import {Connection, PublicKey, Transaction} from "@solana/web3.js";
-import {v4} from 'uuid';
+import { supabase } from '@/function/supabaseClients';
+import { Project, ProjectType } from '@/interface/project-interface';
+import { WalletContextState } from "@solana/wallet-adapter-react";
+import { getProgram } from "@/function/getProgram";
+import { Connection, PublicKey, Transaction } from "@solana/web3.js";
+import { v4 } from 'uuid';
 import {
     createAssociatedTokenAccountInstruction,
     createSetAuthorityInstruction,
     getAssociatedTokenAddressSync,
     getMint, TOKEN_PROGRAM_ID
 } from "@solana/spl-token";
-import {BN, IdlTypes,} from '@coral-xyz/anchor';
-import {AntsaleContract} from "@/anchor/antsale_contract";
+import { BN, IdlTypes, } from '@coral-xyz/anchor';
+import { AntsaleContract } from "@/anchor/antsale_contract";
 
 type FairLaunchConfig = IdlTypes<AntsaleContract>['fairLaunchConfig']
 type PresaleConfig = IdlTypes<AntsaleContract>['presaleConfig']
 
 export const createProject = async (project: Project, isMainnet: boolean, wallet: WalletContextState) => {
     try {
-        const parsedProject: any = {...project};
+        const parsedProject: any = { ...project };
         parsedProject.startTime = project.startTime.toDate('UTC');
         parsedProject.endTime = project.endTime.toDate('UTC');
-        parsedProject.totalSellingAmount = parseFloat(project?.totalSellingAmount?.toString()?.replace(/,/g, "")!) || 0;
 
         const connection = new Connection(
             isMainnet
@@ -71,7 +70,7 @@ export const createProject = async (project: Project, isMainnet: boolean, wallet
                 tx.add(createSetAuthorityInstruction(mint, wallet.publicKey, 1, null, []))
             }
 
-            const {id, shortId} = generateShortUUID()
+            const { id, shortId } = generateShortUUID()
 
             if (project.projectType === ProjectType.FairLaunch) {
                 const fairLaunchConfig: FairLaunchConfig = {
@@ -89,8 +88,8 @@ export const createProject = async (project: Project, isMainnet: boolean, wallet
                         raydium: {}
                     },
                     liquidityPercent: project.liquidityPercent!,
-                    startTime: new BN( Math.floor(parsedProject.startTime.getTime() / 1000)),
-                    endTime: new BN( Math.floor(parsedProject.endTime.getTime() / 1000)),
+                    startTime: new BN(Math.floor(parsedProject.startTime.getTime() / 1000)),
+                    endTime: new BN(Math.floor(parsedProject.endTime.getTime() / 1000)),
                     liquidityType: {
                         autoLocking: {}
                     },
@@ -143,6 +142,8 @@ export const createProject = async (project: Project, isMainnet: boolean, wallet
                     tokenProgram: TOKEN_PROGRAM_ID
                 }).instruction()
                 tx.add(createPresaleIns)
+                parsedProject.totalSellingAmount = parseFloat(project?.totalSellingAmount?.toString()?.replace(/,/g, "")!) || 0;
+                delete parsedProject.isMaxBuy;
             }
 
             tx.feePayer = wallet.publicKey;
@@ -154,7 +155,7 @@ export const createProject = async (project: Project, isMainnet: boolean, wallet
             )
 
 
-            const {data, error} = await supabase.from('project').insert({...parsedProject, id: id}).select("*");
+            const { data, error } = await supabase.from('project').insert({ ...parsedProject, id: id }).select("*");
 
             if (error || data?.length === 0) {
                 console.log('Insert database error: ', error)
@@ -174,5 +175,5 @@ export function generateShortUUID() {
 
     const byteArray = Buffer.from(uuid, 'hex');
 
-    return {id: uuid, shortId: byteArray.toString('base64').replace(/=+$/, ''), };
+    return { id: uuid, shortId: byteArray.toString('base64').replace(/=+$/, ''), };
 }
