@@ -10,4 +10,18 @@ const requiredField = (value: any) => ({
 
 const checkNumber = (value: string) => /^\d*\.?\d*$/.test(value);
 
-export { changeForm, requiredField, checkNumber }
+function getBase64(file: File) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onload = function () {
+            resolve(reader.result);
+        };
+
+        reader.onerror = function (error) {
+            reject('Error: ' + error);
+        };
+    });
+}
+export { changeForm, requiredField, checkNumber, getBase64 }

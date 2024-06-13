@@ -6,7 +6,7 @@ import CustomDivider from './CustomDivider';
 import { EditIcon } from './Icon';
 import ConfigTokenomic from './Tokennomic/ConfigTokenomic';
 import { CreateFairLaunchContext } from '@/provider/CreateFairLaunchProvider';
-import { changeForm } from '@/function/form';
+import { changeForm, getBase64 } from '@/function/form';
 import { ProjectContext } from '@/provider/context';
 
 export default function Addition({
@@ -25,7 +25,7 @@ export default function Addition({
       setNext(false);
     }
   }, [form]);
-
+  console.log(form);
   return (
     <div className='flex flex-col gap-y-6'>
       <div>
@@ -47,9 +47,9 @@ export default function Addition({
               className='absolute left-0 right-0 top-0 bottom-0 opacity-0 z-10 cursor-pointer'
               type='file'
               accept='image/*'
-              onChange={(e: any) => {
+              onChange={async(e: any) => {
                 handleChangeForm({
-                  backgroundImage: URL.createObjectURL(e.target.files[0]),
+                  backgroundImage: await getBase64(e.target.files[0]),
                 });
               }}
             />
@@ -68,9 +68,9 @@ export default function Addition({
               className='absolute left-0 right-0 top-0 bottom-0 opacity-0 z-10 cursor-pointer'
               type='file'
               accept='image/*'
-              onChange={(e: any) =>
+              onChange={async(e: any) =>
                 handleChangeForm({
-                  image: URL.createObjectURL(e.target.files[0]),
+                  image: await getBase64(e.target.files[0]),
                 })
               }
             />
