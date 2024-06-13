@@ -13,7 +13,7 @@ export default function PoolInfo({ data }: { data: PoolData }) {
   const pathname = usePathname();
 
   const calculateLockupTime = () => {
-    const endTime = pathname.includes("details")
+    const endTime = pathname.includes("detail")
       ? new Date(data.endTime.toString()).getTime()
       : data.endTime.toDate("").getTime();
     const lockupTime = endTime + Number(data.liquidityLockupTime);
