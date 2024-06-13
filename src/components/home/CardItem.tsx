@@ -79,7 +79,7 @@ export default function CardItem({ data }: CardItemProps) {
           <div>
             <p className="text-[14px] leading-[22px]">Soft</p>
             <p className="font-medium text-lg leading-[26px] text-primary">
-              {data.totalSellingAmount} {data.currency}
+              {data.softCap} {data.currency}
             </p>
           </div>
           <div>
