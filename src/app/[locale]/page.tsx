@@ -12,7 +12,6 @@ export default function HomePage() {
     <div className="my-[3vw] flex flex-col gap-y-[6vw]">
       <div className="container mx-auto flex flex-col gap-y-[6.5vw]">
         <Hero />
-        <ANTFAds />
         <Why />
         <Partner />
         <Roadmap />

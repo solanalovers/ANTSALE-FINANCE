@@ -41,12 +41,20 @@ const MainContent = ({
   isWhitelist = false,
   maxBuy = 5,
 }: {
-  content: { image: string; saleType: string; desc: string; timeEnd: string };
+  content: {
+    image: string;
+    saleType: string;
+    desc: string;
+    timeEnd: string;
+    timeStart: string;
+  };
   isWhitelist?: boolean;
   maxBuy?: number;
 }) => {
   const t = useTrans("landing");
   const t1 = useTrans("wallet");
+  const currentDate = new Date();
+  const saleStartTime = new Date(content.timeStart);
   const saleEndTime = new Date(content.timeEnd);
   const [timer, setTimer] = useState("00:00:00:00");
   const { balance, cluster } = useContext(AppContext);
@@ -60,7 +68,7 @@ const MainContent = ({
 
   const earlyBuy = async () => {
     setLoading(true);
-    if(isWhitelist) {
+    if (isWhitelist) {
       const _amount = Number(amount);
       if (wallet && wallet.publicKey && wallet.signTransaction && _amount > 0) {
         try {
@@ -71,9 +79,9 @@ const MainContent = ({
               : process.env.NEXT_PUBLIC_HELIUS_RPC_DEVNET!,
             "confirmed"
           );
-  
+
           const program = getProgram(connection, wallet);
-  
+
           const buyIns = await program.methods
             .invest(new BN(_amount * LAMPORTS_PER_SOL))
             .accounts({
@@ -81,68 +89,69 @@ const MainContent = ({
               destination: new PublicKey(process.env.NEXT_PUBLIC_DESTINATION!),
             })
             .instruction();
-  
+
           const blockhash = await connection.getLatestBlockhashAndContext(
             "confirmed"
           );
-  
-          const setComputeUnitPriceIx = ComputeBudgetProgram.setComputeUnitPrice({
-            microLamports: 100000,
-          });
-  
+
+          const setComputeUnitPriceIx =
+            ComputeBudgetProgram.setComputeUnitPrice({
+              microLamports: 100000,
+            });
+
           const messageV0 = new TransactionMessage({
             payerKey: wallet.publicKey,
             recentBlockhash: blockhash.value.blockhash,
             instructions: [setComputeUnitPriceIx, buyIns],
           }).compileToV0Message();
-  
+
           const transactionV0 = new VersionedTransaction(messageV0);
-  
+
           const signature = await wallet.signTransaction(transactionV0);
-  
+
           const signatureEncode = bs58.encode(signature?.signatures?.[0]);
-  
+
           const blockHeight = await connection.getBlockHeight({
             commitment: "confirmed",
             minContextSlot: blockhash.context.slot,
           });
-  
+
           const transactionTTL = blockHeight + 151;
           const waitToConfirm = () =>
             new Promise((resolve) => setTimeout(resolve, 5000));
           const waitToRetry = () =>
             new Promise((resolve) => setTimeout(resolve, 2000));
-  
+
           const numTry = 30;
-  
+
           for (let i = 0; i < numTry; i++) {
             // check transaction TTL
             const blockHeight = await connection.getBlockHeight("confirmed");
             if (blockHeight >= transactionTTL) {
               throw new Error("ONCHAIN_TIMEOUT");
             }
-  
+
             await connection.simulateTransaction(transactionV0, {
               replaceRecentBlockhash: true,
               commitment: "confirmed",
             });
-  
+
             await connection?.sendRawTransaction(signature.serialize(), {
               skipPreflight: process.env.NODE_ENV === "development",
               maxRetries: 0,
               preflightCommitment: "confirmed",
             });
-  
+
             await waitToConfirm();
-  
+
             const sigStatus = await connection.getSignatureStatus(
               signatureEncode
             );
-  
+
             if (sigStatus.value?.err) {
               throw new Error("UNKNOWN_TRANSACTION");
             }
-  
+
             if (sigStatus.value?.confirmationStatus === "confirmed") {
               toast("Confirmed", {
                 position: "top-center",
@@ -151,7 +160,7 @@ const MainContent = ({
               });
               break;
             }
-  
+
             await waitToRetry();
           }
         } catch (error) {
@@ -163,7 +172,7 @@ const MainContent = ({
           });
         }
       }
-    } else{
+    } else {
       toast("Sorry, your SOL address is not on the whitelist", {
         position: "top-center",
         theme: "colored",
@@ -189,7 +198,11 @@ const MainContent = ({
 
   useEffect(() => {
     const countdown = setInterval(() => {
-      const timeleft = countdownToSaleEnd(saleEndTime.toISOString());
+      const timeleft = countdownToSaleEnd(
+        currentDate > saleStartTime
+          ? saleEndTime.toISOString()
+          : saleStartTime.toISOString()
+      );
       setTimer(timeleft);
     }, 1000);
     return () => clearInterval(countdown);
@@ -205,13 +218,13 @@ const MainContent = ({
       </p>
       <div>
         <p className="text-center text-sm leading-[22px]">{content.desc}</p>
-        {content.saleType === "Seed" && (
+        {/* {content.saleType === "Seed" && (
           <p className="text-orange-500 text-center text-sm leading-[22px]">
             {`NB: only SOL addresses on the whitelist can join in the Seed Sale`}
             <br />
             {`Min Buy: 0.3 SOL - Max Buy: 5 SOL per wallet`}
           </p>
-        )}
+        )} */}
       </div>
       {/* <div className="flex items-center gap-x-1 w-[100%] justify-center">
         <p className="text-[13px] leading-[32px] text-primary underline break-all text-center">
@@ -293,12 +306,10 @@ const MainContent = ({
         </div>
       </div>
       <p className="text-[20px] leading-[28px] font-semibold text-[#1C1C1E]">
-        {/* {content.saleType !== "Fairlaunch"
-          ? t("ads.saleEnd")
-          : t("ads.saleStart")} */}
-        {t("ads.saleStart")}{" "}
+        {currentDate > saleStartTime ? t("ads.saleEnd") : t("ads.saleStart")}{" "}
         <span className="font-bold text-primary">{timer}</span>
       </p>
+      {currentDate < saleStartTime && content.saleType !== 'Fairlaunch' && <p className="font-bold text-primary text-[20px] leading-[28px]">9:00 UTC Wed, 20 June 2024</p>}
     </div>
   );
 };
@@ -316,7 +327,7 @@ const Divider = () => (
         y1="0.5"
         x2="10000"
         y2="0.5"
-        stroke="#66AAF9"
+        stroke="#A1A1AA"
         strokeDasharray="12 12"
       />
     </svg>
@@ -370,7 +381,7 @@ export default function ANTFAds() {
           </Tabs>
         </div>
       )}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 gap-8">
         {(!currentView || currentView === "seed") && (
           <ContentBox>
             <MainContent
@@ -378,12 +389,49 @@ export default function ANTFAds() {
                 saleType: t("ads.seed"),
                 image: "/image/landing/seed.png",
                 desc: t("ads.seedDesc"),
-                timeEnd: "2024-06-17T00:00:00",
+                timeEnd: "2024-07-20T09:00:00",
+                timeStart: "2024-06-20T09:00:00",
               }}
               isWhitelist={isWhitelist}
               maxBuy={maxBuy}
             />
             <Divider />
+            <div className="flex flex-col gap-y-6">
+              <p className="text-[26px] leading-[34px] md:text-[36px] md:leading-[42px] text-[#1C1C1E] font-semibold">
+                {t("ads.howtobuy")} SOL
+              </p>
+              <ul className="list-disc ml-4 text-base text-[#1C1C1E] leading-6">
+                <li>{t("ads.faq1")}</li>
+                <li>{t("ads.faq2")}</li>
+                <li>{t("ads.faq3")}</li>
+              </ul>
+              <div>
+                <p>{t("ads.fairContent1")}</p>
+                <p className="text-base leading-6 text-[#1C1C1E]">
+                  <span className="text-primary underline break-all">
+                    9gGj9FKJka7JmspN1MZfAGTFGLkoXCU4VKTQaoyjrgTA
+                  </span>
+                  {` `}
+                  <Copy
+                    className="hover:opacity-80 cursor-pointer hidden md:inline"
+                    variant="Bold"
+                    size={20}
+                    color="#006FEE"
+                    onClick={() =>
+                      navigator.clipboard.writeText(
+                        "9gGj9FKJka7JmspN1MZfAGTFGLkoXCU4VKTQaoyjrgTA"
+                      )
+                    }
+                  />
+                  {t("ads.fairContent2")}
+                  <br />
+                  <span className="text-orange-500">
+                    {t("ads.fairContent3")}
+                  </span>
+                </p>
+              </div>
+            </div>
+            <Divider/>
             <div>
               <p className="text-[26px] leading-[34px] md:text-[36px] md:leading-[42px] font-semibold">
                 $ANTF {t("ads.token")}
@@ -437,48 +485,14 @@ export default function ANTFAds() {
         )}
         {(!currentView || currentView === "fairlaunch") && (
           <ContentBox>
-            <div className="flex flex-col gap-y-6">
-              <p className="text-[26px] leading-[34px] md:text-[36px] md:leading-[42px] text-[#1C1C1E] font-semibold">
-                {t("ads.howtobuy")} SOL
-              </p>
-              <ul className="list-disc ml-4 text-base text-[#1C1C1E] leading-6">
-                <li>{t("ads.faq1")}</li>
-                <li>{t("ads.faq2")}</li>
-                <li>{t("ads.faq3")}</li>
-              </ul>
-              <div>
-                <p>{t("ads.fairContent1")}</p>
-                <p className="text-base leading-6 text-[#1C1C1E]">
-                  <span className="text-primary underline break-all">
-                    9gGj9FKJka7JmspN1MZfAGTFGLkoXCU4VKTQaoyjrgTA
-                  </span>
-                  {` `}
-                  <Copy
-                    className="hover:opacity-80 cursor-pointer hidden md:inline"
-                    variant="Bold"
-                    size={20}
-                    color="#006FEE"
-                    onClick={() =>
-                      navigator.clipboard.writeText(
-                        "9gGj9FKJka7JmspN1MZfAGTFGLkoXCU4VKTQaoyjrgTA"
-                      )
-                    }
-                  />
-                  {t("ads.fairContent2")}
-                  <br />
-                  <span className="text-orange-500">
-                    {t("ads.fairContent3")}
-                  </span>
-                </p>
-              </div>
-            </div>
-            <Divider />
+            {/* <Divider /> */}
             <MainContent
               content={{
                 saleType: t("ads.fairlaunch"),
                 image: "/image/landing/fairlaunch.png",
                 desc: t("ads.fairlaunchDesc"),
-                timeEnd: "2024-07-17T00:00:00",
+                timeStart: "2024-07-20T09:00:00",
+                timeEnd: "2024-08-30T09:00:00",
               }}
             />
             <div className="block md:hidden mb-5" />
