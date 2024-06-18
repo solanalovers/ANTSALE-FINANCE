@@ -125,8 +125,8 @@ export const createProject = async (project: Project, isMainnet: boolean, wallet
                         raydium: {}
                     },
                     liquidityPercent: project.liquidityPercent!,
-                    startTime: new BN(parsedProject.startTime.getTime()),
-                    endTime: new BN(parsedProject.endTime.getTime()),
+                    startTime: new BN(Math.floor(parsedProject.startTime.getTime() / 1000)),
+                    endTime: new BN(Math.floor(parsedProject.endTime.getTime() / 1000)),
                     liquidityType: {
                         autoLocking: {}
                     },
@@ -135,11 +135,13 @@ export const createProject = async (project: Project, isMainnet: boolean, wallet
                         refund: {}
                     }
                 }
+
                 const createPresaleIns = await program.methods.createPresale(shortId, presaleConfig).accounts({
                     creator: wallet.publicKey,
                     mint: mint,
                     fromAta: fromAta,
                     vaultAta: vaultAta,
+                    vaultPdaAta: vaultPdaAta,
                     tokenProgram: TOKEN_PROGRAM_ID
                 }).instruction()
                 tx.add(createPresaleIns)
@@ -160,7 +162,6 @@ export const createProject = async (project: Project, isMainnet: boolean, wallet
                 console.log('Insert database error: ', error)
                 return error;
             }
-
         }
 
 

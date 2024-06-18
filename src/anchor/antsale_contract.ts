@@ -185,6 +185,169 @@ export type AntsaleContract = {
       ]
     },
     {
+      "name": "claimPresale",
+      "discriminator": [
+        82,
+        240,
+        122,
+        5,
+        109,
+        66,
+        86,
+        190
+      ],
+      "accounts": [
+        {
+          "name": "investor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "vaultPda"
+        },
+        {
+          "name": "mint"
+        },
+        {
+          "name": "project",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  101,
+                  115,
+                  97,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "projectId"
+              }
+            ]
+          }
+        },
+        {
+          "name": "projectCounter",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  101,
+                  115,
+                  97,
+                  108,
+                  101,
+                  95,
+                  99,
+                  111,
+                  117,
+                  110,
+                  116,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "projectId"
+              }
+            ]
+          }
+        },
+        {
+          "name": "investCounter",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  115,
+                  116,
+                  95,
+                  99,
+                  111,
+                  117,
+                  110,
+                  116,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "projectId"
+              },
+              {
+                "kind": "account",
+                "path": "investor"
+              }
+            ]
+          }
+        },
+        {
+          "name": "claimRecord",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  108,
+                  97,
+                  105,
+                  109,
+                  101,
+                  100
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "projectId"
+              },
+              {
+                "kind": "account",
+                "path": "investor"
+              }
+            ]
+          }
+        },
+        {
+          "name": "vaultPdaAta",
+          "writable": true
+        },
+        {
+          "name": "toAta",
+          "writable": true
+        },
+        {
+          "name": "tokenProgram"
+        },
+        {
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "projectId",
+          "type": "string"
+        }
+      ]
+    },
+    {
       "name": "createFairLaunch",
       "discriminator": [
         124,
@@ -343,8 +506,36 @@ export type AntsaleContract = {
                 ]
               },
               {
-                "kind": "account",
-                "path": "creator"
+                "kind": "arg",
+                "path": "projectId"
+              }
+            ]
+          }
+        },
+        {
+          "name": "projectCounter",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  101,
+                  115,
+                  97,
+                  108,
+                  101,
+                  95,
+                  99,
+                  111,
+                  117,
+                  110,
+                  116,
+                  101,
+                  114
+                ]
               },
               {
                 "kind": "arg",
@@ -352,6 +543,10 @@ export type AntsaleContract = {
               }
             ]
           }
+        },
+        {
+          "name": "vaultPdaAta",
+          "writable": true
         },
         {
           "name": "fromAta",
@@ -576,6 +771,134 @@ export type AntsaleContract = {
           "type": "u64"
         }
       ]
+    },
+    {
+      "name": "investPresale",
+      "discriminator": [
+        102,
+        191,
+        56,
+        37,
+        13,
+        218,
+        37,
+        0
+      ],
+      "accounts": [
+        {
+          "name": "investor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "project",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  101,
+                  115,
+                  97,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "projectId"
+              }
+            ]
+          }
+        },
+        {
+          "name": "projectCounter",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  101,
+                  115,
+                  97,
+                  108,
+                  101,
+                  95,
+                  99,
+                  111,
+                  117,
+                  110,
+                  116,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "projectId"
+              }
+            ]
+          }
+        },
+        {
+          "name": "investCounter",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  115,
+                  116,
+                  95,
+                  99,
+                  111,
+                  117,
+                  110,
+                  116,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "projectId"
+              },
+              {
+                "kind": "account",
+                "path": "investor"
+              }
+            ]
+          }
+        },
+        {
+          "name": "vault",
+          "writable": true
+        },
+        {
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "projectId",
+          "type": "string"
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
     }
   ],
   "accounts": [
@@ -642,6 +965,19 @@ export type AntsaleContract = {
         220,
         52,
         168
+      ]
+    },
+    {
+      "name": "presaleCounter",
+      "discriminator": [
+        55,
+        28,
+        58,
+        62,
+        225,
+        130,
+        222,
+        197
       ]
     }
   ],
@@ -884,6 +1220,10 @@ export type AntsaleContract = {
                 "name": "presaleConfig"
               }
             }
+          },
+          {
+            "name": "creator",
+            "type": "pubkey"
           }
         ]
       }
@@ -978,6 +1318,18 @@ export type AntsaleContract = {
                 "name": "refundType"
               }
             }
+          }
+        ]
+      }
+    },
+    {
+      "name": "presaleCounter",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "remaining",
+            "type": "u64"
           }
         ]
       }

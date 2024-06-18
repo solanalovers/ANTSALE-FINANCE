@@ -1,15 +1,15 @@
-import { Connection, LAMPORTS_PER_SOL, PublicKey, Transaction } from "@solana/web3.js";
-import { WalletContextState } from "@solana/wallet-adapter-react";
+import {Connection, LAMPORTS_PER_SOL, PublicKey, Transaction} from "@solana/web3.js";
+import {WalletContextState} from "@solana/wallet-adapter-react";
 import * as bs58 from "bs58";
-import { getProgram } from "../function/getProgram";
+import {getProgram} from "../function/getProgram";
 import idl from '../anchor/antsale_contract.json'
-import { DetailData } from "@/app/[locale]/detail/[slug]/page";
+import {DetailData} from "@/app/[locale]/detail/[slug]/page";
 import {
     createAssociatedTokenAccountInstruction,
     getAssociatedTokenAddressSync,
     TOKEN_PROGRAM_ID
 } from "@solana/spl-token";
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 
 export const fetchClaimable = async (projectId: any, isMainnet: boolean, wallet: WalletContextState) => {
     try {
@@ -105,14 +105,6 @@ export const claim = async (project: DetailData, isMainnet: boolean, wallet: Wal
         const toAta = getAssociatedTokenAddressSync(mint, wallet.publicKey)
         const toAtaData = await connection.getAccountInfo(toAta)
 
-        const claimIns = await program.methods.claimFairLaunch(shortId).accounts({
-            investor: wallet.publicKey,
-            mint: mint,
-            vaultPda: vaultPda,
-            vaultPdaAta: vaultPdaAta,
-            toAta: toAta,
-            tokenProgram: TOKEN_PROGRAM_ID
-        }).instruction()
 
         const claimTxn = new Transaction()
 
@@ -125,7 +117,30 @@ export const claim = async (project: DetailData, isMainnet: boolean, wallet: Wal
             ))
         }
 
-        claimTxn.add(claimIns)
+        if (project.projectType === 'FairLaunch') {
+            const claimIns = await program.methods.claimFairLaunch(shortId).accounts({
+                investor: wallet.publicKey,
+                mint: mint,
+                vaultPda: vaultPda,
+                vaultPdaAta: vaultPdaAta,
+                toAta: toAta,
+                tokenProgram: TOKEN_PROGRAM_ID
+            }).instruction()
+
+            claimTxn.add(claimIns)
+        } else if (project.projectType === 'Presale') {
+            const claimIns = await program.methods.claimPresale(shortId).accounts({
+                investor: wallet.publicKey,
+                mint: mint,
+                vaultPda: vaultPda,
+                vaultPdaAta: vaultPdaAta,
+                toAta: toAta,
+                tokenProgram: TOKEN_PROGRAM_ID
+            }).instruction()
+
+            claimTxn.add(claimIns)
+        }
+
 
         claimTxn.feePayer = wallet.publicKey;
         claimTxn.recentBlockhash = (await connection.getLatestBlockhash()).blockhash
@@ -144,7 +159,6 @@ export const claim = async (project: DetailData, isMainnet: boolean, wallet: Wal
             "Transaction sig: ", sig
         )
     }
-
 
 
 }

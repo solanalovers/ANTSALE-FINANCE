@@ -41,10 +41,11 @@ export default function CreatePresaleProvider({
 }
 
 export const checkPresaleValidStep1 = (form: Project): boolean => {
+
     if (
         form.tokenAddress &&
         form.tokenInfo &&
-        Number(form.presaleRate) > 0&&
+        Number(form.presaleRate) > 0 &&
         Number(form.listingRate) > 0 &&
         Number(form.softCap) >= 0 &&
         Number(form.hardCap) &&

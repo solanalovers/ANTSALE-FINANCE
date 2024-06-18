@@ -8,7 +8,7 @@ import { Spinner } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 
 export interface DetailData extends Project {
-  id: number
+  id: String
 }
 
 export default function Detail({ params }: { params: { slug: string } }) {

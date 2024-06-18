@@ -92,7 +92,7 @@ export default function BaseRightContent({
                             isLoading={loading}
                             onClick={async () => {
                                 setLoading(true)
-                                await invest(data.id, cluster === 1, wallet, amount)
+                                await invest(data, cluster === 1, wallet, amount)
                                 setLoading(false)
                             }}
                         >
