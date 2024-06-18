@@ -145,7 +145,7 @@ export default function AntBot() {
         </div>
         <div>
           <div className="flex items-center mb-1 gap-x-1">
-            <Image src="/image/giftbox.png" />
+            <Image src="/image/giftbox-lg.png" />
             <p className="text-sm font-medium">
               Special Rewards of Mint all 10 NFT of AntRobot Collection
             </p>
