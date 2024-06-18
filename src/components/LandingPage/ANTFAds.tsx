@@ -389,8 +389,8 @@ export default function ANTFAds() {
                 saleType: t("ads.seed"),
                 image: "/image/landing/seed.png",
                 desc: t("ads.seedDesc"),
-                timeEnd: "2024-07-20T09:00:00",
-                timeStart: "2024-06-20T09:00:00",
+                timeEnd: "2024-07-20T09:00:00Z",
+                timeStart: "2024-06-20T09:00:00Z",
               }}
               isWhitelist={isWhitelist}
               maxBuy={maxBuy}
@@ -491,8 +491,8 @@ export default function ANTFAds() {
                 saleType: t("ads.fairlaunch"),
                 image: "/image/landing/fairlaunch.png",
                 desc: t("ads.fairlaunchDesc"),
-                timeStart: "2024-07-20T09:00:00",
-                timeEnd: "2024-08-30T09:00:00",
+                timeStart: "2024-07-20T09:00:00Z",
+                timeEnd: "2024-08-30T09:00:00Z",
               }}
             />
             <div className="block md:hidden mb-5" />
