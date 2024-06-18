@@ -282,24 +282,23 @@ const MainContent = ({
 
         <div className="w-full md:w-[40%]">
           <div
-            // ${
-            //   content.saleType === "Fairlaunch"
-            //     ? "bg-[#ccc] pointer-events-none text-default-500"
-            //     : "bg-primary hover:opacity-50 text-white"
-            // }
             className={`w-full font-medium text-base leading-6 h-12 px-4 
-            bg-[#ccc] pointer-events-none text-default-500
+                        ${
+                          currentDate < saleStartTime
+                            ? "bg-[#ccc] pointer-events-none text-default-500"
+                            : "bg-primary hover:opacity-50 text-white"
+                        }
             ${loading && "pointer-events-none"} 
             relative rounded-lg flex items-center justify-center`}
             onClick={async () => {
-              if (wallet.publicKey && !loading) {
+              if (currentDate > saleStartTime && wallet.publicKey && !loading) {
                 await earlyBuy();
               }
             }}
           >
-            {/* {!wallet.publicKey && content.saleType !== "Fairlaunch" && (
-              <WalletMultiButton />
-            )} */}
+            {(currentDate > saleStartTime &&
+              !wallet.publicKey &&
+              content.saleType) !== "Fairlaunch" && <WalletMultiButton />}
             {!loading && t("ads.buy")}
             {loading && <Spinner color="white" />}
           </div>
@@ -309,7 +308,11 @@ const MainContent = ({
         {currentDate > saleStartTime ? t("ads.saleEnd") : t("ads.saleStart")}{" "}
         <span className="font-bold text-primary">{timer}</span>
       </p>
-      {currentDate < saleStartTime && content.saleType !== 'Fairlaunch' && <p className="font-bold text-primary text-[20px] leading-[28px]">9:00 UTC Wed, 20 June 2024</p>}
+      {currentDate < saleStartTime && content.saleType !== "Fairlaunch" && (
+        <p className="font-bold text-primary text-[20px] leading-[28px]">
+          9:00 UTC Wed, 21 June 2024
+        </p>
+      )}
     </div>
   );
 };
@@ -389,8 +392,8 @@ export default function ANTFAds() {
                 saleType: t("ads.seed"),
                 image: "/image/landing/seed.png",
                 desc: t("ads.seedDesc"),
-                timeEnd: "2024-07-20T09:00:00Z",
-                timeStart: "2024-06-20T09:00:00Z",
+                timeEnd: "2024-07-21T09:00:00Z",
+                timeStart: "2024-06-21T09:00:00Z",
               }}
               isWhitelist={isWhitelist}
               maxBuy={maxBuy}
@@ -431,7 +434,7 @@ export default function ANTFAds() {
                 </p>
               </div>
             </div>
-            <Divider/>
+            <Divider />
             <div>
               <p className="text-[26px] leading-[34px] md:text-[36px] md:leading-[42px] font-semibold">
                 $ANTF {t("ads.token")}
@@ -491,8 +494,8 @@ export default function ANTFAds() {
                 saleType: t("ads.fairlaunch"),
                 image: "/image/landing/fairlaunch.png",
                 desc: t("ads.fairlaunchDesc"),
-                timeStart: "2024-07-20T09:00:00Z",
-                timeEnd: "2024-08-30T09:00:00Z",
+                timeStart: "2024-07-21T09:00:00Z",
+                timeEnd: "2024-08-31T09:00:00Z",
               }}
             />
             <div className="block md:hidden mb-5" />
