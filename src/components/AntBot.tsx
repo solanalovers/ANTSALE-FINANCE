@@ -111,7 +111,7 @@ export default function AntBot() {
         <div>
           <div className="flex items-center mb-1 gap-x-1">
             <Image src="/image/giftbox.png" />
-            <p className="text-sm font-medium">$ANTF Seed Round 🌱</p>
+            <p className="text-sm font-medium">$ANTF Fairlaunch Round 🌱</p>
           </div>
           <p className="text-sm leading-[22px]">
             {`Solana wallets holding AntRobot NFTs will be added to the WL Ref for
