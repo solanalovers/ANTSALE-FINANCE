@@ -176,10 +176,12 @@ export default function AntBot() {
           variant="bordered"
           minRows={10}
           maxRows={20}
+          isDisabled
         />
         <Button
           color="primary"
           size="lg"
+          isDisabled
         >
           SUBMIT YOUR WL
         </Button>
