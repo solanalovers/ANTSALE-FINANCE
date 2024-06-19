@@ -10,7 +10,12 @@ export default function AntBot() {
           OWN YOUR ANTROBOT COLLECTION <br />
           and GET A LOT OF REWARDS
         </p>
-        <Button color="primary" isDisabled>MINT YOUR ANTROBOT (0/10)</Button>
+        <Button
+          color="primary"
+          isDisabled
+        >
+          MINT YOUR ANTROBOT (0/10)
+        </Button>
         <div className="flex gap-4 items-center">
           <Image src="/image/ant-robot.png" />
           <div>
@@ -109,8 +114,8 @@ export default function AntBot() {
             <p className="text-sm font-medium">$ANTF Seed Round 🌱</p>
           </div>
           <p className="text-sm leading-[22px]">
-            Solana wallets holding AntRobot NFTs will be added to the WL for the
-            $ANTF Seed Sale.
+            {`Solana wallets holding AntRobot NFTs will be added to the WL Ref for
+            the $ANTF Fairlaunch Sale.`}
           </p>
         </div>
         <div>
@@ -151,27 +156,27 @@ export default function AntBot() {
             </p>
           </div>
           <p className="text-sm leading-[22px]">
-            💎 <span className="font-medium">WL Bonus & Ref:</span> Receive 20
-            WL tickets! Invite friends to the Seed Sale and earn 5-10% referral
-            rewards according to AntSale’s policy. 🤝
+            💎 <span className="font-medium">WL Ref:</span>{" "}
+            {`Receive 20 WL Ref! Invite friends to the Fairlaunch Sale and earn 5-10% referral rewards according to AntSale’s policy. 🤝`}
           </p>
           <p className="text-sm leading-[22px]">
-            💎 <span className="font-medium">Cashback Bonus:</span> Use a wallet
-            with all 10 NFTs to participate in the $ANTF Seed Sale and get an
-            immediate 10% cashback in $SOL after the Seed Sale ends. 💵
+            💎 <span className="font-medium">Cashback Bonus:</span>{" "}
+            {`Use a wallet with all 10 NFTs to participate in the $ANTF Fairlaunch Sale and get an immediate 10% cashback in $SOL after the Fairlaunch Sale ends. 💵`}
           </p>
         </div>
         <div>
           <p className="text-sm leading-[22px] font-bold">
-            {`The Whitelist Solana Wallets that you'd like to invite to the $ANTF
-            Seed Sale`}
+            {`The Solana Wallets that you'd like to invite to the $ANTF Fairlaunch Sale`}
           </p>
           <p className="text-sm leading-[22px]">
-            Please add per wallet address in per row. You can add up to 20
-            addresses
+            {`Please add per wallet address in per row. You can add up to 20 addresses`}
           </p>
         </div>
-        <Textarea variant="bordered" minRows={10} maxRows={10}/>
+        <Textarea
+          variant="bordered"
+          minRows={10}
+          maxRows={20}
+        />
         <Button
           color="primary"
           size="lg"
