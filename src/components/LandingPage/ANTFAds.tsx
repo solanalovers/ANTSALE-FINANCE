@@ -1,5 +1,13 @@
 import { countdownToSaleEnd } from "@/function/timer";
-import { Button, Image, Input, Spinner, Tab, Tabs } from "@nextui-org/react";
+import {
+  Button,
+  Image,
+  Input,
+  Link,
+  Spinner,
+  Tab,
+  Tabs,
+} from "@nextui-org/react";
 import { Copy } from "iconsax-react";
 import React, { ReactNode, useContext, useEffect, useState } from "react";
 import CustomDivider from "../CustomDivider";
@@ -444,6 +452,30 @@ export default function ANTFAds() {
                   <p className="text-[16px] leading-[24px] text-[#1C1C1E]">
                     <span className="font-medium">{t("ads.tokenforsale")}</span>
                     : 100,000 ANTF
+                  </p>
+                </li>
+                <li>
+                  <p className="text-[16px] leading-[24px] text-[#1C1C1E]">
+                    <span className="font-medium">Total Supply</span>: 1,000,000
+                    ANTF
+                  </p>
+                </li>
+                <li>
+                  <p className="text-[16px] leading-[24px] text-[#1C1C1E]">
+                    <span className="font-medium">Max Supply</span>: 1,000,000
+                    ANTF (view{" "}
+                    <Link
+                      href="https://x.com/antsale_finance/status/1797831463150514240"
+                      isExternal
+                    >
+                      Tokenomics
+                    </Link>
+                    )
+                  </p>
+                </li>
+                <li>
+                  <p className="text-[16px] leading-[24px] text-[#1C1C1E]">
+                    🔥100% of LP Tokens was burned after listing on Raydium
                   </p>
                 </li>
                 <li>
