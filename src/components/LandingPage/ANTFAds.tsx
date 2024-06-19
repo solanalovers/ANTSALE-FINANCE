@@ -310,7 +310,7 @@ const MainContent = ({
       </p>
       {currentDate < saleStartTime && content.saleType !== "Fairlaunch" && (
         <p className="font-bold text-primary text-[20px] leading-[28px]">
-          9:00 UTC Fri, 21 June 2024
+          9:00 UTC Fri, June 21 2024
         </p>
       )}
     </div>
