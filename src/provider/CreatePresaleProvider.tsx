@@ -46,17 +46,20 @@ export const checkPresaleValidStep1 = (form: Project): boolean => {
         form.tokenAddress &&
         form.tokenInfo &&
         Number(form.presaleRate) > 0 &&
-        Number(form.listingRate) > 0 &&
         Number(form.softCap) >= 0 &&
         Number(form.hardCap) &&
         Number(form.softCap) >= Number(form.hardCap) * 0.2 &&
         Number(form.hardCap) > 0 &&
         Number(form.minBuy) >= 0 &&
-        Number(form.maxBuy) > 0 &&
-        Number(form.liquidityPercent) >= 20 &&
-        Number(form.liquidityPercent) <= 100
-    )
+        Number(form.maxBuy) > 0
+    ) {
+        if (form.listingOption === 'Auto Listing') {
+            return Number(form.listingRate) > 0 &&
+                Number(form.liquidityPercent) >= 20 &&
+                Number(form.liquidityPercent) <= 100;
+        }
         return true;
+    }
 
     return false;
 };
