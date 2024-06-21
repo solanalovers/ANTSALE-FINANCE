@@ -286,16 +286,17 @@ const MainContent = ({
           variant="flat"
           color="default"
           classNames={{ inputWrapper: "bg-white" }}
+          isDisabled
         />
 
         <div className="w-full md:w-[40%]">
           <div
-            className={`w-full font-medium text-base leading-6 h-12 px-4 
-                        ${
-                          currentDate < saleStartTime
-                            ? "bg-[#ccc] pointer-events-none text-default-500"
-                            : "bg-primary hover:opacity-50 text-white"
-                        }
+                        // ${
+                        //   currentDate < saleStartTime
+                        //     ? "bg-[#ccc] pointer-events-none text-default-500"
+                        //     : "bg-primary hover:opacity-50 text-white"
+                        // }
+            className={`w-full font-medium text-base leading-6 h-12 px-4 bg-[#ccc] pointer-events-none text-default-500
             ${loading && "pointer-events-none"} 
             relative rounded-lg flex items-center justify-center`}
             onClick={async () => {
@@ -393,6 +394,21 @@ export default function ANTFAds() {
         </div>
       )}
       <div className="grid grid-cols-1 gap-8">
+      {(!currentView || currentView === "fairlaunch") && (
+          <ContentBox>
+            {/* <Divider /> */}
+            <MainContent
+              content={{
+                saleType: t("ads.fairlaunch"),
+                image: "/image/landing/fairlaunch.png",
+                desc: t("ads.fairlaunchDesc"),
+                timeStart: "2024-07-21T09:00:00Z",
+                timeEnd: "2024-08-31T09:00:00Z",
+              }}
+            />
+            <div className="block md:hidden mb-5" />
+          </ContentBox>
+        )}
         {(!currentView || currentView === "seed") && (
           <ContentBox>
             <MainContent
@@ -400,7 +416,7 @@ export default function ANTFAds() {
                 saleType: t("ads.seed"),
                 image: "/image/landing/seed.png",
                 desc: t("ads.seedDesc"),
-                timeEnd: "2024-07-21T09:00:00Z",
+                timeEnd: "2024-06s-21T09:00:00Z",
                 timeStart: "2024-06-21T09:00:00Z",
               }}
               isWhitelist={isWhitelist}
@@ -516,21 +532,6 @@ export default function ANTFAds() {
                 </li>
               </ul>
             </div>
-          </ContentBox>
-        )}
-        {(!currentView || currentView === "fairlaunch") && (
-          <ContentBox>
-            {/* <Divider /> */}
-            <MainContent
-              content={{
-                saleType: t("ads.fairlaunch"),
-                image: "/image/landing/fairlaunch.png",
-                desc: t("ads.fairlaunchDesc"),
-                timeStart: "2024-07-21T09:00:00Z",
-                timeEnd: "2024-08-31T09:00:00Z",
-              }}
-            />
-            <div className="block md:hidden mb-5" />
           </ContentBox>
         )}
       </div>
