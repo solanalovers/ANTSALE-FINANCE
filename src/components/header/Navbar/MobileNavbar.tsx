@@ -7,6 +7,7 @@ import useTrans from "@/hook/useTrans";
 import { Image, Link } from "@nextui-org/react";
 import DropdownNavbar from "./DropdownNavbar";
 import LocaleSelect from "../localeComponent/LocaleSelect";
+import CustomDropdown from "./CustomDropdown";
 
 export default function MobileNavbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -19,27 +20,32 @@ export default function MobileNavbar() {
       value: `/${locale}/list`,
     },
     {
-      label: "token",
-      value: `/${locale}/create-token`,
-    },
-    {
-      label: "presale",
-      value: `/${locale}/create-presale`,
-      isHaveStepper: true,
-    },
-    {
-      label: "fairlaunch",
-      value: `/${locale}/create-fairlaunch`,
-      isHaveStepper: true,
-    },
-    {
-      label: "multichain",
-      value: `/${locale}/create-multichain`,
-      isHaveStepper: true,
+      label: "launchpad",
+      children: [
+        {
+          label: "token",
+          value: `/${locale}/create-token`,
+        },
+        {
+          label: "presale",
+          value: `/${locale}/create-presale`,
+          isHaveStepper: true,
+        },
+        {
+          label: "fairlaunch",
+          value: `/${locale}/create-fairlaunch`,
+          isHaveStepper: true,
+        },
+        {
+          label: "multichain",
+          value: `/${locale}/create-multichain`,
+          isHaveStepper: true,
+        },
+      ],
     },
     {
       label: "pump",
-      value: `/${locale}/pumpwithme`,
+      value: `https://pumpwithme.antsale.finance/en`,
     },
   ];
 
@@ -67,13 +73,25 @@ export default function MobileNavbar() {
           </div>
           <div className="flex flex-col gap-2 items-center justify-center">
             {navlink.map((link: any, idx: number) => (
-              <Link
-                key={idx}
-                href={link.isHaveStepper ? link.value + "/step-1" : link.value}
-                className="text-sm leading-5 font-semibold text-default-500 py-3 w-full justify-center"
-              >
-                {t(link.label)}
-              </Link>
+              <>
+                {link.value && (
+                  <Link
+                    key={idx}
+                    href={
+                      link.isHaveStepper ? link.value + "/step-1" : link.value
+                    }
+                    className="text-sm leading-5 font-semibold text-default-500 py-3 w-full justify-center"
+                  >
+                    {t(link.label)}
+                  </Link>
+                )}
+                {link.children && (
+                  <CustomDropdown
+                    data={link.children}
+                    title={link.label}
+                  />
+                )}
+              </>
             ))}
           </div>
           <div className="flex flex-col gap-2 items-center justify-center mt-10">
@@ -88,29 +106,29 @@ export default function MobileNavbar() {
           <div className="flex items-center justify-center flex-col mt-auto gap-6 mb-6">
             <LocaleSelect />
             <div className="flex items-center gap-x-2">
-            <Link
-              href={"https://x.com/antsale_finance"}
-              isExternal
-            >
-              <Image
-                src="/image/footer/twitter.png"
-                alt=""
-                width={40}
-                height={40}
-              />
-            </Link>
-            <Link
-              href={"https://t.me/antsale_finance"}
-              isExternal
-            >
-              <Image
-                src="/image/footer/telegram.png"
-                alt=""
-                width={40}
-                height={40}
-              />
-            </Link>
-          </div>
+              <Link
+                href={"https://x.com/antsale_finance"}
+                isExternal
+              >
+                <Image
+                  src="/image/footer/twitter.png"
+                  alt=""
+                  width={40}
+                  height={40}
+                />
+              </Link>
+              <Link
+                href={"https://t.me/antsale_finance"}
+                isExternal
+              >
+                <Image
+                  src="/image/footer/telegram.png"
+                  alt=""
+                  width={40}
+                  height={40}
+                />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

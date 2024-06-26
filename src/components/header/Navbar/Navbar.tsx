@@ -6,6 +6,7 @@ import React from "react";
 import DropdownNavbar from "./DropdownNavbar";
 import Link from "next/link";
 import useTrans from "@/hook/useTrans";
+import CustomDropdown from "./CustomDropdown";
 
 export default function Navbar() {
   const locale = useLocale();
@@ -19,27 +20,32 @@ export default function Navbar() {
       value: `/${locale}/list`,
     },
     {
-      label: "token",
-      value: `/${locale}/create-token`,
-    },
-    {
-      label: "presale",
-      value: `/${locale}/create-presale`,
-      isHaveStepper: true,
-    },
-    {
-      label: "fairlaunch",
-      value: `/${locale}/create-fairlaunch`,
-      isHaveStepper: true,
-    },
-    {
-      label: "multichain",
-      value: `/${locale}/create-multichain`,
-      isHaveStepper: true,
+      label: "launchpad",
+      children: [
+        {
+          label: "token",
+          value: `/${locale}/create-token`,
+        },
+        {
+          label: "presale",
+          value: `/${locale}/create-presale`,
+          isHaveStepper: true,
+        },
+        {
+          label: "fairlaunch",
+          value: `/${locale}/create-fairlaunch`,
+          isHaveStepper: true,
+        },
+        {
+          label: "multichain",
+          value: `/${locale}/create-multichain`,
+          isHaveStepper: true,
+        },
+      ],
     },
     {
       label: "pump",
-      value: `/${locale}/pumpwithme`,
+      value: `https://pumpwithme.antsale.finance/en`,
     },
   ];
 
@@ -47,25 +53,35 @@ export default function Navbar() {
     <div className="flex container mx-auto pt-4 pb-[10px] justify-between">
       <div className="flex items-center">
         {navlink.map((link: any, idx: number) => (
-          <Link
-            key={idx}
-            href={link.isHaveStepper ? link.value + "/step-1" : link.value}
-            className={`mx-3 text-sm leading-5 relative text-default-500 font-semibold ${
-              theme === "dark" ? "header-link" : "header-link light"
-            } ${
-              (pathname === link.value ||
-                pathname.startsWith(`${link.value}/step-`)) &&
-              "text-primary font-bold after:absolute after:h-[2px] after:bg-primary after:w-full after:left-0 after:bottom-[-10px]"
-            }
+          <>
+            {link.value && (
+              <Link
+                key={idx}
+                href={link.isHaveStepper ? link.value + "/step-1" : link.value}
+                className={`mx-3 text-sm leading-5 relative text-default-500 font-semibold ${
+                  theme === "dark" ? "header-link" : "header-link light"
+                } ${
+                  (pathname === link.value ||
+                    pathname.startsWith(`${link.value}/step-`)) &&
+                  "text-primary font-bold after:absolute after:h-[2px] after:bg-primary after:w-full after:left-0 after:bottom-[-10px]"
+                }
             hover:opacity-50`}
-          >
-            {t(link.label)}
-          </Link>
+              >
+                {t(link.label)}
+              </Link>
+            )}
+            {link.children && (
+              <CustomDropdown
+                data={link.children}
+                title={link.label}
+              />
+            )}
+          </>
         ))}
       </div>
       <div className="flex items-center">
         <Link
-        target="_blank"
+          target="_blank"
           href={"https://blog.antsale.finance/"}
           className={`mx-3 text-sm leading-5 text-default-500 font-semibold ${
             theme === "dark" ? "header-link" : "header-link light"

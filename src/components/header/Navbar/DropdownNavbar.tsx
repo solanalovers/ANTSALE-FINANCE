@@ -45,6 +45,7 @@ export default function DropdownNavbar() {
       <DropdownMenu
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        className="before:w-full before:h-5 relative before:absolute before:top-[-10px]"
       >
         <DropdownItem>
           <Link
@@ -52,7 +53,7 @@ export default function DropdownNavbar() {
             className={`text-base leading-6 text-[#11181C] flex items-center gap-x-3`}
           >
             <ContributeIcon />
-            <p>{t('my.contribute')}</p>
+            <p>{t("my.contribute")}</p>
           </Link>
         </DropdownItem>
         <DropdownItem>
@@ -61,7 +62,7 @@ export default function DropdownNavbar() {
             className={`text-base leading-6 text-[#11181C] flex items-center gap-x-3`}
           >
             <ProjectsIcon />
-            <p>{t('my.project')}</p>
+            <p>{t("my.project")}</p>
           </Link>
         </DropdownItem>
         <DropdownItem>
@@ -70,7 +71,7 @@ export default function DropdownNavbar() {
             className={`text-base leading-6 text-[#11181C] flex items-center gap-x-3`}
           >
             <GroupAddIcon />
-            <p>{t('my.community')}</p>
+            <p>{t("my.community")}</p>
           </Link>
         </DropdownItem>
         <DropdownItem>
@@ -79,7 +80,7 @@ export default function DropdownNavbar() {
             className={`text-base leading-6 text-[#11181C] flex items-center gap-x-3`}
           >
             <RocketIcon />
-            <p>{t('my.pump')}</p>
+            <p>{t("my.pump")}</p>
           </Link>
         </DropdownItem>
       </DropdownMenu>
