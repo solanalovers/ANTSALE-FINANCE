@@ -89,6 +89,7 @@ export default function MobileNavbar() {
                   <CustomDropdown
                     data={link.children}
                     title={link.label}
+                    isMobileOpen={isMenuOpen}
                   />
                 )}
               </>
@@ -101,7 +102,7 @@ export default function MobileNavbar() {
             >
               {t("faq")}
             </Link>
-            <DropdownNavbar />
+            <DropdownNavbar isMobileOpen={isMenuOpen} />
           </div>
           <div className="flex items-center justify-center flex-col mt-auto gap-6 mb-6">
             <LocaleSelect />

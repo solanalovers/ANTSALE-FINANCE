@@ -5,6 +5,7 @@ import {
   GroupAddIcon,
   RocketIcon,
 } from "@/components/Icon";
+import useClickOutside from "@/hook/useClickOutside";
 import useTrans from "@/hook/useTrans";
 import {
   Dropdown,
@@ -14,16 +15,18 @@ import {
   Link,
 } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function CustomDropdown({
   data,
   title,
+  isMobileOpen
 }: {
   data: Array<{ label: string; value: string; isHaveStepper?: boolean }>;
   title: string;
+  isMobileOpen?: boolean
 }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, setIsOpen, containerRef } = useClickOutside();
   const pathname = usePathname();
   const t = useTrans("header");
 
@@ -34,11 +37,18 @@ export default function CustomDropdown({
   const handleMouseLeave = () => {
     setIsOpen(false);
   };
+
+  useEffect(()=>{
+    if(!isMobileOpen) {
+        setIsOpen(false)
+    }
+  },[isMobileOpen])
   return (
     <Dropdown isOpen={isOpen}>
       <DropdownTrigger
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onClick={isOpen ? handleMouseLeave : handleMouseEnter}
       >
         <div className="flex items-center gap-1 cursor-pointer ">
           <p className="text-sm leading-5 text-default-500 font-semibold">
@@ -54,6 +64,7 @@ export default function CustomDropdown({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         className="before:w-full before:h-5 relative before:absolute before:top-[-10px]"
+        ref={containerRef}
       >
         {data.map((item, idx) => (
           <DropdownItem key={idx}>

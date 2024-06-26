@@ -5,6 +5,7 @@ import {
   ProjectsIcon,
   RocketIcon,
 } from "@/components/Icon";
+import useClickOutside from "@/hook/useClickOutside";
 import useTrans from "@/hook/useTrans";
 import {
   Dropdown,
@@ -13,11 +14,11 @@ import {
   DropdownTrigger,
   Link,
 } from "@nextui-org/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export default function DropdownNavbar() {
-  const [isOpen, setIsOpen] = useState(false);
+export default function DropdownNavbar({isMobileOpen}:{isMobileOpen?: boolean}) {
   const t = useTrans("header");
+  const { isOpen, setIsOpen, containerRef } = useClickOutside();
 
   const handleMouseEnter = () => {
     setIsOpen(true);
@@ -26,11 +27,18 @@ export default function DropdownNavbar() {
   const handleMouseLeave = () => {
     setIsOpen(false);
   };
+
+  useEffect(()=>{
+    if(!isMobileOpen) {
+        setIsOpen(false)
+    }
+  },[isMobileOpen])
   return (
     <Dropdown isOpen={isOpen}>
       <DropdownTrigger
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onClick={isOpen ? handleMouseLeave : handleMouseEnter}
       >
         <div className="flex items-center gap-1 cursor-pointer">
           <p className="text-sm leading-5 text-default-500 font-semibold">
@@ -45,6 +53,7 @@ export default function DropdownNavbar() {
       <DropdownMenu
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        ref={containerRef}
         className="before:w-full before:h-5 relative before:absolute before:top-[-10px]"
       >
         <DropdownItem>
