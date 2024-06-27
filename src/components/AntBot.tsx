@@ -53,8 +53,8 @@ export default function AntBot() {
         >
           MINT YOUR ANTROBOT (0/10)
         </Button>
-        <div className="flex gap-4 items-center">
-          <Image src="/image/ant-robot.png" />
+        <div className="grid grid-cols-2 gap-4 items-center">
+          <Image src={`/image/ant-robot/${listRobot[listActive.length]}`} />
           <div>
             <p className="text-xl leading-7 font-bold">Silly AntSam</p>
             <p className="text-base leading-6 font-semibold">SANT</p>
