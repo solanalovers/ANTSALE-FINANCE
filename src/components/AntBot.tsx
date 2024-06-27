@@ -1,8 +1,23 @@
 import React from "react";
 import BorderContent from "./detail/BorderContent";
 import { Button, Image, Link, Textarea } from "@nextui-org/react";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 export default function AntBot() {
+  const { publicKey } = useWallet();
+  const listRobot = [
+    "ant01.png",
+    "ant02.png",
+    "ant03.png",
+    "ant04.png",
+    "ant05.png",
+    "ant06.png",
+    "ant07.png",
+    "ant08.png",
+    "ant09.png",
+    "ant10.png",
+  ];
+  const listActive = [];
   return (
     <BorderContent>
       <div className="flex flex-col gap-y-4">
@@ -10,6 +25,28 @@ export default function AntBot() {
           OWN YOUR ANTROBOT COLLECTION <br />
           and GET A LOT OF REWARDS
         </p>
+        {publicKey && (
+          <div className="flex items-center gap-2">
+            {listRobot.map((item, idx) => (
+              <div
+                className={`relative rounded-[14px] ${
+                  idx > listActive.length - 1 &&
+                  "grayscale border border-[2px] border-dashed"
+                }`}
+              >
+                <Image
+                  src={`/image/ant-robot/${item}`}
+                  key={idx}
+                />
+                {idx <= listActive.length - 1 && (
+                  <div className="absolute left-0 bottom-0 bg-primary w-4 h-4 z-50 flex items-center justify-center rounded-bl-[4px] rounded-tr-[4px]">
+                    <p className="text-white text-[10px]">{idx + 1}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
         <Button
           color="primary"
           isDisabled

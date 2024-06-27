@@ -1,12 +1,10 @@
 "use client";
 import CustomDivider from "@/components/CustomDivider";
 import ToastItem from "@/components/toast/ToastItem";
-import { CreatePresaleContext } from "@/provider/CreatePresaleProvider";
 import {
   Checkbox,
   DatePicker,
   Input,
-  Link,
   Radio,
   RadioGroup,
   Select,
@@ -14,7 +12,6 @@ import {
   Spinner,
 } from "@nextui-org/react";
 import React, { useContext, useEffect, useState } from "react";
-import debounce from "lodash.debounce";
 import { getTokenData } from "@/function/token";
 import { now } from "@internationalized/date";
 import { CreateFairLaunchContext } from "@/provider/CreateFairLaunchProvider";
