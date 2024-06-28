@@ -33,10 +33,10 @@ export default function AntBot() {
                   idx > listActive.length - 1 &&
                   "grayscale border border-[2px] border-dashed"
                 }`}
+                key={idx}
               >
                 <Image
                   src={`/image/ant-robot/${item}`}
-                  key={idx}
                 />
                 {idx <= listActive.length - 1 && (
                   <div className="absolute left-0 bottom-0 bg-primary w-4 h-4 z-50 flex items-center justify-center rounded-bl-[4px] rounded-tr-[4px]">
