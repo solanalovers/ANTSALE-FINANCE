@@ -20,11 +20,11 @@ import React, { useEffect, useState } from "react";
 export default function CustomDropdown({
   data,
   title,
-  isMobileOpen
+  isMobileOpen,
 }: {
   data: Array<{ label: string; value: string; isHaveStepper?: boolean }>;
   title: string;
-  isMobileOpen?: boolean
+  isMobileOpen?: boolean;
 }) {
   const { isOpen, setIsOpen, containerRef } = useClickOutside();
   const pathname = usePathname();
@@ -38,11 +38,11 @@ export default function CustomDropdown({
     setIsOpen(false);
   };
 
-  useEffect(()=>{
-    if(!isMobileOpen) {
-        setIsOpen(false)
+  useEffect(() => {
+    if (!isMobileOpen) {
+      setIsOpen(false);
     }
-  },[isMobileOpen])
+  }, [isMobileOpen]);
   return (
     <Dropdown isOpen={isOpen}>
       <DropdownTrigger
@@ -69,7 +69,7 @@ export default function CustomDropdown({
         {data.map((item, idx) => (
           <DropdownItem key={idx}>
             <Link
-              href={item.value}
+              href={item.isHaveStepper ? item.value + "/step-1" : item.value}
               className={`text-sm leading-5 relative text-default-500 font-semibold header-link light ${
                 (pathname === item.value ||
                   pathname.startsWith(`${item.value}/step-`)) &&
