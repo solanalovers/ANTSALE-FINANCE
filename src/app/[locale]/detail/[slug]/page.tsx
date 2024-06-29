@@ -2,39 +2,35 @@
 import Banner from "@/components/Banner";
 import LeftContent from "@/components/detail/LeftContent";
 import RightContent from "@/components/detail/RightContent";
+import { getProjectInfoData } from "@/function/project-info";
 import { Project } from "@/interface/project-interface";
+import { AppContext } from "@/provider/AppProvider";
 import { getProjectDetail } from "@/supabase/projects";
 import { Spinner } from "@nextui-org/react";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 export interface DetailData extends Project {
-  id: String
+  id: String;
 }
 
 export default function Detail({ params }: { params: { slug: string } }) {
+  const { cluster } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<DetailData>();
-  // const [type] = useState(() => {
-  //   switch (params.slug) {
-  //     case "4":
-  //       return "multi-price";
-  //       break;
-  //     case "5":
-  //       return "purchase-currency";
-  //       break;
-  //     case "6":
-  //       return "fixed-price";
-  //       break;
-  //     default:
-  //       return "normal";
-  //   }
-  // });
   const [type, setType] = useState<any>("normal");
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       const data: any = await getProjectDetail(params.slug);
+      // const { poolAddress, totalRaised } =
+      //   await getProjectInfoData(
+      //     data.projectType,
+      //     data.id,
+      //     data.hardCap,
+      //     cluster === 1
+      //   );
+      // console.log({ poolAddress, totalRaised });
       setData(data);
       setLoading(false);
     };

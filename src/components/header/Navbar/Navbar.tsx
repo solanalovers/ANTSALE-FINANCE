@@ -53,10 +53,9 @@ export default function Navbar() {
     <div className="flex container mx-auto pt-4 pb-[10px] justify-between">
       <div className="flex items-center">
         {navlink.map((link: any, idx: number) => (
-          <>
+          <div key={idx}>
             {link.value && (
               <Link
-                key={idx}
                 href={link.isHaveStepper ? link.value + "/step-1" : link.value}
                 className={`mx-3 text-sm leading-5 relative text-default-500 font-semibold ${
                   theme === "dark" ? "header-link" : "header-link light"
@@ -76,7 +75,7 @@ export default function Navbar() {
                 title={link.label}
               />
             )}
-          </>
+          </div>
         ))}
       </div>
       <div className="flex items-center">

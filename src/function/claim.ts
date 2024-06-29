@@ -47,6 +47,7 @@ export const fetchClaimable = async (projectId: any, isMainnet: boolean, wallet:
             ],
         })])
 
+
         let totalPurchased = 0
         let isClaimable = false
 

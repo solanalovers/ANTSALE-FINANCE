@@ -73,10 +73,9 @@ export default function MobileNavbar() {
           </div>
           <div className="flex flex-col gap-2 items-center justify-center">
             {navlink.map((link: any, idx: number) => (
-              <>
+              <div key={idx}>
                 {link.value && (
                   <Link
-                    key={idx}
                     href={
                       link.isHaveStepper ? link.value + "/step-1" : link.value
                     }
@@ -92,7 +91,7 @@ export default function MobileNavbar() {
                     isMobileOpen={isMenuOpen}
                   />
                 )}
-              </>
+              </div>
             ))}
           </div>
           <div className="flex flex-col gap-2 items-center justify-center mt-10">
