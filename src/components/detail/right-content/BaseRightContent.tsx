@@ -60,6 +60,14 @@ export default function BaseRightContent({
               <Countdown endTime={data.endTime} />
             </>
           )}
+          {status === "upcoming" && (
+            <>
+              <p className="leading-5 text-base font-medium">
+                {data.projectType} Start In
+              </p>
+              <Countdown endTime={data.startTime} />
+            </>
+          )}
         </div>
         {status === "live" && (
           <>
