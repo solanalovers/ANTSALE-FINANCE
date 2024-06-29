@@ -13,11 +13,17 @@ export default function PoolInfo({ data }: { data: PoolData }) {
   const pathname = usePathname();
 
   const calculateLockupTime = () => {
-    const endTime = pathname.includes("detail")
-      ? new Date(data.endTime.toString()).getTime()
-      : data.endTime.toDate("").getTime();
-    const lockupTime = endTime + Number(data.liquidityLockupTime);
-    return lockupTime;
+    const endDate = pathname.includes("detail")
+      ? new Date(data.endTime.toString())
+      : data.endTime.toDate("");
+
+    const endDay = endDate.getDate();
+    const lockupTimeInDays = Number(data.liquidityLockupTime) / 60 / 24;
+
+    const lockupEndDate = new Date(endDate);
+    lockupEndDate.setDate(endDay + lockupTimeInDays);
+
+    return lockupEndDate;
   };
 
   return (
@@ -62,8 +68,7 @@ export default function PoolInfo({ data }: { data: PoolData }) {
       <div className="flex justify-between">
         <p className="font-medium text-base">Tokens For Presale</p>
         <p className="text-base leading-6 text-[#1C1C1E]">
-          {data.tokenForPresale?.toLocaleString()}{" "}
-          {data.tokenInfo?.symbol}
+          {data.tokenForPresale?.toLocaleString()} {data.tokenInfo?.symbol}
         </p>
       </div>
       <div className="my-[14px] w-full border-t border-dashed border-divider" />
