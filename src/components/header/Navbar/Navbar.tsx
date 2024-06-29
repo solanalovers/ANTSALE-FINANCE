@@ -62,7 +62,7 @@ export default function Navbar() {
                 } ${
                   (pathname === link.value ||
                     pathname.startsWith(`${link.value}/step-`)) &&
-                  "text-primary font-bold after:absolute after:h-[2px] after:bg-primary after:w-full after:left-0 after:bottom-[-10px]"
+                  "text-primary font-bold"
                 }
             hover:opacity-50`}
               >
