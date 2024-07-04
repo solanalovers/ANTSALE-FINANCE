@@ -11,6 +11,7 @@ import React, {useContext, useEffect, useState} from "react";
 
 export interface DetailData extends Project {
     id: String;
+    totalRaised?: any
 }
 
 export default function Detail({params}: { params: { slug: string } }) {
@@ -30,8 +31,8 @@ export default function Detail({params}: { params: { slug: string } }) {
                     data.hardCap,
                     cluster === 1
                 );
-            console.log({poolAddress, totalRaised});
-            setData(data);
+            // console.log({poolAddress, totalRaised});
+            setData({...data, poolAddress, totalRaised});
             setLoading(false);
         };
 

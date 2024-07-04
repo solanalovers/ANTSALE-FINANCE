@@ -15,9 +15,11 @@ import { useRouter } from "next/navigation";
 import { calculateProjectStatus, countdownToSaleEnd } from "@/function/timer";
 import useTrans from "@/hook/useTrans";
 import { Project, ProjectType } from "@/interface/project-interface";
+import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 
 interface DataInterface extends Project {
   id: number;
+  totalRaised: any;
 }
 
 interface CardItemProps {
@@ -87,17 +89,17 @@ export default function CardItem({ data }: CardItemProps) {
               {t("progress")}
               <span className="ml-2 text-[#8E8E93]">
                 {/* ({data?.progress?.percentage || '484.13%'}) */}
-                484.13%
+                {parseFloat(((data.totalRaised / LAMPORTS_PER_SOL) / Number(data.hardCap) * 100).toFixed(2))}%
               </span>
             </p>
             <Progress
-              value={83}
+              value={((data.totalRaised / LAMPORTS_PER_SOL)/Number(data.hardCap) * 100)}
               color="success"
               className="my-1"
               aria-label="card-progress"
             />
             <p className="text-[12px] leading-[20px] text-[#8E8E93]">
-              {(242.0635).toLocaleString()} {data.currency} Raised
+            {parseFloat((data.totalRaised / LAMPORTS_PER_SOL).toFixed(4))} {data.currency} Raised
             </p>
           </div>
           <div>

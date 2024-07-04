@@ -10,6 +10,7 @@ import { invest } from "@/function/invest";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { DetailData } from "@/app/[locale]/detail/[slug]/page";
 import { claim, fetchClaimable } from "@/function/claim";
+import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 
 export default function BaseRightContent({
   data,
@@ -161,7 +162,15 @@ export default function BaseRightContent({
         <div className="flex items-center justify-between">
           <p className="text-base font-medium">Current Raise</p>
           <p className="text-base leading-6 text-[#1C1C1E]">
-            0.8548 SOL (17.10%)
+            {parseFloat((data.totalRaised / LAMPORTS_PER_SOL).toFixed(4))}{" "}
+            {data.currency} (
+            {parseFloat(
+              (
+                (data.totalRaised / LAMPORTS_PER_SOL / Number(data.hardCap)) *
+                100
+              ).toFixed(2)
+            )}
+            %)
           </p>
         </div>
         <div className="my-[14px] w-full border-t border-dashed border-divider" />
