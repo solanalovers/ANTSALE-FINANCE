@@ -26,7 +26,22 @@
           "signer": true
         },
         {
-          "name": "vault_pda"
+          "name": "vault_pda",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              }
+            ]
+          }
         },
         {
           "name": "mint"
@@ -226,37 +241,6 @@
           }
         },
         {
-          "name": "project_counter",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  112,
-                  114,
-                  101,
-                  115,
-                  97,
-                  108,
-                  101,
-                  95,
-                  99,
-                  111,
-                  117,
-                  110,
-                  116,
-                  101,
-                  114
-                ]
-              },
-              {
-                "kind": "arg",
-                "path": "_project_id"
-              }
-            ]
-          }
-        },
-        {
           "name": "invest_counter",
           "pda": {
             "seeds": [
@@ -435,10 +419,6 @@
           "writable": true
         },
         {
-          "name": "vault_ata",
-          "writable": true
-        },
-        {
           "name": "token_program"
         },
         {
@@ -547,10 +527,6 @@
           "writable": true
         },
         {
-          "name": "vault_ata",
-          "writable": true
-        },
-        {
           "name": "token_program"
         },
         {
@@ -570,6 +546,170 @@
               "name": "PresaleConfig"
             }
           }
+        }
+      ]
+    },
+    {
+      "name": "finalize",
+      "discriminator": [
+        171,
+        61,
+        218,
+        56,
+        127,
+        115,
+        12,
+        217
+      ],
+      "accounts": [
+        {
+          "name": "bot",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "vault_pda",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint"
+        },
+        {
+          "name": "project",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  101,
+                  115,
+                  97,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "_project_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "project_counter",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  101,
+                  115,
+                  97,
+                  108,
+                  101,
+                  95,
+                  99,
+                  111,
+                  117,
+                  110,
+                  116,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "_project_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "creator"
+        },
+        {
+          "name": "finalize_record",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  101,
+                  115,
+                  97,
+                  108,
+                  101,
+                  95,
+                  99,
+                  111,
+                  117,
+                  110,
+                  116,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "_project_id"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  105,
+                  110,
+                  97,
+                  108,
+                  105,
+                  122,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "vault_pda_ata",
+          "writable": true
+        },
+        {
+          "name": "to_ata",
+          "writable": true
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "project_id",
+          "type": "string"
         }
       ]
     },
@@ -747,8 +887,22 @@
           }
         },
         {
-          "name": "vault",
-          "writable": true
+          "name": "vault_pda",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              }
+            ]
+          }
         },
         {
           "name": "system_program",
@@ -875,8 +1029,22 @@
           }
         },
         {
-          "name": "vault",
-          "writable": true
+          "name": "vault_pda",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              }
+            ]
+          }
         },
         {
           "name": "system_program",
@@ -1003,8 +1171,15 @@
     },
     {
       "code": 6005,
-      "name": "NotClaimTime",
-      "msg": ""
+      "name": "NotClaimTime"
+    },
+    {
+      "code": 6006,
+      "name": "NotFinalizeTime"
+    },
+    {
+      "code": 6007,
+      "name": "CannotFinalize"
     }
   ],
   "types": [

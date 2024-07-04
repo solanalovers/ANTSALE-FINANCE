@@ -99,7 +99,6 @@ export const createProject = async (project: Project, isMainnet: boolean, wallet
                     creator: wallet.publicKey,
                     mint: mint,
                     fromAta: fromAta,
-                    vaultAta: vaultAta,
                     vaultPdaAta: vaultPdaAta,
                     tokenProgram: TOKEN_PROGRAM_ID
                 }).instruction()
@@ -142,7 +141,6 @@ export const createProject = async (project: Project, isMainnet: boolean, wallet
                     creator: wallet.publicKey,
                     mint: mint,
                     fromAta: fromAta,
-                    vaultAta: vaultAta,
                     vaultPdaAta: vaultPdaAta,
                     tokenProgram: TOKEN_PROGRAM_ID
                 }).instruction()
@@ -156,7 +154,6 @@ export const createProject = async (project: Project, isMainnet: boolean, wallet
             console.log(
                 "Transaction sig: ", sig
             )
-
 
             const {data, error} = await supabase.from('project').insert({...parsedProject, id: id}).select("*");
 

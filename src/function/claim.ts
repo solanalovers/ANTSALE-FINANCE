@@ -122,7 +122,6 @@ export const claim = async (project: DetailData, isMainnet: boolean, wallet: Wal
             const claimIns = await program.methods.claimFairLaunch(shortId).accounts({
                 investor: wallet.publicKey,
                 mint: mint,
-                vaultPda: vaultPda,
                 vaultPdaAta: vaultPdaAta,
                 toAta: toAta,
                 tokenProgram: TOKEN_PROGRAM_ID
@@ -160,6 +159,5 @@ export const claim = async (project: DetailData, isMainnet: boolean, wallet: Wal
             "Transaction sig: ", sig
         )
     }
-
 
 }

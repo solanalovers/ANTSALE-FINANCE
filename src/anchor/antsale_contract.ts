@@ -32,7 +32,22 @@ export type AntsaleContract = {
           "signer": true
         },
         {
-          "name": "vaultPda"
+          "name": "vaultPda",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              }
+            ]
+          }
         },
         {
           "name": "mint"
@@ -232,37 +247,6 @@ export type AntsaleContract = {
           }
         },
         {
-          "name": "projectCounter",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  112,
-                  114,
-                  101,
-                  115,
-                  97,
-                  108,
-                  101,
-                  95,
-                  99,
-                  111,
-                  117,
-                  110,
-                  116,
-                  101,
-                  114
-                ]
-              },
-              {
-                "kind": "arg",
-                "path": "projectId"
-              }
-            ]
-          }
-        },
-        {
           "name": "investCounter",
           "pda": {
             "seeds": [
@@ -441,10 +425,6 @@ export type AntsaleContract = {
           "writable": true
         },
         {
-          "name": "vaultAta",
-          "writable": true
-        },
-        {
           "name": "tokenProgram"
         },
         {
@@ -553,10 +533,6 @@ export type AntsaleContract = {
           "writable": true
         },
         {
-          "name": "vaultAta",
-          "writable": true
-        },
-        {
           "name": "tokenProgram"
         },
         {
@@ -576,6 +552,170 @@ export type AntsaleContract = {
               "name": "presaleConfig"
             }
           }
+        }
+      ]
+    },
+    {
+      "name": "finalize",
+      "discriminator": [
+        171,
+        61,
+        218,
+        56,
+        127,
+        115,
+        12,
+        217
+      ],
+      "accounts": [
+        {
+          "name": "bot",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "vaultPda",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint"
+        },
+        {
+          "name": "project",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  101,
+                  115,
+                  97,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "projectId"
+              }
+            ]
+          }
+        },
+        {
+          "name": "projectCounter",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  101,
+                  115,
+                  97,
+                  108,
+                  101,
+                  95,
+                  99,
+                  111,
+                  117,
+                  110,
+                  116,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "projectId"
+              }
+            ]
+          }
+        },
+        {
+          "name": "creator"
+        },
+        {
+          "name": "finalizeRecord",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  101,
+                  115,
+                  97,
+                  108,
+                  101,
+                  95,
+                  99,
+                  111,
+                  117,
+                  110,
+                  116,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "projectId"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  105,
+                  110,
+                  97,
+                  108,
+                  105,
+                  122,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "vaultPdaAta",
+          "writable": true
+        },
+        {
+          "name": "toAta",
+          "writable": true
+        },
+        {
+          "name": "tokenProgram"
+        },
+        {
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "projectId",
+          "type": "string"
         }
       ]
     },
@@ -753,8 +893,22 @@ export type AntsaleContract = {
           }
         },
         {
-          "name": "vault",
-          "writable": true
+          "name": "vaultPda",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              }
+            ]
+          }
         },
         {
           "name": "systemProgram",
@@ -881,8 +1035,22 @@ export type AntsaleContract = {
           }
         },
         {
-          "name": "vault",
-          "writable": true
+          "name": "vaultPda",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              }
+            ]
+          }
         },
         {
           "name": "systemProgram",
@@ -1009,8 +1177,15 @@ export type AntsaleContract = {
     },
     {
       "code": 6005,
-      "name": "notClaimTime",
-      "msg": ""
+      "name": "notClaimTime"
+    },
+    {
+      "code": 6006,
+      "name": "notFinalizeTime"
+    },
+    {
+      "code": 6007,
+      "name": "cannotFinalize"
     }
   ],
   "types": [

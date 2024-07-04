@@ -30,13 +30,11 @@ export const invest = async (project: DetailData, isMainnet: boolean, wallet: Wa
             if (project.projectType === 'FairLaunch') {
                 investIns = await program.methods.investFairLaunch(shortId, new BN(amount * LAMPORTS_PER_SOL)).accounts({
                     investor: wallet.publicKey,
-                    vault: vaultAddress
                 }).instruction()
                 tx.add(investIns)
             } else if (project.projectType === 'Presale') {
                 investIns = await program.methods.investPresale(shortId, new BN(amount * LAMPORTS_PER_SOL)).accounts({
                     investor: wallet.publicKey,
-                    vault: vaultAddress
                 }).instruction()
                 tx.add(investIns)
             }

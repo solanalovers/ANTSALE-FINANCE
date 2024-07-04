@@ -1,6 +1,6 @@
-import { Connection, LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
-import { Program, Provider } from "@coral-xyz/anchor";
-import { AntsaleContract } from "@/anchor/antsale_contract";
+import {Connection, Keypair, LAMPORTS_PER_SOL, PublicKey} from "@solana/web3.js";
+import {Program, Provider} from "@coral-xyz/anchor";
+import {AntsaleContract} from "@/anchor/antsale_contract";
 import idl from '@/anchor/antsale_contract.json'
 import bs58 from "bs58";
 
@@ -24,24 +24,34 @@ export const getProjectInfoData = async (projectType: ProjectType, projectId: St
 
     const shortId = byteArray.toString('base64').replace(/=+$/, '')
 
-    if (projectType === 'Presale') {
-        const [poolPda] = PublicKey.findProgramAddressSync([Buffer.from('presale'), Buffer.from(shortId)], program.programId)
+    let totalRaised = 0
+    let poolPda: PublicKey = Keypair.generate().publicKey;
 
-        const poolPdaData = await program.account.presaleCounter.fetch(poolPda)
+    try {
+        if (projectType === 'Presale') {
+            [poolPda] = PublicKey.findProgramAddressSync([Buffer.from('presale_counter'), Buffer.from(shortId)], program.programId)
 
-        // console.log("Remaining: ", poolPdaData.remaining)
+            const poolPdaData = await program.account.presaleCounter.fetch(poolPda)
 
-        // console.log('Total raised = Hard cap - remaining')
+            console.log("Remaining: ", poolPdaData.remaining)
 
-        return { poolAddress: poolPda, totalRaised: hardCap - poolPdaData.remaining}
-    } else {
-        const [poolPda] = PublicKey.findProgramAddressSync([Buffer.from('fair_launch'), Buffer.from(shortId)], program.programId)
+            console.log('Total raised = Hard cap - remaining')
 
-        const poolPdaData = await program.account.fairLaunchCounter.fetch(poolPda)
+            totalRaised = hardCap * LAMPORTS_PER_SOL - poolPdaData.remaining.toNumber()
 
-        // console.log("Total raised: ", poolPdaData.totalAmount)
-        return { poolAddress: poolPda, totalRaised: poolPdaData.totalAmount}
+        } else {
+            [poolPda] = PublicKey.findProgramAddressSync([Buffer.from('fair_launch_counter'), Buffer.from(shortId)], program.programId)
 
+            const poolPdaData = await program.account.fairLaunchCounter.fetch(poolPda)
+
+            console.log("Total raised:: ", poolPdaData.totalAmount)
+
+            totalRaised = poolPdaData.totalAmount.toNumber()
+        }
+    } catch (e) {
+        console.log('Error: ', e)
     }
+
+    return {poolAddress: poolPda, totalRaised: totalRaised}
 
 }
