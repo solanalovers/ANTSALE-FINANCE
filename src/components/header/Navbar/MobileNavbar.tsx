@@ -45,7 +45,7 @@ export default function MobileNavbar() {
     },
     {
       label: "pump",
-      value: `https://pumpwithme.antsale.finance/en`,
+      value: `https://www.pumpwithme.fun/en`,
     },
   ];
 
