@@ -1,9 +1,9 @@
-'use client';
-import React, { createContext, useEffect, useState } from 'react';
-import { useWallet } from '@solana/wallet-adapter-react';
-import { getBalance } from '@/function/wallet';
-import { useCookies } from 'next-client-cookies';
-import { usePathname } from 'next/navigation';
+"use client";
+import React, { createContext, useEffect, useState } from "react";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { getBalance } from "@/function/wallet";
+import { useCookies } from "next-client-cookies";
+import { usePathname } from "next/navigation";
 
 export const AppContext = createContext<any>({});
 
@@ -15,12 +15,21 @@ export default function AppProvider({
   const cookieStore = useCookies();
   const pathname = usePathname();
   const [cluster, setCluster] = useState<number>(() => {
-    if (!cookieStore.get('cluster')) {
-      cookieStore.set('cluster', '0');
+    if (!cookieStore.get("cluster")) {
+      cookieStore.set("cluster", "0");
       return 0;
     } else {
-      const result = cookieStore.get('cluster');
+      const result = cookieStore.get("cluster");
       return Number(result);
+    }
+  });
+  const [platform, setPlatform] = useState<string>(() => {
+    if (!cookieStore.get("platform")) {
+      cookieStore.set("platform", "sol");
+      return "sol";
+    } else {
+      const result = cookieStore.get("platform");
+      return result!;
     }
   });
   const [balance, setBalance] = useState(0);
@@ -41,19 +50,30 @@ export default function AppProvider({
     })();
   }, [publicKey, cluster]);
 
-  useEffect(()=>{
-    if(pathname.includes('/create-token')) {
-      setCluster(1)
+  useEffect(() => {
+    if (pathname.includes("/create-token")) {
+      setCluster(1);
     }
-  },[pathname])
+  }, [pathname]);
 
   useEffect(() => {
-    cookieStore.set('cluster', cluster.toString());
+    cookieStore.set("cluster", cluster.toString());
   }, [cluster]);
+
+  useEffect(() => {
+    cookieStore.set("platform", platform.toString());
+  }, [platform]);
 
   return (
     <AppContext.Provider
-      value={{ cluster, setCluster, balance, getWalletBalance }}
+      value={{
+        cluster,
+        setCluster,
+        balance,
+        getWalletBalance,
+        platform,
+        setPlatform,
+      }}
     >
       {children}
     </AppContext.Provider>

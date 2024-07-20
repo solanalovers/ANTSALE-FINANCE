@@ -7,6 +7,7 @@ import {
 } from "@/components/Icon";
 import useClickOutside from "@/hook/useClickOutside";
 import useTrans from "@/hook/useTrans";
+import { AppContext } from "@/provider/AppProvider";
 import {
   Dropdown,
   DropdownTrigger,
@@ -14,19 +15,29 @@ import {
   DropdownItem,
   Link,
 } from "@nextui-org/react";
-import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useCookies } from "next-client-cookies";
+import { usePathname, useRouter } from "next/navigation";
+import React, { useContext, useEffect, useState } from "react";
 
 export default function CustomDropdown({
   data,
   title,
   isMobileOpen,
+  platform,
 }: {
-  data: Array<{ label: string; value: string; isHaveStepper?: boolean }>;
+  data: Array<{
+    label: string;
+    value: string;
+    isHaveStepper?: boolean;
+    platform?: string;
+  }>;
   title: string;
   isMobileOpen?: boolean;
+  platform?: string;
 }) {
   const { isOpen, setIsOpen, containerRef } = useClickOutside();
+  const { platform: globalPlatform, setPlatform } = useContext(AppContext);
+  const cookieStore = useCookies();
   const pathname = usePathname();
   const t = useTrans("header");
 
@@ -70,7 +81,10 @@ export default function CustomDropdown({
           <DropdownItem key={idx}>
             <Link
               href={item.isHaveStepper ? item.value + "/step-1" : item.value}
-              className={`text-sm leading-5 relative text-default-500 font-semibold header-link light ${
+              onClick={() => {
+                setPlatform(platform || item.platform);
+              }}
+              className={`text-sm leading-5 w-full relative text-default-500 font-semibold header-link light ${
                 (pathname === item.value ||
                   pathname.startsWith(`${item.value}/step-`)) &&
                 "text-primary font-bold after:absolute after:h-[2px] after:bg-primary after:w-full after:left-0 after:bottom-[-10px]"

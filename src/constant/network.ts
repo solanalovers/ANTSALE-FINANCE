@@ -72,17 +72,7 @@ const currencyShortName: any = {
   usdt: "USDT"
 }
 
-const clusterList = [
-  {
-    name: 'sol-devnet',
-    logo: '/image/multi-chain/sol.png',
-    label: 'SOLANA Devnet'
-  },
-  {
-    name: 'sol-mainnet',
-    logo: '/image/multi-chain/sol.png',
-    label: 'SOLANA Mainnet'
-  },
+const tonClusterList = [
   {
     name: 'ton-devnet',
     logo: '/image/multi-chain/ton.png',
@@ -93,5 +83,18 @@ const clusterList = [
     logo: '/image/multi-chain/ton.png',
     label: 'TON Mainnet'
   }
+];
+
+const solClusterList = [
+  {
+    name: 'sol-devnet',
+    logo: '/image/multi-chain/sol.png',
+    label: 'SOLANA Devnet'
+  },
+  {
+    name: 'sol-mainnet',
+    logo: '/image/multi-chain/sol.png',
+    label: 'SOLANA Mainnet'
+  },
 ]
-export { networkImage, currencyList, currencyShortName, clusterList }
+export { networkImage, currencyList, currencyShortName, tonClusterList, solClusterList }

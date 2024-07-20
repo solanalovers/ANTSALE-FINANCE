@@ -8,13 +8,31 @@ import {
   Image,
 } from "@nextui-org/react";
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "@/provider/AppProvider";
-import { clusterList } from "@/constant/network";
+import { solClusterList, tonClusterList } from "@/constant/network";
 import { ArrowDownIcon } from "../Icon";
 
+const handleClusterList = (platform: string) => {
+  console.log(platform)
+  if (platform === "sol") {
+    return solClusterList;
+  } else {
+    return tonClusterList;
+  }
+};
+
 export default function ClusterSelect() {
-  const { cluster = "0", setCluster } = useContext(AppContext);
+  const { cluster = "0", setCluster, platform } = useContext(AppContext);
+  const [clusterList, setClusterList] = useState<any>(() => {
+    return handleClusterList(platform);
+  });
+
+  useEffect(() => {
+    setClusterList(handleClusterList(platform));
+  }, [platform]);
+
+  console.log(clusterList)
 
   return (
     <Dropdown>

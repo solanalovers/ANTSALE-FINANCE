@@ -17,10 +17,14 @@ export default function MobileNavbar() {
   const navlink = [
     {
       label: "project",
-      value: `/${locale}/list`,
+      children: [
+        { label: "Solana", value: `/${locale}/sol/list`, platform: "sol" },
+        { label: "TON", value: `/${locale}/ton/list`, platform: "ton" },
+      ],
     },
     {
-      label: "launchpad",
+      label: "Solana Launchpad",
+      platform: "sol",
       children: [
         {
           label: "token",
@@ -40,6 +44,39 @@ export default function MobileNavbar() {
           label: "multichain",
           value: `/${locale}/create-multichain`,
           isHaveStepper: true,
+        },
+        {
+          label: "AntSale LOCKER",
+          value: `/${locale}/create-multichain`,
+        },
+      ],
+    },
+    {
+      label: "TON Launchpad",
+      platform: "ton",
+      children: [
+        {
+          label: "token",
+          value: `/${locale}/create-token`,
+        },
+        {
+          label: "presale",
+          value: `/${locale}/create-presale`,
+          isHaveStepper: true,
+        },
+        {
+          label: "fairlaunch",
+          value: `/${locale}/create-fairlaunch`,
+          isHaveStepper: true,
+        },
+        {
+          label: "multichain",
+          value: `/${locale}/create-multichain`,
+          isHaveStepper: true,
+        },
+        {
+          label: "AntSale LOCKER",
+          value: `/${locale}/create-multichain`,
         },
       ],
     },

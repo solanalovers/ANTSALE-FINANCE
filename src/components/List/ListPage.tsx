@@ -9,7 +9,7 @@ import { getListProject } from "@/supabase/projects";
 import dynamic from "next/dynamic";
 import React, { useContext, useEffect, useState } from "react";
 
-export default function Home() {
+export default function ListPageComponent() {
   const [currentList, setCurrentlist] = useState<ProjectType>(
     ProjectType.Presale
   );

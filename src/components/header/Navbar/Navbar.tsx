@@ -17,10 +17,14 @@ export default function Navbar() {
   const navlink = [
     {
       label: "project",
-      value: `/${locale}/list`,
+      children: [
+        { label: "Solana", value: `/${locale}/sol/list`, platform: "sol" },
+        { label: "TON", value: `/${locale}/ton/list`, platform: "ton" },
+      ],
     },
     {
-      label: "launchpad",
+      label: "Solana Launchpad",
+      platform: "sol",
       children: [
         {
           label: "token",
@@ -41,6 +45,39 @@ export default function Navbar() {
           value: `/${locale}/create-multichain`,
           isHaveStepper: true,
         },
+        {
+          label: "AntSale LOCKER",
+          value: `/${locale}/create-multichain`,
+        },
+      ],
+    },
+    {
+      label: "TON Launchpad",
+      platform: "ton",
+      children: [
+        {
+          label: "token",
+          value: `/${locale}/create-token`,
+        },
+        {
+          label: "presale",
+          value: `/${locale}/create-presale`,
+          isHaveStepper: true,
+        },
+        {
+          label: "fairlaunch",
+          value: `/${locale}/create-fairlaunch`,
+          isHaveStepper: true,
+        },
+        {
+          label: "multichain",
+          value: `/${locale}/create-multichain`,
+          isHaveStepper: true,
+        },
+        {
+          label: "AntSale LOCKER",
+          value: `/${locale}/create-multichain`,
+        },
       ],
     },
     {
@@ -51,7 +88,7 @@ export default function Navbar() {
 
   return (
     <div className="flex container mx-auto pt-4 pb-[10px] justify-between">
-      <div className="flex items-center">
+      <div className="flex items-center gap-3">
         {navlink.map((link: any, idx: number) => (
           <div key={idx}>
             {link.value && (
@@ -73,6 +110,7 @@ export default function Navbar() {
               <CustomDropdown
                 data={link.children}
                 title={link.label}
+                platform={link.platform}
               />
             )}
           </div>
