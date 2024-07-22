@@ -7,7 +7,7 @@
     "other": "Our product is currently under development. You can test it on Devnet from June 20th, 2024"
   },
   "header": {
-    "myService": "MY SERVICE",
+    "myService": "My Services",
     "project": "PROJECT LIST",
     "token": "CREATE TOKEN",
     "launchpad": "LAUNCHPAD",
@@ -16,7 +16,7 @@
     "multichain": "CREATE MULTICHAIN-LAUNCH",
     "pump": "PumpWithMe",
     "faq": "FAQ",
-    "blog": "BLOG",
+    "blog": "Blog",
     "my": {
       "project": "My Project",
       "contribute": "My contributors",
